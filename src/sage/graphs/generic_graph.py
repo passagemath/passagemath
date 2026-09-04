@@ -307,6 +307,7 @@ can be applied on both. Here is what it can do:
     :meth:`~GenericGraph.graphviz_string` | Return a representation in the ``dot`` language.
     :meth:`~GenericGraph.graphviz_to_file_named` | Write a representation in the ``dot`` language in a file.
     :meth:`~GenericGraph.tikz` | Return a :class:`~sage.misc.latex_standalone.TikzPicture` object representing the (di)graph.
+    :meth:`~GenericGraph.layout_networkx` | Compute the node layout using any NetworkX layout algorithm.
 
 **Algorithmically hard stuff:**
 
@@ -21254,7 +21255,8 @@ class GenericGraph(GenericGraph_pyx):
         - ``layout`` -- string (default: ``None``); specifies a layout algorithm
           among ``'acyclic'``, ``'acyclic_dummy'``, ``'circular'``,
           ``'ranked'``, ``'graphviz'``, ``'planar'``, ``'spring'``,
-          ``'forest'`` or ``'tree'``
+          ``'forest'``,``'tree'`` or the name of any NetworkX layout
+          algorithm (see :meth:`layout_networkx`)
 
         - ``pos`` -- dictionary (default: ``None``); a dictionary of positions
 
@@ -21364,7 +21366,13 @@ class GenericGraph(GenericGraph_pyx):
             ....:     for G in [Graph([(1, 2)]), Graph([(1, 2), (2, 3), (3, 4)])]:
             ....:         pos = G.layout(style, save_pos=True)
             ....:         assert G._pos is not None
+
+        .. SEEALSO::
+
+            :meth:`layout_networkx` for using any NetworkX layout algorithm not
+            natively implemented on this class.
         """
+
         if layout is None:
             if pos is None:
                 pos = self.get_pos(dim=dim)
@@ -21392,7 +21400,7 @@ class GenericGraph(GenericGraph_pyx):
         a NetworkX copy of ``self``, translating the result back into a
         position dictionary keyed by the vertices of ``self``.
 
-        INPUT:
+        INPUT::
 
         - ``layout_name`` -- string; the name of a NetworkX layout function,
           without its ``_layout`` suffix -- e.g. ``'kamada_kawai'`` for
@@ -21404,26 +21412,92 @@ class GenericGraph(GenericGraph_pyx):
         - ``**options`` -- extra keyword arguments forwarded unchanged to the
           underlying NetworkX layout function.
 
-        OUTPUT:
+        OUTPUT::
 
         A dictionary mapping each vertex of ``self`` to a tuple of ``dim``
         floats.
 
         EXAMPLES::
 
+        Layouts with no extra required arguments work directly through
+        :meth:`plot`::
+
             sage: g = graphs.PetersenGraph()
-            sage: pos = g.layout('kamada_kawai')                      # needs networkx
-            sage: sorted(pos) == sorted(g)                             # needs networkx
-            True
+            sage: g.plot(layout='kamada_kawai')                       # needs networkx sage.plot
+            Graphics object consisting of ... graphics primitives
             sage: g.plot(layout='spectral')                           # needs networkx sage.plot
+            Graphics object consisting of ... graphics primitives
+            sage: g.plot(layout='shell')                              # needs networkx sage.plot
+            Graphics object consisting of ... graphics primitives
+            sage: g.plot(layout='circular')                           # needs networkx sage.plot
+            Graphics object consisting of ... graphics primitives
+
+        Calling :meth:`layout_networkx` directly returns the raw position
+        dictionary, keyed by the vertices of ``self``::
+
+            sage: pos = g.layout_networkx('kamada_kawai')             # needs networkx
+            sage: sorted(pos) == sorted(g)                            # needs networkx
+            True
+            sage: all(len(p) == 2 for p in pos.values())              # needs networkx
+            True
+
+        Three-dimensional layouts are supported for algorithms that accept a
+        ``dim`` parameter::
+
+            sage: pos3d = g.layout_networkx('kamada_kawai', dim=3)    # needs networkx
+            sage: all(len(p) == 3 for p in pos3d.values())            # needs networkx
+            True
+
+        Layout-specific keyword arguments recognized by the target NetworkX
+        function are forwarded when calling :meth:`layout_networkx`
+        directly::
+
+            sage: pos = g.layout_networkx('spring', k=2, iterations=100)  # needs networkx
+            sage: sorted(pos) == sorted(g)                            # needs networkx
+            True
+
+        Sage-specific plotting options passed through :meth:`plot`, such as
+        ``vertex_size``, are safely ignored rather than raising an error,
+        even when a NetworkX layout function happens to accept a
+        same-named parameter with an unrelated meaning (for example, Sage's
+        ``dist`` is a float controlling multi-edge spacing, while
+        :func:`networkx.kamada_kawai_layout`'s ``dist`` parameter expects a
+        distance matrix)::
+
+            sage: g.plot(layout='kamada_kawai', vertex_size=300)      # needs networkx sage.plot
             Graphics object consisting of ... graphics primitives
 
         An unknown layout name raises a clear error::
 
-            sage: g.layout('this_is_not_a_layout')                     # needs networkx
+            sage: g.layout('this_is_not_a_layout')                    # needs networkx
             Traceback (most recent call last):
             ...
             ValueError: unknown layout algorithm: this_is_not_a_layout
+
+        .. WARNING::
+
+            Some NetworkX layouts require extra *mandatory* arguments that
+            are not valid Sage plotting options -- for example, ``nodes``
+            for :func:`networkx.bipartite_layout`. Such arguments cannot be
+            passed through :meth:`plot` directly: :meth:`plot` validates its
+            keyword arguments against a fixed list of recognized Sage
+            plotting options and raises ``ValueError: invalid input`` for
+            anything outside that list, regardless of whether
+            :meth:`layout_networkx` would have accepted and used it
+            correctly. Compute the position dictionary separately instead,
+            and pass it to :meth:`plot` via ``pos=``::
+
+                sage: B = graphs.CompleteBipartiteGraph(3, 4)          # needs networkx
+                sage: pos = B.layout_networkx('bipartite', nodes=list(range(3)))  # needs networkx
+                sage: B.plot(pos=pos)                                  # needs networkx sage.plot
+                Graphics object consisting of ... graphics primitives
+
+        .. SEEALSO::
+
+            The `NetworkX layout documentation
+            <https://networkx.org/documentation/stable/reference/drawing.html#module-networkx.drawing.layout>`_
+            for the full list of available layout functions and their
+            algorithm-specific keyword arguments.
         """
 
         import networkx
@@ -22436,6 +22510,14 @@ class GenericGraph(GenericGraph_pyx):
 
           - ``'tutte'`` -- uses the Tutte embedding algorithm. The graph must be
             a 3-connected, planar graph.
+
+          - the name of any NetworkX layout algorithm (without the ``_layout``
+            suffix), such as ``'kamada_kawai'``, ``'spectral'``, `` 'shell'``, or
+            `` 'spiral'`` which is forwarded to the corresponding function in
+            :mod:`networkx.drawing.layout`, e.g. ``layout='kamada_kawai'`` calls
+            :func:`networkx.kamada_kawai_layout`. See
+            :meth:`~sage.graphs.generic_graph.GenericGraph.layout_networkx` for
+            details.
 
         - ``vertex_labels`` -- boolean (default: ``True``); whether to print
           vertex labels
