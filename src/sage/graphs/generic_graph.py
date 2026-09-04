@@ -21399,6 +21399,9 @@ class GenericGraph(GenericGraph_pyx):
         class. It looks up ``networkx.<layout_name>_layout`` and calls it on
         a NetworkX copy of ``self``, translating the result back into a
         position dictionary keyed by the vertices of ``self``.
+        See the
+        `NetworkX layout documentation 
+        <https://networkx.org/documentation/stable/reference/drawing.html#module-networkx.drawing.layout>`_.
 
         INPUT::
 
