@@ -619,6 +619,7 @@ def small_roots(self, X=None, beta=1.0, epsilon=None, **kwds):
     The lattice has no trailing zero columns when `t < \delta`
     (:issue:`42590`)::
 
+        sage: # needs fpylll
         sage: R.<x> = PolynomialRing(Zmod(17), implementation='NTL')
         sage: f = x^2 - 5*x + 6
         sage: from sage.misc.verbose import set_verbose
