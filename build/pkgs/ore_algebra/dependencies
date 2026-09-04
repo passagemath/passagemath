@@ -1,4 +1,1 @@
- | $(PYTHON_TOOLCHAIN) $(SAGERUNTIME) $(PYTHON)
-
-----------
-All lines of this file are ignored except the first.
+cython fpylll scipy sagemath_combinat sagemath_graphs sagemath_modules sagemath_pari sagemath_plot sagemath_repl sagemath_singular sagemath_symbolics | pkgconfig
