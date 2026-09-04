@@ -973,8 +973,12 @@ class GenericGraph(GenericGraph_pyx):
             \definecolor{clv1}{rgb}{0.0,0.0,0.0}
             \definecolor{cv0v1}{rgb}{0.0,0.0,0.0}
             %
-            \Vertex[style={minimum size=1.0cm,draw=cv0,fill=cfv0,text=clv0,shape=circle},LabelOut=false,L=\hbox{$0$},x=2.5cm,y=5.0cm]{v0}
-            \Vertex[style={minimum size=1.0cm,draw=cv1,fill=cfv1,text=clv1,shape=circle},LabelOut=false,L=\hbox{$1$},x=2.5cm,y=0.0cm]{v1}
+            \begin{scope}[VertexStyle/.append style={minimum size=1.0cm,draw=cv0,fill=cfv0,text=clv0,shape=circle}]
+            \Vertex[LabelOut=false,L=\hbox{$0$},x=2.5cm,y=5.0cm]{v0}
+            \end{scope}
+            \begin{scope}[VertexStyle/.append style={minimum size=1.0cm,draw=cv1,fill=cfv1,text=clv1,shape=circle}]
+            \Vertex[LabelOut=false,L=\hbox{$1$},x=2.5cm,y=0.0cm]{v1}
+            \end{scope}
             %
             \Edge[lw=0.1cm,style={color=cv0v1,},](v0)(v1)
             %
