@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -x
+"$SAGE_ROOT"/src/bin/sage --pip install -v -r "$SAGE_ROOT/build/pkgs/ore_algebra/requirements.txt" \
+            --find-links=${SAGE_VENV}/var/lib/sage/wheels \
+            --build-constraint=${SAGE_VENV}/var/lib/sage/scripts/{setuptools,cython,pkgconfig,sagemath_environment,sagemath_flint,sagemath_modules}/spkg-requirements.txt \
+            --constraint=${SAGE_VENV}/var/lib/sage/scripts/{fpylll,scipy,sagemath_combinat,sagemath_graphs,sagemath_modules,sagemath_pari,sagemath_plot,sagemath_repl,sagemath_singular,sagemath_symbolics}/spkg-requirements.txt

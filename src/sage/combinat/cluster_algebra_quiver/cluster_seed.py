@@ -2747,6 +2747,15 @@ class ClusterSeed(SageObject):
             sage: S = ClusterSeed(['A',2])
             sage: S.mutation_sequence([0,1,0,1], return_output='var')
             [(x1 + 1)/x0, (x0 + x1 + 1)/(x0*x1), (x0 + 1)/x1, x0]
+
+        Verify that calling ``mutation_sequence`` with ``show_sequence=True`` executes without raising
+        an exc:`AttributeError`::
+
+            sage: B = Matrix([[0,1],[-1, 0]])
+            sage: S = ClusterSeed(B)
+            sage: S.mutation_sequence([0,1], show_sequence=True)
+            [A seed for a cluster algebra of rank 2, A seed for a cluster algebra of rank 2]
+
         """
         seed = ClusterSeed(self)
 
@@ -2759,7 +2768,7 @@ class ClusterSeed(SageObject):
             seed_sequence.append(seed)
 
         if show_sequence:
-            self.quiver().mutation_sequence2(sequence=sequence, show_sequence=True, fig_size=fig_size)
+            self.quiver().mutation_sequence(sequence=sequence, show_sequence=True, fig_size=fig_size)
 
         if return_output == 'seed':
             return seed_sequence

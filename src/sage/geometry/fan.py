@@ -1204,6 +1204,29 @@ class RationalPolyhedralFan(IntegralRayCollection, Callable, Container):
         rays = [sib(tuple(r)) for r in self.rays()]
         return sib.name('Fan')(cones=cones, rays=rays)
 
+    def _macaulay2_init_(self, macaulay2=None):
+        """
+        Conversion to Macaulay2.
+
+        EXAMPLES::
+
+            sage: # optional - macaulay2
+            sage: F = Fan([Cone([[0,1],[1,1]]),Cone([[1,1],[1,0]])])
+            sage: m2 = macaulay2
+            sage: f = m2(F)  # indirect doctest
+            sage: f.isComplete()
+            false
+            sage: f.fVector()
+            {1, 3, 2}
+            sage: f == F._macaulay2_init_()
+            True
+        """
+        if macaulay2 is None:
+            from sage.interfaces.macaulay2 import macaulay2 as m2_default
+            macaulay2 = m2_default
+
+        return macaulay2.fan(self.generating_cones())
+
     def __call__(self, dim=None, codim=None):
         r"""
         Return the specified cones of ``self``.

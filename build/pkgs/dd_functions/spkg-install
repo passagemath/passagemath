@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -x
+# --no-deps so that the ore_algebra dep is not reinstalled
+"$SAGE_ROOT"/src/bin/sage --pip install -v -r "$SAGE_ROOT/build/pkgs/dd_functions/requirements.txt" \
+            --no-deps

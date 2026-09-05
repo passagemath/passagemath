@@ -790,7 +790,7 @@ cdef class PPLBackend(GenericBackend):
         g = self.mip.optimizing_point()
         return Integer(g.coefficient(Variable(variable))) / Integer(g.divisor())
 
-    cpdef int ncols(self) noexcept:
+    cpdef int ncols(self) except? -1:
         """
         Return the number of columns/variables.
 
@@ -807,7 +807,7 @@ cdef class PPLBackend(GenericBackend):
         """
         return len(self.objective_function)
 
-    cpdef int nrows(self) noexcept:
+    cpdef int nrows(self) except? -1:
         """
         Return the number of rows/constraints.
 
@@ -823,7 +823,7 @@ cdef class PPLBackend(GenericBackend):
         """
         return len(self.Matrix)
 
-    cpdef bint is_maximization(self) noexcept:
+    cpdef bint is_maximization(self) except? -1:
         """
         Test whether the problem is a maximization
 
@@ -954,7 +954,7 @@ cdef class PPLBackend(GenericBackend):
         """
         return (self.col_lower_bound[index], self.col_upper_bound[index])
 
-    cpdef bint is_variable_binary(self, int index) noexcept:
+    cpdef bint is_variable_binary(self, int index) except? -1:
         """
         Test whether the given variable is of binary type.
 
@@ -975,7 +975,7 @@ cdef class PPLBackend(GenericBackend):
         """
         return index in self.integer_variables and self.col_bounds(index) == (0, 1)
 
-    cpdef bint is_variable_integer(self, int index) noexcept:
+    cpdef bint is_variable_integer(self, int index) except? -1:
         """
         Test whether the given variable is of integer type.
 
@@ -996,7 +996,7 @@ cdef class PPLBackend(GenericBackend):
         """
         return index in self.integer_variables and self.col_bounds(index) != (0, 1)
 
-    cpdef bint is_variable_continuous(self, int index) noexcept:
+    cpdef bint is_variable_continuous(self, int index) except? -1:
         """
         Test whether the given variable is of continuous/real type.
 

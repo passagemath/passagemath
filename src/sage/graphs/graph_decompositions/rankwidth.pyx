@@ -47,6 +47,7 @@ i.e. singletons.
 
 ::
 
+    sage: # needs rankwidth
     sage: g = graphs.PetersenGraph()
     sage: rw, tree = g.rank_decomposition()
     sage: all(len(v)==1 for v in tree if tree.degree(v) == 1)
@@ -59,6 +60,7 @@ from the smaller of the two and its complement.
 
 ::
 
+    sage: # needs rankwidth
     sage: g = graphs.PetersenGraph()
     sage: rw, tree = g.rank_decomposition()
     sage: u = Set([8, 9, 3, 7])
@@ -81,6 +83,7 @@ from the smaller of the two and its complement.
 
 EXAMPLES::
 
+        sage: # needs rankwidth
         sage: g = graphs.PetersenGraph()
         sage: g.rank_decomposition()
         (3, Graph on 19 vertices)
@@ -134,6 +137,7 @@ def rank_decomposition(G, verbose=False):
 
     EXAMPLES::
 
+        sage: # needs rankwidth
         sage: from sage.graphs.graph_decompositions.rankwidth import rank_decomposition
         sage: g = graphs.PetersenGraph()
         sage: rank_decomposition(g)
@@ -141,6 +145,7 @@ def rank_decomposition(G, verbose=False):
 
     On more than 32 vertices::
 
+        sage: # needs rankwidth
         sage: g = graphs.RandomGNP(40, .5)
         sage: rank_decomposition(g)
         Traceback (most recent call last):
@@ -149,6 +154,7 @@ def rank_decomposition(G, verbose=False):
 
     The empty graph::
 
+        sage: # needs rankwidth
         sage: g = Graph()
         sage: rank_decomposition(g)
         (0, Graph on 0 vertices)
@@ -282,6 +288,7 @@ def mkgraph(int num_vertices):
 
     EXAMPLES::
 
+        sage: # needs rankwidth
         sage: from sage.graphs.graph_decompositions.rankwidth import rank_decomposition
         sage: g = graphs.PetersenGraph()
         sage: rank_decomposition(g)

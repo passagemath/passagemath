@@ -299,6 +299,7 @@ class ArtinGroupElement(FinitelyPresentedGroupElement):
 
         We also verify the result using the elements in [BQ2024]_ Remark 4.2::
 
+            sage: # needs sage.graphs
             sage: ap = s3 * s1 * s2 * s1 * ~s3 * s4 * s2 * s3 * s2 * ~s3 * s1^-2 * s4
             sage: bp = s1 * ~s4 * s1^2 * s3^-2 * ~s2 * s4 * s1 * ~s3 * s2 * ~s4 * s3 * s1 * s4 * s1 * ~s2 * s4^-2 * s3
             sage: alpha = ap * s3 * ~ap

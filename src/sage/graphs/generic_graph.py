@@ -973,8 +973,12 @@ class GenericGraph(GenericGraph_pyx):
             \definecolor{clv1}{rgb}{0.0,0.0,0.0}
             \definecolor{cv0v1}{rgb}{0.0,0.0,0.0}
             %
-            \Vertex[style={minimum size=1.0cm,draw=cv0,fill=cfv0,text=clv0,shape=circle},LabelOut=false,L=\hbox{$0$},x=2.5cm,y=5.0cm]{v0}
-            \Vertex[style={minimum size=1.0cm,draw=cv1,fill=cfv1,text=clv1,shape=circle},LabelOut=false,L=\hbox{$1$},x=2.5cm,y=0.0cm]{v1}
+            \begin{scope}[VertexStyle/.append style={minimum size=1.0cm,draw=cv0,fill=cfv0,text=clv0,shape=circle}]
+            \Vertex[LabelOut=false,L=\hbox{$0$},x=2.5cm,y=5.0cm]{v0}
+            \end{scope}
+            \begin{scope}[VertexStyle/.append style={minimum size=1.0cm,draw=cv1,fill=cfv1,text=clv1,shape=circle}]
+            \Vertex[LabelOut=false,L=\hbox{$1$},x=2.5cm,y=0.0cm]{v1}
+            \end{scope}
             %
             \Edge[lw=0.1cm,style={color=cv0v1,},](v0)(v1)
             %
@@ -7570,6 +7574,14 @@ class GenericGraph(GenericGraph_pyx):
             Traceback (most recent call last):
             ...
             ValueError: algorithm must be None or "MILP" for directed graphs
+
+        Check that the issue raised in :issue:`42257` on the MILP formulation on
+        complete directed graphs of order 3 is fixed::
+
+            sage: clique = digraphs.Complete
+            sage: [len(clique(k).edge_disjoint_spanning_trees(k - 1, algorithm='MILP'))
+            ....:  for k in range(1, 8)]
+            [0, 1, 2, 3, 4, 5, 6]
         """
         self._scream_if_not_simple()
         from sage.categories.sets_cat import EmptySetError
@@ -7644,8 +7656,9 @@ class GenericGraph(GenericGraph_pyx):
 
             # We use the Miller-Tucker-Zemlin subtour elimination constraints
             # combined with the Desrosiers-Langevin strengthening constraints
+            # (only when n is large enough to avoid corner cases).
             for u, v in D.edge_iterator(labels=False):
-                if D.has_edge(v, u):
+                if n > 3 and D.has_edge(v, u):
                     # DL
                     p.add_constraint(pos[u, c] + (n - 1)*edge[(u, v), c] + (n - 3)*edge[(v, u), c]
                                      <= pos[v, c] + n - 2)
@@ -16866,19 +16879,25 @@ class GenericGraph(GenericGraph_pyx):
             sage: PG = G.power(3)
             sage: PG.edges(sort=True, labels=False)
             [(0, 1), (0, 2), (0, 3), (0, 4), (1, 0), (1, 2), (1, 3), (1, 4), (1, 5), (2, 0), (2, 1), (2, 3), (2, 4), (2, 5), (3, 0), (3, 1), (3, 2), (4, 5)]
-        """
-        from sage.graphs.digraph import DiGraph
-        from sage.graphs.graph import Graph
 
-        power_of_graph = DiGraph() if self.is_directed() else Graph()
+        Testing on graph with isolated vertices::
+
+            sage: BipartiteGraph(7).power(1).order()
+            7
+        """
+        if self.is_directed():
+            from sage.graphs.digraph import DiGraph as GT
+        else:
+            from sage.graphs.graph import Graph as GT
+
+        if name := self.name():
+            name = f'power({name})'
+        power_of_graph = GT([self, []], format='vertices_and_edges', name=name)
 
         for u in self:
             for v in self.breadth_first_search(u, distance=k):
                 if u != v:
                     power_of_graph.add_edge(u, v)
-
-        if self.name():
-            power_of_graph.name("power({})".format(self.name()))
 
         return power_of_graph
 
@@ -23583,7 +23602,7 @@ class GenericGraph(GenericGraph_pyx):
             sage: print(G.latex_options().dot2tex_picture())    # optional - dot2tex graphviz, needs sage.plot
             \begin{tikzpicture}[>=latex,line join=bevel,]
             ...
-              \definecolor{strokecolor}{rgb}{0.25,0.5,1.0};
+              \definecolor{strokecolor}{rgb}{0.25,0.5,1.0}
               \draw [strokecolor,] (node_0) ... (node_1);
             ...
             \end{tikzpicture}
