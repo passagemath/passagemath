@@ -168,6 +168,7 @@ class FiniteDimensionalInvariantModule(SubmoduleWithBasis):
     being in the degree-`4` homogeneous component of a polynomial ring
     in three variables::
 
+        sage: # needs sage.combinat
         sage: C = IntegerVectors(4, length=3, min_part=0)  # representing degree-4 monomials
         sage: M = CombinatorialFreeModule(QQ, C)  # isomorphic to deg-4 homog. polynomials
         sage: G = SymmetricGroup(3)
@@ -186,6 +187,7 @@ class FiniteDimensionalInvariantModule(SubmoduleWithBasis):
     These are the monomial symmetric functions, which are a well-known
     basis for the symmetric functions. For comparison::
 
+        sage: # needs sage.combinat
         sage: Sym = SymmetricFunctions(QQ)
         sage: m = Sym.monomial()
         sage: [m[mu].expand(3) for mu in Partitions(4)]
@@ -660,6 +662,7 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
     two copies of the permutation representation, found by reduction modulo
     three on the indices of a six-dimensional module::
 
+        sage: # needs sage.combinat
         sage: M = CombinatorialFreeModule(QQ, [0,1,2,3,4,5], prefix='M')
         sage: action = lambda g,x: M.term(g(x%3 + 1)-1 + (x>=3)*3)
         sage: T = M.twisted_invariant_module(G, [2,0,-1], action_on_basis=action)
@@ -667,7 +670,6 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
         Finite family {0: B[0], 1: B[1], 2: B[2], 3: B[3]}
         sage: [T.lift(b) for b in T.basis()]
         [M[0] - M[2], M[1] - M[2], M[3] - M[5], M[4] - M[5]]
-
         sage: T = M.twisted_invariant_module(G, [1,1,1], action_on_basis=action)
         sage: T.basis()
         Finite family {0: B[0], 1: B[1]}
@@ -676,6 +678,7 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
 
     There are still no copies of the sign representation::
 
+        sage: # needs sage.combinat
         sage: T = M.twisted_invariant_module(G, [1,-1,1], action_on_basis=action)
         sage: T.basis()
         Finite family {}
@@ -683,6 +686,7 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
     The trivial representation also contains no copies of the sign
     representation::
 
+        sage: # needs sage.combinat
         sage: R = G.trivial_representation(QQ)
         sage: T = R.twisted_invariant_module([1,-1,1])
         sage: T.basis()
@@ -691,19 +695,18 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
     The regular representation contains two copies of the standard
     representation and one copy each of the trivial and the sign::
 
+        sage: # needs sage.combinat
         sage: R = G.regular_representation(QQ)
         sage: std = R.twisted_invariant_module([2,0,-1])
         sage: std.basis()
         Finite family {0: B[0], 1: B[1], 2: B[2], 3: B[3]}
         sage: [std.lift(b) for b in std.basis()]
         [() - (1,2,3), -(1,2,3) + (1,3,2), (2,3) - (1,2), -(1,2) + (1,3)]
-
         sage: triv = R.twisted_invariant_module([1,1,1])
         sage: triv.basis()
         Finite family {0: B[0]}
         sage: [triv.lift(b) for b in triv.basis()]
         [() + (2,3) + (1,2) + (1,2,3) + (1,3,2) + (1,3)]
-
         sage: sgn = R.twisted_invariant_module([1,-1,1])
         sage: sgn.basis()
         Finite family {0: B[0]}
@@ -775,6 +778,7 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
 
         Check that it works for class functions::
 
+            sage: # needs sage.rings.number_field
             sage: chi = ClassFunction(G, [2,0,-1])
             sage: T3 = M.twisted_invariant_module(G, chi, action_on_basis=action)       # needs sage.combinat
             sage: T is T3                                                               # needs sage.combinat
@@ -783,6 +787,7 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
         Check that it works when the character values are not an instance of
         :class:`~sage.rings.integer.Integer`::
 
+            sage: # needs sage.rings.number_field
             sage: chi = [QQ(2), QQ(0), QQ(-1)]
             sage: T4 = M.twisted_invariant_module(G, chi, action_on_basis=action)       # needs sage.combinat
             sage: T is T4                                                               # needs sage.combinat
@@ -843,6 +848,7 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
         As a first example we will consider the permutation representation
         of `S_3`::
 
+            sage: # needs sage.rings.number_field
             sage: M = CombinatorialFreeModule(QQ, [1,2,3], prefix='M');
             sage: G = SymmetricGroup(3)
             sage: G.conjugacy_classes()                                                 # needs sage.libs.flint
@@ -861,6 +867,7 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
         sum of one copy of the standard representation which is two-dimensional
         and one copy of the trivial representation::
 
+            sage: # needs sage.rings.number_field
             sage: T.basis()
             Finite family {0: B[0], 1: B[1]}
             sage: [T.lift(b) for b in T.basis()]
@@ -927,6 +934,7 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.number_field
             sage: G = CyclicPermutationGroup(3)
             sage: M = CombinatorialFreeModule(QQ, [1,2,3], prefix='M')
             sage: action = lambda g, m: M.monomial(g(m))  # cyclically permute coordinates
@@ -950,6 +958,7 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
         representation, so the basis for the trivial representation
         projects to `0`::
 
+            sage: # needs sage.combinat
             sage: M = CombinatorialFreeModule(QQ, [1,2,3]); M.rename('M')
             sage: B = M.basis()
             sage: G = SymmetricGroup(3); G.rename('S3')
@@ -962,7 +971,6 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
             0
             sage: parent(t)
             Twist of (S3)-invariant submodule of M by character [2, 0, -1]
-
             sage: G.rename(); M.rename()  # reset names
         """
         return self.retract(self.project_ambient(x))
@@ -979,6 +987,7 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: M = CombinatorialFreeModule(QQ, [1,2,3]); M.rename('M')
             sage: B = M.basis()
             sage: G = SymmetricGroup(3); G.rename('S3')
@@ -989,6 +998,7 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
         The image of ``self.project`` is in ``self``, while the image
         of ``self.project_ambient`` is in ``self._ambient``::
 
+            sage: # needs sage.combinat
             sage: t = T.project(B[1] + B[2] + B[3]); t
             0
             sage: parent(t)
@@ -1009,6 +1019,7 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
 
         ::
 
+            sage: # needs sage.combinat
             sage: G.rename(); M.rename()  # reset names
         """
         if (isinstance(self._ambient, Representation)
@@ -1023,6 +1034,7 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: M = CombinatorialFreeModule(QQ, [1,2,3])
             sage: def action(g, x): return(M.term(g(x)))
             sage: G = SymmetricGroup(3)
@@ -1034,6 +1046,7 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
         standard representation twisted invariant has basis
         ``(B[1] - B[3], B[2] - B[3])``, hence::
 
+            sage: # needs sage.combinat
             sage: A = Matrix([[1,0],[0,1],[-1,-1]])
             sage: P = A*(A.transpose()*A).inverse()*A.transpose()
             sage: T = M.twisted_invariant_module(G, [2,0,-1], action_on_basis=action)
@@ -1044,6 +1057,7 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
         representation in this representation, the projection
         matrix is just the zero matrix::
 
+            sage: # needs sage.combinat
             sage: T = M.twisted_invariant_module(G, [1,-1,1], action_on_basis=action)
             sage: T.projection_matrix()
             [0 0 0]
@@ -1059,6 +1073,7 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
 
             EXAMPLES::
 
+                sage: # needs sage.combinat
                 sage: G = SymmetricGroup(3)
                 sage: R = G.regular_representation(QQ)
                 sage: T = R.twisted_invariant_module([2,0,-1])

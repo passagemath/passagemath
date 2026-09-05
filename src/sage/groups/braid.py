@@ -301,7 +301,7 @@ class Braid(FiniteTypeArtinGroupElement):
             [0 1 0 0]
             [0 0 1 0]
             [0 0 0 1]
-            sage: elm.is_one()
+            sage: elm.is_one()                                                          # needs sage.libs.braiding
             False
 
         REFERENCES:
@@ -1674,7 +1674,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
             sage: BG = BraidGroup(5)
             sage: b = BG([3, 3, 4, 3, 3, 2, 1, 4, 3, 2]) # b is s2^2*s3*s2^2*s1*s0*s3*s2*s1
-            sage: b.centralizer()
+            sage: b.centralizer()                                                       # needs sage.libs.braiding
             [s0^-1*s1^-1*s0^-1*s2^-1*s1^-1*s0^-1*s3^-1*s2^-1*s0*s2*s1*s3*s2*s1*s0*s3^2*s2*s1,
             s0*s2]
         """
