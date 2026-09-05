@@ -27,4 +27,4 @@ fi
 ### http://scipy.github.io/devdocs/building/index.html
 
 
-sdh_pip_install .
+sdh_pip_install --config-setting build-dir=$(pwd)/build-meson .
