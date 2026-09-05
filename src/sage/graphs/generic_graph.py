@@ -21419,10 +21419,10 @@ class GenericGraph(GenericGraph_pyx):
         a NetworkX copy of ``self``, translating the result back into a
         position dictionary keyed by the vertices of ``self``.
         See the
-        `NetworkX layout documentation 
+        `NetworkX layout documentation
         <https://networkx.org/documentation/stable/reference/drawing.html#module-networkx.drawing.layout>`_.
 
-        INPUT::
+        INPUT:
 
         - ``layout_name`` -- string; the name of a NetworkX layout function,
           without its ``_layout`` suffix -- e.g. ``'kamada_kawai'`` for
@@ -21434,12 +21434,12 @@ class GenericGraph(GenericGraph_pyx):
         - ``**options`` -- extra keyword arguments forwarded unchanged to the
           underlying NetworkX layout function.
 
-        OUTPUT::
+        OUTPUT:
 
         A dictionary mapping each vertex of ``self`` to a tuple of ``dim``
         floats.
 
-        EXAMPLES::
+        EXAMPLES:
 
         Layouts with no extra required arguments work directly through
         :meth:`plot`::
