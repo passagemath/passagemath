@@ -122,7 +122,7 @@ SAGE_SPKG_CONFIGURE([python3], [
         AS_IF([test -n "$CFLAGS_MARCH"], [
             dnl Issue #31228
             AC_MSG_CHECKING([whether "$CFLAGS_MARCH" works with the C/C++ compilers configured for building extensions for $PYTHON_FOR_VENV])
-            SAGE_PYTHON_CHECK_DISTUTILS([CC="$CC" CXX="$CXX" CFLAGS="$CFLAGS_MARCH" conftest_venv/bin/python3], [
+            SAGE_PYTHON_CHECK_DISTUTILS([CC="$CC" CXX="$CXX" CFLAGS="$CFLAGS_MARCH" ../conftest_venv/bin/python3], [
                 AC_MSG_RESULT([yes])
             ], [
                 AC_MSG_RESULT([no, with these flags, $reason; disabling use of "$CFLAGS_MARCH"])
@@ -132,7 +132,7 @@ SAGE_SPKG_CONFIGURE([python3], [
 
         AS_IF([test -n "$OPENMP_CFLAGS$OPENMP_CXXFLAGS"], [
             AC_MSG_CHECKING([whether OpenMP works with the C/C++ compilers configured for building extensions for $PYTHON_FOR_VENV])
-            SAGE_PYTHON_CHECK_DISTUTILS([CC="$CC" CXX="$CXX" CFLAGS="$CFLAGS $OPENMP_CFLAGS" CXXFLAGS="$CXXFLAGS $OPENMP_CXXFLAGS" conftest_venv/bin/python3], [
+            SAGE_PYTHON_CHECK_DISTUTILS([CC="$CC" CXX="$CXX" CFLAGS="$CFLAGS $OPENMP_CFLAGS" CXXFLAGS="$CXXFLAGS $OPENMP_CXXFLAGS" ../conftest_venv/bin/python3], [
                 AC_MSG_RESULT([yes])
             ], [
                 AC_MSG_RESULT([no, $reason; disabling use of OpenMP])
