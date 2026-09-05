@@ -7,4 +7,4 @@ cd src/
 # even when --no-isolation (--no-build-isolation) is in used. We patch it out.
 sed -i.bak '/build-system/,/project/s/^ *"numpy.*/    "numpy",/' pyproject.toml
 
-sdh_pip_install --no-build-isolation .
+sdh_pip_install --config-setting build-dir=$(pwd)/build-meson --no-build-isolation .

@@ -7,14 +7,14 @@ if [ "$SAGE_EDITABLE" = yes ]; then
     # Editables 0.5 does not map non-package data files
     # https://editables.readthedocs.io/en/latest/use-cases.html#mapping-non-python-directories-or-files
     mkdir -p ${SAGE_DESTDIR}${SAGE_INST_LOCAL}/share/doc/sage
-    sdh_pip_editable_install .
+    sdh_pip_editable_install --config-setting build-dir=$(pwd)/build-meson .
     # We expect a subdirectory like build/cp312.
     # Use 'find -newer' to use the one just created/modified by the editable build.
     find $(pwd -P)/build -maxdepth 1 -name "cp*" -newer ${SAGE_DESTDIR}${SAGE_INST_LOCAL} -exec \
          ln -svf {}/pdf ${SAGE_DESTDIR}${SAGE_INST_LOCAL}/share/doc/sage/ \;
     if [ "$SAGE_WHEELS" = yes ]; then
-        sdh_build_and_store_wheel --no-build-isolation .
+        sdh_build_and_store_wheel --config-setting build-dir=$(pwd)/build-meson --no-build-isolation .
     fi
 else
-    sdh_pip_install --no-build-isolation .
+    sdh_pip_install --config-setting build-dir=$(pwd)/build-meson --no-build-isolation .
 fi
