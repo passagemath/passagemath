@@ -751,7 +751,7 @@ cdef class FinitePolyExtElement(FiniteRingElement):
             sage: (a**2).is_square()                                                    # needs sage.libs.ntl
             True
             sage: k.<a> = FiniteField(17^5, implementation='pari_ffelt', modulus='primitive')     # needs sage.libs.pari
-            sage: a.is_square()
+            sage: a.is_square()                                                                   # needs sage.libs.pari
             False
             sage: (a**2).is_square()                                                    # needs sage.libs.pari
             True

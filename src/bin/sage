@@ -122,7 +122,7 @@ usage() {
         echo "                           --help - show all testing options"
     else
         echo "                         (not installed currently, "
-        echo "                          to install, run sage --pip install sagemath-repl)"
+        echo "                          to install, run sage --pip install passagemath-repl)"
     fi
     echo
     echo "Running external programs:"
@@ -361,7 +361,7 @@ usage_advanced() {
     else
         echo "Running Sage:"
         echo "                         (not installed currently, "
-        echo "                          to install, run sage --pip install sagemath-repl)"
+        echo "                          to install, run sage --pip install passagemath-repl)"
     fi
     echo
     echo "Running external programs:"
@@ -465,7 +465,7 @@ usage_advanced() {
         echo "  -t [options] <files|dir> -- test examples in .py, .pyx, .sage"
         echo "                              or .tex files."
         echo "                              (not installed currently, to install,"
-        echo "                               run sage --pip install sagemath-repl)"
+        echo "                               run sage --pip install passagemath-repl)"
     fi
     if [ -n "$SAGE_SRC" -a -f "$SAGE_SRC/tox.ini" ]; then
         echo "  --tox [options] <files|dirs> -- general entry point for testing"

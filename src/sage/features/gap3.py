@@ -2,7 +2,8 @@ r"""
 Feature for testing the presence of ``gap3``.
 """
 
-from . import Executable, Feature, FeatureTestResult
+from . import Executable, Feature, FeatureTestResult, PythonModule
+from .join_feature import JoinFeature
 
 
 class Gap3(Executable):
@@ -22,11 +23,11 @@ class Gap3(Executable):
 
             sage: from sage.features.gap3 import Gap3
             sage: Gap3()
-            Feature('gap3')
+            Feature('gap3_executable')
         """
         Executable.__init__(
             self,
-            "gap3",
+            "gap3_executable",
             executable="gap3",
             spkg="gap3",
             type="optional",
@@ -86,4 +87,7 @@ class Gap3Package(Feature):
 
 
 def all_features():
-    return [Gap3()]
+    return [JoinFeature("gap3",
+                        (Gap3(),
+                         PythonModule('sage.combinat.root_system.reflection_group_real')),
+                        spkg="pypi/passagemath-gap3")]

@@ -375,7 +375,7 @@ jobs:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq liblzma bzip2 info libxml2 libuuid
       # Non-Python packages to install as spkgs
-      TARGETS_PRE: _cibuildwheel_local_a pip ${{ startsWith(matrix.os, 'ubuntu') && 'patchelf' || '' }}
+      TARGETS_PRE: _cibuildwheel_local_a ${{ startsWith(matrix.os, 'ubuntu') && 'patchelf' || '' }}
       CIBW_BUILD: "*${{ matrix.build }}*"
       #
       CIBW_ARCHS: ${{ matrix.arch }}

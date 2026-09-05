@@ -264,29 +264,77 @@ cdef class LazyImport():
             doctest:warning...
             UserWarning: Option ``at_startup=True`` for lazy import QQ not needed anymore
             Rational Field
+
+        A hidden feature keeps the import unresolved, so that it is reported
+        again on every access rather than only on the first one::
+
+            sage: from sage.features import FeatureNotPresentError, PythonModule
+            sage: feature = PythonModule('math')
+            sage: feature.hide()
+            sage: lazy_sqrt = LazyImport('math', 'sqrt', feature=feature)
+            sage: for _ in range(2):
+            ....:     try:
+            ....:         lazy_sqrt._get_object()
+            ....:     except FeatureNotPresentError:
+            ....:         print('not present')
+            not present
+            not present
+            sage: lazy_sqrt._object is None
+            True
+            sage: feature.unhide()
+            sage: lazy_sqrt._get_object()
+            <built-in function sqrt>
+
+        A successful import, on the other hand, is cached before the checks
+        that may warn, so that neither a warning promoted to an error nor a
+        warning callback accessing this lazy import again undoes it::
+
+            sage: import warnings
+            sage: lazy_int = LazyImport('builtins', 'int', at_startup=True)
+            sage: with warnings.catch_warnings():
+            ....:     warnings.simplefilter('error', UserWarning)
+            ....:     lazy_int._get_object()
+            Traceback (most recent call last):
+            ...
+            UserWarning: Option ``at_startup=True`` for lazy import int not needed anymore
+            sage: lazy_int._object is int
+            True
         """
         if self._object is not None:
             return self._object
 
+        try:
+            value = getattr(__import__(self._module, {}, {}, [self._name]), self._name)
+        except ImportError as e:
+            if self._feature:
+                # Avoid warnings from static type checkers by explicitly importing FeatureNotPresentError.
+                from sage.features import FeatureNotPresentError
+                raise FeatureNotPresentError(self._feature, reason=f'Importing {self._name} failed: {e}')
+            raise
+
+        if self._feature:
+            # for the case that the feature is hidden
+            self._feature.require()
+
+        # The import has succeeded, so cache the value before running the
+        # checks below: they may warn, and a warning may be turned into an
+        # error or handled by a callback that accesses this lazy import again.
+        self._object = value
+
+        # Warn if the at_startup parameter looks incorrect. This
+        # method short-circuits (returns the cached response) only
+        # when self._object is not None. If the lazy import is backed
+        # by a missing feature, or if the import refers to a
+        # module/function that simply does not exist, an error will be
+        # raised above and self._object will remain None. The check
+        # below is not meant to be re-run (it will print spurious
+        # warnings times 2 through N with at_startup=True); to avoid
+        # that, we run it only after the import/feature test.
         if startup_guard and not self._at_startup:
             warn(f"Resolving lazy import {self._name} during startup")
         elif self._at_startup and not startup_guard:
             if finish_startup_called:
                 warn(f"Option ``at_startup=True`` for lazy import {self._name} not needed anymore")
-
-        feature = self._feature
-        try:
-            self._object = getattr(__import__(self._module, {}, {}, [self._name]), self._name)
-        except ImportError as e:
-            if feature:
-                # Avoid warnings from static type checkers by explicitly importing FeatureNotPresentError.
-                from sage.features import FeatureNotPresentError
-                raise FeatureNotPresentError(feature, reason=f'Importing {self._name} failed: {e}')
-            raise
-
-        if feature:
-            # for the case that the feature is hidden
-            feature.require()
 
         if self._deprecation is not None:
             from sage.misc.superseded import deprecation_cython as deprecation
@@ -303,8 +351,8 @@ cdef class LazyImport():
         name = self._as_name
         if self._namespace is not None:
             if self._namespace.get(name) is self:
-                self._namespace[name] = self._object
-        return self._object
+                self._namespace[name] = value
+        return value
 
     def _get_deprecation_issue(self):
         """

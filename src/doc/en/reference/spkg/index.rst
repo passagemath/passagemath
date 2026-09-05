@@ -42,13 +42,16 @@ Features
    sage/features/databases
    sage/features/dot2tex
    sage/features/dvipng
+   sage/features/ecl
    sage/features/eclib
    sage/features/ecm
    sage/features/ffmpeg
+   sage/features/flatter
    sage/features/four_ti_2
    sage/features/fricas
    sage/features/frobby
    sage/features/gap
+   sage/features/gap3
    sage/features/gfan
    sage/features/giac
    sage/features/graph_generators
@@ -60,8 +63,11 @@ Features
    sage/features/internet
    sage/features/jmol
    sage/features/kenzo
+   sage/features/khoca
    sage/features/latex
    sage/features/latte
+   sage/features/lcalc
+   sage/features/lie
    sage/features/lrs
    sage/features/macaulay2
    sage/features/mcqd
@@ -78,6 +84,7 @@ Features
    sage/features/polymake
    sage/features/poppler
    sage/features/qepcad
+   sage/features/rankwidth
    sage/features/rubiks
    sage/features/sat
    sage/features/singular

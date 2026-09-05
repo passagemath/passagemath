@@ -3697,6 +3697,18 @@ class Graph(GenericGraph):
             sage: e = SymmetricFunctions(ZZ).e()                                        # needs sage.combinat sage.modules
             sage: e(graphs.CompleteGraph(5).chromatic_symmetric_function())             # needs sage.combinat sage.modules
             120*e[5]
+
+        A graph with a loop has no proper coloring, so its chromatic symmetric
+        function is zero.  This must hold even for large vertex labels: with
+        the natural labeling ``0, 1, ..., n - 1`` a loop on a vertex labelled
+        above 256 has endpoints that are equal but distinct :class:`Integer`
+        objects, so they must be compared by value rather than identity::
+
+            sage: G = Graph(loops=True)
+            sage: G.add_vertices(range(258))
+            sage: G.add_edge(257, 257)
+            sage: G.chromatic_symmetric_function()                                  # needs sage.combinat sage.modules
+            0
         """
         from sage.combinat.sf.sf import SymmetricFunctions
         from sage.combinat.partition import _Partitions
@@ -3730,7 +3742,7 @@ class Graph(GenericGraph):
             u = find(dsf, e[0])
             v = find(dsf, e[1])
             # Terms cancel if edge creates a cycle.
-            if u is not v:
+            if u != v:
                 ret = summand(stack, dsf, sizes)
                 dsf[v] = u
                 sizes[u] += sizes[v]
@@ -9519,7 +9531,8 @@ class Graph(GenericGraph):
     from sage.graphs.weakly_chordal import is_long_hole_free, is_long_antihole_free, is_weakly_chordal
     from sage.graphs.asteroidal_triples import is_asteroidal_triple_free
     chromatic_polynomial = LazyImport('sage.graphs.chrompoly', 'chromatic_polynomial', at_startup=True)
-    rank_decomposition = LazyImport('sage.graphs.graph_decompositions.rankwidth', 'rank_decomposition', at_startup=True)
+    from sage.features.rankwidth import RankWidth
+    rank_decomposition = LazyImport('sage.graphs.graph_decompositions.rankwidth', 'rank_decomposition', at_startup=True, feature=RankWidth())
     from sage.graphs.graph_decompositions.tree_decomposition import treewidth
     from sage.graphs.graph_decompositions.vertex_separation import pathwidth
     from sage.graphs.graph_decompositions.tree_decomposition import treelength
