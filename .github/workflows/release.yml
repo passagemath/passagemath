@@ -1,20 +1,8 @@
 name: Release distributions and wheels
 
 on:
-  push:
-    tags:
-      # Match all release tags including beta, rc
-      - '[0-9]+.[0-9]+'
-      - '[0-9]+.[0-9]+.[0-9]+'
-      - '[0-9]+.[0-9]+.beta[0-9]+'
-      - '[0-9]+.[0-9]+.[0-9]+.beta[0-9]+'
-      - '[0-9]+.[0-9]+.rc[0-9]+'
-      - '[0-9]+.[0-9]+.[0-9]+.rc[0-9]+'
-  pull_request:
-    paths:
-      - '.github/workflows/release.yml'
   workflow_dispatch:
-    # Allow to run manually
+  ## Disabled in passagemath -- see dist.yml instead
 
 jobs:
 

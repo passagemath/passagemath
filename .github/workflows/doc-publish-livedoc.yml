@@ -1,10 +1,8 @@
 name: Publish live documentation
 
 on:
-  workflow_run:
-    workflows: "Build live documentation"
-    types:
-      - completed
+  workflow_dispatch:
+  ## Disabled in passagemath -- see doc-publish-passagemath.yml instead
 
 permissions:
   statuses: write

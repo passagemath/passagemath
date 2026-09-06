@@ -1,13 +1,8 @@
 name: Build documentation
 
 on:
-  pull_request:
-  merge_group:
-  push:
-    branches:
-      - develop
   workflow_dispatch:
-    # Allow to run manually
+  ## Disabled in passagemath -- see doc-build-passagemath.yml instead
 
 concurrency:
   # Cancel previous runs of this workflow for the same branch

@@ -7,13 +7,8 @@ name: Build & Test with all meson features disabled
 #   * -Dauto_features=disabled (when all others are working)
 
 on:
-  push:
-    branches:
-      - master
-      - develop
-  pull_request:
   workflow_dispatch:
-    # Allow to run manually
+  ## Disabled in passagemath
 
 concurrency:
   # Cancel previous runs of this workflow for the same branch

@@ -15,17 +15,8 @@ name: CI (Distro)
 ## tar files of all logs are made available as "build artifacts".
 
 on:
-  pull_request:
-    paths:
-      - '.github/workflows/ci-distro.yml'
-      - 'build/pkgs/**'
-      - 'build/make/**'
-      - 'configure.ac'
-  push:
-    tags:
-      - '*'
   workflow_dispatch:
-    # Allow to run manually
+  ## Disabled in passagemath -- see ci-linux.yml and ci-macos.yml instead
 
 env:
   TARGETS_PRE: all-sage-local

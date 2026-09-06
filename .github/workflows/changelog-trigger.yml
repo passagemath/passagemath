@@ -1,8 +1,8 @@
 name: Trigger changelog generation
 
 on:
-  release:
-    types: [published]
+  workflow_dispatch:
+  ## Disabled in passagemath
 
 jobs:
   trigger-website-repo-workflow:
