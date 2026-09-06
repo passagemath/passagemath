@@ -1,18 +1,8 @@
-name: CI
+name: CI (monolithic, Meson)
 
 on:
-  push:
-    tags:
-      - '*'
-  pull_request:
-    paths:
-      - '**.build'
-      - 'uv.lock'
-      - 'subprojects/**'
-      - '.github/workflows/ci.yml'
-      - 'build/pkgs/*/distros/*.txt'
   workflow_dispatch:
-    # Allow to run manually
+  ## Disabled in passagemath
 
 jobs:
   linux:
