@@ -250,7 +250,7 @@ sdh_build_wheel() {
             --no-deps)
                 install_options="$install_options $1"
                 ;;
-            -C|--config-settings)
+            -C|--config-settings|--config-setting)
                 shift
                 # Per 'python -m build --help', options which begin with a hyphen
                 # must be in the form of "--config-setting=--opt(=value)" or "-C--opt(=value)"

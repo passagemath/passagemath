@@ -36,7 +36,7 @@ jobs:
       CAN_DEPLOY: ${{ secrets.SAGEMATH_PYPI_API_TOKEN != '' }}
     steps:
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           pattern: ${{ matrix.pattern }}
           path: wheelhouse
@@ -51,6 +51,7 @@ jobs:
           find wheelhouse -size +99M -exec mv "{}" too-large/ \;
           ls -l wheelhouse
           ls -l too-large
+          for a in too-large/*.whl; do if [ -r $a ]; then echo "::error::Wheel too large: $(ls -l $a)"; echo "::group::$a"; unzip -v $a; echo "::endgroup::"; fi; done
 
       - uses: pypa/gh-action-pypi-publish@release/v1
         with:

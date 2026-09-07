@@ -1320,7 +1320,6 @@ cdef class Pygen(GiacMethods_base):
             sage: b = libgiac('2**300')
             sage: a
             10
-            <class 'sage.rings.integer.Integer'>
             sage: next_prime(b)                                                         # needs sage.libs.pari
             2037035976334486086268445688409378161051468393665936250636140449354381299763336706183397533
             sage: c = libgiac('2 % nextprime(2**40)')
