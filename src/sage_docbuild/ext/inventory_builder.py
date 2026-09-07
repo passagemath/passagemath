@@ -28,6 +28,8 @@ class InventoryBuilder(DummyBuilder):
     inventory files. The documentation files are not written.
     """
     name = "inventory"
+
+    #: The output-format identifier used by the inventory builder.
     format = "inventory"
     epilog = "The inventory file is in %(outdir)s."
 
@@ -66,6 +68,7 @@ class InventoryBuilder(DummyBuilder):
         """
         assert self.env is not None
 
+        Path(self.outdir).mkdir(parents=True, exist_ok=True)
         InventoryFile.dump(
             path.join(self.outdir, INVENTORY_FILENAME), self.env, self
         )
