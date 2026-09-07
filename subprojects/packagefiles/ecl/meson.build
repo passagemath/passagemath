@@ -1,6 +1,5 @@
 project('ecl', 'c',
-  version : '26.5.5',
-  meson_version : '>=1.7',
+  meson_version : '>=0.57.0',
 )
 
 mod = import('unstable-external_project')
