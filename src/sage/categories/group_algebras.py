@@ -199,7 +199,7 @@ class GroupAlgebras(AlgebrasCategory):
 
             EXAMPLES::
 
-                sage: SymmetricGroup(3).algebra(QQ).center_basis()                      # needs sage.combinat sage.groups sage.modules
+                sage: SymmetricGroup(3).algebra(QQ).center_basis()                      # needs sage.combinat sage.graphs sage.groups sage.modules
                 ((), (2,3) + (1,2) + (1,3), (1,2,3) + (1,3,2))
 
             .. SEEALSO::
