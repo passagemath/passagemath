@@ -49,7 +49,8 @@ jobs:
       matrix:
         distribution: >-
           ${{ fromJson(inputs.distributions
-                       || '["sagemath-benzene",
+                       || '["sagemath-standard",
+                            "sagemath-benzene",
                             "sagemath-bliss",
                             "sagemath-brial",
                             "sagemath-buckygen",
@@ -103,7 +104,6 @@ jobs:
                             "sagemath-schemes",
                             "sagemath-singular",
                             "sagemath-sirocco",
-                            "sagemath-standard",
                             "sagemath-standard-no-symbolics",
                             "sagemath-symbolics",
                             "sagemath-sympow",
