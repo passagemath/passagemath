@@ -484,10 +484,10 @@ class WeightLatticeRealizations(Category_over_base_ring):
                 sage: W = WeylGroup(['C',3,1])
                 sage: s = W.simple_reflections()
                 sage: w = s[0]*s[1]*s[2]*s[3]*s[2]
-                sage: W.from_reduced_word(R.reduced_word_of_alcove_morphism(omega2.translation)) == w*w                 # needs sage.graphs
+                sage: W.from_reduced_word(R.reduced_word_of_alcove_morphism(omega2.translation)) == w*w
                 True
                 sage: w = s[0]*s[1]*s[2]*s[0]*s[1]*s[0]
-                sage: W.from_reduced_word(R.reduced_word_of_alcove_morphism(omega3.translation)) == w                   # needs sage.graphs
+                sage: W.from_reduced_word(R.reduced_word_of_alcove_morphism(omega3.translation)) == w
                 True
 
                 sage: # needs sage.graphs
