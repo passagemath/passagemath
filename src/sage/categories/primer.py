@@ -95,7 +95,7 @@ Some challenges
 
   ::
 
-      sage: # needs sage.modules, known bug: windows (crash - https://github.com/passagemath/passagemath/issues/1892#issuecomment-3673607183)
+      sage: # known bug (windows), needs sage.modules
       sage: m = random_matrix(QQ, 4, algorithm='echelonizable',
       ....:                   rank=3, upper_bound=60)
       sage: m^8 == m*m*m*m*m*m*m*m == ((m^2)^2)^2
@@ -124,7 +124,7 @@ Sage knows about monoids::
 
 and sure enough, binary powering is defined there::
 
-    sage: # needs sage.modules, known bug: windows (crash - https://github.com/passagemath/passagemath/issues/1892#issuecomment-3673607183)
+    sage: # known bug (windows), needs sage.modules
     sage: m._pow_int.__module__
     'sage.categories.monoids'
 

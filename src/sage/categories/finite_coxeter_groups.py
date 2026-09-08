@@ -342,7 +342,7 @@ class FiniteCoxeterGroups(CategoryWithAxiom):
                 sage: CoxeterGroup(['H', 3]).degrees()
                 (2, 6, 10)
 
-                sage: WeylGroup([["A",3], ["A",3], ["B",2]]).degrees()
+                sage: WeylGroup([["A",3], ["A",3], ["B",2]]).degrees()                  # needs sage.rings.number_field
                 (2, 3, 4, 2, 3, 4, 2, 4)
 
             TESTS::
@@ -393,7 +393,7 @@ class FiniteCoxeterGroups(CategoryWithAxiom):
                 sage: CoxeterGroup(['H', 3]).codegrees()
                 (0, 4, 8)
 
-                sage: WeylGroup([["A",3], ["A",3], ["B",2]]).codegrees()
+                sage: WeylGroup([["A",3], ["A",3], ["B",2]]).codegrees()                # needs sage.rings.number_field
                 (0, 1, 2, 0, 1, 2, 0, 2)
             """
             return tuple(d - 2 for d in self.degrees())
@@ -470,9 +470,9 @@ class FiniteCoxeterGroups(CategoryWithAxiom):
 
             TESTS::
 
-                sage: [len(WeylGroup(["A", n]).weak_poset(side = "right").cover_relations()) for n in [1,2,3]]  # needs sage.graphs
+                sage: [len(WeylGroup(["A", n]).weak_poset(side = "right").cover_relations()) for n in [1,2,3]]          # needs sage.graphs
                 [1, 6, 36]
-                sage: [len(WeylGroup(["A", n]).weak_poset(side = "left" ).cover_relations()) for n in [1,2,3]]  # needs sage.graphs
+                sage: [len(WeylGroup(["A", n]).weak_poset(side = "left" ).cover_relations()) for n in [1,2,3]]          # needs sage.graphs
                 [1, 6, 36]
 
             .. TODO::
@@ -516,7 +516,7 @@ class FiniteCoxeterGroups(CategoryWithAxiom):
                 [ 0  1], [-1  0], [ 1 -1]
                 ]
 
-                sage: [t.reduced_word() for t in CoxeterGroup(["A",3]).inversion_sequence([2,1,3,2,1,3])]   # needs sage.graphs
+                sage: [t.reduced_word() for t in CoxeterGroup(["A",3]).inversion_sequence([2,1,3,2,1,3])]               # needs sage.graphs
                 [[2], [1, 2, 1], [2, 3, 2], [1, 2, 3, 2, 1], [3], [1]]
             """
             return [self.from_reduced_word(word[:i+1]+list(reversed(word[:i])))
@@ -731,18 +731,18 @@ class FiniteCoxeterGroups(CategoryWithAxiom):
                 A 2-dimensional polyhedron in RDF^2 defined as the convex hull of 14 vertices
 
                 sage: W = ReflectionGroup(['A',3])                          # optional - gap3
-                sage: W.permutahedron()                                     # optional - gap3
+                sage: W.permutahedron()         # optional - gap3                       # needs sage.graphs
                 A 3-dimensional polyhedron in QQ^3 defined as the convex hull
                 of 24 vertices
 
                 sage: W = ReflectionGroup(['A',3],['B',2])                  # optional - gap3
-                sage: W.permutahedron()                                     # optional - gap3
+                sage: W.permutahedron()         # optional - gap3                       # needs sage.graphs
                 A 5-dimensional polyhedron in QQ^5 defined as the convex hull of 192 vertices
 
             TESTS::
 
                 sage: W = ReflectionGroup(['A',3])                          # optional - gap3
-                sage: W.permutahedron([3,5,8])                              # optional - gap3
+                sage: W.permutahedron([3,5,8])  # optional - gap3                       # needs sage.graphs
                 A 3-dimensional polyhedron in QQ^3 defined as the convex hull
                 of 24 vertices
 
@@ -815,7 +815,7 @@ class FiniteCoxeterGroups(CategoryWithAxiom):
                 sage: P.rank()
                 3
 
-                sage: # needs sage.graphs, optional - gap3
+                sage: # optional - gap3, needs sage.graphs
                 sage: W = CoxeterGroup(['H', 3], implementation='permutation')
                 sage: P = W.coxeter_poset()
                 sage: P
@@ -892,7 +892,7 @@ class FiniteCoxeterGroups(CategoryWithAxiom):
                 sage: C.homology()
                 {0: 0, 1: 0, 2: Z}
 
-                sage: # needs sage.graphs, optional - gap3
+                sage: # optional - gap3, needs sage.graphs
                 sage: W = CoxeterGroup(['H', 3], implementation='permutation')
                 sage: C = W.coxeter_complex()
                 sage: C
@@ -946,14 +946,14 @@ class FiniteCoxeterGroups(CategoryWithAxiom):
 
             EXAMPLES::
 
-                sage: W = WeylGroup(["A", 3])                                           # needs sage.combinat sage.groups
-                sage: s = W.simple_reflections()                                        # needs sage.combinat sage.groups
-                sage: (s[1]*s[2]*s[3]).absolute_length()                                # needs sage.combinat sage.graphs sage.groups
+                sage: W = WeylGroup(["A", 3])
+                sage: s = W.simple_reflections()
+                sage: (s[1]*s[2]*s[3]).absolute_length()                                # needs sage.graphs
                 3
 
-                sage: W = SymmetricGroup(4)                                             # needs sage.groups
-                sage: s = W.simple_reflections()                                        # needs sage.groups
-                sage: (s[3]*s[2]*s[1]).absolute_length()                                # needs sage.combinat sage.graphs sage.groups
+                sage: W = SymmetricGroup(4)
+                sage: s = W.simple_reflections()
+                sage: (s[3]*s[2]*s[1]).absolute_length()                                # needs sage.graphs
                 3
             """
             M = self.canonical_matrix()

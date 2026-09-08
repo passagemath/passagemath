@@ -498,7 +498,7 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
                 sage: M = CombinatorialFreeModule(QQ, [1,2,3])
                 sage: G = SymmetricGroup(3)
                 sage: def action(g, x): return(M.term(g(x)))  # permute coordinates
-                sage: T = M.twisted_invariant_module(G, [2,0,-1],
+                sage: T = M.twisted_invariant_module(G, [2,0,-1],                       # needs sage.rings.number_field
                 ....:                                action_on_basis=action)
                 sage: import __main__; __main__.action = action
                 sage: TestSuite(T).run()
@@ -1464,14 +1464,14 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
 
                         sage: # needs sage.modules
                         sage: V = ZZ^2; phi = V.hom([V.0 + V.1, 2*V.1])
-                        sage: phi.fcp()                                                         # needs sage.libs.pari
+                        sage: phi.fcp()                                                 # needs sage.libs.pari
                         (x - 2) * (x - 1)
-                        sage: phi.fcp('T')                                                      # needs sage.libs.pari
+                        sage: phi.fcp('T')                                              # needs sage.libs.pari
                         (T - 2) * (T - 1)
                         sage: W = CombinatorialFreeModule(ZZ, ['x', 'y'])
                         sage: M = matrix(ZZ, [[1, 0], [1, 2]])
                         sage: psi = W.module_morphism(matrix=M, codomain=W)
-                        sage: psi.fcp()                                                         # needs sage.libs.pari
+                        sage: psi.fcp()                                                 # needs sage.libs.pari
                         (x - 2) * (x - 1)
                     """
                     return self.matrix().fcp
@@ -1500,9 +1500,9 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
                         [2 4 1]
                         Domain:   Vector space of dimension 3 over Finite Field of size 7
                         Codomain: Vector space of dimension 3 over Finite Field of size 7
-                        sage: H.minpoly()                                                       # needs sage.libs.pari
+                        sage: H.minpoly()                                               # needs sage.libs.pari
                         x^3 + 6*x^2 + 6*x + 1
-                        sage: H.minimal_polynomial()                                            # needs sage.libs.pari
+                        sage: H.minimal_polynomial()                                    # needs sage.libs.pari
                         x^3 + 6*x^2 + 6*x + 1
                         sage: H^3 + (H^2)*6 + H*6 + 1
                         Vector space morphism represented by the matrix:

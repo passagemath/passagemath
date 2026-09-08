@@ -70,7 +70,7 @@ class DihedralGroup(UniqueRepresentation, Parent):
 
         sage: TestSuite(G).run()
 
-        sage: c = FiniteCoxeterGroups().example(3).cayley_graph()
+        sage: c = FiniteCoxeterGroups().example(3).cayley_graph()                       # needs sage.graphs
         sage: c.edges(sort=True)
         [((), (1,), 1),
          ((), (2,), 2),
@@ -174,7 +174,7 @@ class DihedralGroup(UniqueRepresentation, Parent):
 
         EXAMPLES::
 
-            sage: FiniteCoxeterGroups().example(6).coxeter_matrix()
+            sage: FiniteCoxeterGroups().example(6).coxeter_matrix()                     # needs sage.graphs
             [1 6]
             [6 1]
         """

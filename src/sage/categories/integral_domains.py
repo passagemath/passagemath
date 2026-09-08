@@ -10,7 +10,7 @@ A few tests for the method ``is_integrally_closed``::
     True
     sage: QQ.is_integrally_closed()
     True
-    sage: QQbar.is_integrally_closed()                                          # needs sage.rings.number_field
+    sage: QQbar.is_integrally_closed()                                                  # needs sage.rings.number_field
     True
     sage: GF(5).is_integrally_closed()
     True
@@ -165,10 +165,10 @@ class IntegralDomains(CategoryWithAxiom):
             EXAMPLES::
 
                 sage: R.<x, y> = GF(3)[]
-                sage: R.localization((x*y, x**2 + y**2))                                    # needs sage.rings.finite_rings
+                sage: R.localization((x*y, x**2 + y**2))                                # needs sage.rings.finite_rings
                 Multivariate Polynomial Ring in x, y over Finite Field of size 3
                  localized at (y, x, x^2 + y^2)
-                sage: ~y in _                                                               # needs sage.rings.finite_rings
+                sage: ~y in _                                                           # needs sage.rings.finite_rings
                 True
             """
             from sage.rings.localization import Localization
