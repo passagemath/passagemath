@@ -337,8 +337,8 @@ class Fields(CategoryWithAxiom):
 
             EXAMPLES::
 
-                sage: k = GF(9, 'a')                                                        # needs sage.rings.finite_rings
-                sage: k.prime_subfield()                                                    # needs sage.rings.finite_rings
+                sage: k = GF(9, 'a')                                                    # needs sage.rings.finite_rings
+                sage: k.prime_subfield()                                                # needs sage.rings.finite_rings
                 Finite Field of size 3
             """
             if self.characteristic() == 0:
@@ -604,14 +604,14 @@ class Fields(CategoryWithAxiom):
 
                 sage: QQ.fraction_field()
                 Rational Field
-                sage: RR.fraction_field()                                                   # needs sage.rings.real_mpfr
+                sage: RR.fraction_field()                                               # needs sage.rings.real_mpfr
                 Real Field with 53 bits of precision
-                sage: CC.fraction_field()                                                   # needs sage.rings.real_mpfr
+                sage: CC.fraction_field()                                               # needs sage.rings.real_mpfr
                 Complex Field with 53 bits of precision
 
                 sage: x = polygen(ZZ, 'x')
-                sage: F = NumberField(x^2 + 1, 'i')                                         # needs sage.rings.number_field
-                sage: F.fraction_field()                                                    # needs sage.rings.number_field
+                sage: F = NumberField(x^2 + 1, 'i')                                     # needs sage.rings.number_field
+                sage: F.fraction_field()                                                # needs sage.rings.number_field
                 Number Field in i with defining polynomial x^2 + 1
             """
             return self

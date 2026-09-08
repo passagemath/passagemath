@@ -164,7 +164,7 @@ class FiniteDimensionalSemisimpleAlgebrasWithBasis(CategoryWithAxiom_over_base_r
                 center of the algebra of the symmetric group
                 `S_4`::
 
-                    sage: Z4 = SymmetricGroup(4).algebra(QQ).center()                   # needs sage.combinat sage.groups sage.modules
+                    sage: Z4 = SymmetricGroup(4).algebra(QQ).center()                   # needs sage.combinat sage.graphs sage.groups sage.modules
                     sage: Z4._orthogonal_decomposition()                                # needs sage.combinat sage.groups sage.modules
                     (B[0] + B[1] + B[2] + B[3] + B[4],
                      B[0] + 1/3*B[1] - 1/3*B[2] - 1/3*B[4],
@@ -231,7 +231,7 @@ class FiniteDimensionalSemisimpleAlgebrasWithBasis(CategoryWithAxiom_over_base_r
 
                     sage: # needs sage.combinat sage.groups sage.modules
                     sage: A4 = SymmetricGroup(4).algebra(QQ)
-                    sage: Z4 = A4.center()
+                    sage: Z4 = A4.center()                                              # needs sage.graphs
                     sage: idempotents = Z4.central_orthogonal_idempotents()
                     sage: idempotents
                     (1/24*B[0] + 1/24*B[1] + 1/24*B[2] + 1/24*B[3] + 1/24*B[4],

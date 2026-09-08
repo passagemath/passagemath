@@ -90,7 +90,7 @@ class SuperCrystals(Category_singleton):
                 blue for edge 1, red for edge 2, green for edge 3, and dashed with
                 the corresponding color for barred edges. Edge 0 is dotted black::
 
-                    sage: view(G)  # optional - dot2tex graphviz, not tested (opens external window)
+                    sage: view(G)               # not tested (opens external window), optional - graphviz, needs dot2tex
                 """
                 from sage.graphs.digraph import DiGraph
                 from sage.misc.latex import LatexExpr

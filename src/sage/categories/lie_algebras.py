@@ -70,7 +70,7 @@ class LieAlgebras(Category_over_base_ring):
 
         sage: C = LieAlgebras(QQ)
         sage: TestSuite(C).run()
-        sage: TestSuite(C.example()).run()                                              # needs sage.combinat sage.groups sage.modules
+        sage: TestSuite(C.example()).run()                                              # needs sage.combinat sage.groups sage.modules sage.rings.real_interval_field
 
     .. TODO::
 
@@ -299,7 +299,7 @@ class LieAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat  sage.libs.singular sage.modules
+                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat sage.libs.singular sage.modules
                 sage: L.universal_enveloping_algebra()                                  # needs sage.combinat sage.libs.singular sage.modules
                 Noncommutative Multivariate Polynomial Ring in b0, b1, b2
                  over Rational Field, nc-relations: {}
@@ -813,7 +813,7 @@ class LieAlgebras(Category_over_base_ring):
             elements returned by ``self.some_elements()``::
 
                 sage: L = LieAlgebras(QQ).example()                                     # needs sage.combinat sage.groups sage.modules
-                sage: L._test_jacobi_identity()                                         # needs sage.combinat sage.groups sage.modules
+                sage: L._test_jacobi_identity()                                         # needs sage.combinat sage.groups sage.modules sage.rings.real_interval_field
 
             However, the elements tested can be customized with the
             ``elements`` keyword argument::
@@ -852,7 +852,7 @@ class LieAlgebras(Category_over_base_ring):
             elements returned by ``self.some_elements()``::
 
                 sage: L = LieAlgebras(QQ).example()                                     # needs sage.combinat sage.groups sage.modules
-                sage: L._test_antisymmetry()                                            # needs sage.combinat sage.groups sage.modules
+                sage: L._test_antisymmetry()                                            # needs sage.combinat sage.groups sage.modules sage.rings.real_interval_field
 
             However, the elements tested can be customized with the
             ``elements`` keyword argument::
@@ -881,7 +881,7 @@ class LieAlgebras(Category_over_base_ring):
             TESTS::
 
                 sage: L = LieAlgebras(QQ).example()                                     # needs sage.combinat sage.groups sage.modules
-                sage: L._test_distributivity()                                          # needs sage.combinat sage.groups sage.modules
+                sage: L._test_distributivity()                                          # needs sage.combinat sage.groups sage.modules sage.rings.real_interval_field
 
             EXAMPLES:
 

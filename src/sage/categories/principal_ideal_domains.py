@@ -130,7 +130,7 @@ class PrincipalIdealDomains(Category_singleton):
 
             EXAMPLES::
 
-                sage: Zp(5).is_noetherian()                                                 # needs sage.rings.padics
+                sage: Zp(5).is_noetherian()                                             # needs sage.rings.padics
                 True
             """
             return True
@@ -141,7 +141,7 @@ class PrincipalIdealDomains(Category_singleton):
 
             EXAMPLES::
 
-                sage: QQ.class_group()                                                      # needs sage.groups sage.modules
+                sage: QQ.class_group()                                                  # needs sage.groups sage.modules
                 Trivial Abelian group
             """
             from sage.groups.abelian_gps.abelian_group import AbelianGroup

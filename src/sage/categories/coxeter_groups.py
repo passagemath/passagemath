@@ -244,7 +244,7 @@ class CoxeterGroups(Category_singleton):
                 Finitely presented group < S1, S2 | (S1*S2)^2*(S1^-1*S2^-1)^2 >
 
                 sage: W = ReflectionGroup(['B',3], index_set=["AA","BB","5"])  # optional - gap3
-                sage: W.braid_group_as_finitely_presented_group()              # optional - gap3
+                sage: W.braid_group_as_finitely_presented_group()       # optional - gap3, needs sage.graphs
                 Finitely presented group < SAA, SBB, S5 |
                  (SAA*SBB)^2*(SAA^-1*SBB^-1)^2, SAA*S5*SAA^-1*S5^-1,
                  SBB*S5*SBB*S5^-1*SBB^-1*S5^-1 >
@@ -342,7 +342,7 @@ class CoxeterGroups(Category_singleton):
                 sage: # optional - gap3
                 sage: W = ReflectionGroup(['A',3], index_set=["AA","BB","5"])
                 sage: w = W.long_element()
-                sage: W.braid_orbit(w.reduced_word())
+                sage: W.braid_orbit(w.reduced_word())                                   # needs sage.graphs
                 [['BB', '5', 'AA', 'BB', '5', 'AA'],
                  ['5', 'BB', '5', 'AA', 'BB', '5'],
                  ['BB', 'AA', 'BB', '5', 'BB', 'AA'],
@@ -643,15 +643,15 @@ class CoxeterGroups(Category_singleton):
             TESTS::
 
                 sage: W = SymmetricGroup(3)                                             # needs sage.groups
-                sage: sorted(W.standard_coxeter_elements())                             # needs sage.combinat sage.groups
+                sage: sorted(W.standard_coxeter_elements())                             # needs sage.combinat sage.graphs sage.groups
                 [(1,2,3), (1,3,2)]
 
                 sage: W = Permutations(3)
                 sage: sorted(W.standard_coxeter_elements())                             # needs sage.graphs
                 [[2, 3, 1], [3, 1, 2]]
 
-                sage: W = CoxeterGroup(['D', 3])                                        # needs sage.combinat sage.groups
-                sage: sorted(W.standard_coxeter_elements())                             # needs sage.combinat sage.groups
+                sage: W = CoxeterGroup(['D', 3])                                        # needs sage.combinat sage.graphs sage.groups
+                sage: sorted(W.standard_coxeter_elements())                             # needs sage.combinat sage.graphs sage.groups
                 [
                 [-1  1  1]  [ 0 -1  1]  [ 0  1 -1]  [ 1 -1 -1]
                 [-1  0  1]  [ 1 -1  0]  [ 0  0 -1]  [ 1 -1  0]
@@ -895,7 +895,7 @@ class CoxeterGroups(Category_singleton):
 
             TESTS::
 
-                sage: W = CoxeterGroup(['A', 2, 1])                                     # needs sage.combinat sage.groups
+                sage: W = CoxeterGroup(['A', 2, 1])                                     # needs sage.combinat sage.graphs sage.groups
                 sage: W.kazhdan_lusztig_cells()                                         # needs sage.combinat sage.groups
                 Traceback (most recent call last):
                 ...
@@ -1811,7 +1811,7 @@ class CoxeterGroups(Category_singleton):
                 sage: W = ReflectionGroup(['A',3],
                 ....:                     index_set=["AA","BB","5"])
                 sage: w = W.long_element()
-                sage: w.reduced_words()
+                sage: w.reduced_words()                                                 # needs sage.graphs
                 [['BB', '5', 'AA', 'BB', '5', 'AA'],
                  ['5', 'BB', '5', 'AA', 'BB', '5'],
                  ['BB', 'AA', 'BB', '5', 'BB', 'AA'],
