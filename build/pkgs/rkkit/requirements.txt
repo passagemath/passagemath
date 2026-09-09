@@ -1,0 +1,1 @@
+-e RKkit@git+https://github.com/Thierry-Dumont/RKkit.git
