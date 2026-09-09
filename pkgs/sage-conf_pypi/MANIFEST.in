@@ -2,6 +2,8 @@ prune .tox
 include VERSION.txt
 graft bin
 graft sage_root
+# Without the following line, the directory is missing when run on ubuntu-24.04
+graft sage_root/.upstream.d
 # Without the following line, sage_root/build/bin is missing when run on ubuntu-24.04
 graft sage_root/build/bin
 # Without the following line, sage_root/build/sage_bootstrap is missing
