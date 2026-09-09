@@ -21,6 +21,7 @@ renderable in a browser-based notebook with the help of MathJax.
 # *****************************************************************************
 
 import re
+from collections import UserString
 
 from sage.misc.latex import latex
 from sage.structure.sage_object import SageObject
@@ -28,7 +29,7 @@ from sage.structure.sage_object import SageObject
 macro_regex = re.compile(r'\\newcommand{(?P<name>\\[a-zA-Z]+)}(\[.+\])?{(?P<definition>.+)}')
 
 
-class HtmlFragment(str, SageObject):
+class HtmlFragment(SageObject, UserString):
     r"""
     A HTML fragment.
 
@@ -39,11 +40,85 @@ class HtmlFragment(str, SageObject):
     EXAMPLES::
 
         sage: from sage.misc.html import HtmlFragment
-        sage: HtmlFragment('<b>test</b>')
+        sage: fragment = HtmlFragment('<b>test</b>')
+        sage: fragment
         <b>test</b>
+        sage: str(fragment)
+        '<b>test</b>'
+        sage: isinstance(fragment, str)
+        False
 
+    .. automethod:: _repr_
+    .. automethod:: _repr_html_
     .. automethod:: _rich_repr_
     """
+
+    # SageObject precedes UserString in the method resolution order so that
+    # _repr_ governs printing.  SageObject is unhashable, however, and HTML
+    # fragments are immutable strings, so take hashing from UserString.
+    __hash__ = UserString.__hash__
+
+    def _repr_(self):
+        r"""
+        Return the underlying HTML without quotes.
+
+        EXAMPLES::
+
+            sage: from sage.misc.html import HtmlFragment
+            sage: HtmlFragment('<b>test</b>')._repr_()
+            '<b>test</b>'
+        """
+        return self.data
+
+    def _repr_html_(self):
+        r"""
+        Return the HTML representation of this fragment.
+
+        This allows plain IPython and Jupyter frontends to display the
+        fragment as HTML without requiring Sage's rich output system.
+
+        EXAMPLES::
+
+            sage: from sage.misc.html import HtmlFragment
+            sage: fragment = HtmlFragment('<b>test</b>')
+            sage: fragment._repr_html_()
+            '<b>test</b>'
+            sage: type(fragment._repr_html_()) is str
+            True
+
+        TESTS::
+
+            sage: # needs ipython
+            sage: from IPython.core.formatters import DisplayFormatter
+            sage: formats, metadata = DisplayFormatter().format(fragment)
+            sage: formats['text/html'] == str(fragment)
+            True
+            sage: 'text/plain' in formats
+            True
+        """
+        return str(self)
+
+    def join(self, seq):
+        r"""
+        Return the items of ``seq`` joined by this fragment.
+
+        INPUT:
+
+        - ``seq`` -- iterable; each item is converted with ``str``
+
+        Unlike the inherited :meth:`collections.UserString.join`, this
+        accepts items that are not :class:`str` and returns a fragment
+        rather than a plain :class:`str`.
+
+        EXAMPLES::
+
+            sage: from sage.misc.html import HtmlFragment
+            sage: HtmlFragment('<br>').join(['<b>a</b>', HtmlFragment('<i>b</i>')])
+            <b>a</b><br><i>b</i>
+            sage: type(HtmlFragment('').join([]))
+            <class 'sage.misc.html.HtmlFragment'>
+        """
+        return self.__class__(self.data.join(str(item) for item in seq))
 
     def _rich_repr_(self, display_manager, **kwds):
         """
@@ -61,9 +136,9 @@ class HtmlFragment(str, SageObject):
         """
         OutputHtml = display_manager.types.OutputHtml
         if OutputHtml in display_manager.supported_output():
-            return OutputHtml(self)
+            return OutputHtml(str(self))
         else:
-            return display_manager.types.OutputPlainText(self)
+            return display_manager.types.OutputPlainText(str(self))
 
 
 def math_parse(s):
@@ -496,7 +571,7 @@ class HTMLFragmentFactory(SageObject):
             from sage.repl.user_globals import get_globals
             locals = get_globals()
         s = str(s)
-        s = math_parse(s)
+        s = str(math_parse(s))
         t = ''
         while s:
             i = s.find('<sage>')
