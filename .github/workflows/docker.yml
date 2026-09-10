@@ -20,10 +20,10 @@ on:
           [
            "centos-stream-9-python3.12",
            "centos-stream-10",
-           "almalinux-8-toolset-gcc_9-python3.12",
+           "almalinux-8-toolset-gcc_15-python3.12",
            "almalinux-9-python3.11",
            "almalinux-10",
-           "rockylinux-8-toolset-gcc_9-python3.12",
+           "rockylinux-8-toolset-gcc_15-python3.12",
            "rockylinux-9-python3.11",
            "rockylinux-10",
           ]
