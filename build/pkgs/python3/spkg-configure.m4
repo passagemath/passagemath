@@ -37,7 +37,8 @@ SAGE_SPKG_CONFIGURE([python3], [
       dnl Check if we can do venv with a system python3
       dnl instead of building our own copy.
       dnl  Issue #31160: We no longer check for readline here.
-      check_modules="sqlite3, ctypes, math, hashlib, socket, zlib, ssl"
+      dnl https://github.com/passagemath/passagemath/issues/2851: Check for pyexpat
+      check_modules="sqlite3, ctypes, math, hashlib, socket, zlib, ssl, pyexpat"
       AS_IF([test -z "$MSYSTEM"], [dnl
           check_modules="$check_modules, _posixsubprocess"
       ])
