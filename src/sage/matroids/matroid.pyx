@@ -6676,7 +6676,17 @@ cdef class Matroid(SageObject):
             return M._is_graphic_cmr()
         raise ValueError("Not a valid algorithm.")
 
-    cpdef bint is_regular(self, algorithm=None) except -1:
+    def is_regular(self, *,
+                   algorithm=None,
+                   time_limit=60.0, certificate=False,
+                   use_direct_graphicness_test=True,
+                   prefer_graphicness=True,
+                   series_parallel_ok=True,
+                   check_graphic_minors_planar=False,
+                   stop_when_irregular=True,
+                   decompose_strategy='delta_three',
+                   construct_leaf_graphs=False,
+                   construct_all_graphs=False):
         r"""
         Return if ``self`` is regular.
 
@@ -6689,7 +6699,7 @@ cdef class Matroid(SageObject):
 
         INPUT:
 
-        - ``algorithm`` -- (default: ``None``); specify which algorithm
+        - ``algorithm`` -- (default: ``None``); specify using which algorithm
           to check regularity:
 
           - ``None`` -- an algorithm based on excluded minors.
@@ -6726,8 +6736,12 @@ cdef class Matroid(SageObject):
         """
         M = self.binary_matroid()
         if M is None:  # equivalent to checking for a U24 minor
+            if certificate:
+                raise NotImplementedError
             return False
         if algorithm is None:
+            if certificate:
+                raise NotImplementedError
             from sage.matroids.database_matroids import Fano, FanoDual
             if self.has_minor(Fano()) or self.has_minor(FanoDual()):
                 return False
@@ -6736,7 +6750,21 @@ cdef class Matroid(SageObject):
             from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
             A = M.representation()
             A_cmr = Matrix_cmr_chr_sparse(A.parent(), A)
-            return A_cmr._is_binary_linear_matroid_regular()
+            return A_cmr._is_binary_linear_matroid_regular(
+                time_limit=time_limit,
+                certificate=certificate,
+                use_direct_graphicness_test=use_direct_graphicness_test,
+                prefer_graphicness=prefer_graphicness,
+                series_parallel_ok=series_parallel_ok,
+                check_graphic_minors_planar=check_graphic_minors_planar,
+                stop_when_irregular=stop_when_irregular,
+                stop_when_nongraphic=False,
+                stop_when_noncographic=False,
+                stop_when_nongraphic_and_noncographic=False,
+                decompose_strategy=decompose_strategy,
+                construct_leaf_graphs=construct_leaf_graphs,
+                construct_all_graphs=construct_all_graphs
+            )
         raise ValueError("Not a valid algorithm.")
 
     # matroid k-closed
