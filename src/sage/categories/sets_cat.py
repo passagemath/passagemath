@@ -1942,6 +1942,35 @@ Please use, e.g., S.algebra(QQ, category=Semigroups())""".format(self))
                 cls = ImageSubobject
             return cls(self, domain_subset)
 
+        def restrict_domain(self, new_domain, check=False):
+            r"""
+            Special case of :meth:`extend_domain` for injective canonical coercions.
+
+            INPUT:
+
+            - ``self`` -- a member of Hom(Y, Z)
+            - ``new_codomain`` -- an object X such that there is an injective canonical
+              coercion `\phi` in Hom(X, Y)
+            - ``check`` -- whether to check that the coercion is injective
+
+            OUTPUT:
+
+            An element of Hom(X, Z) obtained by composing ``self`` with `\phi`.  If
+            no injective canonical `\phi` exists, a :exc:`TypeError` is raised.
+            """
+            D = self.domain()
+            if D is None:
+                raise ValueError("This map became defunct by garbage collection")
+            cdef Map connecting = D._internal_coerce_map_from(new_domain)
+            if connecting is None:
+                raise TypeError("No coercion from %s to %s" % (new_domain, D))
+            if connecting.codomain() is not D:
+                raise RuntimeError("BUG: coerce_map_from should always return a map to self (%s)" % D)
+            if check and not connecting.is_injective():
+                raise TypeError("Coercion from %s to %s is not injective" % (new_domain, D))
+
+            return self.pre_compose(connecting.__copy__())
+
     # Lazy imports to avoid circularity issues.
     Enumerated = LazyImport('sage.categories.enumerated_sets', 'EnumeratedSets', at_startup=True)
     Finite = LazyImport('sage.categories.finite_sets', 'FiniteSets', at_startup=True)
