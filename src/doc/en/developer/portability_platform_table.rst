@@ -1402,41 +1402,41 @@
 .. |codespace-centos-stream-10-standard| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-centos-stream-10-standard%2Fdevcontainer.json
 
-.. |image-almalinux-8-toolset-gcc_9-python3.12-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.12-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.12-minimal-with-system-packages
+.. |image-almalinux-8-toolset-gcc_15-python3.12-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_15-python3.12-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_15-python3.12-minimal-with-system-packages
 
-.. |image-almalinux-8-toolset-gcc_9-python3.12-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.12-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.12-minimal-configured
+.. |image-almalinux-8-toolset-gcc_15-python3.12-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_15-python3.12-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_15-python3.12-minimal-configured
 
-.. |image-almalinux-8-toolset-gcc_9-python3.12-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.12-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.12-minimal-with-targets-pre
+.. |image-almalinux-8-toolset-gcc_15-python3.12-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_15-python3.12-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_15-python3.12-minimal-with-targets-pre
 
-.. |image-almalinux-8-toolset-gcc_9-python3.12-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.12-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.12-minimal-with-targets
+.. |image-almalinux-8-toolset-gcc_15-python3.12-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_15-python3.12-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_15-python3.12-minimal-with-targets
 
-.. |image-almalinux-8-toolset-gcc_9-python3.12-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.12-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.12-minimal-with-targets-optional
+.. |image-almalinux-8-toolset-gcc_15-python3.12-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_15-python3.12-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_15-python3.12-minimal-with-targets-optional
 
-.. |codespace-almalinux-8-toolset-gcc_9-python3.12-minimal| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-almalinux-8-toolset-gcc_9-python3.12-minimal%2Fdevcontainer.json
+.. |codespace-almalinux-8-toolset-gcc_15-python3.12-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-almalinux-8-toolset-gcc_15-python3.12-minimal%2Fdevcontainer.json
 
-.. |image-almalinux-8-toolset-gcc_9-python3.12-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.12-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.12-standard-with-system-packages
+.. |image-almalinux-8-toolset-gcc_15-python3.12-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_15-python3.12-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_15-python3.12-standard-with-system-packages
 
-.. |image-almalinux-8-toolset-gcc_9-python3.12-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.12-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.12-standard-configured
+.. |image-almalinux-8-toolset-gcc_15-python3.12-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_15-python3.12-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_15-python3.12-standard-configured
 
-.. |image-almalinux-8-toolset-gcc_9-python3.12-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.12-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.12-standard-with-targets-pre
+.. |image-almalinux-8-toolset-gcc_15-python3.12-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_15-python3.12-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_15-python3.12-standard-with-targets-pre
 
-.. |image-almalinux-8-toolset-gcc_9-python3.12-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.12-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.12-standard-with-targets
+.. |image-almalinux-8-toolset-gcc_15-python3.12-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_15-python3.12-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_15-python3.12-standard-with-targets
 
-.. |image-almalinux-8-toolset-gcc_9-python3.12-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.12-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.12-standard-with-targets-optional
+.. |image-almalinux-8-toolset-gcc_15-python3.12-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_15-python3.12-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_15-python3.12-standard-with-targets-optional
 
-.. |codespace-almalinux-8-toolset-gcc_9-python3.12-standard| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-almalinux-8-toolset-gcc_9-python3.12-standard%2Fdevcontainer.json
+.. |codespace-almalinux-8-toolset-gcc_15-python3.12-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-almalinux-8-toolset-gcc_15-python3.12-standard%2Fdevcontainer.json
 
 .. |image-almalinux-9-python3.11-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-9-python3.11-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-9-python3.11-minimal-with-system-packages
@@ -1473,6 +1473,150 @@
 
 .. |codespace-almalinux-9-python3.11-standard| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-almalinux-9-python3.11-standard%2Fdevcontainer.json
+
+.. |image-almalinux-10-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-10-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-10-minimal-with-system-packages
+
+.. |image-almalinux-10-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-10-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-10-minimal-configured
+
+.. |image-almalinux-10-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-10-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-10-minimal-with-targets-pre
+
+.. |image-almalinux-10-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-10-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-10-minimal-with-targets
+
+.. |image-almalinux-10-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-10-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-10-minimal-with-targets-optional
+
+.. |codespace-almalinux-10-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-almalinux-10-minimal%2Fdevcontainer.json
+
+.. |image-almalinux-10-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-10-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-10-standard-with-system-packages
+
+.. |image-almalinux-10-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-10-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-10-standard-configured
+
+.. |image-almalinux-10-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-10-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-10-standard-with-targets-pre
+
+.. |image-almalinux-10-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-10-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-10-standard-with-targets
+
+.. |image-almalinux-10-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-10-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-10-standard-with-targets-optional
+
+.. |codespace-almalinux-10-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-almalinux-10-standard%2Fdevcontainer.json
+
+.. |image-rockylinux-8-toolset-gcc_15-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-8-toolset-gcc_15-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-8-toolset-gcc_15-minimal-with-system-packages
+
+.. |image-rockylinux-8-toolset-gcc_15-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-8-toolset-gcc_15-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-8-toolset-gcc_15-minimal-configured
+
+.. |image-rockylinux-8-toolset-gcc_15-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-8-toolset-gcc_15-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-8-toolset-gcc_15-minimal-with-targets-pre
+
+.. |image-rockylinux-8-toolset-gcc_15-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-8-toolset-gcc_15-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-8-toolset-gcc_15-minimal-with-targets
+
+.. |image-rockylinux-8-toolset-gcc_15-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-8-toolset-gcc_15-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-8-toolset-gcc_15-minimal-with-targets-optional
+
+.. |codespace-rockylinux-8-toolset-gcc_15-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-rockylinux-8-toolset-gcc_15-minimal%2Fdevcontainer.json
+
+.. |image-rockylinux-8-toolset-gcc_15-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-8-toolset-gcc_15-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-8-toolset-gcc_15-standard-with-system-packages
+
+.. |image-rockylinux-8-toolset-gcc_15-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-8-toolset-gcc_15-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-8-toolset-gcc_15-standard-configured
+
+.. |image-rockylinux-8-toolset-gcc_15-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-8-toolset-gcc_15-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-8-toolset-gcc_15-standard-with-targets-pre
+
+.. |image-rockylinux-8-toolset-gcc_15-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-8-toolset-gcc_15-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-8-toolset-gcc_15-standard-with-targets
+
+.. |image-rockylinux-8-toolset-gcc_15-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-8-toolset-gcc_15-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-8-toolset-gcc_15-standard-with-targets-optional
+
+.. |codespace-rockylinux-8-toolset-gcc_15-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-rockylinux-8-toolset-gcc_15-standard%2Fdevcontainer.json
+
+.. |image-rockylinux-9-python3.11-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-9-python3.11-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-9-python3.11-minimal-with-system-packages
+
+.. |image-rockylinux-9-python3.11-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-9-python3.11-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-9-python3.11-minimal-configured
+
+.. |image-rockylinux-9-python3.11-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-9-python3.11-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-9-python3.11-minimal-with-targets-pre
+
+.. |image-rockylinux-9-python3.11-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-9-python3.11-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-9-python3.11-minimal-with-targets
+
+.. |image-rockylinux-9-python3.11-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-9-python3.11-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-9-python3.11-minimal-with-targets-optional
+
+.. |codespace-rockylinux-9-python3.11-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-rockylinux-9-python3.11-minimal%2Fdevcontainer.json
+
+.. |image-rockylinux-9-python3.11-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-9-python3.11-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-9-python3.11-standard-with-system-packages
+
+.. |image-rockylinux-9-python3.11-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-9-python3.11-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-9-python3.11-standard-configured
+
+.. |image-rockylinux-9-python3.11-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-9-python3.11-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-9-python3.11-standard-with-targets-pre
+
+.. |image-rockylinux-9-python3.11-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-9-python3.11-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-9-python3.11-standard-with-targets
+
+.. |image-rockylinux-9-python3.11-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-9-python3.11-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-9-python3.11-standard-with-targets-optional
+
+.. |codespace-rockylinux-9-python3.11-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-rockylinux-9-python3.11-standard%2Fdevcontainer.json
+
+.. |image-rockylinux-10-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-10-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-10-minimal-with-system-packages
+
+.. |image-rockylinux-10-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-10-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-10-minimal-configured
+
+.. |image-rockylinux-10-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-10-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-10-minimal-with-targets-pre
+
+.. |image-rockylinux-10-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-10-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-10-minimal-with-targets
+
+.. |image-rockylinux-10-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-10-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-10-minimal-with-targets-optional
+
+.. |codespace-rockylinux-10-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-rockylinux-10-minimal%2Fdevcontainer.json
+
+.. |image-rockylinux-10-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-10-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-10-standard-with-system-packages
+
+.. |image-rockylinux-10-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-10-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-10-standard-configured
+
+.. |image-rockylinux-10-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-10-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-10-standard-with-targets-pre
+
+.. |image-rockylinux-10-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-10-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-10-standard-with-targets
+
+.. |image-rockylinux-10-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-rockylinux-10-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-rockylinux-10-standard-with-targets-optional
+
+.. |codespace-rockylinux-10-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-rockylinux-10-standard%2Fdevcontainer.json
 
 .. |image-alpine-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-alpine-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-alpine-minimal-with-system-packages
@@ -2406,14 +2550,14 @@
    * -    ‑*standard*
      - |image-centos-stream-10-standard-with-system-packages| |image-centos-stream-10-standard-with-targets-pre| |image-centos-stream-10-standard-with-targets| |image-centos-stream-10-standard-with-targets-optional|
      - |codespace-centos-stream-10-standard|
-   * - **almalinux**-8-toolset-gcc_9-python3.12 
+   * - **almalinux**-8-toolset-gcc_15-python3.12 
        
           ‑*minimal*
-     - |image-almalinux-8-toolset-gcc_9-python3.12-minimal-with-system-packages| |image-almalinux-8-toolset-gcc_9-python3.12-minimal-with-targets-pre| |image-almalinux-8-toolset-gcc_9-python3.12-minimal-with-targets| |image-almalinux-8-toolset-gcc_9-python3.12-minimal-with-targets-optional|
-     - |codespace-almalinux-8-toolset-gcc_9-python3.12-minimal|
+     - |image-almalinux-8-toolset-gcc_15-python3.12-minimal-with-system-packages| |image-almalinux-8-toolset-gcc_15-python3.12-minimal-with-targets-pre| |image-almalinux-8-toolset-gcc_15-python3.12-minimal-with-targets| |image-almalinux-8-toolset-gcc_15-python3.12-minimal-with-targets-optional|
+     - |codespace-almalinux-8-toolset-gcc_15-python3.12-minimal|
    * -    ‑*standard*
-     - |image-almalinux-8-toolset-gcc_9-python3.12-standard-with-system-packages| |image-almalinux-8-toolset-gcc_9-python3.12-standard-with-targets-pre| |image-almalinux-8-toolset-gcc_9-python3.12-standard-with-targets| |image-almalinux-8-toolset-gcc_9-python3.12-standard-with-targets-optional|
-     - |codespace-almalinux-8-toolset-gcc_9-python3.12-standard|
+     - |image-almalinux-8-toolset-gcc_15-python3.12-standard-with-system-packages| |image-almalinux-8-toolset-gcc_15-python3.12-standard-with-targets-pre| |image-almalinux-8-toolset-gcc_15-python3.12-standard-with-targets| |image-almalinux-8-toolset-gcc_15-python3.12-standard-with-targets-optional|
+     - |codespace-almalinux-8-toolset-gcc_15-python3.12-standard|
    * - **almalinux**-9-python3.11 
        
           ‑*minimal*
@@ -2422,6 +2566,38 @@
    * -    ‑*standard*
      - |image-almalinux-9-python3.11-standard-with-system-packages| |image-almalinux-9-python3.11-standard-with-targets-pre| |image-almalinux-9-python3.11-standard-with-targets| |image-almalinux-9-python3.11-standard-with-targets-optional|
      - |codespace-almalinux-9-python3.11-standard|
+   * - **almalinux**-10 
+       
+          ‑*minimal*
+     - |image-almalinux-10-minimal-with-system-packages| |image-almalinux-10-minimal-with-targets-pre| |image-almalinux-10-minimal-with-targets| |image-almalinux-10-minimal-with-targets-optional|
+     - |codespace-almalinux-10-minimal|
+   * -    ‑*standard*
+     - |image-almalinux-10-standard-with-system-packages| |image-almalinux-10-standard-with-targets-pre| |image-almalinux-10-standard-with-targets| |image-almalinux-10-standard-with-targets-optional|
+     - |codespace-almalinux-10-standard|
+   * - **rockylinux**-8-toolset-gcc_15 
+       
+          ‑*minimal*
+     - |image-rockylinux-8-toolset-gcc_15-minimal-with-system-packages| |image-rockylinux-8-toolset-gcc_15-minimal-with-targets-pre| |image-rockylinux-8-toolset-gcc_15-minimal-with-targets| |image-rockylinux-8-toolset-gcc_15-minimal-with-targets-optional|
+     - |codespace-rockylinux-8-toolset-gcc_15-minimal|
+   * -    ‑*standard*
+     - |image-rockylinux-8-toolset-gcc_15-standard-with-system-packages| |image-rockylinux-8-toolset-gcc_15-standard-with-targets-pre| |image-rockylinux-8-toolset-gcc_15-standard-with-targets| |image-rockylinux-8-toolset-gcc_15-standard-with-targets-optional|
+     - |codespace-rockylinux-8-toolset-gcc_15-standard|
+   * - **rockylinux**-9-python3.11 
+       
+          ‑*minimal*
+     - |image-rockylinux-9-python3.11-minimal-with-system-packages| |image-rockylinux-9-python3.11-minimal-with-targets-pre| |image-rockylinux-9-python3.11-minimal-with-targets| |image-rockylinux-9-python3.11-minimal-with-targets-optional|
+     - |codespace-rockylinux-9-python3.11-minimal|
+   * -    ‑*standard*
+     - |image-rockylinux-9-python3.11-standard-with-system-packages| |image-rockylinux-9-python3.11-standard-with-targets-pre| |image-rockylinux-9-python3.11-standard-with-targets| |image-rockylinux-9-python3.11-standard-with-targets-optional|
+     - |codespace-rockylinux-9-python3.11-standard|
+   * - **rockylinux**-10 
+       
+          ‑*minimal*
+     - |image-rockylinux-10-minimal-with-system-packages| |image-rockylinux-10-minimal-with-targets-pre| |image-rockylinux-10-minimal-with-targets| |image-rockylinux-10-minimal-with-targets-optional|
+     - |codespace-rockylinux-10-minimal|
+   * -    ‑*standard*
+     - |image-rockylinux-10-standard-with-system-packages| |image-rockylinux-10-standard-with-targets-pre| |image-rockylinux-10-standard-with-targets| |image-rockylinux-10-standard-with-targets-optional|
+     - |codespace-rockylinux-10-standard|
    * - **alpine** 
        
           ‑*minimal*
