@@ -1,19 +1,20 @@
-name: Build documentation (PDF)
+name: Build live documentation
 
 on:
   workflow_dispatch:
-  ## Disabled in passagemath -- see doc-build-pdf-passagemath.yml instead
+  ## Disabled in passagemath -- see doc-build-passagemath.yml instead
 
-concurrency:
-  # Cancel previous runs of this workflow for the same branch
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+permissions:
+  contents: write
 
 env:
   PYTHON_VERSION: 3.12
+  SAGE_USE_CDNS: "yes"
+  SAGE_LIVE_DOC: "yes"
+  SAGE_JUPYTER_SERVER: "binder:sagemath/sage-binder-env/dev"
 
 jobs:
-  doc-pdf:
+  livedoc:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -25,12 +26,6 @@ jobs:
           # Remove pre-installed packages like Docker, Android, .NET, etc.
           # We only keep the basic essentials (like compilers, etc.)
           tool-cache: true
-
-      - name: Merge CI fixes from sagemath/sage
-        run: |
-          .github/workflows/merge-fixes.sh
-        env:
-          GH_TOKEN: ${{ github.token }}
 
       - name: Cache conda packages
         uses: actions/cache@v6
@@ -57,6 +52,12 @@ jobs:
           activate-environment: sage-dev
           environment-file: environment-${{ env.PYTHON_VERSION }}-linux.yml
 
+      - name: Patch jupyter-sphinx for live doc
+        shell: bash -l {0}
+        run: |
+          JUPYTER_SPHINX_DIR=$(python -c "import jupyter_sphinx; print(jupyter_sphinx.__path__[0])")
+          patch -p2 -d "$JUPYTER_SPHINX_DIR" < build/pkgs/jupyter_sphinx/patches/0001-Patch-for-sage-live-doc.patch
+
       - name: Build Sage
         shell: bash -l {0}
         run: |
@@ -64,25 +65,36 @@ jobs:
           export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:$PATH"
           pip install --no-build-isolation --config-settings=builddir=builddir . -v
 
-      - name: Build documentation
+      - name: Build live doc
+        shell: bash -l {0}
+        run: |
+          meson compile -C builddir doc-html -j2
+
+      - name: Build pdf doc
         shell: bash -l {0}
         run: |
           sudo DEBIAN_FRONTEND=noninteractive sudo apt-get update
           sudo DEBIAN_FRONTEND=noninteractive apt-get install $(build/bin/sage-get-system-packages debian texlive texlive_luatex free_fonts xindy)
           meson compile -C builddir doc-pdf
-        env:
-          SAGE_DOCBUILD_OPTS: "--include-tests-blocks"
 
       - name: Copy doc
         id: copy
         run: |
           mkdir -p ./doc
           cp -r builddir/src/doc/pdf doc/
-          # Zip everything for increased performance
-          zip -r doc-pdf.zip doc
+          cp -rL builddir/src/doc/html doc/
+          cp builddir/src/doc/index.html doc/
+          zip -r livedoc.zip doc
 
-      - name: Upload doc
+      - name: Upload livedoc
         uses: actions/upload-artifact@v7
         with:
-          name: doc-pdf
-          path: doc-pdf.zip
+          name: livedoc
+          path: livedoc.zip
+
+      - name: Upload docs to release
+        uses: softprops/action-gh-release@v3.0.1
+        with:
+          files: livedoc.zip
+          token: ${{ secrets.RELEASE_CREATION_TOKEN }}
+        if: github.ref_type == 'tag'
