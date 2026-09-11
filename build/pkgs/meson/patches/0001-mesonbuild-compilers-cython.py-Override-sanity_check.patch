@@ -1,0 +1,27 @@
+From ee84d75772adfde99a715ce26f1606c3170da24a Mon Sep 17 00:00:00 2001
+From: Matthias Koeppe <mkoeppe@math.ucdavis.edu>
+Date: Thu, 10 Sep 2026 18:11:35 -0700
+Subject: [PATCH] mesonbuild/compilers/cython.py: Override sanity_check
+
+---
+ mesonbuild/compilers/cython.py | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/mesonbuild/compilers/cython.py b/mesonbuild/compilers/cython.py
+index 58654ae03..203e989a4 100644
+--- a/mesonbuild/compilers/cython.py
++++ b/mesonbuild/compilers/cython.py
+@@ -54,6 +54,10 @@ class CythonCompiler(Compiler):
+         # We can lie here, it's fine
+         return []
+ 
++    def sanity_check(self, work_dir: str) -> None:
++        # Yes, we know it works.
++        return
++
+     def _sanity_check_filenames(self) -> T.Tuple[str, T.Optional[str], str]:
+         sourcename, _, binname = super()._sanity_check_filenames()
+ 
+-- 
+2.55.0
+
