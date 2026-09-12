@@ -21328,7 +21328,7 @@ class GenericGraph(GenericGraph_pyx):
             option forest_roots : An iterable specifying which vertices to use as roots for the ``layout='forest'`` option. If no root is specified for a tree, then one is chosen close to the center of the tree. Ignored unless ``layout='forest'``.
             option heights : A dictionary mapping heights to the list of vertices at this height.
             option iterations : The number of times to execute the spring layout algorithm.
-            option layout : A layout algorithm -- one of : "acyclic", "circular" (plots the graph with vertices evenly distributed on a circle), "ranked", "graphviz", "planar", "spring" (traditional spring layout, using the graph's current positions as initial positions), or "tree" (the tree will be plotted in levels, depending on minimum distance for the root).
+            option layout : A layout algorithm -- one of : "acyclic", "circular" (plots the graph with vertices evenly distributed on a circle), "ranked", "graphviz", "planar", "spring" (traditional spring layout, using the graph's current positions as initial positions), "tree" (the tree will be plotted in levels, depending on minimum distance for the root), or the name of any NetworkX layout function such as "kamada_kawai", "spectral", "shell", or "spiral" (see :meth:`~sage.graphs.generic_graph.GenericGraph.layout_networkx`).
             option prog : Which graphviz layout program to use -- one of "circo", "dot", "fdp", "neato", or "twopi".
             option save_pos : Whether or not to save the computed position for the graph.
             option spring : Use spring layout to finalize the current layout.
