@@ -19,14 +19,15 @@ dynamic = ["version"]
 include(`pyproject_toml_metadata_supports_windows.m4')dnl'
 
 [project.optional-dependencies]
-conf      = [SPKG_INSTALL_REQUIRES_sage_conf]           # sage.env can optionally use sage_conf
-docbuild  = [SPKG_INSTALL_REQUIRES_sage_docbuild]       # For "sage --docbuild"
-sage      = [SPKG_INSTALL_REQUIRES_sagelib]             # For "sage", "sage -t", ...
+conf      = [SPKG_INSTALL_REQUIRES_sage_conf]           # sage.env can optionally use passagemath-conf
 cython    = [SPKG_INSTALL_REQUIRES_cython]              # For "sage --cython"
+docbuild  = [SPKG_INSTALL_REQUIRES_sage_docbuild]       # For "sage --docbuild"
+package   = [SPKG_INSTALL_REQUIRES_sage_bootstrap]      # For "sage --package", package installation advice
 pytest    = [SPKG_INSTALL_REQUIRES_pytest]              # For "sage --pytest"
 rst2ipynb = [SPKG_INSTALL_REQUIRES_rst2ipynb]           # For "sage --rst2ipynb"
-tox       = [SPKG_INSTALL_REQUIRES_tox]                 # For "sage --tox"
+sage      = [SPKG_INSTALL_REQUIRES_sagelib]             # For "sage", "sage -t", ...
 sws2rst   = [SPKG_INSTALL_REQUIRES_sage_sws2rst]        # For "sage --sws2rst"
+tox       = [SPKG_INSTALL_REQUIRES_tox]                 # For "sage --tox"
 
 [project.readme]
 file = "README.rst"
