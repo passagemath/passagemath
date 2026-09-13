@@ -740,6 +740,7 @@ class FunctionFieldIdeal_module(FunctionFieldIdeal, Ideal_generic):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.function_field
             sage: K.<x> = FunctionField(QQ); R.<y> = K[]
             sage: L.<y> = K.extension(y^2 - x^3 - 1)
             sage: O = L.equation_order()
@@ -752,6 +753,7 @@ class FunctionFieldIdeal_module(FunctionFieldIdeal, Ideal_generic):
         division by the determinant of the order basis accounts for orders
         whose basis is not the ambient power basis::
 
+            sage: # needs sage.rings.function_field
             sage: O = L.order(x*y)
             sage: O.free_module().basis_matrix().det()
             x
@@ -768,6 +770,7 @@ class FunctionFieldIdeal_module(FunctionFieldIdeal, Ideal_generic):
         falling back to the generic ideal implementation and returning the
         ideal itself (:issue:`42215`)::
 
+            sage: # needs sage.rings.function_field
             sage: q = 3
             sage: Fq = GF(q)
             sage: F.<S> = FunctionField(Fq)
