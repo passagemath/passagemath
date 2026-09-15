@@ -21409,6 +21409,7 @@ class GenericGraph(GenericGraph_pyx):
         if save_pos:
             self.set_pos(pos, dim=dim)
         return pos
+
     def layout_networkx(self, layout_name, dim=2, **options):
         r"""
         Compute a layout using one of NetworkX's layout algorithms.
