@@ -139,9 +139,11 @@ layout_options = {
         'A layout algorithm -- one of : "acyclic", "circular" (plots the '
         'graph with vertices evenly distributed on a circle), "ranked", '
         '"graphviz", "planar", "spring" (traditional spring layout, using '
-        'the graph\'s current positions as initial positions), or "tree" '
+        'the graph\'s current positions as initial positions), "tree" '
         '(the tree will be plotted in levels, depending on minimum distance '
-        'for the root).',
+        'for the root), or the name of any NetworkX layout function such '
+        'as "kamada_kawai", "spectral", "shell", or "spiral" (see '
+        ':meth:`~sage.graphs.generic_graph.GenericGraph.layout_networkx`).',
     'iterations':
         'The number of times to execute the spring layout algorithm.',
     'heights':
