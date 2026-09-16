@@ -165,7 +165,7 @@ class FiniteDimensionalSemisimpleAlgebrasWithBasis(CategoryWithAxiom_over_base_r
                 `S_4`::
 
                     sage: Z4 = SymmetricGroup(4).algebra(QQ).center()                   # needs sage.combinat sage.graphs sage.groups sage.modules
-                    sage: Z4._orthogonal_decomposition()                                # needs sage.combinat sage.groups sage.modules
+                    sage: Z4._orthogonal_decomposition()                                # needs sage.combinat sage.graphs sage.groups sage.modules
                     (B[0] + B[1] + B[2] + B[3] + B[4],
                      B[0] + 1/3*B[1] - 1/3*B[2] - 1/3*B[4],
                      B[0] + B[2] - 1/2*B[3],
@@ -232,8 +232,8 @@ class FiniteDimensionalSemisimpleAlgebrasWithBasis(CategoryWithAxiom_over_base_r
                     sage: # needs sage.combinat sage.groups sage.modules
                     sage: A4 = SymmetricGroup(4).algebra(QQ)
                     sage: Z4 = A4.center()                                              # needs sage.graphs
-                    sage: idempotents = Z4.central_orthogonal_idempotents()
-                    sage: idempotents
+                    sage: idempotents = Z4.central_orthogonal_idempotents()             # needs sage.graphs
+                    sage: idempotents                                                   # needs sage.graphs
                     (1/24*B[0] + 1/24*B[1] + 1/24*B[2] + 1/24*B[3] + 1/24*B[4],
                      3/8*B[0] + 1/8*B[1] - 1/8*B[2] - 1/8*B[4],
                      1/6*B[0] + 1/6*B[2] - 1/12*B[3],
@@ -244,7 +244,7 @@ class FiniteDimensionalSemisimpleAlgebrasWithBasis(CategoryWithAxiom_over_base_r
                 recognize among them the sum and alternating
                 sum of all permutations::
 
-                    sage: [e.lift() for e in idempotents]                               # needs sage.combinat sage.groups sage.modules
+                    sage: [e.lift() for e in idempotents]                               # needs sage.combinat sage.graphs sage.groups sage.modules
                     [1/24*() + 1/24*(3,4) + 1/24*(2,3) + 1/24*(2,3,4) + 1/24*(2,4,3)
                      + 1/24*(2,4) + 1/24*(1,2) + 1/24*(1,2)(3,4) + 1/24*(1,2,3)
                      + 1/24*(1,2,3,4) + 1/24*(1,2,4,3) + 1/24*(1,2,4) + 1/24*(1,3,2)
@@ -263,7 +263,7 @@ class FiniteDimensionalSemisimpleAlgebrasWithBasis(CategoryWithAxiom_over_base_r
                 of the identity of `Z_4` into orthogonal idempotents::
 
                     sage: # needs sage.combinat sage.groups sage.modules
-                    sage: Z4.is_identity_decomposition_into_orthogonal_idempotents(idempotents)
+                    sage: Z4.is_identity_decomposition_into_orthogonal_idempotents(idempotents)     # needs sage.graphs
                     True
                 """
                 return tuple([(e.leading_coefficient()/(e*e).leading_coefficient())*e

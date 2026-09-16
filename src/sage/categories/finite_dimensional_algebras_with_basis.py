@@ -1827,7 +1827,7 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
                         sage: S3 = SymmetricGroupAlgebra(QQ, 3)
                         sage: T = S2.tensor(S3)
                         sage: C = T.cellular_basis()                                    # needs sage.graphs
-                        sage: all(C(T._from_cellular_index(k)).leading_support() == k
+                        sage: all(C(T._from_cellular_index(k)).leading_support() == k   # needs sage.graphs
                         ....:     for k in C.basis().keys())
                         True
                     """

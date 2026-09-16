@@ -501,7 +501,7 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
                 sage: T = M.twisted_invariant_module(G, [2,0,-1],                       # needs sage.rings.number_field
                 ....:                                action_on_basis=action)
                 sage: import __main__; __main__.action = action
-                sage: TestSuite(T).run()
+                sage: TestSuite(T).run()                                                # needs sage.rings.number_field
             """
 
             if action_on_basis is not None:

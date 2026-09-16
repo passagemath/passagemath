@@ -896,7 +896,7 @@ class CoxeterGroups(Category_singleton):
             TESTS::
 
                 sage: W = CoxeterGroup(['A', 2, 1])                                     # needs sage.combinat sage.graphs sage.groups
-                sage: W.kazhdan_lusztig_cells()                                         # needs sage.combinat sage.groups
+                sage: W.kazhdan_lusztig_cells()                                         # needs sage.combinat sage.graphs sage.groups
                 Traceback (most recent call last):
                 ...
                 ValueError: the Coxeter group must be finite to compute Kazhdan--Lusztig cells

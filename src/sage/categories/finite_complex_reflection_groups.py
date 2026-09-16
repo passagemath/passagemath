@@ -1098,7 +1098,7 @@ class FiniteComplexReflectionGroups(CategoryWithAxiom):
                     sage: W1 = CoxeterGroup(['A', 2])                                   # needs sage.graphs
                     sage: W2 = WeylGroup(['A', 2])
                     sage: W3 = SymmetricGroup(3)
-                    sage: W1.absolute_poset()
+                    sage: W1.absolute_poset()                                           # needs sage.graphs
                     Finite poset containing 6 elements
                     sage: W2.absolute_poset()                                           # needs sage.graphs
                     Finite poset containing 6 elements
