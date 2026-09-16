@@ -26,6 +26,7 @@ The algebra epimorphism from the braid group algebra over the same base ring is
 realized inside the element constructor of the present class, for example in the
 case of the 3 strand cubic Hecke algebra::
 
+    sage: # needs sage.libs.pari
     sage: CHA3 = algebras.CubicHecke(3)
     sage: BG3 = CHA3.braid_group()
     sage: braid = BG3((1,2,-1,2,2,-1)); braid
@@ -71,6 +72,7 @@ of [Mar2018]_. We verify that the third power of it is a scalar multiple
 of itself (explicitly ``2*w^2`` times the *Schur element* of the three
 dimensional irreducible representation)::
 
+    sage: # needs sage.libs.pari
     sage: CHA3 = algebras.CubicHecke(3)
     sage: c1, c2 = CHA3.gens()
     sage: b = c1^2*c2 - c2*c1^2 - c1*c2^2 + c2^2*c1; b
@@ -152,10 +154,10 @@ class CubicHeckeElement(CombinatorialFreeModule.Element):
 
     EXAMPLES::
 
-        sage: CHA3s = algebras.CubicHecke('s1, s2'); CHA3s.an_element()
+        sage: CHA3s = algebras.CubicHecke('s1, s2'); CHA3s.an_element()                 # needs sage.libs.pari
         -w*s1*s2^-1 + v*s1 + u*s2 - ((v*w-u)/w)
-        sage: CHA3.<c1, c2> = algebras.CubicHecke(3)
-        sage: c1**3*~c2
+        sage: CHA3.<c1, c2> = algebras.CubicHecke(3)                                    # needs sage.libs.pari
+        sage: c1**3*~c2                                                                 # needs sage.libs.pari
         u*w*c1^-1*c2^-1 + (u^2-v)*c1*c2^-1 - (u*v-w)*c2^-1
     """
     # --------------------------------------------------------------------------
@@ -167,16 +169,16 @@ class CubicHeckeElement(CombinatorialFreeModule.Element):
 
         EXAMPLES::
 
-            sage: CHA3 = algebras.CubicHecke(3)
-            sage: ele1 = CHA3((1,-2,1)); ele1
+            sage: CHA3 = algebras.CubicHecke(3)                                         # needs sage.libs.pari
+            sage: ele1 = CHA3((1,-2,1)); ele1                                           # needs sage.libs.pari
             c0*c1^-1*c0
-            sage: ~ele1                       # indirect doctest
+            sage: ~ele1                       # indirect doctest                        # needs sage.libs.pari
             c0^-1*c1*c0^-1
 
-            sage: CHA2 = algebras.CubicHecke(2)
-            sage: x = CHA2.an_element(); x
+            sage: CHA2 = algebras.CubicHecke(2)                                         # needs sage.libs.pari
+            sage: x = CHA2.an_element(); x                                              # needs sage.libs.pari
             v*c - ((v*w-u)/w)
-            sage: ~x
+            sage: ~x                                                                    # needs sage.libs.pari
             Traceback (most recent call last):
             ...
             ValueError: cannot invert self (= v*c - ((v*w-u)/w))
@@ -206,6 +208,7 @@ class CubicHeckeElement(CombinatorialFreeModule.Element):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: CHA3 = algebras.CubicHecke(3)
             sage: ele = CHA3.an_element(); ele
             -w*c0*c1^-1 + v*c0 + u*c1 - ((v*w-u)/w)
@@ -228,10 +231,10 @@ class CubicHeckeElement(CombinatorialFreeModule.Element):
 
         EXAMPLES::
 
-            sage: CHA3 = algebras.CubicHecke(3)
-            sage: ele = CHA3.an_element(); ele
+            sage: CHA3 = algebras.CubicHecke(3)                                         # needs sage.libs.pari
+            sage: ele = CHA3.an_element(); ele                                          # needs sage.libs.pari
             -w*c0*c1^-1 + v*c0 + u*c1 - ((v*w-u)/w)
-            sage: ele.max_len()
+            sage: ele.max_len()                                                         # needs sage.libs.pari
             2
         """
         return max(len(bas_ele.Tietze()) for bas_ele in self.support())
@@ -248,6 +251,7 @@ class CubicHeckeElement(CombinatorialFreeModule.Element):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: CHA3 = algebras.CubicHecke(3)
             sage: ele = CHA3.an_element(); ele
             -w*c0*c1^-1 + v*c0 + u*c1 - ((v*w-u)/w)
@@ -281,6 +285,7 @@ class CubicHeckeElement(CombinatorialFreeModule.Element):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: CHA3 = algebras.CubicHecke(3)
             sage: ele = CHA3.an_element(); ele
             -w*c0*c1^-1 + v*c0 + u*c1 - ((v*w-u)/w)
@@ -345,6 +350,7 @@ class CubicHeckeElement(CombinatorialFreeModule.Element):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: CHA3 = algebras.CubicHecke(3)
             sage: CHA3.inject_variables()
             Defining c0, c1
@@ -356,21 +362,21 @@ class CubicHeckeElement(CombinatorialFreeModule.Element):
 
         using the ``representation_type`` option::
 
-            sage: CHA3.<c0, c1> = algebras.CubicHecke(3)     #  optional gap3
+            sage: CHA3.<c0, c1> = algebras.CubicHecke(3)        # optional - gap3, needs sage.libs.pari
             sage: chevie = CHA3.repr_type.SplitIrredChevie   #  optional gap3
             sage: c0m_ch = c0.matrix(representation_type=chevie) #  optional gap3
             sage: c0m_ch[CHA3.irred_repr.W3_011]             #  optional gap3
             [         b          0]
             [        -b -b - a + u]
-            sage: c0m[CHA3.irred_repr.W3_011]
+            sage: c0m[CHA3.irred_repr.W3_011]                                           # needs sage.libs.pari
             [            b             0]
             [a^2 - u*a + v    -b - a + u]
 
         using the ``original`` option::
 
-            sage: c0mo = c0.matrix(original=True)
+            sage: c0mo = c0.matrix(original=True)                                       # needs sage.libs.pari
             sage: c0mo_ch = c0.matrix(representation_type=chevie, original=True) #  optional gap3
-            sage: c0mo[CHA3.irred_repr.W3_011]
+            sage: c0mo[CHA3.irred_repr.W3_011]                                          # needs sage.libs.pari
             [  b   0]
             [b*c   c]
             sage: c0mo_ch[CHA3.irred_repr.W3_011]            #  optional gap3
@@ -413,9 +419,9 @@ class CubicHeckeElement(CombinatorialFreeModule.Element):
 
         EXAMPLES::
 
-            sage: roots = (E(3), ~E(3), 1)
-            sage: CHA3.<c1, c2> = algebras.CubicHecke(3, cubic_equation_roots=roots)
-            sage: e = CHA3.an_element(); e
+            sage: roots = (E(3), ~E(3), 1)                                              # needs sage.rings.number_field
+            sage: CHA3.<c1, c2> = algebras.CubicHecke(3, cubic_equation_roots=roots)    # needs sage.rings.number_field
+            sage: e = CHA3.an_element(); e                                              # needs sage.rings.number_field
             -c1*c2^-1
             sage: _.revert_garside()
             -c2*c1^-1
@@ -434,6 +440,7 @@ class CubicHeckeElement(CombinatorialFreeModule.Element):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: CHA3.<c1, c2> = algebras.CubicHecke(3)
             sage: e = CHA3.an_element()
             sage: e.revert_mirror()
@@ -454,6 +461,7 @@ class CubicHeckeElement(CombinatorialFreeModule.Element):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: CHA3.<c1, c2> = algebras.CubicHecke(3)
             sage: e = CHA3.an_element()
             sage: e.revert_orientation()
@@ -516,53 +524,54 @@ class CubicHeckeElement(CombinatorialFreeModule.Element):
         EXAMPLES::
 
             sage: from sage.knots.knotinfo import KnotInfo
-            sage: CHA2 = algebras.CubicHecke(2)
+            sage: CHA2 = algebras.CubicHecke(2)                                         # needs sage.libs.pari
             sage: K3_1 = KnotInfo.K3_1
-            sage: b3_1 = CHA2(K3_1.braid())
-            sage: mt3_1 = b3_1.formal_markov_trace(); mt3_1
+            sage: b3_1 = CHA2(K3_1.braid())                                             # needs sage.libs.pari
+            sage: mt3_1 = b3_1.formal_markov_trace(); mt3_1                             # needs sage.libs.pari
             ((u^2*s^2-v*s^2+u*w)/s)*B[U1] - (u*v-w)*B[U2]
-            sage: mt3_1.parent()
+            sage: mt3_1.parent()                                                        # needs sage.libs.pari
             Free module generated by {U1, U2}
                over Multivariate Polynomial Ring in u, v, w, s
                over Integer Ring localized at (s, w, v, u)
 
-            sage: f = b3_1.formal_markov_trace(extended=True); f
+            sage: f = b3_1.formal_markov_trace(extended=True); f                        # needs sage.libs.pari
             (a^2*b*c*s^-1+a*b^2*c*s^-1+a*b*c^2*s^-1+a^2*s+a*b*s+b^2*s+a*c*s+b*c*s+c^2*s)*B[U1]
               + (-a^2*b-a*b^2-a^2*c+(-2)*a*b*c-b^2*c-a*c^2-b*c^2)*B[U2]
-            sage: f.parent().base_ring()
+            sage: f.parent().base_ring()                                                # needs sage.libs.pari
             Multivariate Laurent Polynomial Ring in a, b, c, s
               over Splitting Algebra of x^2 + x + 1 with roots [e3, -e3 - 1]
               over Integer Ring
 
-            sage: f = b3_1.formal_markov_trace(extended=True, field_embedding=True); f
+            sage: f = b3_1.formal_markov_trace(extended=True, field_embedding=True); f  # needs sage.libs.pari
             ((a^2*b*c+a*b^2*c+a*b*c^2+a^2*s^2+a*b*s^2+b^2*s^2+a*c*s^2+b*c*s^2+c^2*s^2)/s)*B[U1]
             - (a^2*b+a*b^2+a^2*c+2*a*b*c+b^2*c+a*c^2+b*c^2)*B[U2]
-            sage: f.parent().base_ring()
+            sage: f.parent().base_ring()                                                # needs sage.libs.pari
             Fraction Field of Multivariate Polynomial Ring in a, b, c, s
               over Cyclotomic Field of order 3 and degree 2
 
         Obtaining the well known link invariants from it::
 
+            sage: # needs sage.libs.pari
             sage: MT = mt3_1.base_ring()
             sage: sup = mt3_1.support()
             sage: u, v, w, s = mt3_1.base_ring().gens()
-            sage: LK3_1 = mt3_1*s**-3 # since the writhe of K3_1 is 3
+            sage: LK3_1 = mt3_1*s**-3  # since the writhe of K3_1 is 3
             sage: f = MT.specialize_homfly()
             sage: g = sum(f(LK3_1.coefficient(b)) * b.regular_homfly_polynomial() for b in sup); g
             L^-2*M^2 - 2*L^-2 - L^-4
             sage: g == K3_1.link().homfly_polynomial()
             True
 
-            sage: f = MT.specialize_kauffman()
-            sage: g = sum(f(LK3_1.coefficient(b)) * b.regular_kauffman_polynomial() for b in sup); g
+            sage: f = MT.specialize_kauffman()                                          # needs sage.libs.pari
+            sage: g = sum(f(LK3_1.coefficient(b)) * b.regular_kauffman_polynomial() for b in sup); g                    # needs sage.libs.pari
             a^-2*z^2 - 2*a^-2 + a^-3*z + a^-4*z^2 - a^-4 + a^-5*z
-            sage: g == K3_1.kauffman_polynomial()
+            sage: g == K3_1.kauffman_polynomial()                                       # needs sage.libs.pari
             True
 
-            sage: f = MT.specialize_links_gould()
-            sage: g = sum(f(LK3_1.coefficient(b)) * b.links_gould_polynomial() for b in sup); g
+            sage: f = MT.specialize_links_gould()                                       # needs sage.libs.pari
+            sage: g = sum(f(LK3_1.coefficient(b)) * b.links_gould_polynomial() for b in sup); g     # needs sage.libs.pari
             -t0^2*t1 - t0*t1^2 + t0^2 + 2*t0*t1 + t1^2 - t0 - t1 + 1
-            sage: g == K3_1.link().links_gould_polynomial()
+            sage: g == K3_1.link().links_gould_polynomial()                             # needs sage.libs.pari
             True
         """
         cha = self.parent()
@@ -680,6 +689,7 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
     Cubic Hecke algebra over the ring of definition::
 
+        sage: # needs sage.libs.pari
         sage: CHA3 = algebras.CubicHecke('s1, s2'); CHA3
         Cubic Hecke algebra on 3 strands over Multivariate Polynomial Ring
           in u, v, w
@@ -700,22 +710,22 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
     Element construction::
 
-        sage: ele = CHA3.an_element(); ele
+        sage: ele = CHA3.an_element(); ele                                              # needs sage.libs.pari
         -w*s1*s2^-1 + v*s1 + u*s2 - ((v*w-u)/w)
-        sage: ele2 = ele**2; ele2
+        sage: ele2 = ele**2; ele2                                                       # needs sage.libs.pari
         w^2*(s1^-1*s2)^2 - u*w^2*s1^-1*s2*s1^-1 - v*w*s2*s1^-1*s2
         - v*w^2*s1^-1*s2^-1 + u*w*s1*s2*s1^-1*s2 - u*w*s1^-1*s2*s1
         - (u*v*w-2*v*w+2*u)*s1*s2^-1 + u*v*w*s2*s1^-1 + u*v*s2*s1 + v^2*w*s1^-1
         - u^2*w*s1*s2*s1^-1 + ((u*v^2*w-2*v^2*w-u*w^2+2*u*v)/w)*s1 + u*v*s1*s2
         + (u^2*w+v^2*w)*s2^-1 + ((u^3*w-2*u*v*w+2*u^2)/w)*s2
         - ((u^2*v*w^2+v^3*w^2-v^2*w^2+2*u*v*w-u^2)/w^2)
-        sage: B3 = CHA3.braid_group()
-        sage: braid = B3((2,-1, 2, 1)); braid
+        sage: B3 = CHA3.braid_group()                                                   # needs sage.libs.pari
+        sage: braid = B3((2,-1, 2, 1)); braid                                           # needs sage.libs.pari
         s2*s1^-1*s2*s1
-        sage: ele3 = CHA3(braid); ele3
+        sage: ele3 = CHA3(braid); ele3                                                  # needs sage.libs.pari
         s1*s2*s1^-1*s2 + u*s1^-1*s2*s1 - v*s1*s2^-1 + v*s2^-1*s1 - u*s1*s2*s1^-1
-        sage: ele3t = CHA3((2,-1, 2, 1))
-        sage: ele3 == ele3t
+        sage: ele3t = CHA3((2,-1, 2, 1))                                                # needs sage.libs.pari
+        sage: ele3 == ele3t                                                             # needs sage.libs.pari
         True
         sage: CHA4 = algebras.CubicHecke(4)     # optional database_cubic_hecke
         sage: ele4 = CHA4(ele3); ele4           # optional database_cubic_hecke
@@ -724,7 +734,7 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
     Cubic Hecke algebra over the ring of definition using different variable
     names::
 
-        sage: algebras.CubicHecke(3, cubic_equation_parameters='u, v, w', cubic_equation_roots='p, q, r')
+        sage: algebras.CubicHecke(3, cubic_equation_parameters='u, v, w', cubic_equation_roots='p, q, r')               # needs sage.libs.pari
         Cubic Hecke algebra on 3 strands over Multivariate Polynomial Ring
           in u, v, w
           over Integer Ring localized at (w,)
@@ -739,7 +749,7 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
     Cubic Hecke algebra over a special base ring with respect to a special
     cubic equation::
 
-        sage: algebras.CubicHecke('s1, s2', cubic_equation_parameters=(QQ(1),3,1))
+        sage: algebras.CubicHecke('s1, s2', cubic_equation_parameters=(QQ(1),3,1))      # needs sage.libs.pari
         Cubic Hecke algebra on 3 strands over Rational Field
           with cubic equation: h^3 - h^2 + 3*h - 1 = 0
         sage: CHA3 = _
@@ -753,8 +763,8 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
         - 591488/83619*T^4 - 642145/83619*T^3 + 252521/111492*T^2 + 45685/5868*T
         + 55187/17604
 
-        sage: F = GF(25,'u')
-        sage: algebras.CubicHecke('s1, s2', cubic_equation_parameters=(F(1), F.gen(), F(3)))
+        sage: F = GF(25,'u')                                                            # needs sage.libs.pari
+        sage: algebras.CubicHecke('s1, s2', cubic_equation_parameters=(F(1), F.gen(), F(3)))        # needs sage.libs.pari
         Cubic Hecke algebra on 3 strands over Finite Field in u of size 5^2
           with cubic equation: h^3 + 4*h^2 + u*h + 2 = 0
         sage: CHA3 = _
@@ -767,9 +777,9 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
     Cubic Hecke algebra over a special extension ring with respect to special
     roots of the cubic equation::
 
-        sage: UCF = UniversalCyclotomicField()
-        sage: e3=UCF.gen(3); e5=UCF.gen(5)
-        sage: algebras.CubicHecke('s1, s2', cubic_equation_roots=(1, e5, e3))
+        sage: UCF = UniversalCyclotomicField()                                          # needs sage.rings.number_field
+        sage: e3=UCF.gen(3); e5=UCF.gen(5)                                              # needs sage.rings.number_field
+        sage: algebras.CubicHecke('s1, s2', cubic_equation_roots=(1, e5, e3))           # needs sage.rings.number_field
         Cubic Hecke algebra on 3 strands over Universal Cyclotomic Field
           with cubic equation:
           h^3 + (-E(15) - E(15)^4 - E(15)^7 + E(15)^8)*h^2 + (-E(15)^2 - E(15)^8
@@ -777,7 +787,7 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
     TESTS::
 
-        sage: CHA3 = algebras.CubicHecke(3)
+        sage: CHA3 = algebras.CubicHecke(3)                                             # needs sage.libs.pari
         sage: TestSuite(CHA3).run()
 
     Note, that the ``TestSuite`` run on the cubic Hecke algebra on four strands
@@ -798,6 +808,7 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: CHA2 = algebras.CubicHecke(2, 'd', cubic_equation_roots=(3,5,7)); CHA2
             Cubic Hecke algebra on 2 strands
               over Integer Ring localized at (3, 5, 7)
@@ -841,6 +852,7 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         TESTS::
 
+            sage: # needs sage.libs.pari
             sage: CHA2 = algebras.CubicHecke(2, 'd', cubic_equation_roots=(3,5,7))
             sage: TestSuite(CHA2).run()
             sage: CHA2 = algebras.CubicHecke(2, cubic_equation_parameters=(3,5,7))
@@ -1132,8 +1144,8 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         TESTS::
 
-            sage: CHA3 = algebras.CubicHecke(3)
-            sage: CHA3 # indirect doctest
+            sage: CHA3 = algebras.CubicHecke(3)                                         # needs sage.libs.pari
+            sage: CHA3  # indirect doctest                                              # needs sage.libs.pari
             Cubic Hecke algebra on 3 strands
               over Multivariate Polynomial Ring in u, v, w
               over Integer Ring localized at (w,)
@@ -1185,30 +1197,30 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
             sage: CB2 = CubicBraidGroup(2)
             sage: cb, = CB2.gens()
             sage: cb2 = cb**2
-            sage: CHA2 = algebras.CubicHecke(2)
-            sage: CHA2(b2)
+            sage: CHA2 = algebras.CubicHecke(2)                                         # needs sage.libs.pari
+            sage: CHA2(b2)                                                              # needs sage.libs.pari
             w*c^-1 + u*c - v
-            sage: CHA2(cb2)
+            sage: CHA2(cb2)                                                             # needs sage.libs.pari
             c^-1
-            sage: CHA3  = algebras.CubicHecke(3)
-            sage: B3    = CHA3.braid_group()
-            sage: CB3   = CHA3.cubic_braid_group()
-            sage: CB3GA = CHA3.cubic_braid_group_algebra()
-            sage: braid = B3((1,2,2,-1,2,1,1,-1)); braid
+            sage: CHA3  = algebras.CubicHecke(3)                                        # needs sage.libs.pari
+            sage: B3    = CHA3.braid_group()                                            # needs sage.libs.pari
+            sage: CB3   = CHA3.cubic_braid_group()                                      # needs sage.libs.pari
+            sage: CB3GA = CHA3.cubic_braid_group_algebra()                              # needs sage.libs.pari
+            sage: braid = B3((1,2,2,-1,2,1,1,-1)); braid                                # needs sage.libs.pari
             c0*c1^2*c0^-1*c1*c0
-            sage: img_braid = CHA3(braid); img_braid
+            sage: img_braid = CHA3(braid); img_braid                                    # needs sage.libs.pari
             u*w*(c0^-1*c1)^2 + u*v*c0*c1^-1*c0 - u^2*w*c0^-1*c1*c0^-1
             - u*v*c1*c0^-1*c1 - (u*v*w-w^2)*c0^-1*c1^-1 + u^2*c0*c1*c0^-1*c1
             - (u^2*v-u*w)*c0*c1^-1 + u^2*v*c1*c0^-1 + (u^2-v)*c1*c0
             - u^3*c0*c1*c0^-1 + (u*v^2-v*w)*c1^-1
-            sage: cbraid = CB3(braid); cbraid
+            sage: cbraid = CB3(braid); cbraid                                           # needs sage.libs.pari
             c0*c1^2*c0^-1*c1*c0
-            sage: img_cbraid = CHA3(cbraid); img_cbraid
+            sage: img_cbraid = CHA3(cbraid); img_cbraid                                 # needs sage.libs.pari
             c0^-1*c1^-1
-            sage: img_cbraid_back = img_cbraid.cubic_braid_group_algebra_pre_image()
-            sage: img_cbraid_back in CB3GA
+            sage: img_cbraid_back = img_cbraid.cubic_braid_group_algebra_pre_image()    # needs sage.libs.pari
+            sage: img_cbraid_back in CB3GA                                              # needs sage.libs.pari
             True
-            sage: img_cbraid_back == CB3GA(cbraid)
+            sage: img_cbraid_back == CB3GA(cbraid)                                      # needs sage.libs.pari
             True
         """
         braid_grp = self.braid_group()
@@ -1319,8 +1331,8 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA3 = algebras.CubicHecke(3)
-            sage: len(CHA3.get_order())
+            sage: CHA3 = algebras.CubicHecke(3)                                         # needs sage.libs.pari
+            sage: len(CHA3.get_order())                                                 # needs sage.libs.pari
             24
         """
         # The reason we have overridden this is that we have to care about
@@ -1381,8 +1393,8 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2)
-            sage: CHA2._dense_free_module()
+            sage: CHA2 = algebras.CubicHecke(2)                                         # needs sage.libs.pari
+            sage: CHA2._dense_free_module()                                             # needs sage.libs.pari
             Ambient free module of rank 3
               over the integral domain Multivariate Polynomial Ring in u, v, w
               over Integer Ring localized at (w,)
@@ -1398,8 +1410,8 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2)
-            sage: CHA2.ngens()
+            sage: CHA2 = algebras.CubicHecke(2)                                         # needs sage.libs.pari
+            sage: CHA2.ngens()                                                          # needs sage.libs.pari
             1
         """
         return self._nstrands - 1
@@ -1410,8 +1422,8 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2)
-            sage: CHA2.algebra_generators()
+            sage: CHA2 = algebras.CubicHecke(2)                                         # needs sage.libs.pari
+            sage: CHA2.algebra_generators()                                             # needs sage.libs.pari
             Finite family {c: c}
         """
         from sage.sets.family import Family
@@ -1423,8 +1435,8 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2)
-            sage: CHA2.gens()
+            sage: CHA2 = algebras.CubicHecke(2)                                         # needs sage.libs.pari
+            sage: CHA2.gens()                                                           # needs sage.libs.pari
             (c,)
         """
         return tuple(self.algebra_generators())
@@ -1435,8 +1447,8 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2)
-            sage: CHA2.gen(0)
+            sage: CHA2 = algebras.CubicHecke(2)                                         # needs sage.libs.pari
+            sage: CHA2.gen(0)                                                           # needs sage.libs.pari
             c
         """
         return self.gens()[i]
@@ -1448,8 +1460,8 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
          EXAMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2)
-            sage: CHA2.one_basis()
+            sage: CHA2 = algebras.CubicHecke(2)                                         # needs sage.libs.pari
+            sage: CHA2.one_basis()                                                      # needs sage.libs.pari
             1
         """
         return self.cubic_braid_group().one()
@@ -1461,8 +1473,8 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2)
-            sage: CHA2.an_element()              # indirect doctest
+            sage: CHA2 = algebras.CubicHecke(2)                                         # needs sage.libs.pari
+            sage: CHA2.an_element()              # indirect doctest                     # needs sage.libs.pari
             v*c - ((v*w-u)/w)
         """
         n = self.ngens() + 1
@@ -1490,7 +1502,7 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA3 = algebras.CubicHecke(3)  # optional gap3
+            sage: CHA3 = algebras.CubicHecke(3)         # optional - gap3               # needs sage.libs.pari
             sage: CHA3.chevie()                  # optional gap3
             Hecke(G4,[[a,b,c]])
         """
@@ -1530,6 +1542,7 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: CHA3 = algebras.CubicHecke(3)
             sage: g = CHA3.basis().keys().an_element(); g
             c0*c1
@@ -1576,8 +1589,8 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2)
-            sage: CHA2._basis_tietze()
+            sage: CHA2 = algebras.CubicHecke(2)                                         # needs sage.libs.pari
+            sage: CHA2._basis_tietze()                                                  # needs sage.libs.pari
             [[], [1], [-1]]
         """
         if self._nstrands > 4:
@@ -1594,10 +1607,10 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2)
-            sage: CHA2._tietze_to_finite_sub_basis_monomial([-1])
+            sage: CHA2 = algebras.CubicHecke(2)                                         # needs sage.libs.pari
+            sage: CHA2._tietze_to_finite_sub_basis_monomial([-1])                       # needs sage.libs.pari
             c^-1
-            sage: CHA2._tietze_to_finite_sub_basis_monomial([-2]) is None
+            sage: CHA2._tietze_to_finite_sub_basis_monomial([-2]) is None               # needs sage.libs.pari
             True
         """
         tietze_list = list(tietze_tup)
@@ -1627,10 +1640,10 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2)
-            sage: CHA2._create_matrix_list_for_one(CHA2.repr_type.SplitIrredMarin)
+            sage: CHA2 = algebras.CubicHecke(2)                                         # needs sage.libs.pari
+            sage: CHA2._create_matrix_list_for_one(CHA2.repr_type.SplitIrredMarin)      # needs sage.libs.pari
             [[1], [1], [1]]
-            sage: CHA2._create_matrix_list_for_one(CHA2.repr_type.RegularLeft)
+            sage: CHA2._create_matrix_list_for_one(CHA2.repr_type.RegularLeft)          # needs sage.libs.pari
             [
             [1 0 0]
             [0 1 0]
@@ -1667,7 +1680,7 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA3 = algebras.CubicHecke(3)              # optional gap3
+            sage: CHA3 = algebras.CubicHecke(3)         # optional - gap3               # needs sage.libs.pari
             sage: CHA3._fetch_matrix_list_from_chevie(5)     # optional gap3
             [
             [ a  0]  [c c]
@@ -1700,8 +1713,8 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2, cubic_equation_roots=(3,7,11))
-            sage: CHA2._test_ring_constructions()
+            sage: CHA2 = algebras.CubicHecke(2, cubic_equation_roots=(3,7,11))          # needs sage.libs.pari
+            sage: CHA2._test_ring_constructions()                                       # needs sage.libs.pari
         """
         # ------------------------------------------------------------------------
         # testing ring constructions
@@ -1780,8 +1793,8 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2, cubic_equation_roots=(3,7,11))
-            sage: CHA2._test_matrix_constructions()
+            sage: CHA2 = algebras.CubicHecke(2, cubic_equation_roots=(3,7,11))          # needs sage.libs.pari
+            sage: CHA2._test_matrix_constructions()                                     # needs sage.libs.pari
         """
         # ----------------------------------------------------------------------
         # testing matrix constructions
@@ -1905,6 +1918,7 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: CHA3 = algebras.CubicHecke(3)
             sage: b1, b2 = CHA3.braid_group().gens(); br = ~b2*b1*~b2
             sage: CHA3._braid_image_from_filecache(br)
@@ -1946,6 +1960,7 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: CHA2 = algebras.CubicHecke(2)
             sage: br, = CHA2.braid_group().gens(); br2 = br**2
             sage: section = CHA2.filecache_section().braid_images
@@ -1982,9 +1997,9 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2)
-            sage: br, = CHA2.braid_group().gens(); br2 = br**2
-            sage: CHA2._braid_image(br2)
+            sage: CHA2 = algebras.CubicHecke(2)                                         # needs sage.libs.pari
+            sage: br, = CHA2.braid_group().gens(); br2 = br**2                          # needs sage.libs.pari
+            sage: CHA2._braid_image(br2)                                                # needs sage.libs.pari
             w*c^-1 + u*c - v
         """
         # ----------------------------------------------------------------------
@@ -2024,10 +2039,10 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA3 = algebras.CubicHecke(3)
-            sage: CHA3._braid_image_from_reduced_powers((1, -2, 1))
+            sage: CHA3 = algebras.CubicHecke(3)                                         # needs sage.libs.pari
+            sage: CHA3._braid_image_from_reduced_powers((1, -2, 1))                     # needs sage.libs.pari
             c0*c1^-1*c0
-            sage: CHA3._braid_image_from_reduced_powers((1, -2, 1, 2))
+            sage: CHA3._braid_image_from_reduced_powers((1, -2, 1, 2))                  # needs sage.libs.pari
             w*c0^-1*c1*c0^-1 - v*c1*c0^-1 + u*c0*c1*c0^-1
         """
         n = self.ngens()
@@ -2125,10 +2140,10 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA3 = algebras.CubicHecke(3)
-            sage: CHA3._braid_image_from_former_calculations((1, -2, 1))
+            sage: CHA3 = algebras.CubicHecke(3)                                         # needs sage.libs.pari
+            sage: CHA3._braid_image_from_former_calculations((1, -2, 1))                # needs sage.libs.pari
             (c0*c1^-1*c0, None)
-            sage: CHA3._braid_image_from_former_calculations((1, -2, 1, 2))
+            sage: CHA3._braid_image_from_former_calculations((1, -2, 1, 2))             # needs sage.libs.pari
             (c0*c1^-1*c0, ([], [1, -2, 1], [2]))
         """
         braid_list = list(braid_tietze)
@@ -2273,8 +2288,8 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA3 = algebras.CubicHecke(3)
-            sage: CHA3._reduce_all_gen_powers((1, 1, -2, -2))
+            sage: CHA3 = algebras.CubicHecke(3)                                         # needs sage.libs.pari
+            sage: CHA3._reduce_all_gen_powers((1, 1, -2, -2))                           # needs sage.libs.pari
             ([u*v/w, (-v)/w, (-v^2)/w, (-u^2)/w, u/w, u*v/w, -u, 1, v],
              [(), (2,), (-2,), (1,), (1, 2), (1, -2), (-1,), (-1, 2), (-1, -2)])
         """
@@ -2370,8 +2385,8 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2)
-            sage: CHA2._reduce_gen_power(5)
+            sage: CHA2 = algebras.CubicHecke(2)                                         # needs sage.libs.pari
+            sage: CHA2._reduce_gen_power(5)                                             # needs sage.libs.pari
             (-u^3*v + 2*u*v^2 + u^2*w - 2*v*w, u^4 - 3*u^2*v
             + v^2 + 2*u*w, u^3*w - 2*u*v*w + w^2)
         """
@@ -2438,6 +2453,7 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: CHA3 = algebras.CubicHecke(3)
             sage: CHA3.inject_variables()
             Defining c0, c1
@@ -2562,9 +2578,9 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2)
-            sage: CBG = CHA2.cubic_braid_group()
-            sage: CHA2._cubic_braid_basis_tuple(CBG((1, 1)))
+            sage: CHA2 = algebras.CubicHecke(2)                                         # needs sage.libs.pari
+            sage: CBG = CHA2.cubic_braid_group()                                        # needs sage.libs.pari
+            sage: CHA2._cubic_braid_basis_tuple(CBG((1, 1)))                            # needs sage.libs.pari
             (-1,)
         """
         tietze_list = self._basis_tietze()
@@ -2608,9 +2624,9 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2)
-            sage: CBG = CHA2.cubic_braid_group()
-            sage: CHA2._cubic_braid_image(CBG((1,1)))
+            sage: CHA2 = algebras.CubicHecke(2)                                         # needs sage.libs.pari
+            sage: CBG = CHA2.cubic_braid_group()                                        # needs sage.libs.pari
+            sage: CHA2._cubic_braid_image(CBG((1,1)))                                   # needs sage.libs.pari
             c^-1
         """
         if check:
@@ -2641,9 +2657,9 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2)
-            sage: br, = CHA2.gens()
-            sage: CHA2.mirror_isomorphism(br)   # indirect doctest
+            sage: CHA2 = algebras.CubicHecke(2)                                         # needs sage.libs.pari
+            sage: br, = CHA2.gens()                                                     # needs sage.libs.pari
+            sage: CHA2.mirror_isomorphism(br)   # indirect doctest                      # needs sage.libs.pari
             c^-1
         """
         result = self.zero()
@@ -2676,19 +2692,19 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2)
-            sage: CHA2._markov_trace_module()
+            sage: CHA2 = algebras.CubicHecke(2)                                         # needs sage.libs.pari
+            sage: CHA2._markov_trace_module()                                           # needs sage.libs.pari
             Free module generated by {U1, U2}
               over Multivariate Polynomial Ring in u, v, w, s
               over Integer Ring localized at (s, w, v, u)
 
-            sage: CHA2._markov_trace_module(extended=True)
+            sage: CHA2._markov_trace_module(extended=True)                              # needs sage.libs.pari
             Free module generated by {U1, U2}
               over Multivariate Laurent Polynomial Ring in a, b, c, s
               over Splitting Algebra of x^2 + x + 1 with roots [e3, -e3 - 1]
               over Integer Ring
 
-            sage: CHA2._markov_trace_module(extended=True, field_embedding=True)
+            sage: CHA2._markov_trace_module(extended=True, field_embedding=True)        # needs sage.libs.pari
             Free module generated by {U1, U2}
               over Fraction Field of Multivariate Polynomial Ring in a, b, c, s
               over Cyclotomic Field of order 3 and degree 2
@@ -2720,8 +2736,8 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2)
-            sage: CHA2._markov_trace_coeffs()
+            sage: CHA2 = algebras.CubicHecke(2)                                         # needs sage.libs.pari
+            sage: CHA2._markov_trace_coeffs()                                           # needs sage.libs.pari
             [B[U2], s*B[U1], 1/s*B[U1]]
             sage: M = _[0].parent(); M
             Free module generated by {U1, U2}
@@ -2747,8 +2763,8 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2)
-            sage: list(CHA2.filecache_section())
+            sage: CHA2 = algebras.CubicHecke(2)                                         # needs sage.libs.pari
+            sage: list(CHA2.filecache_section())                                        # needs sage.libs.pari
             [<section.matrix_representations: 'matrix_representations'>,
              <section.braid_images: 'braid_images'>,
              <section.basis_extensions: 'basis_extensions'>,
@@ -2770,8 +2786,8 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2)
-            sage: CHA2.is_filecache_empty()
+            sage: CHA2 = algebras.CubicHecke(2)                                         # needs sage.libs.pari
+            sage: CHA2.is_filecache_empty()                                             # needs sage.libs.pari
             False
         """
         return self._filecache.is_empty(section=section)
@@ -2818,8 +2834,8 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA4 = algebras.CubicHecke(2)
-            sage: CHA4.strands()
+            sage: CHA4 = algebras.CubicHecke(2)                                         # needs sage.libs.pari
+            sage: CHA4.strands()                                                        # needs sage.libs.pari
             2
         """
         return self._nstrands
@@ -2846,6 +2862,7 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: CHA3 = algebras.CubicHecke(3)
             sage: ele = CHA3.an_element()
             sage: ele_gar = CHA3.garside_involution(ele); ele_gar
@@ -2884,6 +2901,7 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: CHA3 = algebras.CubicHecke(3)
             sage: ele = CHA3.an_element()
             sage: ele_ori = CHA3.orientation_antiinvolution(ele); ele_ori
@@ -2931,6 +2949,7 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: CHA3 = algebras.CubicHecke(3)
             sage: ele = CHA3.an_element()
             sage: ele_mirr = CHA3.mirror_isomorphism(ele); ele_mirr
@@ -2979,6 +2998,7 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.number_field
             sage: CHA2 = algebras.CubicHecke(2, cubic_equation_roots=(E(3), ~E(3), 1))
             sage: CHA2.cubic_equation()
             h^3 - 1
@@ -3017,6 +3037,7 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: CHA2 = algebras.CubicHecke(2, cubic_equation_roots=(3, 4, 5))
             sage: CHA2.cubic_equation()
             h^3 - 12*h^2 + 47*h - 60
@@ -3046,6 +3067,7 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: CHA2 = algebras.CubicHecke(2, cubic_equation_roots=(3, 4, 5))
             sage: CHA2.cubic_equation()
             h^3 - 12*h^2 + 47*h - 60
@@ -3073,10 +3095,10 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2, cubic_equation_roots=(3, 4, 5))
-            sage: CHA2.base_ring()
+            sage: CHA2 = algebras.CubicHecke(2, cubic_equation_roots=(3, 4, 5))         # needs sage.libs.pari
+            sage: CHA2.base_ring()                                                      # needs sage.libs.pari
             Integer Ring localized at (2, 3, 5)
-            sage: CHA2.base_ring(generic=True)
+            sage: CHA2.base_ring(generic=True)                                          # needs sage.libs.pari
             Multivariate Polynomial Ring in u, v, w
               over Integer Ring localized at (w,)
         """
@@ -3103,11 +3125,11 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2, cubic_equation_roots=(3, 4, 5))
-            sage: CHA2.extension_ring()
+            sage: CHA2 = algebras.CubicHecke(2, cubic_equation_roots=(3, 4, 5))         # needs sage.libs.pari
+            sage: CHA2.extension_ring()                                                 # needs sage.libs.pari
             Splitting Algebra of T^2 + T + 1 with roots [E3, -E3 - 1]
             over Integer Ring localized at (2, 3, 5)
-            sage: CHA2.extension_ring(generic=True)
+            sage: CHA2.extension_ring(generic=True)                                     # needs sage.libs.pari
             Multivariate Laurent Polynomial Ring in a, b, c
             over Splitting Algebra of x^2 + x + 1
               with roots [e3, -e3 - 1] over Integer Ring
@@ -3136,10 +3158,10 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2, cubic_equation_roots=(3, 4, 5))
-            sage: CHA2.cyclotomic_generator()
+            sage: CHA2 = algebras.CubicHecke(2, cubic_equation_roots=(3, 4, 5))         # needs sage.libs.pari
+            sage: CHA2.cyclotomic_generator()                                           # needs sage.libs.pari
             E3
-            sage: CHA2.cyclotomic_generator(generic=True)
+            sage: CHA2.cyclotomic_generator(generic=True)                               # needs sage.libs.pari
             e3
         """
         e3gen = self.extension_ring(generic=True).cyclotomic_generator()
@@ -3157,8 +3179,8 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2)
-            sage: CHA2.braid_group()
+            sage: CHA2 = algebras.CubicHecke(2)                                         # needs sage.libs.pari
+            sage: CHA2.braid_group()                                                    # needs sage.libs.pari
             Braid group on 2 strands
         """
         return self._braid_group
@@ -3172,8 +3194,8 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2)
-            sage: CHA2.cubic_braid_group()
+            sage: CHA2 = algebras.CubicHecke(2)                                         # needs sage.libs.pari
+            sage: CHA2.cubic_braid_group()                                              # needs sage.libs.pari
             Cubic Braid group on 2 strands
         """
         return self._cubic_braid_group
@@ -3188,8 +3210,8 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2)
-            sage: CHA2.braid_group_algebra()
+            sage: CHA2 = algebras.CubicHecke(2)                                         # needs sage.libs.pari
+            sage: CHA2.braid_group_algebra()                                            # needs sage.libs.pari
             Algebra of Braid group on 2 strands
              over Multivariate Polynomial Ring in u, v, w
              over Integer Ring localized at (w,)
@@ -3206,8 +3228,8 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA2 = algebras.CubicHecke(2)
-            sage: CHA2.cubic_braid_group_algebra()
+            sage: CHA2 = algebras.CubicHecke(2)                                         # needs sage.libs.pari
+            sage: CHA2.cubic_braid_group_algebra()                                      # needs sage.libs.pari
             Algebra of Cubic Braid group on 2 strands
              over Multivariate Polynomial Ring in u, v, w
              over Integer Ring localized at (w,)
@@ -3232,8 +3254,8 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA3 = algebras.CubicHecke(3, cubic_equation_roots=(3, 4, 5))
-            sage: CHA3.cubic_hecke_subalgebra()
+            sage: CHA3 = algebras.CubicHecke(3, cubic_equation_roots=(3, 4, 5))         # needs sage.libs.pari
+            sage: CHA3.cubic_hecke_subalgebra()                                         # needs sage.libs.pari
             Cubic Hecke algebra on 2 strands
               over Integer Ring localized at (2, 3, 5)
                 with cubic equation: h^3 - 12*h^2 + 47*h - 60 = 0
@@ -3284,6 +3306,7 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: CHA2 = algebras.CubicHecke(2)
             sage: ce = CHA2.cubic_equation(); ce
             h^3 - u*h^2 + v*h - w
@@ -3302,22 +3325,22 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
         Note that both cubic Hecke algebras have the same ring of definition
         and identical generic cubic equation::
 
-            sage: cemg = CHA2m.cubic_equation(generic=True)
-            sage: CHA2.cubic_equation(generic=True) == cemg
+            sage: cemg = CHA2m.cubic_equation(generic=True)                             # needs sage.libs.pari
+            sage: CHA2.cubic_equation(generic=True) == cemg                             # needs sage.libs.pari
             True
-            sage: CHA2.cubic_equation() == cemg
+            sage: CHA2.cubic_equation() == cemg                                         # needs sage.libs.pari
             True
-            sage: a, b, c = CHA2.cubic_equation_roots()
-            sage: CHA2m.cubic_equation_roots(generic=True) == [a, b, c]
+            sage: a, b, c = CHA2.cubic_equation_roots()                                 # needs sage.libs.pari
+            sage: CHA2m.cubic_equation_roots(generic=True) == [a, b, c]                 # needs sage.libs.pari
             True
-            sage: CHA2m.cubic_equation_roots()
+            sage: CHA2m.cubic_equation_roots()                                          # needs sage.libs.pari
             [((-1)/(-w))*a^2 + (u/(-w))*a + (-v)/(-w),
              ((1/(-w))*a)*b + (1/(-w))*a^2 + ((-u)/(-w))*a,
              (((-1)/(-w))*a)*b]
             sage: ai, bi, ci = _
-            sage: ai == ~a, bi == ~b, ci == ~c
+            sage: ai == ~a, bi == ~b, ci == ~c                                          # needs sage.libs.pari
             (True, True, True)
-            sage: CHA2.extension_ring(generic=True).mirror_involution()
+            sage: CHA2.extension_ring(generic=True).mirror_involution()                 # needs sage.libs.pari
             Ring endomorphism of Multivariate Laurent Polynomial Ring in a, b, c
                                  over Splitting Algebra of x^2 + x + 1
                                    with roots [e3, -e3 - 1] over Integer Ring
@@ -3330,8 +3353,8 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
         algebras if the specialization does not factor through the mirror
         involution on the ring if definition::
 
-            sage: CHA2s = algebras.CubicHecke(2, cubic_equation_roots=(3, 4, 5))
-            sage: CHA2s
+            sage: CHA2s = algebras.CubicHecke(2, cubic_equation_roots=(3, 4, 5))        # needs sage.libs.pari
+            sage: CHA2s                                                                 # needs sage.libs.pari
             Cubic Hecke algebra on 2 strands
               over Integer Ring localized at (2, 3, 5)
                 with cubic equation: h^3 - 12*h^2 + 47*h - 60 = 0
@@ -3339,7 +3362,7 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
         In the next example it is not clear what the mirror image of ``7``
         should be::
 
-            sage: CHA2s.mirror_image()
+            sage: CHA2s.mirror_image()                                                  # needs sage.libs.pari
             Traceback (most recent call last):
             ...
             RuntimeError: base ring Integer Ring localized at (2, 3, 5)
@@ -3411,7 +3434,7 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA3 = algebras.CubicHecke(3)       # optional gap3
+            sage: CHA3 = algebras.CubicHecke(3)         # optional - gap3               # needs sage.libs.pari
             sage: sch_eles = CHA3.schur_elements()    # optional gap3
             sage: sch_eles[6]                         # optional gap3
             (u^3*w + v^3 - 6*u*v*w + 8*w^2)/w^2
@@ -3448,7 +3471,7 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA3 = algebras.CubicHecke(3)                 # optional gap3
+            sage: CHA3 = algebras.CubicHecke(3)                 # optional - gap3, needs sage.libs.pari
             sage: CHA3.schur_element(CHA3.irred_repr.W3_111)    # optional gap3
             (u^3*w + v^3 - 6*u*v*w + 8*w^2)/w^2
         """
@@ -3483,20 +3506,20 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: CHA3 = algebras.CubicHecke(3)
-            sage: ch = CHA3.characters()
-            sage: e = CHA3.an_element()
-            sage: ch[0](e)
+            sage: CHA3 = algebras.CubicHecke(3)                                         # needs sage.libs.pari
+            sage: ch = CHA3.characters()                                                # needs sage.libs.pari
+            sage: e = CHA3.an_element()                                                 # needs sage.libs.pari
+            sage: ch[0](e)                                                              # needs sage.libs.pari
             a^2*b + a^2*c + a^2 - b*c + b^-1*c^-1 + a^-1*c^-1 + a^-1*b^-1
             sage: _.parent()
             Multivariate Laurent Polynomial Ring in a, b, c
               over Splitting Algebra of x^2 + x + 1 with roots [e3, -e3 - 1]
               over Integer Ring
-            sage: ch_w3_100 = CHA3.characters(irr=CHA3.irred_repr.W3_100)
-            sage: ch_w3_100(e) == ch[0](e)
+            sage: ch_w3_100 = CHA3.characters(irr=CHA3.irred_repr.W3_100)               # needs sage.libs.pari
+            sage: ch_w3_100(e) == ch[0](e)                                              # needs sage.libs.pari
             True
-            sage: ch_x = CHA3.characters(original=False)
-            sage: ch_x[0](e)
+            sage: ch_x = CHA3.characters(original=False)                                # needs sage.libs.pari
+            sage: ch_x[0](e)                                                            # needs sage.libs.pari
             (u + v)*a + (-v*w - w^2 + u)/w
             sage: _.parent()
             Splitting Algebra of T^2 + T + 1 with roots [E3, -E3 - 1]

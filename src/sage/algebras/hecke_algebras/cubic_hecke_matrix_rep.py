@@ -379,26 +379,26 @@ class CubicHeckeMatrixRep(Matrix_generic_dense):
     EXAMPLES::
 
         sage: import sage.algebras.hecke_algebras.cubic_hecke_matrix_rep as chmr
-        sage: CHA2.<c1> = algebras.CubicHecke(2)
-        sage: MS = chmr.CubicHeckeMatrixSpace(CHA2)
-        sage: m1 = MS(c1); m1
+        sage: CHA2.<c1> = algebras.CubicHecke(2)                                        # needs sage.libs.pari
+        sage: MS = chmr.CubicHeckeMatrixSpace(CHA2)                                     # needs sage.libs.pari
+        sage: m1 = MS(c1); m1                                                           # needs sage.libs.pari
         [         a          0          0]
         [         0          b          0]
         [         0          0 -b - a + u]
-        sage: type(m1)
+        sage: type(m1)                                                                  # needs sage.libs.pari
         <class 'sage.algebras.hecke_algebras.cubic_hecke_matrix_rep.CubicHeckeMatrixSpace_with_category.element_class'>
-        sage: m1.block_diagonal_list()
+        sage: m1.block_diagonal_list()                                                  # needs sage.libs.pari
         [[a], [b], [-b - a + u]]
 
-        sage: MSo = chmr.CubicHeckeMatrixSpace(CHA2, original=True)
-        sage: MSo(c1)
+        sage: MSo = chmr.CubicHeckeMatrixSpace(CHA2, original=True)                     # needs sage.libs.pari
+        sage: MSo(c1)                                                                   # needs sage.libs.pari
         [a 0 0]
         [0 b 0]
         [0 0 c]
 
         sage: reg_left = chmr.RepresentationType.RegularLeft
-        sage: MSreg = chmr.CubicHeckeMatrixSpace(CHA2, representation_type=reg_left)
-        sage: MSreg(c1)
+        sage: MSreg = chmr.CubicHeckeMatrixSpace(CHA2, representation_type=reg_left)    # needs sage.libs.pari
+        sage: MSreg(c1)                                                                 # needs sage.libs.pari
         [ 0 -v  1]
         [ 1  u  0]
         [ 0  w  0]
@@ -409,7 +409,7 @@ class CubicHeckeMatrixRep(Matrix_generic_dense):
 
     The minpoly does not work over more generic rings::
 
-        sage: TestSuite(m1).run(skip='_test_minpoly')
+        sage: TestSuite(m1).run(skip='_test_minpoly')                                   # needs sage.libs.pari
     """
 
     @cached_method
@@ -430,8 +430,8 @@ class CubicHeckeMatrixRep(Matrix_generic_dense):
 
         EXAMPLES::
 
-            sage: CHA2.<c1> = algebras.CubicHecke(2)
-            sage: c1.matrix()._get_block(0)      # indirect doctest
+            sage: CHA2.<c1> = algebras.CubicHecke(2)                                    # needs sage.libs.pari
+            sage: c1.matrix()._get_block(0)      # indirect doctest                     # needs sage.libs.pari
             [a]
         """
         representation_type = self.parent()._representation_type
@@ -458,6 +458,7 @@ class CubicHeckeMatrixRep(Matrix_generic_dense):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: CHA2.<c1> = algebras.CubicHecke(2)
             sage: m1 = c1.matrix()
             sage: m1._irr_to_ind(CHA2.irred_repr.W2_001)
@@ -502,6 +503,7 @@ class CubicHeckeMatrixRep(Matrix_generic_dense):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: CHA2.<c1> = algebras.CubicHecke(2)
             sage: m1 = c1.matrix()
             sage: m1[0]                       # indirect doctest
@@ -529,8 +531,8 @@ class CubicHeckeMatrixRep(Matrix_generic_dense):
 
         EXAMPLES::
 
-            sage: CHA2.<c1> = algebras.CubicHecke(2)
-            sage: c1.matrix().block_diagonal_list()
+            sage: CHA2.<c1> = algebras.CubicHecke(2)                                    # needs sage.libs.pari
+            sage: c1.matrix().block_diagonal_list()                                     # needs sage.libs.pari
             [[a], [b], [-b - a + u]]
         """
         representation_type = self.parent()._representation_type
@@ -558,6 +560,7 @@ class CubicHeckeMatrixRep(Matrix_generic_dense):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: CHA2.<c1> = algebras.CubicHecke(2)
             sage: m1 = c1.matrix()
             sage: m1.reduce_to_irr_block(0)
@@ -601,6 +604,7 @@ class CubicHeckeMatrixSpace(MatrixSpace):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.pari
         sage: CHA2.<c1> = algebras.CubicHecke(2)
         sage: c1.matrix()      # indirect doctest
         [         a          0          0]
@@ -625,10 +629,10 @@ class CubicHeckeMatrixSpace(MatrixSpace):
         TESTS::
 
             sage: import sage.algebras.hecke_algebras.cubic_hecke_matrix_rep as chmr
-            sage: CHA2.<c1> = algebras.CubicHecke(2)
-            sage: MS = chmr.CubicHeckeMatrixSpace(CHA2)
-            sage: MS2 = chmr.CubicHeckeMatrixSpace(CHA2, representation_type=CHA2.repr_type.SplitIrredMarin, subdivide=False)
-            sage: MS is MS2
+            sage: CHA2.<c1> = algebras.CubicHecke(2)                                    # needs sage.libs.pari
+            sage: MS = chmr.CubicHeckeMatrixSpace(CHA2)                                 # needs sage.libs.pari
+            sage: MS2 = chmr.CubicHeckeMatrixSpace(CHA2, representation_type=CHA2.repr_type.SplitIrredMarin, subdivide=False)                                   # needs sage.libs.pari
+            sage: MS is MS2                                                             # needs sage.libs.pari
             True
         """
         from sage.algebras.hecke_algebras.cubic_hecke_algebra import CubicHeckeAlgebra
@@ -665,12 +669,12 @@ class CubicHeckeMatrixSpace(MatrixSpace):
         TESTS::
 
             sage: import sage.algebras.hecke_algebras.cubic_hecke_matrix_rep as chmr
-            sage: CHA3.<c1, c2> = algebras.CubicHecke(3)
-            sage: MS = chmr.CubicHeckeMatrixSpace(CHA3, original=True)
+            sage: CHA3.<c1, c2> = algebras.CubicHecke(3)                                # needs sage.libs.pari
+            sage: MS = chmr.CubicHeckeMatrixSpace(CHA3, original=True)                  # needs sage.libs.pari
 
         The minpoly does not work over more generic rings::
 
-            sage: TestSuite(MS).run(skip='_test_elements')     # long time
+            sage: TestSuite(MS).run(skip='_test_elements')      # long time             # needs sage.libs.pari
         """
         from sage.algebras.hecke_algebras.cubic_hecke_algebra import CubicHeckeAlgebra
 
@@ -705,9 +709,9 @@ class CubicHeckeMatrixSpace(MatrixSpace):
 
         EXAMPLES::
 
-            sage: CHA2.<c1> = algebras.CubicHecke(2)
-            sage: MS = c1.matrix().parent()
-            sage: MS._test_category()   # indirect doctest
+            sage: CHA2.<c1> = algebras.CubicHecke(2)                                    # needs sage.libs.pari
+            sage: MS = c1.matrix().parent()                                             # needs sage.libs.pari
+            sage: MS._test_category()   # indirect doctest                              # needs sage.libs.pari
         """
         return
 
@@ -717,9 +721,9 @@ class CubicHeckeMatrixSpace(MatrixSpace):
 
         EXAMPLES::
 
-            sage: CHA2.<c1> = algebras.CubicHecke(2)
-            sage: MS = c1.matrix().parent()
-            sage: loads(dumps(MS)) == MS      # indirect doctest
+            sage: CHA2.<c1> = algebras.CubicHecke(2)                                    # needs sage.libs.pari
+            sage: MS = c1.matrix().parent()                                             # needs sage.libs.pari
+            sage: loads(dumps(MS)) == MS      # indirect doctest                        # needs sage.libs.pari
             True
         """
         original = self.base_ring() == self._original_base_ring
@@ -736,16 +740,16 @@ class CubicHeckeMatrixSpace(MatrixSpace):
         EXAMPlES::
 
             sage: import sage.algebras.hecke_algebras.cubic_hecke_matrix_rep as chmr
-            sage: CHA3.<c1, c2> = algebras.CubicHecke(3)
-            sage: MS = chmr.CubicHeckeMatrixSpace(CHA3, original=True)
-            sage: m1 = MS._element_constructor_(c1)
-            sage: isinstance(m1, MS.element_class)
+            sage: CHA3.<c1, c2> = algebras.CubicHecke(3)                                # needs sage.libs.pari
+            sage: MS = chmr.CubicHeckeMatrixSpace(CHA3, original=True)                  # needs sage.libs.pari
+            sage: m1 = MS._element_constructor_(c1)                                     # needs sage.libs.pari
+            sage: isinstance(m1, MS.element_class)                                      # needs sage.libs.pari
             True
-            sage: isinstance(MS._element_constructor_(m1), MS.element_class)
+            sage: isinstance(MS._element_constructor_(m1), MS.element_class)            # needs sage.libs.pari
             True
 
-            sage: m = matrix(MS.base_ring(), 12, 12, lambda i, j: 1)
-            sage: MS._element_constructor_(m)
+            sage: m = matrix(MS.base_ring(), 12, 12, lambda i, j: 1)                    # needs sage.libs.pari
+            sage: MS._element_constructor_(m)                                           # needs sage.libs.pari
             Traceback (most recent call last):
             ...
             TypeError: incompatible block structure
@@ -790,9 +794,9 @@ class CubicHeckeMatrixSpace(MatrixSpace):
         EXAMPLES::
 
             sage: import sage.algebras.hecke_algebras.cubic_hecke_matrix_rep as chmr
-            sage: CHA2.<c1> = algebras.CubicHecke(2)
-            sage: MS = chmr.CubicHeckeMatrixSpace(CHA2)
-            sage: MS(c1)
+            sage: CHA2.<c1> = algebras.CubicHecke(2)                                    # needs sage.libs.pari
+            sage: MS = chmr.CubicHeckeMatrixSpace(CHA2)                                 # needs sage.libs.pari
+            sage: MS(c1)                                                                # needs sage.libs.pari
             [         a          0          0]
             [         0          b          0]
             [         0          0 -b - a + u]
@@ -822,12 +826,12 @@ class CubicHeckeMatrixSpace(MatrixSpace):
         EXAMPLES::
 
             sage: import sage.algebras.hecke_algebras.cubic_hecke_matrix_rep as chmr
-            sage: CHA2.<c1> = algebras.CubicHecke(2)
-            sage: MS = chmr.CubicHeckeMatrixSpace(CHA2)
-            sage: B = MS._original_base_ring
-            sage: a, b, c = B.gens()
-            sage: mat = matrix(B, [[a, b], [0, c]])
-            sage: MS._specialize_matrix(mat)
+            sage: CHA2.<c1> = algebras.CubicHecke(2)                                    # needs sage.libs.pari
+            sage: MS = chmr.CubicHeckeMatrixSpace(CHA2)                                 # needs sage.libs.pari
+            sage: B = MS._original_base_ring                                            # needs sage.libs.pari
+            sage: a, b, c = B.gens()                                                    # needs sage.libs.pari
+            sage: mat = matrix(B, [[a, b], [0, c]])                                     # needs sage.libs.pari
+            sage: MS._specialize_matrix(mat)                                            # needs sage.libs.pari
             [         a          b]
             [         0 -b - a + u]
         """
@@ -857,9 +861,9 @@ class CubicHeckeMatrixSpace(MatrixSpace):
         EXAMPLES::
 
             sage: import sage.algebras.hecke_algebras.cubic_hecke_matrix_rep as chmr
-            sage: CHA3.<c1, c2> = algebras.CubicHecke(3)
-            sage: MS = chmr.CubicHeckeMatrixSpace(CHA3)
-            sage: MS._image_on_gen(1)
+            sage: CHA3.<c1, c2> = algebras.CubicHecke(3)                                # needs sage.libs.pari
+            sage: MS = chmr.CubicHeckeMatrixSpace(CHA3)                                 # needs sage.libs.pari
+            sage: MS._image_on_gen(1)                                                   # needs sage.libs.pari
             [
                            [  b   0]  [  a   0]  [  a   0]
             [a], [c], [b], [b*c   c], [a*b   b], [a*c   c],
@@ -869,9 +873,9 @@ class CubicHeckeMatrixSpace(MatrixSpace):
             [        b         1         a]
             ]
 
-            sage: CHA2 = CHA3.cubic_hecke_subalgebra()
-            sage: MSreg = chmr.CubicHeckeMatrixSpace(CHA2, representation_type=CHA2.repr_type.RegularRight)
-            sage: MSreg._image_on_gen(-1)
+            sage: CHA2 = CHA3.cubic_hecke_subalgebra()                                  # needs sage.libs.pari
+            sage: MSreg = chmr.CubicHeckeMatrixSpace(CHA2, representation_type=CHA2.repr_type.RegularRight)             # needs sage.libs.pari
+            sage: MSreg._image_on_gen(-1)                                               # needs sage.libs.pari
             [
             [     0      1 (-u)/w]
             [     0      0    1/w]
@@ -935,9 +939,9 @@ class CubicHeckeMatrixSpace(MatrixSpace):
         EXAMPLES::
 
             sage: import sage.algebras.hecke_algebras.cubic_hecke_matrix_rep as chmr
-            sage: CHA3.<c1, c2> = algebras.CubicHecke(3)
-            sage: MS = chmr.CubicHeckeMatrixSpace(CHA3, original=True)
-            sage: MS._image_on_basis(c1)
+            sage: CHA3.<c1, c2> = algebras.CubicHecke(3)                                # needs sage.libs.pari
+            sage: MS = chmr.CubicHeckeMatrixSpace(CHA3, original=True)                  # needs sage.libs.pari
+            sage: MS._image_on_basis(c1)                                                # needs sage.libs.pari
             [        a         0         0         0         0         0         0         0         0         0         0         0]
             [        0         c         0         0         0         0         0         0         0         0         0         0]
             [        0         0         b         0         0         0         0         0         0         0         0         0]
@@ -985,6 +989,7 @@ class CubicHeckeMatrixSpace(MatrixSpace):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: CHA2.<c1> = algebras.CubicHecke(2)
             sage: m1   = c1.matrix()
             sage: m1rl = c1.matrix(representation_type = CHA2.repr_type.RegularLeft)
@@ -1013,6 +1018,7 @@ class CubicHeckeMatrixSpace(MatrixSpace):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: CHA2.<c1> = algebras.CubicHecke(2)
             sage: m1   = c1.matrix()
             sage: m1rl = c1.matrix(representation_type = CHA2.repr_type.RegularLeft)
@@ -1041,8 +1047,8 @@ class CubicHeckeMatrixSpace(MatrixSpace):
 
         EXAMPLES::
 
-            sage: CHA2.<c1> = algebras.CubicHecke(2, cubic_equation_roots=(2, 3, 5))
-            sage: c1.matrix()
+            sage: CHA2.<c1> = algebras.CubicHecke(2, cubic_equation_roots=(2, 3, 5))    # needs sage.libs.pari
+            sage: c1.matrix()                                                           # needs sage.libs.pari
             [2 0 0]
             [0 3 0]
             [0 0 5]
@@ -1061,6 +1067,7 @@ class CubicHeckeMatrixSpace(MatrixSpace):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: CHA2.<c1> = algebras.CubicHecke(2, cubic_equation_roots=(2, 3, 5))
             sage: M = c1.matrix(); M
             [2 0 0]
