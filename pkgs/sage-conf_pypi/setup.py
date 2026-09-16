@@ -72,6 +72,13 @@ class build_py(setuptools_build_py):
                 print(f'Reusing configured SAGE_ROOT={SAGE_ROOT}')
             else:
                 SAGE_CONF_CONFIGURE_ARGS = os.environ.get('SAGE_CONF_CONFIGURE_ARGS', '')
+                if os.environ.get('UV', None):
+                    # https://github.com/passagemath/passagemath/issues/2373#issuecomment-5704501714:
+                    #   During a uv build, the sys.executable is not necessarily a Python
+                    #   that has access to the full isolated build environment.
+                    #   setuptools may be missing, although declared as a build prerequisite.
+                    # https://docs.astral.sh/uv/reference/environment/#uv
+                    SAGE_CONF_CONFIGURE_ARGS = "--disable-python-distutils-check " + SAGE_CONF_CONFIGURE_ARGS
                 cmd = f"cd {SAGE_ROOT} && ({SETENV}; ./configure --prefix={SAGE_LOCAL} --with-python={sys.executable} --enable-build-as-root --enable-download-from-upstream-url --with-system-python3=force --with-sage-venv=none --disable-notebook --disable-sagelib --disable-sage_conf --disable-doc {SAGE_CONF_CONFIGURE_ARGS})"
                 print(f"Running {cmd}")
                 sys.stdout.flush()
