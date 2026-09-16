@@ -564,7 +564,7 @@ class FiniteComplexReflectionGroups(CategoryWithAxiom):
                 sage: W = ReflectionGroup(4)
                 sage: P = W.milnor_fiber_poset(); P                                     # needs sage.graphs
                 Finite meet-semilattice containing 41 elements
-                sage: sum(x**P.rank(elt) for elt in P)
+                sage: sum(x**P.rank(elt) for elt in P)                                  # needs sage.graphs
                 24*x^2 + 16*x + 1
 
                 sage: # optional - gap3
@@ -573,9 +573,9 @@ class FiniteComplexReflectionGroups(CategoryWithAxiom):
                 False
                 sage: P = W.milnor_fiber_poset(); P                                     # needs sage.graphs
                 Finite poset containing 47 elements
-                sage: sum(x**P.rank(elt) for elt in P)
+                sage: sum(x**P.rank(elt) for elt in P)                                  # needs sage.graphs
                 16*x^3 + 24*x^2 + 6*x + 1
-                sage: P.is_meet_semilattice()
+                sage: P.is_meet_semilattice()                                           # needs sage.graphs
                 False
             """
             I = self.index_set()
@@ -1001,10 +1001,10 @@ class FiniteComplexReflectionGroups(CategoryWithAxiom):
 
                 EXAMPLES::
 
-                    sage: W = ReflectionGroup((1,1,3))                          # optional - gap3
-
-                    sage: chains = W.generalized_noncrossing_partitions(2)      # optional - gap3, needs sage.graphs
-                    sage: sorted([w.reduced_word() for w in chain]              # optional - gap3
+                    sage: # optional - gap3, needs sage.graphs
+                    sage: W = ReflectionGroup((1,1,3))
+                    sage: chains = W.generalized_noncrossing_partitions(2)
+                    sage: sorted([w.reduced_word() for w in chain]
                     ....:        for chain in chains)
                     [[[], [], [1, 2]],
                      [[], [1], [2]],
@@ -1018,10 +1018,9 @@ class FiniteComplexReflectionGroups(CategoryWithAxiom):
                      [[1, 2, 1], [1], []],
                      [[2], [], [1, 2, 1]],
                      [[2], [1, 2, 1], []]]
-
-                    sage: chains = W.generalized_noncrossing_partitions(2,      # optional - gap3, needs sage.graphs
+                    sage: chains = W.generalized_noncrossing_partitions(2,
                     ....:              positive=True)
-                    sage: sorted([w.reduced_word() for w in chain]              # optional - gap3
+                    sage: sorted([w.reduced_word() for w in chain]
                     ....:        for chain in chains)
                     [[[], [1, 2], []],
                      [[], [1, 2, 1], [1]],
@@ -1081,28 +1080,27 @@ class FiniteComplexReflectionGroups(CategoryWithAxiom):
 
                 EXAMPLES::
 
-                    sage: P = ReflectionGroup((1,1,3)).absolute_poset(); P      # optional - gap3, needs sage.graphs
+                    sage: # optional - gap3, needs sage.graphs
+                    sage: P = ReflectionGroup((1,1,3)).absolute_poset(); P
                     Finite poset containing 6 elements
-
-                    sage: sorted(w.reduced_word() for w in P)                   # optional - gap3
+                    sage: sorted(w.reduced_word() for w in P)
                     [[], [1], [1, 2], [1, 2, 1], [2], [2, 1]]
-
-                    sage: W = ReflectionGroup(4); W                             # optional - gap3
+                    sage: W = ReflectionGroup(4); W
                     Irreducible complex reflection group of rank 2 and type ST4
-                    sage: W.absolute_poset()                                    # optional - gap3, needs sage.graphs
+                    sage: W.absolute_poset()
                     Finite poset containing 24 elements
 
                 TESTS::
 
-                    sage: # needs sage.combinat sage.groups
-                    sage: W1 = CoxeterGroup(['A', 2])                                   # needs sage.graphs
+                    sage: # needs sage.combinat sage.graphs sage.groups
+                    sage: W1 = CoxeterGroup(['A', 2])
                     sage: W2 = WeylGroup(['A', 2])
                     sage: W3 = SymmetricGroup(3)
-                    sage: W1.absolute_poset()                                           # needs sage.graphs
+                    sage: W1.absolute_poset()
                     Finite poset containing 6 elements
-                    sage: W2.absolute_poset()                                           # needs sage.graphs
+                    sage: W2.absolute_poset()
                     Finite poset containing 6 elements
-                    sage: W3.absolute_poset()                                           # needs sage.graphs
+                    sage: W3.absolute_poset()
                     Finite poset containing 6 elements
                 """
                 return self.noncrossing_partition_lattice(L=tuple(self), in_unitary_group=in_unitary_group)
@@ -1207,7 +1205,7 @@ class FiniteComplexReflectionGroups(CategoryWithAxiom):
 
                     sage: W = ReflectionGroup(5)                  # optional - gap3
                     sage: C = W.milnor_fiber_complex()  # optional - gap3               # needs sage.graphs
-                    sage: C.homology()                            # optional - gap3
+                    sage: C.homology()                            # optional - gap3     # needs sage.graphs
                     {0: 0, 1: Z^25}
                 """
                 I = self.index_set()
