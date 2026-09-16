@@ -1038,7 +1038,7 @@ class ModulesWithBasis(CategoryWithAxiom_over_base_ring):
 
             Of course, this center is best constructed using::
 
-                sage: center = S3A.center()                                             # needs sage.combinat sage.groups sage.modules
+                sage: center = S3A.center()                                             # needs sage.combinat sage.graphs sage.groups sage.modules
 
             We can also automatically construct a basis such that
             the lift morphism is (lower) unitriangular::

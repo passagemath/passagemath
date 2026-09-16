@@ -982,7 +982,7 @@ cdef class RealReflectionGroupElement(ComplexReflectionGroupElement):
         EXAMPLES::
 
             sage: W = ReflectionGroup(['A',2])                      # optional - gap3
-            sage: for w in W:                                       # optional - gap3
+            sage: for w in W:                   # optional - gap3                       # needs sage.graphs
             ....:     print("%s %s"%(w.reduced_word(),
             ....:           [w.action(weight,side='left') for weight in W.fundamental_weights()]))
             [] [(2/3, 1/3), (1/3, 2/3)]
@@ -1174,10 +1174,11 @@ def _gap_factorization(w, gens):
 
     EXAMPLES::
 
-        sage: from sage.combinat.root_system.reflection_group_element import _gap_factorization  # optional - gap3
-        sage: W = ReflectionGroup((1,1,3))                              # optional - gap3
-        sage: gens = [W.simple_reflection(i) for i in W.index_set()]    # optional - gap3
-        sage: [_gap_factorization(w,gens) for w in W]                   # optional - gap3
+        sage: # optional - gap3
+        sage: from sage.combinat.root_system.reflection_group_element import _gap_factorization
+        sage: W = ReflectionGroup((1,1,3))
+        sage: gens = [W.simple_reflection(i) for i in W.index_set()]
+        sage: [_gap_factorization(w,gens) for w in W]
         [[], [1], [0], [0, 1], [1, 0], [0, 1, 0]]
     """
     from sage.interfaces.gap3 import gap3

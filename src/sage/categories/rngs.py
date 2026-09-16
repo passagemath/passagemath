@@ -120,8 +120,8 @@ class Rngs(CategoryWithAxiom):
 
             Since :issue:`7797`, non-commutative rings have ideals as well::
 
-                sage: A = SteenrodAlgebra(2)                                                # needs sage.combinat sage.modules
-                sage: A._ideal_class_()                                                     # needs sage.combinat sage.modules
+                sage: A = SteenrodAlgebra(2)                                            # needs sage.combinat sage.modules
+                sage: A._ideal_class_()                                                 # needs sage.combinat sage.modules
                 <class 'sage.rings.noncommutative_ideals.Ideal_nc'>
             """
             from sage.rings.noncommutative_ideals import Ideal_nc

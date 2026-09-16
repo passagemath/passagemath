@@ -597,39 +597,40 @@ class ShephardToddFamilyGroup(UniqueRepresentation, Parent):
             [2 3 1]
 
             sage: G = groups.misc.ShephardToddFamily(2, 2, 3)                           # needs sage.groups
-            sage: G.coxeter_matrix()                                                    # needs sage.groups
+            sage: G.coxeter_matrix()                                                    # needs sage.graphs sage.groups
             [1 3 3]
             [3 1 2]
             [3 2 1]
 
             sage: G = groups.misc.ShephardToddFamily(2, 2, 2)                           # needs sage.groups
-            sage: G.coxeter_matrix()                                                    # needs sage.groups
+            sage: G.coxeter_matrix()                                                    # needs sage.graphs sage.groups
             [1 2]
             [2 1]
 
             sage: G = groups.misc.ShephardToddFamily(2, 2, 1)                           # needs sage.groups
-            sage: G.coxeter_matrix()                                                    # needs sage.groups
+            sage: G.coxeter_matrix()                                                    # needs sage.graphs sage.groups
             [1]
 
             sage: G = groups.misc.ShephardToddFamily(5, 5, 1)                           # needs sage.groups
-            sage: G.coxeter_matrix()                                                    # needs sage.groups
+            sage: G.coxeter_matrix()                                                    # needs sage.graphs sage.groups
             []
 
             sage: G = groups.misc.ShephardToddFamily(4, 4, 2)                           # needs sage.groups
-            sage: G.coxeter_matrix()                                                    # needs sage.groups
+            sage: G.coxeter_matrix()                                                    # needs sage.graphs sage.groups
             [1 4]
             [4 1]
 
             sage: G = groups.misc.ShephardToddFamily(7, 7, 2)                           # needs sage.groups
-            sage: G.coxeter_matrix()                                                    # needs sage.groups
+            sage: G.coxeter_matrix()                                                    # needs sage.graphs sage.groups
             [1 7]
             [7 1]
 
-            sage: G = groups.misc.ShephardToddFamily(6, 3, 1)                           # needs sage.groups
-            sage: G.coxeter_matrix() is None                                            # needs sage.groups
+            sage: # needs sage.groups
+            sage: G = groups.misc.ShephardToddFamily(6, 3, 1)
+            sage: G.coxeter_matrix() is None
             True
-            sage: G = groups.misc.ShephardToddFamily(6, 3, 4)                           # needs sage.groups
-            sage: G.coxeter_matrix() is None                                            # needs sage.groups
+            sage: G = groups.misc.ShephardToddFamily(6, 3, 4)
+            sage: G.coxeter_matrix() is None
             True
 
         TESTS::

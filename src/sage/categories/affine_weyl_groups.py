@@ -191,9 +191,8 @@ class AffineWeylGroups(Category_singleton):
                 <class 'sage.combinat.core.Cores_length_with_category.element_class'>
                 sage: la.to_grassmannian() == w
                 True
-
-                sage: w = W.from_reduced_word([0,2,1])                                  # needs sage.combinat sage.groups
-                sage: w.affine_grassmannian_to_core()                                   # needs sage.combinat sage.groups
+                sage: w = W.from_reduced_word([0,2,1])
+                sage: w.affine_grassmannian_to_core()
                 Traceback (most recent call last):
                 ...
                 ValueError: this only works on type 'A' affine Grassmannian elements

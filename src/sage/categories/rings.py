@@ -340,8 +340,8 @@ class Rings(CategoryWithAxiom):
 
             EXAMPLES::
 
-                sage: Q.<i,j,k> = QuaternionAlgebra(QQ, -1, -1)                             # needs sage.combinat sage.libs.singular sage.modules
-                sage: Q.is_commutative()                                                    # needs sage.combinat sage.libs.singular sage.modules
+                sage: Q.<i,j,k> = QuaternionAlgebra(QQ, -1, -1)                         # needs sage.combinat sage.libs.singular sage.modules
+                sage: Q.is_commutative()                                                # needs sage.combinat sage.libs.singular sage.modules
                 False
             """
             return False
@@ -372,13 +372,13 @@ class Rings(CategoryWithAxiom):
                 True
                 sage: Integers(8).is_integral_domain()
                 False
-                sage: Zp(7).is_integral_domain()                                            # needs sage.rings.padics
+                sage: Zp(7).is_integral_domain()                                        # needs sage.rings.padics
                 True
-                sage: Qp(7).is_integral_domain()                                            # needs sage.rings.padics
+                sage: Qp(7).is_integral_domain()                                        # needs sage.rings.padics
                 True
                 sage: R.<a,b> = QQ[]
-                sage: S.<x,y> = R.quo((b^3))                                                # needs sage.libs.singular
-                sage: S.is_integral_domain()                                                # needs sage.libs.singular
+                sage: S.<x,y> = R.quo((b^3))                                            # needs sage.libs.singular
+                sage: S.is_integral_domain()                                            # needs sage.libs.singular
                 False
                 sage: R = ZZ.quotient(ZZ.ideal(10)); R.is_integral_domain()
                 False
@@ -386,12 +386,12 @@ class Rings(CategoryWithAxiom):
             This illustrates the use of the ``proof`` parameter::
 
                 sage: R.<a,b> = ZZ[]
-                sage: S.<x,y> = R.quo((b^3))                                                # needs sage.libs.singular
-                sage: S.is_integral_domain(proof=True)                                      # needs sage.libs.singular
+                sage: S.<x,y> = R.quo((b^3))                                            # needs sage.libs.singular
+                sage: S.is_integral_domain(proof=True)                                  # needs sage.libs.singular
                 Traceback (most recent call last):
                 ...
                 NotImplementedError
-                sage: S.is_integral_domain(proof=False)                                     # needs sage.libs.singular
+                sage: S.is_integral_domain(proof=False)                                 # needs sage.libs.singular
                 False
 
             TESTS:
@@ -399,12 +399,12 @@ class Rings(CategoryWithAxiom):
             Make sure :issue:`10481` is fixed::
 
                 sage: x = polygen(ZZ, 'x')
-                sage: R.<a> = ZZ['x'].quo(x^2)                                              # needs sage.libs.pari
-                sage: R.fraction_field()                                                    # needs sage.libs.pari
+                sage: R.<a> = ZZ['x'].quo(x^2)                                          # needs sage.libs.pari
+                sage: R.fraction_field()                                                # needs sage.libs.pari
                 Traceback (most recent call last):
                 ...
                 TypeError: self must be an integral domain.
-                sage: R.is_integral_domain()                                                # needs sage.libs.pari
+                sage: R.is_integral_domain()                                            # needs sage.libs.pari
                 False
 
             Forward the proof flag to ``is_field``, see :issue:`22910`::
@@ -476,13 +476,13 @@ class Rings(CategoryWithAxiom):
                 True
                 sage: GF(3).is_prime_field()
                 True
-                sage: GF(9, 'a').is_prime_field()                                           # needs sage.rings.finite_rings
+                sage: GF(9, 'a').is_prime_field()                                       # needs sage.rings.finite_rings
                 False
                 sage: ZZ.is_prime_field()
                 False
                 sage: QQ['x'].is_prime_field()
                 False
-                sage: Qp(19).is_prime_field()                                               # needs sage.rings.padics
+                sage: Qp(19).is_prime_field()                                           # needs sage.rings.padics
                 False
 
                 sage: # needs sage.libs.pari
@@ -563,22 +563,22 @@ class Rings(CategoryWithAxiom):
                 True
                 sage: QQ.is_subring(GF(7))
                 False
-                sage: QQ.is_subring(CyclotomicField(7))                                     # needs sage.rings.number_field
+                sage: QQ.is_subring(CyclotomicField(7))                                 # needs sage.rings.number_field
                 True
                 sage: QQ.is_subring(ZZ)
                 False
 
             Every ring is a subring of itself, :issue:`17287`::
 
-                sage: QQbar.is_subring(QQbar)                                               # needs sage.rings.number_field
+                sage: QQbar.is_subring(QQbar)                                           # needs sage.rings.number_field
                 True
                 sage: RR.is_subring(RR)
                 True
-                sage: CC.is_subring(CC)                                                     # needs sage.rings.real_mpfr
+                sage: CC.is_subring(CC)                                                 # needs sage.rings.real_mpfr
                 True
                 sage: x = polygen(ZZ, 'x')
-                sage: K.<a> = NumberField(x^3 - x + 1/10)                                   # needs sage.rings.number_field
-                sage: K.is_subring(K)                                                       # needs sage.rings.number_field
+                sage: K.<a> = NumberField(x^3 - x + 1/10)                               # needs sage.rings.number_field
+                sage: K.is_subring(K)                                                   # needs sage.rings.number_field
                 True
                 sage: R.<x> = RR[]
                 sage: R.is_subring(R)
@@ -611,7 +611,7 @@ class Rings(CategoryWithAxiom):
 
                 sage: QQ.is_field()
                 True
-                sage: GF(9, 'a').is_field()                                                 # needs sage.rings.finite_rings
+                sage: GF(9, 'a').is_field()                                             # needs sage.rings.finite_rings
                 True
                 sage: ZZ.is_field()
                 False
@@ -623,12 +623,12 @@ class Rings(CategoryWithAxiom):
             This illustrates the use of the ``proof`` parameter::
 
                 sage: R.<a,b> = QQ[]
-                sage: S.<x,y> = R.quo((b^3))                                                # needs sage.libs.singular
-                sage: S.is_field(proof=True)                                                # needs sage.libs.singular
+                sage: S.<x,y> = R.quo((b^3))                                            # needs sage.libs.singular
+                sage: S.is_field(proof=True)                                            # needs sage.libs.singular
                 Traceback (most recent call last):
                 ...
                 NotImplementedError
-                sage: S.is_field(proof=False)                                               # needs sage.libs.singular
+                sage: S.is_field(proof=False)                                           # needs sage.libs.singular
                 False
             """
             if self.is_zero():
@@ -660,11 +660,11 @@ class Rings(CategoryWithAxiom):
                 -1
                 sage: QQ.zeta(1)
                 1
-                sage: CyclotomicField(6).zeta(6)                                            # needs sage.rings.number_field
+                sage: CyclotomicField(6).zeta(6)                                        # needs sage.rings.number_field
                 zeta6
-                sage: CyclotomicField(3).zeta(3)                                            # needs sage.rings.number_field
+                sage: CyclotomicField(3).zeta(3)                                        # needs sage.rings.number_field
                 zeta3
-                sage: CyclotomicField(3).zeta(3).multiplicative_order()                     # needs sage.rings.number_field
+                sage: CyclotomicField(3).zeta(3).multiplicative_order()                 # needs sage.rings.number_field
                 3
 
                 sage: # needs sage.rings.finite_rings
@@ -685,7 +685,7 @@ class Rings(CategoryWithAxiom):
                 Traceback (most recent call last):
                 ...
                 ValueError: no n-th root of unity in rational field
-                sage: Zp(7, prec=8).zeta()                                                  # needs sage.rings.padics
+                sage: Zp(7, prec=8).zeta()                                              # needs sage.rings.padics
                 3 + 4*7 + 6*7^2 + 3*7^3 + 2*7^5 + 6*7^6 + 2*7^7 + O(7^8)
 
             TESTS::
@@ -695,7 +695,7 @@ class Rings(CategoryWithAxiom):
                 1
                 sage: R.zeta(2)
                 -1
-                sage: R.zeta(3)                                                             # needs sage.libs.pari
+                sage: R.zeta(3)                                                         # needs sage.libs.pari
                 Traceback (most recent call last):
                 ...
                 ValueError: no 3rd root of unity in Univariate Polynomial Ring in x over Rational Field
@@ -732,13 +732,13 @@ class Rings(CategoryWithAxiom):
 
             EXAMPLES::
 
-                sage: CyclotomicField(19).zeta_order()                                      # needs sage.rings.number_field
+                sage: CyclotomicField(19).zeta_order()                                  # needs sage.rings.number_field
                 38
                 sage: GF(19).zeta_order()
                 18
-                sage: GF(5^3,'a').zeta_order()                                              # needs sage.rings.finite_rings
+                sage: GF(5^3,'a').zeta_order()                                          # needs sage.rings.finite_rings
                 124
-                sage: Zp(7, prec=8).zeta_order()                                            # needs sage.rings.padics
+                sage: Zp(7, prec=8).zeta_order()                                        # needs sage.rings.padics
                 6
             """
             return self.zeta().multiplicative_order()
@@ -821,7 +821,7 @@ class Rings(CategoryWithAxiom):
                 sage: Hom(CyclotomicField(3), QQ, category=Rings()).__class__           # needs sage.rings.number_field
                 <class 'sage.rings.number_field.homset.CyclotomicFieldHomset_with_category'>
 
-                sage: TestSuite(Hom(QQ, QQ, category=Rings())).run() # indirect doctest
+                sage: TestSuite(Hom(QQ, QQ, category=Rings())).run()  # indirect doctest            # needs sage.rings.real_interval_field
             """
             if category is not None and not category.is_subcategory(Rings()):
                 raise TypeError(f"{category} is not a subcategory of Rings()")
@@ -946,7 +946,7 @@ class Rings(CategoryWithAxiom):
 
             EXAMPLES::
 
-                sage: QQ['x,y'].nilradical()                                                # needs sage.libs.singular
+                sage: QQ['x,y'].nilradical()                                            # needs sage.libs.singular
                 Ideal (0) of Multivariate Polynomial Ring in x, y over Rational Field
 
             .. SEEALSO::
@@ -962,7 +962,7 @@ class Rings(CategoryWithAxiom):
 
             EXAMPLES::
 
-                sage: Zp(7).unit_ideal()                                                    # needs sage.rings.padics
+                sage: Zp(7).unit_ideal()                                                # needs sage.rings.padics
                 Principal ideal (1 + O(7^20)) of 7-adic Ring with capped relative precision 20
             """
             return self._ideal_class_(1)(self, [self.one()])
@@ -1072,10 +1072,10 @@ class Rings(CategoryWithAxiom):
 
             Non-commutative rings::
 
-                sage: A = SteenrodAlgebra(2)                                                # needs sage.combinat sage.modules
-                sage: A.ideal(A.1, A.2^2)                                                   # needs sage.combinat sage.modules
+                sage: A = SteenrodAlgebra(2)                                            # needs sage.combinat sage.modules
+                sage: A.ideal(A.1, A.2^2)                                               # needs sage.combinat sage.modules
                 Twosided Ideal (Sq(2), Sq(2,2)) of mod 2 Steenrod algebra, milnor basis
-                sage: A.ideal(A.1, A.2^2, side='left')                                      # needs sage.combinat sage.modules
+                sage: A.ideal(A.1, A.2^2, side='left')                                  # needs sage.combinat sage.modules
                 Left Ideal (Sq(2), Sq(2,2)) of mod 2 Steenrod algebra, milnor basis
 
             TESTS:
@@ -1740,7 +1740,7 @@ class Rings(CategoryWithAxiom):
                 sage: ZZ._random_nonzero_element() != 0
                 True
                 sage: A = GF((5, 3))                                                    # needs sage.rings.finite_rings
-                sage: A._random_nonzero_element() != 0                                  # needs sage.rings.finite_rings sage.modules
+                sage: A._random_nonzero_element() != 0                                  # needs sage.modules sage.rings.finite_rings
                 True
             """
             while True:
@@ -1793,9 +1793,9 @@ class Rings(CategoryWithAxiom):
 
                 sage: RDF.epsilon()
                 2.220446049250313e-16
-                sage: ComplexField(53).epsilon()                                            # needs sage.rings.real_mpfr
+                sage: ComplexField(53).epsilon()                                        # needs sage.rings.real_mpfr
                 2.22044604925031e-16
-                sage: RealField(10).epsilon()                                               # needs sage.rings.real_mpfr
+                sage: RealField(10).epsilon()                                           # needs sage.rings.real_mpfr
                 0.0020
 
             For exact rings, zero is returned::
@@ -1805,14 +1805,14 @@ class Rings(CategoryWithAxiom):
 
             This also works over derived rings::
 
-                sage: RR['x'].epsilon()                                                     # needs sage.rings.real_mpfr
+                sage: RR['x'].epsilon()                                                 # needs sage.rings.real_mpfr
                 2.22044604925031e-16
                 sage: QQ['x'].epsilon()
                 0
 
             For the symbolic ring, there is no reasonable answer::
 
-                sage: SR.epsilon()                                                          # needs sage.symbolic
+                sage: SR.epsilon()                                                      # needs sage.symbolic
                 Traceback (most recent call last):
                 ...
                 NotImplementedError

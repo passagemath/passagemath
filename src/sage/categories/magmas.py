@@ -388,13 +388,14 @@ class Magmas(Category_singleton):
 
                 EXAMPLES::
 
-                    sage: SymmetricGroup(1).algebra(QQ).is_field()                      # needs sage.combinat sage.groups
+                    sage: # needs sage.combinat
+                    sage: SymmetricGroup(1).algebra(QQ).is_field()                      # needs sage.groups
                     True
-                    sage: SymmetricGroup(1).algebra(ZZ).is_field()                      # needs sage.combinat sage.groups
+                    sage: SymmetricGroup(1).algebra(ZZ).is_field()                      # needs sage.groups
                     False
-                    sage: SymmetricGroup(2).algebra(QQ).is_field()                      # needs sage.combinat sage.groups
+                    sage: SymmetricGroup(2).algebra(QQ).is_field()                      # needs sage.groups
                     False
-                    sage: Magmas().example().algebra(QQ).is_field()                     # needs sage.combinat sage.modules
+                    sage: Magmas().example().algebra(QQ).is_field()                     # needs sage.modules
                     False
 
                 """
@@ -734,10 +735,10 @@ class Magmas(Category_singleton):
 
                         sage: # needs sage.combinat sage.groups
                         sage: from sage.combinat.root_system.extended_affine_weyl_group import ExtendedAffineWeylGroup
-                        sage: PvW0 = ExtendedAffineWeylGroup(['A',2,1]).PvW0()
-                        sage: PvW0 in Magmas().Unital().Realizations()
+                        sage: PvW0 = ExtendedAffineWeylGroup(['A',2,1]).PvW0()          # needs sage.graphs
+                        sage: PvW0 in Magmas().Unital().Realizations()                  # needs sage.graphs
                         True
-                        sage: PvW0.one()
+                        sage: PvW0.one()                                                # needs sage.graphs
                         1
                     """
                     return self(self.realization_of().a_realization().one())
@@ -1146,9 +1147,9 @@ class Magmas(Category_singleton):
 
                 Here is a more elaborate example involving a sub algebra::
 
-                    sage: Z = SymmetricGroup(5).algebra(QQ).center()                    # needs sage.combinat sage.groups
-                    sage: B = Z.basis()                                                 # needs sage.combinat sage.groups
-                    sage: B[3] * B[2]                                                   # needs sage.combinat sage.groups
+                    sage: Z = SymmetricGroup(5).algebra(QQ).center()                    # needs sage.combinat sage.graphs sage.groups
+                    sage: B = Z.basis()                                                 # needs sage.combinat sage.graphs sage.groups
+                    sage: B[3] * B[2]                                                   # needs sage.combinat sage.graphs sage.groups
                     4*B[2] + 6*B[3] + 5*B[6]
                 """
                 assert x in self

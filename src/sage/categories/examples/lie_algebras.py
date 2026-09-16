@@ -86,7 +86,7 @@ class LieAlgebraFromAssociative(Parent, UniqueRepresentation):
         EXAMPLES::
 
             sage: L = LieAlgebras(QQ).example()                                         # needs sage.combinat sage.groups
-            sage: TestSuite(L).run()                                                    # needs sage.combinat sage.groups
+            sage: TestSuite(L).run()                                                    # needs sage.combinat sage.groups sage.rings.real_interval_field
         """
         if not gens:
             raise ValueError("need at least one generator")
