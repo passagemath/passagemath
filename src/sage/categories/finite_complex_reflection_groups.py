@@ -564,6 +564,7 @@ class FiniteComplexReflectionGroups(CategoryWithAxiom):
                 sage: W = ReflectionGroup(4)
                 sage: P = W.milnor_fiber_poset(); P                                     # needs sage.graphs
                 Finite meet-semilattice containing 41 elements
+                sage: R.<x> = ZZ[]
                 sage: sum(x**P.rank(elt) for elt in P)                                  # needs sage.graphs
                 24*x^2 + 16*x + 1
 
@@ -573,6 +574,7 @@ class FiniteComplexReflectionGroups(CategoryWithAxiom):
                 False
                 sage: P = W.milnor_fiber_poset(); P                                     # needs sage.graphs
                 Finite poset containing 47 elements
+                sage: R.<x> = ZZ[]
                 sage: sum(x**P.rank(elt) for elt in P)                                  # needs sage.graphs
                 16*x^3 + 24*x^2 + 6*x + 1
                 sage: P.is_meet_semilattice()                                           # needs sage.graphs
