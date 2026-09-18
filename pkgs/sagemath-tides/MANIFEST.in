@@ -4,6 +4,7 @@ prune sage
 
 include VERSION.txt
 
+include sage/calculus/tides.p*
 include sage/interfaces/tides.p*
 
 global-exclude *.c

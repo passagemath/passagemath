@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-symbolics
+# sage_setup: distribution = sagemath-tides
 """
 Runtime helpers for the optional TIDES integrator.
 """
