@@ -20,6 +20,7 @@ include sage/calculus/calculus.p*
 include sage/calculus/desolvers.p*
 include sage/calculus/predefined.p*
 include sage/calculus/tests.p*
+include sage/calculus/tides.p*
 include sage/calculus/var.p*
 
 graft sage/manifolds

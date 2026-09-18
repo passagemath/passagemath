@@ -76,6 +76,7 @@ import os
 import shutil
 
 from sage.calculus.functional import diff
+from sage.calculus.tides import _tides_compile_flags
 from sage.misc.lazy_import import lazy_import
 lazy_import("sage.interfaces.maxima_lib","maxima")
 from sage.misc.functional import N
@@ -1774,10 +1775,11 @@ def desolve_mintides(f, ics, initial, final, delta, tolrel=1e-16, tolabs=1e-16):
     genfiles_mintides(intfile, drfile, f, [N(_) for _ in ics],
                       N(initial), N(final), N(delta), N(tolrel),
                       N(tolabs), fileoutput)
+    tides_library, tides_libdir, tides_include = _tides_compile_flags()
     subprocess.check_call('gcc -o ' + runmefile + ' ' + os.path.join(tempdir, '*.c ') +
-                          os.path.join('$SAGE_LOCAL', 'lib', 'libTIDES.a') + ' $LDFLAGS '
-                          + os.path.join('-L$SAGE_LOCAL', 'lib ') + ' -lm  -O2 ' +
-                          os.path.join('-I$SAGE_LOCAL', 'include '),
+                          tides_library + ' $LDFLAGS '
+                          + tides_libdir + ' -lm  -O2 ' +
+                          tides_include,
                           shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     subprocess.check_call(os.path.join(tempdir, 'runme'), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     with open(fileoutput) as outfile:
@@ -1869,10 +1871,11 @@ def desolve_tides_mpfr(f, ics, initial, final, delta, tolrel=1e-16, tolabs=1e-16
     runmefile = os.path.join(tempdir, 'runme')
     genfiles_mpfr(intfile, drfile, f, ics, initial, final, delta, [], [],
                   digits, tolrel, tolabs, fileoutput)
+    tides_library, tides_libdir, tides_include = _tides_compile_flags()
     subprocess.check_call('gcc -o ' + runmefile + ' ' + os.path.join(tempdir, '*.c ') +
-                          os.path.join('$SAGE_LOCAL', 'lib', 'libTIDES.a') + ' $LDFLAGS '
-                          + os.path.join('-L$SAGE_LOCAL', 'lib ') + '-lmpfr -lgmp -lm  -O2 -w ' +
-                          os.path.join('-I$SAGE_LOCAL', 'include '),
+                          tides_library + ' $LDFLAGS '
+                          + tides_libdir + '-lmpfr -lgmp -lm  -O2 -w ' +
+                          tides_include,
                           shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     subprocess.check_call(os.path.join(tempdir, 'runme'), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     with open(fileoutput) as outfile:
