@@ -1,5 +1,5 @@
 ============================================================
- passagemath: Database of 4-dimensional reflexive polytopes
+ passagemath: High-precision integration of ODEs with TIDES
 ============================================================
 
 `passagemath <https://github.com/passagemath/passagemath>`__ is open
@@ -71,10 +71,17 @@ About this pip-installable distribution package
 -----------------------------------------------
 
 This pip-installable distribution ``passagemath-tides`` is a
-distribution of data for use with ``passagemath-polyhedra``.
+distribution for use with ``passagemath-symbolics``.
 
-It provides the database of 4-d reflexive polytopes with Hodge
-numbers as index, based on the original list by Maximilian Kreuzer
-and Harald Skarke using their software PALP.
+It provides the interface to TIDES, the library for integration of ODEs
+with high precision.
 
-Because the database is huge, there is no wheel provided on PyPI.
+``passagemath-tides`` is provided as a source distribution only.
+Upon installation, it builds TIDES from source via ``passagemath-conf``.
+
+
+What is included
+----------------
+
+- `Interface to TIDES <https://passagemath.org/docs/latest/html/en/reference/interfaces/sage/interfaces/tides.html#module-sage.interfaces.tides>`__
+- this interface is the backend for `sage.calculus.desolvers.desolve_mintides <https://passagemath.org/docs/latest/html/en/reference/calculus/sage/calculus/desolvers.html#sage.calculus.desolvers.desolve_mintides>`__ and `sage.calculus.desolvers.desolve_tides_mpfr <https://passagemath.org/docs/latest/html/en/reference/calculus/sage/calculus/desolvers.html#sage.calculus.desolvers.desolve_tides_mpfr>`__
