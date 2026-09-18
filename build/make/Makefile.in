@@ -264,7 +264,8 @@ PYPI_SDIST_PACKAGES = $(WHEEL_PACKAGES) \
 	sagemath_database_cremona_ellcurve \
 	sagemath_database_polytopes_4d \
 	sagemath_database_stein_watkins \
-	sagemath_polymake
+	sagemath_polymake \
+	sagemath_tides
 
 # Generate the actual inst_<pkgname> variables; for each package that is
 # actually built this generates a line like:

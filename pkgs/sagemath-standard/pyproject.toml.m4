@@ -88,6 +88,7 @@ scip        = [SPKG_INSTALL_REQUIRES_pyscipopt]
 sirocco     = [SPKG_INSTALL_REQUIRES_sagemath_sirocco]
 sympow      = [SPKG_INSTALL_REQUIRES_sagemath_sympow]
 tdlib       = [SPKG_INSTALL_REQUIRES_sagemath_tdlib]
+tides       = [SPKG_INSTALL_REQUIRES_sagemath_tides]
 topcom      = [SPKG_INSTALL_REQUIRES_sagemath_topcom]
 
 test        = []

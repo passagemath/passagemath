@@ -20,7 +20,6 @@ include sage/calculus/calculus.p*
 include sage/calculus/desolvers.p*
 include sage/calculus/predefined.p*
 include sage/calculus/tests.p*
-include sage/calculus/tides.p*
 include sage/calculus/var.p*
 
 graft sage/manifolds
@@ -37,7 +36,6 @@ include sage/interfaces/maple*.p*
 include sage/interfaces/mathematica.p*
 include sage/interfaces/mathics3.p*
 include sage/interfaces/sympy*.p*
-include sage/interfaces/tides.p*
 
 graft sage/ext_data/magma
 
