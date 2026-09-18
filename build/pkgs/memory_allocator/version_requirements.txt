@@ -1,1 +1,1 @@
-memory_allocator < 0.2
+memory_allocator
