@@ -535,7 +535,7 @@ class DocTestController(SageObject):
                                         'pari_galdata', 'pari_nflistdata', 'pari_nftables',
                                         'planarity', 'plantri', 'polytopes_db', 'polytopes_db_4d',
                                         'pynormaliz', 'python_igraph', 'qepcad', 'rubiks', 'semigroups',
-                                        'sirocco', 'sympow', 'tachyon', 'tdlib', 'topcom']:
+                                        'sirocco', 'sympow', 'tachyon', 'tdlib', 'tides', 'topcom']:
                             continue
                         if pkg.is_installed() and pkg.installed_version == pkg.remote_version:
                             options.optional.add(pkg.name)
