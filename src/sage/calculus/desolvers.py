@@ -904,7 +904,7 @@ def desolve_system(des, vars, ics=None, ivar=None, algorithm='maxima'):
         sage: de2 = diff(x2,t) == -2
         sage: desolve_system([de1, de2], [x1, x2], ivar=t)                              # needs sage.libs.maxima
         [x1(t) == epsilon*t + x1(0), x2(t) == -2*t + x2(0)]
-        sage: desolve_system([de1, de2], [x1, x2], ics=[1,1], ivar=t)                   # needs sage.libs.maxima
+        sage: desolve_system([de1, de2], [x1, x2], ics=[1,1], ivar=t)
         Traceback (most recent call last):
         ...
         ValueError: Initial conditions aren't complete: number of vars is different
