@@ -1,1 +1,2 @@
-passagemath-tides
+# This file is updated on every release by the update-version script
+passagemath-tides == 10.8.12rc1
