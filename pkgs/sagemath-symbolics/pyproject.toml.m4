@@ -53,6 +53,7 @@ primecount      = [SPKG_INSTALL_REQUIRES_primecountpy]
 pynac           = []  # no extra needed
 singular        = [SPKG_INSTALL_REQUIRES_sagemath_singular]
 sympy           = []  # no extra needed
+tides           = [SPKG_INSTALL_REQUIRES_sagemath_tides]
 
 # extras by other features
 plot            = [SPKG_INSTALL_REQUIRES_sagemath_plot]
