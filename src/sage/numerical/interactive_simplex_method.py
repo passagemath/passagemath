@@ -180,6 +180,7 @@ Classes and functions
 import operator
 import re
 
+from collections import UserString
 from copy import copy
 
 from sage.misc.abstract_method import abstract_method
@@ -212,6 +213,168 @@ from sage.structure.sage_object import SageObject
 # Hopefully, some day there will be no need in it at all and only "if" parts
 # will have to be left.
 generate_real_LaTeX = False
+
+
+class _SimplexMethodOutput(SageObject, UserString):
+    r"""
+    The output of an interactive simplex method.
+
+    This wrapper preserves the HTML representation used by Sage's rich output
+    system and provides a Markdown representation for stock Jupyter kernels.
+    It is string-like but deliberately does not inherit from :class:`str`,
+    because Google Colab gives its own formatter for strings precedence over
+    rich display methods (:issue:`2384`).
+
+    INPUT:
+
+    - ``parts`` -- a string, or an iterable of strings, holding LaTeX markup
+      and prose
+
+    TESTS::
+
+        sage: from sage.numerical.interactive_simplex_method import _SimplexMethodOutput
+        sage: output = _SimplexMethodOutput([
+        ....:     "\\begin{equation*}\\renewcommand{\\arraystretch}{1.5} %notruncate\n"
+        ....:     r"x\mspace{-6mu}+y\end{equation*}",
+        ....:     "Optimal."])
+        sage: print(output._repr_markdown_())
+        $$x\mkern-6mu+y$$
+        Optimal.
+        sage: output + " Done."
+        \begin{equation*}\renewcommand{\arraystretch}{1.5} %notruncate
+        x\mspace{-6mu}+y\end{equation*}
+        Optimal. Done.
+
+    The result stays usable where the previous :class:`~sage.misc.html.HtmlFragment`
+    was, as long as no ``str`` is required::
+
+        sage: len(output) == len(str(output))
+        True
+        sage: hash(output) == hash(str(output))
+        True
+        sage: output[:17]
+        \begin{equation*}
+        sage: "%s" % output == str(output)
+        True
+
+    The stock IPython display protocol publishes Markdown without treating the
+    result as an ordinary string::
+
+        sage: from IPython.core.formatters import DisplayFormatter
+        sage: formats, metadata = DisplayFormatter().format(output)
+        sage: sorted(formats)
+        ['text/markdown', 'text/plain']
+        sage: metadata
+        {}
+
+    Sage's simple backend keeps the original plain representation::
+
+        sage: from sage.repl.rich_output import get_display_manager
+        sage: output._rich_repr_(get_display_manager())
+        OutputPlainText container
+
+    .. automethod:: _repr_
+    .. automethod:: _repr_markdown_
+    .. automethod:: _rich_repr_
+    """
+
+    # SageObject precedes UserString in the method resolution order, so that
+    # _repr_ governs printing.  SageObject is unhashable, however, and these
+    # objects are immutable strings, so take hashing from UserString.
+    __hash__ = UserString.__hash__
+
+    def __init__(self, parts):
+        r"""
+        Initialize this output from ``parts``.
+
+        TESTS::
+
+            sage: from sage.numerical.interactive_simplex_method import _SimplexMethodOutput
+            sage: _SimplexMethodOutput("Optimal.")
+            Optimal.
+            sage: _SimplexMethodOutput(["First.", "Second."])
+            First.
+            Second.
+
+        Output that is already assembled is not taken apart again::
+
+            sage: nested = _SimplexMethodOutput(["First.", "Second."])
+            sage: _SimplexMethodOutput(nested)
+            First.
+            Second.
+        """
+        if isinstance(parts, (str, UserString)):
+            text = str(parts)
+        else:
+            text = "\n".join(map(str, parts))
+        UserString.__init__(self, text)
+
+    def _repr_(self):
+        r"""
+        Return the underlying markup, unquoted.
+
+        TESTS::
+
+            sage: from sage.numerical.interactive_simplex_method import _SimplexMethodOutput
+            sage: _SimplexMethodOutput("Optimal.")._repr_()
+            'Optimal.'
+        """
+        return self.data
+
+    def _repr_markdown_(self):
+        r"""
+        Return Markdown containing MathJax display delimiters.
+
+        ``%notruncate`` is a Sage notebook directive, and Colab renders
+        neither it nor ``\arraystretch``, so both are dropped here.  Colab
+        also renders no ``\mspace``, which becomes the equivalent ``\mkern``.
+
+        ``%`` starts a TeX comment, so the directive is dropped together with
+        the rest of its line.  Under ``generate_real_LaTeX`` that line also
+        carries a ``\setlength`` which Colab does not render either, and
+        which must not be left behind once its comment marker is gone.
+
+        TESTS::
+
+            sage: from sage.numerical.interactive_simplex_method import _SimplexMethodOutput
+            sage: markdown = _SimplexMethodOutput(
+            ....:     "\\begin{equation*}\\renewcommand{\\arraystretch}{1.5} %notruncate\n"
+            ....:     r"x\mspace{-6mu}+y\end{equation*}")._repr_markdown_()
+            sage: markdown
+            '$$x\\mkern-6mu+y$$'
+            sage: any(command in markdown
+            ....:     for command in [r'\mspace', '%notruncate', r'\arraystretch'])
+            False
+
+        The whole comment goes, including anything ``generate_real_LaTeX``
+        appended to its line::
+
+            sage: _SimplexMethodOutput("a %notruncate \\setlength{x}\nb")._repr_markdown_()
+            'a \nb'
+        """
+        markdown = re.sub(
+            r"\\mspace\{(-?\d+)mu\}",
+            lambda match: rf"\mkern{match.group(1)}mu",
+            self.data)
+        markdown = re.sub(r"%notruncate.*", "", markdown)
+        markdown = re.sub(
+            r"\\renewcommand\{\\arraystretch\}\{[^{}]+\}\s*", "", markdown)
+        return (markdown
+                .replace(r"\begin{equation*}", "$$")
+                .replace(r"\end{equation*}", "$$"))
+
+    def _rich_repr_(self, display_manager, **kwds):
+        r"""
+        Delegate to :class:`~sage.misc.html.HtmlFragment`.
+
+        TESTS::
+
+            sage: from sage.numerical.interactive_simplex_method import _SimplexMethodOutput
+            sage: from sage.repl.rich_output import get_display_manager
+            sage: _SimplexMethodOutput("Optimal.")._rich_repr_(get_display_manager())
+            OutputPlainText container
+        """
+        return HtmlFragment(self.data)._rich_repr_(display_manager, **kwds)
 
 
 def _assemble_arrayl(lines, stretch=None):
@@ -2519,8 +2682,8 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
 
         OUTPUT:
 
-        - :class:`~sage.misc.html.HtmlFragment` with HTML/`\LaTeX` code of
-          all encountered dictionaries
+        - a string-like object holding all encountered dictionaries, with
+          HTML and Markdown representations
 
         .. NOTE::
 
@@ -2575,7 +2738,7 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
                                "An optimal solution: ${}$.").format(
                                latex(v), latex(d.basic_solution())))
         self._final_revised_dictionary = d
-        return HtmlFragment("\n".join(output))
+        return _SimplexMethodOutput(output)
 
     def run_simplex_method(self):
         r"""
@@ -2583,8 +2746,8 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
 
         OUTPUT:
 
-        - :class:`~sage.misc.html.HtmlFragment` with HTML/`\LaTeX` code of
-          all encountered dictionaries
+        - a string-like object holding all encountered dictionaries, with
+          HTML and Markdown representations
 
         .. NOTE::
 
@@ -2703,7 +2866,7 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
                                "An optimal solution: ${}$.").format(
                                latex(v), latex(d.basic_solution())))
             self._final_dictionary = d
-        return HtmlFragment("\n".join(output))
+        return _SimplexMethodOutput(output)
 
     def slack_variables(self):
         r"""
@@ -3624,8 +3787,8 @@ class LPAbstractDictionary(SageObject):
 
         OUTPUT:
 
-        - :class:`~sage.misc.html.HtmlFragment` with HTML/`\LaTeX` code of
-          all encountered dictionaries
+        - a string-like object holding all encountered dictionaries, with
+          HTML and Markdown representations
 
         EXAMPLES::
 
@@ -3659,6 +3822,24 @@ class LPAbstractDictionary(SageObject):
             sage: D.is_optimal()
             True
 
+        The transcript uses a standard Markdown representation in stock
+        Jupyter kernels (:issue:`2384`)::
+
+            sage: D = P.dictionary(2, 3, 5)
+            sage: result = D.run_dual_simplex_method()
+            sage: from IPython.core.formatters import DisplayFormatter
+            sage: formats, metadata = DisplayFormatter().format(result)
+            sage: sorted(formats)
+            ['text/markdown', 'text/plain']
+            sage: markdown = formats['text/markdown']
+            sage: markdown.count('$$')
+            4
+            sage: r'\mkern-6mu' in markdown and r'\mspace' not in markdown
+            True
+            sage: any(command in markdown
+            ....:     for command in ['%notruncate', r'\arraystretch'])
+            False
+
         This method detects infeasible problems::
 
             sage: A = ([1, 0],)
@@ -3689,7 +3870,7 @@ class LPAbstractDictionary(SageObject):
             self.update()
         if self.is_optimal():
             output.append(self._html_())
-        return HtmlFragment("\n".join(output))
+        return _SimplexMethodOutput(output)
 
     def run_simplex_method(self):
         r"""
@@ -3700,8 +3881,8 @@ class LPAbstractDictionary(SageObject):
 
         OUTPUT:
 
-        - :class:`~sage.misc.html.HtmlFragment` with HTML/`\LaTeX` code of
-          all encountered dictionaries
+        - a string-like object holding all encountered dictionaries, with
+          HTML and Markdown representations
 
         EXAMPLES::
 
@@ -3769,7 +3950,7 @@ class LPAbstractDictionary(SageObject):
             self.update()
         if self.is_optimal():
             output.append(self._html_())
-        return HtmlFragment("\n".join(output))
+        return _SimplexMethodOutput(output)
 
     @abstract_method
     def update(self):
