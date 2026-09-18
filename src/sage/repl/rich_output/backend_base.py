@@ -467,7 +467,7 @@ class BackendBase(SageObject):
         concatenate = kwds.get('concatenate', False)
         from sage.misc.html import html
         from sage.repl.rich_output.output_browser import OutputHtml
-        return OutputHtml(html(obj, concatenate=concatenate, strict=True))
+        return OutputHtml(str(html(obj, concatenate=concatenate, strict=True)))
 
     def set_underscore_variable(self, obj):
         """

@@ -2575,7 +2575,7 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
                                "An optimal solution: ${}$.").format(
                                latex(v), latex(d.basic_solution())))
         self._final_revised_dictionary = d
-        return HtmlFragment("\n".join(output))
+        return HtmlFragment("\n").join(output)
 
     def run_simplex_method(self):
         r"""
@@ -2703,7 +2703,7 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
                                "An optimal solution: ${}$.").format(
                                latex(v), latex(d.basic_solution())))
             self._final_dictionary = d
-        return HtmlFragment("\n".join(output))
+        return HtmlFragment("\n").join(output)
 
     def slack_variables(self):
         r"""
@@ -3689,7 +3689,7 @@ class LPAbstractDictionary(SageObject):
             self.update()
         if self.is_optimal():
             output.append(self._html_())
-        return HtmlFragment("\n".join(output))
+        return HtmlFragment("\n").join(output)
 
     def run_simplex_method(self):
         r"""
@@ -3769,7 +3769,7 @@ class LPAbstractDictionary(SageObject):
             self.update()
         if self.is_optimal():
             output.append(self._html_())
-        return HtmlFragment("\n".join(output))
+        return HtmlFragment("\n").join(output)
 
     @abstract_method
     def update(self):
@@ -4687,13 +4687,13 @@ class LPRevisedDictionary(LPAbstractDictionary):
             \end{array}\right)
             \end{equation*}
         """
-        return HtmlFragment("\n".join([
+        return HtmlFragment("\n").join([
             super()._preupdate_output(direction),
             r"\begin{equation*}",
             r"B_\mathrm{new}^{-1} = E^{-1} B_\mathrm{old}^{-1} = ",
             latex(self.E_inverse()),
             latex(self.B_inverse()),
-            r"\end{equation*}"]))
+            r"\end{equation*}"])
 
     def A(self, v):
         r"""
