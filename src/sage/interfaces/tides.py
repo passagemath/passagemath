@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-tides
+# sage.doctest: optional - tides
 r"""
 Interface to TIDES
 
