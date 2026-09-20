@@ -76,7 +76,6 @@ import os
 import shutil
 
 from sage.calculus.functional import diff
-from sage.calculus.tides import _tides_compile_flags
 from sage.misc.lazy_import import lazy_import
 lazy_import("sage.interfaces.maxima_lib","maxima")
 from sage.misc.functional import N
@@ -1765,6 +1764,7 @@ def desolve_mintides(f, ics, initial, final, delta, tolrel=1e-16, tolabs=1e-16):
     import subprocess
     if subprocess.call('command -v gcc', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE):
         raise RuntimeError('Unable to run because gcc cannot be found')
+    from sage.calculus.tides import _tides_compile_flags
     from sage.interfaces.tides import genfiles_mintides
     from sage.misc.temporary_file import tmp_dir
     tempdir = tmp_dir()
@@ -1860,6 +1860,7 @@ def desolve_tides_mpfr(f, ics, initial, final, delta, tolrel=1e-16, tolabs=1e-16
     import subprocess
     if subprocess.call('command -v gcc', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE):
         raise RuntimeError('Unable to run because gcc cannot be found')
+    from sage.calculus.tides import _tides_compile_flags
     from sage.functions.log import log
     from sage.functions.other import ceil
     from sage.interfaces.tides import genfiles_mpfr
