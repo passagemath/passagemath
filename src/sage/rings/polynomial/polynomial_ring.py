@@ -3625,7 +3625,6 @@ class PolynomialRing_dense_mod_p(PolynomialRing_dense_finite_field,
         - Jeroen Demeyer (September 2014): add "ffprimroot" algorithm,
           see :issue:`8373`.
         """
-        from sage.libs.pari import pari
         from sage.rings.finite_rings.conway_polynomials import (conway_polynomial,
                                                                 exists_conway_polynomial)
 
@@ -3643,22 +3642,31 @@ class PolynomialRing_dense_mod_p(PolynomialRing_dense_finite_field,
                 try:
                     from .polynomial_gf2x import GF2X_BuildSparseIrred_list
                 except ImportError:
-                    algorithm = "adleman-lenstra"
+                    try:
+                        from sage.libs.pari import pari as _
+                    except ImportError:
+                        algorithm = "primitive"
+                    else:
+                        algorithm = "adleman-lenstra"
                 else:
                     algorithm = "minimal_weight"
             else:
                 algorithm = "adleman-lenstra"
-        elif algorithm == "primitive":
+
+        if algorithm == "primitive":
             if exists_conway_polynomial(p, n):
                 algorithm = "conway"
             else:
                 algorithm = "ffprimroot"
 
         if algorithm == "adleman-lenstra":
+            from sage.libs.pari import pari
             return self(pari(p).ffinit(n))
-        elif algorithm == "conway":
+
+        if algorithm == "conway":
             return self(conway_polynomial(p, n))
-        elif algorithm == "first_lexicographic":
+
+        if algorithm == "first_lexicographic":
             if p == 2:
                 try:
                     from .polynomial_gf2x import GF2X_BuildIrred_list
@@ -3670,6 +3678,7 @@ class PolynomialRing_dense_mod_p(PolynomialRing_dense_finite_field,
                 # Fallback to PolynomialRing_dense_finite_field.irreducible_element
                 pass
         elif algorithm == "ffprimroot":
+            from sage.libs.pari import pari
             return self(pari(p).ffinit(n).ffgen().ffprimroot().charpoly())
         elif algorithm == "minimal_weight":
             if p == 2:

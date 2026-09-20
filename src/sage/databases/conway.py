@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-pari
+# sage_setup: distribution = sagemath-categories
 r"""
 Frank Lübeck's tables of Conway polynomials over finite fields
 """
