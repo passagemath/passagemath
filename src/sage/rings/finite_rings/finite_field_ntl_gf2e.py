@@ -17,9 +17,11 @@ Finite fields of characteristic 2
 #                  http://www.gnu.org/licenses/
 #*****************************************************************************
 
+from sage.misc.lazy_import import lazy_import
 from sage.rings.finite_rings.finite_field_base import FiniteField
-from sage.libs.pari import pari
 from sage.rings.integer import Integer
+
+lazy_import('sage.libs.pari', 'pari')
 
 
 def late_import():
