@@ -96,7 +96,7 @@ Examples
 
 Using `SageManifolds <https://sagemanifolds.obspm.fr/>`_::
 
-    $ pipx run --spec "passagemath-symbolics[test]" ipython
+    $ pipx run --spec "passagemath-symbolics[maxima,test]" ipython
 
     In [1]: from passagemath_symbolics import *
 
@@ -135,12 +135,24 @@ Available as extras, from other distributions
 ``pip install "passagemath-symbolics[mathics3]"``
  Computer algebra system `Mathics3 <https://passagemath.org/docs/latest/html/en/reference/spkg/mathics3.html>`_
 
+``pip install "passagemath-symbolics[maxima]"``
+ Computer algebra system `Maxima <https://passagemath.org/docs/latest/html/en/reference/spkg/maxima.html>`_ via `passagemath-maxima <https://passagemath.org/docs/latest/html/en/reference/spkg/sagemath_maxima.html>`_
+
 ``pip install "passagemath-symbolics[primecount]"``
  `Prime counting function <https://passagemath.org/docs/latest/html/en/reference/functions/sage/functions/prime_pi.html>`_
  implementation `primecount <https://passagemath.org/docs/latest/html/en/reference/spkg/primecount.html>`_, via `primecountpy <https://passagemath.org/docs/latest/html/en/reference/spkg/primecountpy.html>`_
 
+``pip install "passagemath-symbolics[singular]"``
+ Computer algebra system `Singular <https://passagemath.org/docs/latest/html/en/reference/spkg/singular.html>`_ via `passagemath-singular <https://passagemath.org/docs/latest/html/en/reference/spkg/sagemath_singular.html>`_
+
 ``pip install "passagemath-symbolics[sympy]"``
  Python library for symbolic mathematics / computer algebra system `SymPy <https://passagemath.org/docs/latest/html/en/reference/spkg/sympy.html>`_
+
+``pip install "passagemath-symbolics[tides]"``
+ High-precision integration of ODEs with `TIDES <https://passagemath.org/docs/latest/html/en/reference/spkg/tides.html>`_ via `passagemath-tides <https://passagemath.org/docs/latest/html/en/reference/spkg/sagemath_tides.html>`_
+
+``pip install "passagemath-symbolics[standard]"``
+ All libraries for symbolics that are included in a standard installation of Sage: Maxima, primecount, Singular
 
 ``pip install "passagemath-symbolics[plot]"``
  Plotting facilities
