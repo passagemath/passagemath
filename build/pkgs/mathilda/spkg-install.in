@@ -1,0 +1,8 @@
+cd src
+set -e
+if [ "$UNAME" = "Darwin" ]; then
+   # "Compiler. Mathilda must be built with a REAL GCC, never Apple's clang shim"
+   unset CC
+fi
+sdh_make USE_GRAPHICS=0 USE_FFTW=0 USE_REGEX=0 PREFIX="$SAGE_INST_LOCAL"
+sdh_make_install PREFIX="$SAGE_INST_LOCAL"
