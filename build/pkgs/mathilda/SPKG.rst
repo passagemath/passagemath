@@ -20,3 +20,9 @@ Upstream Contact
 ----------------
 
 https://github.com/stblake/mathilda
+
+Special Update/Build Instructions
+---------------------------------
+
+On macOS, install a real gcc using homebrew; the package will autodetect
+and use it. The package declines to use Apple's gcc-clang shim.
