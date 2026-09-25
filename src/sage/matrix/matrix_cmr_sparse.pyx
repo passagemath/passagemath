@@ -5194,7 +5194,8 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         - ``stop_when_irregular`` -- boolean (default: ``True``);
           whether to stop decomposing once irregularity is determined.
 
-          For a description of other parameters, see :meth:`_set_cmr_seymour_parameters`
+          For a description of other parameters controlling the Seymour
+          decomposition, see :meth:`is_totally_unimodular`.
 
         - ``row_keys`` -- a finite or enumerated family of arbitrary objects
           that index the rows of the matrix
@@ -5415,7 +5416,48 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         - ``stop_when_nonTU`` -- boolean (default: ``True``);
           whether to stop decomposing once non-TUness is determined.
 
-          For a description of other parameters, see :meth:`_set_cmr_seymour_parameters`
+        - ``stop_when_irregular`` -- boolean;
+          whether to stop decomposing once irregularity is determined.
+
+        - ``stop_when_nongraphic`` -- boolean;
+          whether to stop decomposing once non-graphicness (or being non-network) is determined.
+
+        - ``stop_when_noncographic`` -- boolean;
+          whether to stop decomposing once non-cographicness (or being non-conetwork) is determined.
+
+        - ``stop_when_nongraphic_and_noncographic`` -- boolean;
+          whether to stop decomposing once non-graphicness and non-cographicness
+          (or not being network and not being conetwork) is determined.
+
+        - ``series_parallel_ok`` -- boolean (default: ``True``);
+          whether to allow series-parallel operations in the decomposition tree.
+
+        - ``check_graphic_minors_planar`` -- boolean (default: ``False``);
+          whether minors identified as graphic should still be checked for cographicness.
+
+        - ``use_direct_graphicness_test`` -- boolean (default: ``True``);
+          whether to use fast graphicness routines.
+
+        - ``prefer_graphicness`` -- boolean;
+          whether to first test for (co)graphicness (or being (co)network)
+          before applying series-parallel reductions.
+
+        - ``decompose_strategy`` -- one of ``'delta_pivot'``, ``'y_pivot'``, ``'three_pivot'``,
+          ``'delta_three'``, ``'y_three'`` (default: ``'delta_three'``);
+          whether to perform pivots to change the rank distribution, and how to construct the children.
+
+          A decomposition as described by Seymour can be selected via ``'delta_pivot'``.
+          A decomposition as used by Truemper can be selected via ``'three_pivot'``.
+          The default (``'delta_three'``) is to not carry out any pivots and choose either
+          Seymour's or Truemper's definition, depending on the rank distribution.
+
+          .. SEEALSO:: :meth:`delta_sum`, :meth:`three_sum`
+
+        - ``construct_leaf_graphs`` -- boolean;
+          whether to construct (co)graphs for all leaf nodes that are (co)graphic or (co)network.
+
+        - ``construct_all_graphs`` -- boolean;
+          whether to construct (co)graphs for all nodes that are (co)graphic or (co)network.
 
         - ``row_keys`` -- a finite or enumerated family of arbitrary objects
           that index the rows of the matrix, for use in certificates
@@ -5607,63 +5649,7 @@ cdef _set_cmr_seymour_parameters(CMR_SEYMOUR_PARAMS *params, dict kwds):
 
     - ``params`` -- the parameters object to be set
 
-    Keyword arguments:
-
-    - ``stop_when_irregular`` -- boolean;
-      whether to stop decomposing once irregularity is determined.
-
-    - ``stop_when_nongraphic`` -- boolean;
-      whether to stop decomposing once non-graphicness (or being non-network) is determined.
-
-    - ``stop_when_noncographic`` -- boolean;
-      whether to stop decomposing once non-cographicness (or being non-conetwork) is determined.
-
-    - ``stop_when_nongraphic_and_noncographic`` -- boolean;
-      whether to stop decomposing once non-graphicness and non-cographicness
-      (or not being network and not being conetwork) is determined.
-
-    - ``series_parallel_ok`` -- boolean (default: ``True``);
-      whether to allow series-parallel operations in the decomposition tree.
-
-    - ``check_graphic_minors_planar`` -- boolean (default: ``False``);
-      whether minors identified as graphic should still be checked for cographicness.
-
-    - ``use_direct_graphicness_test`` -- boolean (default: ``True``);
-      whether to use fast graphicness routines.
-
-    - ``prefer_graphicness`` -- boolean;
-      whether to first test for (co)graphicness (or being (co)network)
-      before applying series-parallel reductions.
-
-    - ``decompose_strategy`` -- among ``'delta_pivot'``, ``'y_pivot'``, ``'three_pivot'``, ``'delta_three'``, ``'y_three'``} (default: ``'delta_three'``);
-      whether to perform pivots to change the rank distribution, and how to construct the children.
-
-        The value is a bit-wise OR of two decisions, one per rank distribution:
-        - CMR_SEYMOUR_DECOMPOSE_FLAG_DISTRIBUTED_MASK indicates what to do if ranks are 1 and 1.
-        - CMR_SEYMOUR_DECOMPOSE_FLAG_CONCENTRATED_MASK indicates what to do if ranks are 2 and 0.
-
-        The possible choices for distributed ranks (1 and 1) are:
-        - CMR_SEYMOUR_DECOMPOSE_FLAG_DISTRIBUTED_PIVOT pivot such that the rank distribution becomes concentrated.
-        - CMR_SEYMOUR_DECOMPOSE_FLAG_DISTRIBUTED_DELTASUM for the `\Delta`-sum (default).
-        - CMR_SEYMOUR_DECOMPOSE_FLAG_DISTRIBUTED_YSUM for the Y-sum.
-
-        The possible choices for concentrated ranks (2 and 0) are:
-        - CMR_SEYMOUR_DECOMPOSE_FLAG_CONCENTRATED_PIVOT pivot such that the rank distribution becomes distributed.
-        - CMR_SEYMOUR_DECOMPOSE_FLAG_CONCENTRATED_THREESUM for the 3-sum (default).
-
-    .. SEEALSO:: :meth:`delta_sum`, :meth:`three_sum`
-
-    .. NOTE::
-
-        A decomposition as described by Seymour (``'delta_pivot'``) can be selected via CMR_SEYMOUR_DECOMPOSE_FLAG_SEYMOUR.
-        A decomposition as used by Truemper (``'three_pivot'``) can be selected via CMR_SEYMOUR_DECOMPOSE_FLAG_TRUEMPER.
-        The default (``'delta_three'``) is to not carry out any pivots and choose Seymour's or Truemper's definition depending on the rank distribution.
-
-    - ``construct_leaf_graphs`` -- boolean;
-      whether to construct (co)graphs for all leaf nodes that are (co)graphic or (co)network.
-
-    - ``construct_all_graphs`` -- boolean;
-      whether to construct (co)graphs for all nodes that are (co)graphic or (co)network.
+    - ``kwds`` -- keyword arguments, see :meth:`is_totally_unimodular`
     """
     CMR_CALL(CMRseymourParamsInit(params))
     params.stopWhenIrregular = kwds['stop_when_irregular']
@@ -5675,6 +5661,22 @@ cdef _set_cmr_seymour_parameters(CMR_SEYMOUR_PARAMS *params, dict kwds):
     params.seriesParallel = kwds['series_parallel_ok']
     params.planarityCheck = kwds['check_graphic_minors_planar']
     if kwds['decompose_strategy'] is not 'delta_three':
+        ## The value is a bit-wise OR of two decisions, one per rank distribution:
+        ## - CMR_SEYMOUR_DECOMPOSE_FLAG_DISTRIBUTED_MASK indicates what to do if ranks are 1 and 1.
+        ## - CMR_SEYMOUR_DECOMPOSE_FLAG_CONCENTRATED_MASK indicates what to do if ranks are 2 and 0.
+        ##
+        ## The possible choices for distributed ranks (1 and 1) are:
+        ## - CMR_SEYMOUR_DECOMPOSE_FLAG_DISTRIBUTED_PIVOT pivot such that the rank distribution becomes concentrated.
+        ## - CMR_SEYMOUR_DECOMPOSE_FLAG_DISTRIBUTED_DELTASUM for the `\Delta`-sum (default).
+        ## - CMR_SEYMOUR_DECOMPOSE_FLAG_DISTRIBUTED_YSUM for the Y-sum.
+        ##
+        ## The possible choices for concentrated ranks (2 and 0) are:
+        ## - CMR_SEYMOUR_DECOMPOSE_FLAG_CONCENTRATED_PIVOT pivot such that the rank distribution becomes distributed.
+        ## - CMR_SEYMOUR_DECOMPOSE_FLAG_CONCENTRATED_THREESUM for the 3-sum (default).
+        ##
+        ## A decomposition as described by Seymour (``'delta_pivot'``) can be selected via CMR_SEYMOUR_DECOMPOSE_FLAG_SEYMOUR.
+        ## A decomposition as used by Truemper (``'three_pivot'``) can be selected via CMR_SEYMOUR_DECOMPOSE_FLAG_TRUEMPER.
+        ## The default (``'delta_three'``) is to not carry out any pivots and choose Seymour's or Truemper's definition depending on the rank distribution.
         if kwds['decompose_strategy'] == 'delta_pivot':
             params.decomposeStrategy = CMR_SEYMOUR_DECOMPOSE_FLAG_SEYMOUR
         elif kwds['decompose_strategy'] == 'three_pivot':
