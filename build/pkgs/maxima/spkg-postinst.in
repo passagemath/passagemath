@@ -1,0 +1,10 @@
+set -ex
+mkdir maxima_user
+export MAXIMA_USERDIR="$(pwd)/maxima_user"
+(cd src/share && for pkg in *; do
+    if [ -d "$pkg" ]; then
+        maxima --very-quiet --batch-string='load("'$pkg'");'
+    fi
+done)
+(cd $MAXIMA_USERDIR/binary/*/ecl/*/share &&
+    tar cf - **/*.fas) | (cd "$SAGE_LOCAL/share/maxima/${PKG_VER%.p*}/share/" && tar xf -)
