@@ -20,6 +20,9 @@ cd src/
 # Use newer version of config.guess and config.sub (see Issue #19734)
 cp "$SAGE_ROOT"/config/config.* .
 
+# current patches change autotools source files
+autoreconf -fi
+
 # Patch out bad 'multiple targets' rule
 # https://github.com/sagemath/sage/pull/35619#issuecomment-1567351409
 sed -i.bak 's/^maxima_singlepage.html //' doc/info/Makefile.in
