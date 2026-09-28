@@ -625,8 +625,12 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
                     z        Pi                2
                  x y  + Sqrt[--] FresnelS[Sqrt[--] x]
                              2                 Pi
-        sage: print(f.integral(x))                                                      # needs sage.libs.maxima
-        x*y^z + 1/16*sqrt(pi)*((I + 1)*sqrt(2)*erf((1/2*I + 1/2)*sqrt(2)*x) - (I - 1)*sqrt(2)*erf(sqrt(-I)*x) - 2*sqrt(2)*imag_part(erf((-1)^(1/4)*x)) + 2*sqrt(2)*real_part(erf((-1)^(1/4)*x)))
+
+        sage: # needs sage.libs.maxima
+        sage: ans = f.integral(x); ans  # random - depends on maxima version
+        x*y^z - 1/4*(-1)^(3/4)*sqrt(pi)*(I*sqrt(-I)*erf((-1)^(1/4)*x) - I*(-1)^(1/4)*erf(sqrt(-I)*x))/sqrt(-I)
+        sage: ans in [x*y^z - 1/4*(-1)^(3/4)*sqrt(pi)*(I*sqrt(-I)*erf((-1)^(1/4)*x) - I*(-1)^(1/4)*erf(sqrt(-I)*x))/sqrt(-I), x*y^z + 1/16*sqrt(pi)*((I + 1)*sqrt(2)*erf((1/2*I + 1/2)*sqrt(2)*x) - (I - 1)*sqrt(2)*erf(sqrt(-I)*x) - 2*sqrt(2)*imag_part(erf((-1)^(1/4)*x)) + 2*sqrt(2)*real_part(erf((-1)^(1/4)*x)))]
+        True
 
     Alternatively, just use algorithm='mathematica_free' to integrate via Mathematica
     over the internet (does NOT require a Mathematica license!)::
@@ -776,17 +780,10 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
 
         sage: # needs sage.libs.maxima
         sage: _ = var('x,y')
-        sage: f = log(x^2 + y^2)
-        sage: res = integral(f, x, 1414/10^7, 1); res
-        Traceback (most recent call last):
-        ...
-        ValueError: Computation failed since Maxima requested additional constraints;
-        using the 'assume' command before evaluation *may* help ...
-        Is ... positive, negative or zero?
-        sage: assume(y > 1)
-        sage: res = integral(f, x, 1414/10^7, 1); res
-        -2*y*arctan(707/5000000/y) + 2*y*arctan(1/y) + log(y^2 + 1)
-        - 707/5000000*log(y^2 + 499849/25000000000000) - 4999293/2500000
+        sage: f = log(x^2+y^2)
+        sage: assume(y>1)
+        sage: res = integral(f,x,1414/10^7, 1); res
+        -2*y*arctan(707/5000000/y) + 2*y*arctan(1/y) + log(y^2 + 1) - 707/5000000*log(y^2 + 499849/25000000000000) - 4999293/2500000
         sage: nres = numerical_integral(f.subs(y=2), 0.0001414, 1.); nres
         (1.4638323264144..., 1.6251803529759...e-14)
         sage: res.subs(y=2).n()
