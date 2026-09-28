@@ -38,6 +38,7 @@ sdh_configure --enable-ecl git_found=false
 #---------------------------------------------------------------
 
 sdh_make
+sdh_make share-binaries
 sdh_make_install
 
 
