@@ -456,7 +456,7 @@ class InterfaceInit(Converter):
         (:issue:`42608`)::
 
             sage: z = SR(complex(1, 2))
-            sage: (z * x)._maxima_init_()
+            sage: (z * x)._maxima_init_()                                               # needs sage.libs.maxima
             '(_SAGE_VAR_x)*(1.0000000000000000 + 2.0000000000000000*%i)'
 
         In particular, this fixes symbolic matrix inversion after NumPy has
