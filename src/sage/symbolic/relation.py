@@ -963,7 +963,6 @@ def solve(f, *args, explicit_solutions=None, multiplicities=None, to_poly_solve=
         [sin(x) == cos(x)]
         sage: solve(sin(x)==cos(x), x, to_poly_solve=True)
         [x == 1/4*pi + pi*z...]
-
         sage: var('Q')
         Q
         sage: solve(Q*sqrt(Q^2 + 2) - 1, Q)
@@ -1375,6 +1374,7 @@ def _solve_expression(f, x, explicit_solutions, multiplicities,
 
     Maxima 5.49 no longer raises an error for these inputs::
 
+        sage: # needs sage.libs.maxima
         sage: solve(acot(x), x)
         [...]
         sage: solve(acot(x), x, to_poly_solve=True)
