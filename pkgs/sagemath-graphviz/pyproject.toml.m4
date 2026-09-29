@@ -16,7 +16,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "passagemath-graphviz"
-description = "passagemath: Computational group theory with GAP3"
+description = "passagemath: Graph visualization with Graphviz"
 dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_environment
 ]
