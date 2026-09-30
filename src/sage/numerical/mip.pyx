@@ -958,7 +958,7 @@ cdef class MixedIntegerLinearProgram(SageObject):
 
         EXAMPLES::
 
-            sage: p = MixedIntegerLinearProgram(solver='GLPK')
+            sage: p = MixedIntegerLinearProgram(solver='Highs')
             sage: x = p.new_variable()
             sage: p.backend_index(x['first'])
             0
@@ -974,7 +974,7 @@ cdef class MixedIntegerLinearProgram(SageObject):
 
         A component of another program has no index in ``p``::
 
-            sage: q = MixedIntegerLinearProgram(solver='GLPK')
+            sage: q = MixedIntegerLinearProgram(solver='Highs')
             sage: y = q.new_variable()
             sage: try:
             ....:     p.backend_index(y[0])
@@ -1192,7 +1192,7 @@ cdef class MixedIntegerLinearProgram(SageObject):
         The backend indices identify the coordinates of the polyhedron
         (see :issue:`38799`)::
 
-            sage: p = MixedIntegerLinearProgram(solver='GLPK')
+            sage: p = MixedIntegerLinearProgram(solver='Highs')
             sage: x = p.new_variable()
             sage: y = p.new_variable()
             sage: p.backend_index(x['a']), p.backend_index(y['b']), p.backend_index(x['c'])
