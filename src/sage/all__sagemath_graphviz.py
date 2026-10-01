@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-gap3
+# sage_setup: distribution = sagemath-graphviz
 
 from sage.all__sagemath_gap import *
 
