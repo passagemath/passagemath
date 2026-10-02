@@ -91,7 +91,7 @@ class KahlerAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: # needs sage.graphs sage.modules sage.libs.singular
+                sage: # needs sage.graphs sage.libs.singular sage.modules
                 sage: ch = matroids.catalog.Fano().chow_ring(QQ, True, 'fy')
                 sage: Ba, Bb, Bc, Bd, Be, Bf, Bg, Babf, Bace, Badg, Bbcd, Bbeg, Bcfg, Bdef, Babcdefg = ch.gens()[8:]
                 sage: u = ch(-Babf^2 + Bcfg^2 - 8/7*Bc*Babcdefg + 1/2*Bd*Babcdefg - Bf*Babcdefg - Bg*Babcdefg); u
@@ -109,7 +109,7 @@ class KahlerAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: # needs sage.graphs sage.modules sage.libs.singular
+                sage: # needs sage.graphs sage.libs.singular sage.modules
                 sage: U46 = matroids.Uniform(4, 6)
                 sage: C = U46.chow_ring(QQ, False)
                 sage: w = C.lefschetz_element(); w

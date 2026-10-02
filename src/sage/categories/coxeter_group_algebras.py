@@ -35,7 +35,7 @@ class CoxeterGroupAlgebras(AlgebrasCategory):
                 sage: q1, q2 = K.gens()
                 sage: KW = W.algebra(K)
                 sage: w = W.an_element()
-                sage: KW.demazure_lusztig_operator_on_basis(w, 0, q1, q2)
+                sage: KW.demazure_lusztig_operator_on_basis(w, 0, q1, q2)               # needs sage.graphs
                 -q2*323123 + (q1+q2)*123
                 sage: KW.demazure_lusztig_operator_on_basis(w, 1, q1, q2)
                 q1*1231
@@ -47,7 +47,7 @@ class CoxeterGroupAlgebras(AlgebrasCategory):
             At `q_1=1` and `q_2=0` we recover the action of the
             isobaric divided differences `\pi_i`::
 
-                sage: KW.demazure_lusztig_operator_on_basis(w, 0, 1, 0)
+                sage: KW.demazure_lusztig_operator_on_basis(w, 0, 1, 0)                 # needs sage.graphs
                 123
                 sage: KW.demazure_lusztig_operator_on_basis(w, 1, 1, 0)
                 1231
@@ -59,7 +59,7 @@ class CoxeterGroupAlgebras(AlgebrasCategory):
             At `q_1=1` and `q_2=-1` we recover the action of the
             simple reflection `s_i`::
 
-                sage: KW.demazure_lusztig_operator_on_basis(w, 0, 1, -1)
+                sage: KW.demazure_lusztig_operator_on_basis(w, 0, 1, -1)                # needs sage.graphs
                 323123
                 sage: KW.demazure_lusztig_operator_on_basis(w, 1, 1, -1)
                 1231
@@ -111,7 +111,7 @@ class CoxeterGroupAlgebras(AlgebrasCategory):
                 sage: T = KW.demazure_lusztig_operators(q1, q2, affine=True)
                 sage: x = KW.monomial(W.an_element()); x
                 123
-                sage: T[0](x)
+                sage: T[0](x)                                                           # needs sage.graphs
                 -q2*323123 + (q1+q2)*123
                 sage: T[1](x)
                 q1*1231

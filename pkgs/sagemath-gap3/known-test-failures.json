@@ -1,0 +1,218 @@
+{
+    "sage.algebras.hecke_algebras.cubic_hecke_algebra": {
+        "failed": true,
+        "ntests": 222
+    },
+    "sage.algebras.hecke_algebras.cubic_hecke_matrix_rep": {
+        "failed": true,
+        "ntests": 97
+    },
+    "sage.categories.additive_groups": {
+        "ntests": 9
+    },
+    "sage.categories.affine_weyl_groups": {
+        "ntests": 13
+    },
+    "sage.categories.commutative_additive_groups": {
+        "ntests": 17
+    },
+    "sage.categories.complex_reflection_groups": {
+        "ntests": 16
+    },
+    "sage.categories.complex_reflection_or_generalized_coxeter_groups": {
+        "ntests": 209
+    },
+    "sage.categories.coxeter_groups": {
+        "ntests": 485
+    },
+    "sage.categories.finite_complex_reflection_groups": {
+        "failed": true,
+        "ntests": 223
+    },
+    "sage.categories.finite_coxeter_groups": {
+        "ntests": 95
+    },
+    "sage.categories.finite_groups": {
+        "ntests": 39
+    },
+    "sage.categories.finite_permutation_groups": {
+        "ntests": 43
+    },
+    "sage.categories.finite_weyl_groups": {
+        "ntests": 6
+    },
+    "sage.categories.generalized_coxeter_groups": {
+        "ntests": 12
+    },
+    "sage.categories.lie_groups": {
+        "ntests": 9
+    },
+    "sage.categories.permutation_groups": {
+        "ntests": 6
+    },
+    "sage.categories.shephard_groups": {
+        "ntests": 5
+    },
+    "sage.categories.weyl_groups": {
+        "ntests": 70
+    },
+    "sage.combinat.colored_permutations": {
+        "ntests": 399
+    },
+    "sage.combinat.colored_permutations_representations": {
+        "failed": true,
+        "ntests": 156
+    },
+    "sage.combinat.root_system.ambient_space": {
+        "ntests": 84
+    },
+    "sage.combinat.root_system.associahedron": {
+        "ntests": 4
+    },
+    "sage.combinat.root_system.braid_orbit": {
+        "ntests": 11
+    },
+    "sage.combinat.root_system.cartan_matrix": {
+        "ntests": 64
+    },
+    "sage.combinat.root_system.cartan_type": {
+        "ntests": 386
+    },
+    "sage.combinat.root_system.coxeter_group": {
+        "ntests": 6
+    },
+    "sage.combinat.root_system.coxeter_type": {
+        "ntests": 81
+    },
+    "sage.combinat.root_system.non_symmetric_macdonald_polynomials": {
+        "ntests": 5
+    },
+    "sage.combinat.root_system.reflection_group_complex": {
+        "failed": true,
+        "ntests": 322
+    },
+    "sage.combinat.root_system.reflection_group_element": {
+        "failed": true,
+        "ntests": 115
+    },
+    "sage.combinat.root_system.reflection_group_real": {
+        "failed": true,
+        "ntests": 86
+    },
+    "sage.combinat.root_system.root_lattice_realization_algebras": {
+        "failed": true,
+        "ntests": 284
+    },
+    "sage.combinat.root_system.root_lattice_realizations": {
+        "ntests": 487
+    },
+    "sage.combinat.root_system.root_space": {
+        "ntests": 78
+    },
+    "sage.combinat.root_system.root_system": {
+        "ntests": 123
+    },
+    "sage.combinat.root_system.type_A": {
+        "ntests": 48
+    },
+    "sage.combinat.root_system.type_A_affine": {
+        "ntests": 29
+    },
+    "sage.combinat.root_system.type_A_infinity": {
+        "ntests": 37
+    },
+    "sage.combinat.root_system.type_B": {
+        "ntests": 39
+    },
+    "sage.combinat.root_system.type_BC_affine": {
+        "ntests": 41
+    },
+    "sage.combinat.root_system.type_B_affine": {
+        "ntests": 20
+    },
+    "sage.combinat.root_system.type_C": {
+        "ntests": 40
+    },
+    "sage.combinat.root_system.type_C_affine": {
+        "ntests": 22
+    },
+    "sage.combinat.root_system.type_D": {
+        "ntests": 41
+    },
+    "sage.combinat.root_system.type_D_affine": {
+        "ntests": 22
+    },
+    "sage.combinat.root_system.type_E": {
+        "ntests": 46
+    },
+    "sage.combinat.root_system.type_E_affine": {
+        "ntests": 19
+    },
+    "sage.combinat.root_system.type_F": {
+        "ntests": 39
+    },
+    "sage.combinat.root_system.type_F_affine": {
+        "ntests": 18
+    },
+    "sage.combinat.root_system.type_G": {
+        "ntests": 34
+    },
+    "sage.combinat.root_system.type_G_affine": {
+        "ntests": 18
+    },
+    "sage.combinat.root_system.type_H": {
+        "ntests": 21
+    },
+    "sage.combinat.root_system.type_I": {
+        "ntests": 20
+    },
+    "sage.combinat.root_system.type_Q": {
+        "ntests": 25
+    },
+    "sage.combinat.root_system.type_affine": {
+        "ntests": 67
+    },
+    "sage.combinat.root_system.type_dual": {
+        "ntests": 126
+    },
+    "sage.combinat.root_system.type_folded": {
+        "ntests": 31
+    },
+    "sage.combinat.root_system.type_marked": {
+        "ntests": 119
+    },
+    "sage.combinat.root_system.type_reducible": {
+        "ntests": 82
+    },
+    "sage.combinat.root_system.type_relabel": {
+        "ntests": 135
+    },
+    "sage.combinat.root_system.type_super_A": {
+        "ntests": 127
+    },
+    "sage.combinat.root_system.weight_lattice_realizations": {
+        "ntests": 131
+    },
+    "sage.combinat.root_system.weight_space": {
+        "ntests": 109
+    },
+    "sage.combinat.root_system.weyl_group": {
+        "ntests": 6
+    },
+    "sage.combinat.subword": {
+        "ntests": 108
+    },
+    "sage.combinat.subword_complex": {
+        "ntests": 7
+    },
+    "sage.combinat.subword_complex_c": {
+        "failed": true,
+        "ntests": 7
+    },
+    "sage.interfaces.gap3": {
+        "ntests": 113
+    },
+    "sage.rings.universal_cyclotomic_field": {
+        "ntests": 7
+    }
+}

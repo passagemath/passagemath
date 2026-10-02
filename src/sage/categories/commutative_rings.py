@@ -52,11 +52,11 @@ class CommutativeRings(CategoryWithAxiom):
 
         sage: QQ.is_commutative()
         True
-        sage: ZpCA(7).is_commutative()                                              # needs sage.rings.padics
+        sage: ZpCA(7).is_commutative()                                                  # needs sage.rings.padics
         True
-        sage: A = QuaternionAlgebra(QQ, -1, -3, names=('i','j','k')); A             # needs sage.combinat sage.libs.singular sage.modules
+        sage: A = QuaternionAlgebra(QQ, -1, -3, names=('i','j','k')); A                 # needs sage.combinat sage.libs.singular sage.modules
         Quaternion Algebra (-1, -3) with base ring Rational Field
-        sage: A.is_commutative()                                                    # needs sage.combinat sage.libs.singular sage.modules
+        sage: A.is_commutative()                                                        # needs sage.combinat sage.libs.singular sage.modules
         False
     """
     def __lean_init__(self):
@@ -178,10 +178,10 @@ class CommutativeRings(CategoryWithAxiom):
                 <class 'sage.rings.quotient_ring.QuotientRingIdeal_principal'>
                 sage: S._ideal_class_(2)
                 <class 'sage.rings.quotient_ring.QuotientRingIdeal_generic'>
-                sage: T.<z> = S[]                                                           # needs sage.libs.singular
-                sage: T._ideal_class_(5)                                                    # needs sage.libs.singular
+                sage: T.<z> = S[]                                                       # needs sage.libs.singular
+                sage: T._ideal_class_(5)                                                # needs sage.libs.singular
                 <class 'sage.rings.ideal.Ideal_generic'>
-                sage: T._ideal_class_(1)                                                    # needs sage.libs.singular
+                sage: T._ideal_class_(1)                                                # needs sage.libs.singular
                 <class 'sage.rings.ideal.Ideal_principal'>
             """
             # One might need more than just n
@@ -419,21 +419,21 @@ class CommutativeRings(CategoryWithAxiom):
             EXAMPLES::
 
                 sage: R.<x,y,z> = QQ[]
-                sage: M = R.derivation_module(); M                                          # needs sage.modules
+                sage: M = R.derivation_module(); M                                      # needs sage.modules
                 Module of derivations over
                  Multivariate Polynomial Ring in x, y, z over Rational Field
-                sage: M.gens()                                                              # needs sage.modules
+                sage: M.gens()                                                          # needs sage.modules
                 (d/dx, d/dy, d/dz)
 
             We can specify a different codomain::
 
                 sage: K = R.fraction_field()
-                sage: M = R.derivation_module(K); M                                         # needs sage.libs.singular sage.modules
+                sage: M = R.derivation_module(K); M                                     # needs sage.libs.singular sage.modules
                 Module of derivations
                  from Multivariate Polynomial Ring in x, y, z over Rational Field
                    to Fraction Field of
                       Multivariate Polynomial Ring in x, y, z over Rational Field
-                sage: M.gen() / x                                                           # needs sage.libs.singular sage.modules
+                sage: M.gen() / x                                                       # needs sage.libs.singular sage.modules
                 1/x*d/dx
 
             Here is an example with a non-canonical defining morphism::
@@ -446,8 +446,8 @@ class CommutativeRings(CategoryWithAxiom):
                   Defn: x |--> 0
                         y |--> 1
                         z |--> 2
-                sage: M = R.derivation_module(ev)                                           # needs sage.modules
-                sage: M                                                                     # needs sage.modules
+                sage: M = R.derivation_module(ev)                                       # needs sage.modules
+                sage: M                                                                 # needs sage.modules
                 Module of derivations
                  from Multivariate Polynomial Ring in x, y, z over Rational Field
                    to Rational Field
@@ -472,7 +472,7 @@ class CommutativeRings(CategoryWithAxiom):
             An example with a twisting homomorphism::
 
                 sage: theta = R.hom([x^2, y^2, z^2])
-                sage: M = R.derivation_module(twist=theta); M                               # needs sage.modules
+                sage: M = R.derivation_module(twist=theta); M                           # needs sage.modules
                 Module of twisted derivations over Multivariate Polynomial Ring in x, y, z
                  over Rational Field (twisting morphism: x |--> x^2, y |--> y^2, z |--> z^2)
 
@@ -510,23 +510,23 @@ class CommutativeRings(CategoryWithAxiom):
             EXAMPLES::
 
                 sage: R.<x,y,z> = QQ[]
-                sage: R.derivation()                                                        # needs sage.modules
+                sage: R.derivation()                                                    # needs sage.modules
                 d/dx
 
             In that case, ``arg`` could be a generator::
 
-                sage: R.derivation(y)                                                       # needs sage.modules
+                sage: R.derivation(y)                                                   # needs sage.modules
                 d/dy
 
             or a list of coefficients::
 
-                sage: R.derivation([1,2,3])                                                 # needs sage.modules
+                sage: R.derivation([1,2,3])                                             # needs sage.modules
                 d/dx + 2*d/dy + 3*d/dz
 
             It is not possible to define derivations with respect to a
             polynomial which is not a variable::
 
-                sage: R.derivation(x^2)                                                     # needs sage.modules
+                sage: R.derivation(x^2)                                                 # needs sage.modules
                 Traceback (most recent call last):
                 ...
                 ValueError: unable to create the derivation
@@ -535,18 +535,18 @@ class CommutativeRings(CategoryWithAxiom):
 
                 sage: R.<x,y,z> = QQ[]
                 sage: theta = R.hom([x^2, y^2, z^2])
-                sage: f = R.derivation(twist=theta); f                                      # needs sage.modules
+                sage: f = R.derivation(twist=theta); f                                  # needs sage.modules
                 0
-                sage: f.parent()                                                            # needs sage.modules
+                sage: f.parent()                                                        # needs sage.modules
                 Module of twisted derivations over Multivariate Polynomial Ring in x, y, z
                  over Rational Field (twisting morphism: x |--> x^2, y |--> y^2, z |--> z^2)
 
             Specifying a scalar, the returned twisted derivation is the
             corresponding multiple of `\theta - id`::
 
-                sage: R.derivation(1, twist=theta)                                          # needs sage.modules
+                sage: R.derivation(1, twist=theta)                                      # needs sage.modules
                 [x |--> x^2, y |--> y^2, z |--> z^2] - id
-                sage: R.derivation(x, twist=theta)                                          # needs sage.modules
+                sage: R.derivation(x, twist=theta)                                      # needs sage.modules
                 x*([x |--> x^2, y |--> y^2, z |--> z^2] - id)
             """
             if isinstance(arg, (list, tuple)):

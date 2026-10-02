@@ -69,15 +69,27 @@ class PackageSystem(Feature):
             sage: fedora.spkg_installation_hint('openblas')  # optional - SAGE_ROOT
             'To install openblas using the fedora package manager, you can try to run:\n!sudo yum install openblas-devel'
         """
+        import shlex
         from subprocess import run, CalledProcessError
         lines = []
         system = self.name
+        from sage.env import SAGE_ROOT
+        if not SAGE_ROOT:
+            try:
+                import sage_root
+            except ImportError:
+                pass
+            else:
+                for root in sage_root.__path__:
+                    SAGE_ROOT = root
+                    break
+        env = f'SAGE_ROOT={shlex.quote(SAGE_ROOT)} ' if SAGE_ROOT else ''
         try:
-            proc = run(f'sage-get-system-packages {system} {spkgs}',
+            proc = run(f'{env}sage-get-system-packages {system} {spkgs}',
                        shell=True, capture_output=True, text=True, check=True)
             system_packages = proc.stdout.strip()
             if system_packages:
-                print_sys = f'sage-print-system-package-command {system} --verbose --sudo --prompt="{prompt}"'
+                print_sys = f'{env}sage-print-system-package-command {system} --verbose --sudo --prompt="{prompt}"'
                 command = f'{print_sys} update && {print_sys} install {system_packages}'
                 proc = run(command, shell=True, capture_output=True, text=True, check=True)
                 command = proc.stdout.strip()

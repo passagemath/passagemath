@@ -826,21 +826,21 @@ class Crystals(Category_singleton):
 
                 sage: C = Crystals().example(3)
                 sage: G = C.digraph()
-                sage: view(G)  # optional - dot2tex graphviz, not tested (opens external window)
+                sage: view(G)                   # not tested (opens external window), optional - graphviz, needs dot2tex
 
             One may also overwrite the colors::
 
                 sage: C = Crystals().example(3)
                 sage: G = C.digraph()
                 sage: G.set_latex_options(color_by_label = {1:"red", 2:"purple", 3:"blue"})
-                sage: view(G)  # optional - dot2tex graphviz, not tested (opens external window)
+                sage: view(G)                   # not tested (opens external window), optional - graphviz, needs dot2tex
 
             Or one may add colors to yet unspecified edges::
 
                 sage: C = Crystals().example(4)
                 sage: G = C.digraph()
                 sage: C.cartan_type()._index_set_coloring[4]="purple"
-                sage: view(G)  # optional - dot2tex graphviz, not tested (opens external window)
+                sage: view(G)                   # not tested (opens external window), optional - graphviz, needs dot2tex
 
             Here is an example of how to take the top part up to a
             given depth of an infinite dimensional crystal::
@@ -867,7 +867,7 @@ class Crystals(Category_singleton):
                 sage: list(D)
                 [[[1, 1], [2]], [[1, 2], [2]], [[1, 1], [3]],
                  [[1, 3], [2]], [[1, 3], [3]]]
-                sage: view(D)  # optional - dot2tex graphviz, not tested (opens external window)
+                sage: view(D)                   # not tested (opens external window), optional - graphviz, needs dot2tex
 
             We can also choose to display particular arrows using the
             ``index_set`` option::
@@ -876,7 +876,7 @@ class Crystals(Category_singleton):
                 sage: G = C.digraph(index_set=[1,3])
                 sage: len(G.edges(sort=False))
                 20
-                sage: view(G)  # optional - dot2tex graphviz, not tested (opens external window)
+                sage: view(G)                   # not tested (opens external window), optional - graphviz, needs dot2tex
 
             TESTS:
 
@@ -964,7 +964,7 @@ class Crystals(Category_singleton):
                 sage: T = crystals.Tableaux(['A',2],shape=[1])
                 sage: T._latex_()
                 '...tikzpicture...'
-                sage: view(T) # optional - dot2tex graphviz, not tested (opens external window)
+                sage: view(T)                   # not tested (opens external window), optional - graphviz, needs dot2tex
 
             One can for example also color the edges using the following options::
 

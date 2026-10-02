@@ -1382,15 +1382,15 @@ class ComplexReflectionGroup(UniqueRepresentation, PermutationGroup_generic):
         EXAMPLES::
 
             sage: W = ReflectionGroup((1,1,3))
-            sage: W.braid_relations()
+            sage: W.braid_relations()                                                   # needs sage.graphs
             [[[1, 2, 1], [2, 1, 2]]]
 
             sage: W = ReflectionGroup((2,1,3))
-            sage: W.braid_relations()
+            sage: W.braid_relations()                                                   # needs sage.graphs
             [[[1, 2, 1, 2], [2, 1, 2, 1]], [[1, 3], [3, 1]], [[2, 3, 2], [3, 2, 3]]]
 
             sage: W = ReflectionGroup((2,2,3))
-            sage: W.braid_relations()
+            sage: W.braid_relations()                                                   # needs sage.graphs
             [[[1, 2, 1], [2, 1, 2]], [[1, 3], [3, 1]], [[2, 3, 2], [3, 2, 3]]]
         """
         if self.is_real():
@@ -1526,7 +1526,7 @@ class ComplexReflectionGroup(UniqueRepresentation, PermutationGroup_generic):
 
         EXAMPLES::
 
-            sage: ReflectionGroup(['A',4]).cartan_matrix()
+            sage: ReflectionGroup(['A',4]).cartan_matrix()                              # needs sage.graphs
             [ 2 -1  0  0]
             [-1  2 -1  0]
             [ 0 -1  2 -1]
@@ -1574,7 +1574,7 @@ class ComplexReflectionGroup(UniqueRepresentation, PermutationGroup_generic):
         EXAMPLES::
 
             sage: W = ReflectionGroup(['A',3])
-            sage: F = W.invariant_form(); F
+            sage: F = W.invariant_form(); F                                             # needs sage.graphs
             [   1 -1/2    0]
             [-1/2    1 -1/2]
             [   0 -1/2    1]
@@ -1586,7 +1586,7 @@ class ComplexReflectionGroup(UniqueRepresentation, PermutationGroup_generic):
             True
 
             sage: W = ReflectionGroup(['B',3])
-            sage: F = W.invariant_form(); F
+            sage: F = W.invariant_form(); F                                             # needs sage.graphs
             [ 1 -1  0]
             [-1  2 -1]
             [ 0 -1  2]
@@ -1599,7 +1599,7 @@ class ComplexReflectionGroup(UniqueRepresentation, PermutationGroup_generic):
             True
 
             sage: W = ReflectionGroup((3,1,2))
-            sage: F = W.invariant_form(); F
+            sage: F = W.invariant_form(); F                                             # needs sage.rings.number_field
             [1 0]
             [0 1]
 
@@ -1613,7 +1613,7 @@ class ComplexReflectionGroup(UniqueRepresentation, PermutationGroup_generic):
             sage: W.is_well_generated()
             False
 
-            sage: F = W.invariant_form(); F
+            sage: F = W.invariant_form(); F                                             # needs sage.rings.number_field
             [1 0]
             [0 1]
             sage: S = W.simple_reflections()
@@ -1624,14 +1624,14 @@ class ComplexReflectionGroup(UniqueRepresentation, PermutationGroup_generic):
 
             sage: W = ReflectionGroup(['B',3],(4,2,3),4,7); W
             Reducible complex reflection group of rank 10 and type B3 x G(4,2,3) x ST4 x ST7
-            sage: F = W.invariant_form(); S = W.simple_reflections()
+            sage: F = W.invariant_form(); S = W.simple_reflections()                    # needs sage.rings.number_field
             sage: all( F == S[i].matrix()*F*S[i].matrix().transpose().conjugate() for i in W.index_set() )
             True
 
         TESTS::
 
             sage: tests = [['A',3],['B',3],['F',4],(4,2,2),4,7]
-            sage: for ty in tests:
+            sage: for ty in tests:                                                      # needs sage.graphs
             ....:     W = ReflectionGroup(ty)
             ....:     A = W.invariant_form()
             ....:     B = W.invariant_form(brute_force=True)
@@ -1704,7 +1704,7 @@ class ComplexReflectionGroup(UniqueRepresentation, PermutationGroup_generic):
         EXAMPLES::
 
             sage: W = ReflectionGroup((3,1,2))
-            sage: W._invariant_form_brute_force()
+            sage: W._invariant_form_brute_force()                                       # needs sage.rings.number_field
             [1 0]
             [0 1]
         """
@@ -1765,15 +1765,15 @@ class ComplexReflectionGroup(UniqueRepresentation, PermutationGroup_generic):
         EXAMPLES::
 
             sage: W = ReflectionGroup((4,2,5))
-            sage: I = W.invariant_form()
-            sage: A = W.invariant_form_standardization()
+            sage: I = W.invariant_form()                                                # needs sage.rings.number_field
+            sage: A = W.invariant_form_standardization()                                # needs sage.rings.number_field
             sage: A^2 == I
             True
 
         TESTS::
 
             sage: W = ReflectionGroup(9)
-            sage: A = W.invariant_form_standardization()
+            sage: A = W.invariant_form_standardization()                                # needs sage.rings.number_field
             sage: S = W.simple_reflections()
             sage: Ainv = A.inverse()
             sage: T = {i: Ainv * S[i] * A for i in W.index_set()}
@@ -1909,7 +1909,7 @@ class ComplexReflectionGroup(UniqueRepresentation, PermutationGroup_generic):
             sage: W = ReflectionGroup(["H",4])
             sage: W.coxeter_number()
             30
-            sage: all(W.coxeter_number(chi).is_integer()
+            sage: all(W.coxeter_number(chi).is_integer()                                # needs sage.rings.number_field
             ....:     for chi in W.irreducible_characters())
             True
             sage: W = ReflectionGroup(14)
@@ -2146,7 +2146,7 @@ class IrreducibleComplexReflectionGroup(ComplexReflectionGroup):
 
                 sage: W = ReflectionGroup((1,1,3))
                 sage: h = W.coxeter_number()
-                sage: for w in W:
+                sage: for w in W:                                                       # needs sage.rings.number_field
                 ....:     print("{} {}".format(w.reduced_word(), w.is_regular(h)))
                 [] False
                 [2] False
@@ -2156,7 +2156,7 @@ class IrreducibleComplexReflectionGroup(ComplexReflectionGroup):
                 [1, 2, 1] False
 
                 sage: W = ReflectionGroup(23); h = W.coxeter_number()
-                sage: for w in W:
+                sage: for w in W:                                                       # needs sage.rings.number_field
                 ....:     if w.is_regular(h):
                 ....:         w.reduced_word()
                 [1, 2, 3]
@@ -2188,10 +2188,10 @@ class IrreducibleComplexReflectionGroup(ComplexReflectionGroup):
 
                 sage: W = ReflectionGroup(["A",5])
                 sage: w = W.from_reduced_word([1,2,3,5])
-                sage: w.is_regular(4)
+                sage: w.is_regular(4)                                                   # needs sage.rings.number_field
                 False
                 sage: W = ReflectionGroup(["A",3])
-                sage: len([w for w in W if w.is_regular(w.order())])
+                sage: len([w for w in W if w.is_regular(w.order())])                    # needs sage.rings.number_field
                 18
             """
             from sage.rings.universal_cyclotomic_field import UniversalCyclotomicField, E

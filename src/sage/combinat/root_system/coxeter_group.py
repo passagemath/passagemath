@@ -118,7 +118,7 @@ def CoxeterGroup(data, implementation='reflection', base_ring=None, index_set=No
 
     TESTS::
 
-        sage: W = groups.misc.CoxeterGroup(["H",3])                                     # needs sage.graphs sage.groups sage.rings.number_field
+        sage: W = groups.misc.CoxeterGroup(["H",3])                                     # needs sage.groups sage.rings.number_field
     """
     if implementation not in ["permutation", "matrix", "coxeter3", "reflection", "chevie", None]:
         raise ValueError("invalid type implementation")

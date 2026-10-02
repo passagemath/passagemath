@@ -279,7 +279,7 @@ class RootSystem(UniqueRepresentation, SageObject):
 
     ::
 
-        sage: for T in CartanType.samples(crystallographic=True):  # long time (13s on sage.math, 2012)
+        sage: for T in CartanType.samples(crystallographic=True):       # long time (13s on sage.math, 2012), needs sage.graphs
         ....:     TestSuite(RootSystem(T)).run()
 
     Some checks for equality::
