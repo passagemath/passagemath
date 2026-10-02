@@ -1,4 +1,4 @@
-attrs jsonschema_specifications referencing rpds_py | pip $(PYTHON)
+attrs jsonschema_specifications referencing rpds_py rfc3987_syntax
 
 ----------
 All lines of this file are ignored except the first.

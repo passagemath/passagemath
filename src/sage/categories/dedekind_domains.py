@@ -51,9 +51,9 @@ class DedekindDomains(Category):
                 sage: ZZ.krull_dimension()
                 1
                 sage: x = polygen(ZZ, 'x')
-                sage: K = NumberField(x^2 + 1, 's')                                         # needs sage.rings.number_field
-                sage: OK = K.ring_of_integers()                                             # needs sage.rings.number_field
-                sage: OK.krull_dimension()                                                  # needs sage.rings.number_field
+                sage: K = NumberField(x^2 + 1, 's')                                     # needs sage.rings.number_field
+                sage: OK = K.ring_of_integers()                                         # needs sage.rings.number_field
+                sage: OK.krull_dimension()                                              # needs sage.rings.number_field
                 1
             """
             from sage.rings.integer_ring import ZZ
@@ -70,16 +70,16 @@ class DedekindDomains(Category):
                 sage: ZZ.is_integrally_closed()
                 True
                 sage: x = polygen(ZZ, 'x')
-                sage: K = NumberField(x^2 + 1, 's')                                         # needs sage.rings.number_field
-                sage: OK = K.ring_of_integers()                                             # needs sage.rings.number_field
-                sage: OK.is_integrally_closed()                                             # needs sage.rings.number_field
+                sage: K = NumberField(x^2 + 1, 's')                                     # needs sage.rings.number_field
+                sage: OK = K.ring_of_integers()                                         # needs sage.rings.number_field
+                sage: OK.is_integrally_closed()                                         # needs sage.rings.number_field
                 True
 
             These, however, are not Dedekind domains::
 
                 sage: QQ.is_integrally_closed()
                 True
-                sage: S = ZZ[sqrt(5)]; S.is_integrally_closed()                             # needs fpylll sage.rings.number_field sage.symbolic
+                sage: S = ZZ[sqrt(5)]; S.is_integrally_closed()                         # needs fpylll sage.rings.number_field sage.symbolic
                 False
                 sage: T.<x,y> = PolynomialRing(QQ, 2); T
                 Multivariate Polynomial Ring in x, y over Rational Field
@@ -121,9 +121,9 @@ class DedekindDomains(Category):
                 sage: ZZ.is_noetherian()
                 True
                 sage: x = polygen(ZZ, 'x')
-                sage: K = NumberField(x^2 + 1, 's')                                         # needs sage.rings.number_field
-                sage: OK = K.ring_of_integers()                                             # needs sage.rings.number_field
-                sage: OK.is_noetherian()                                                    # needs sage.rings.number_field
+                sage: K = NumberField(x^2 + 1, 's')                                     # needs sage.rings.number_field
+                sage: OK = K.ring_of_integers()                                         # needs sage.rings.number_field
+                sage: OK.is_noetherian()                                                # needs sage.rings.number_field
                 True
                 sage: QQ.is_noetherian()
                 True

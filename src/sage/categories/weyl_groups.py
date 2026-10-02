@@ -140,7 +140,7 @@ class WeylGroups(Category_singleton):
                  [3, 1, 2, 1],
                  [3, 2],
                  [3, 2, 1]]
-                sage: W = WeylGroup(['C',4,1])
+                sage: W = WeylGroup(['C',4,1])                                          # needs sage.graphs
                 sage: PF = W.pieri_factors()
                 sage: W.from_reduced_word([3,2,0]) in PF                                # needs sage.graphs
                 True
@@ -549,12 +549,12 @@ class WeylGroups(Category_singleton):
 
                 sage: W = WeylGroup(['B',4])
                 sage: w = W.from_reduced_word([3,2,3,1])
-                sage: w.stanley_symmetric_function()  # long time (6s on sage.math, 2011)
+                sage: w.stanley_symmetric_function()    # long time (6s on sage.math, 2011), needs sage.graphs
                 48*m[1, 1, 1, 1] + 24*m[2, 1, 1] + 12*m[2, 2] + 8*m[3, 1] + 2*m[4]
 
                 sage: A = AffinePermutationGroup(['A',4,1])
                 sage: a = A([-2,0,1,4,12])
-                sage: a.stanley_symmetric_function()
+                sage: a.stanley_symmetric_function()                                    # needs sage.graphs
                 6*m[1, 1, 1, 1, 1, 1, 1, 1] + 5*m[2, 1, 1, 1, 1, 1, 1]
                 + 4*m[2, 2, 1, 1, 1, 1] + 3*m[2, 2, 2, 1, 1] + 2*m[2, 2, 2, 2]
                 + 4*m[3, 1, 1, 1, 1, 1] + 3*m[3, 2, 1, 1, 1] + 2*m[3, 2, 2, 1]
@@ -565,7 +565,7 @@ class WeylGroups(Category_singleton):
 
                 sage: G = SymmetricGroup(4)
                 sage: w = G.from_reduced_word([3,2,3,1])
-                sage: w.stanley_symmetric_function()
+                sage: w.stanley_symmetric_function()                                    # needs sage.graphs
                 3*m[1, 1, 1, 1] + 2*m[2, 1, 1] + m[2, 2] + m[3, 1]
 
             REFERENCES:

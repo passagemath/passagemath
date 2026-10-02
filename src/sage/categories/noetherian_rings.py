@@ -5,7 +5,7 @@ Noetherian rings
 EXAMPLES::
 
     sage: from sage.categories.noetherian_rings import NoetherianRings
-    sage: GF(4, "a") in NoetherianRings()                                       # needs sage.rings.finite_rings
+    sage: GF(4, "a") in NoetherianRings()                                               # needs sage.rings.finite_rings
     True
     sage: QQ in NoetherianRings()
     True
@@ -78,7 +78,7 @@ class NoetherianRings(Category):
                 True
 
                 sage: L.<z> = LazyLaurentSeriesRing(QQ)                                 # needs sage.combinat
-                sage: L.is_noetherian()                                            # needs sage.combinat
+                sage: L.is_noetherian()                                                 # needs sage.combinat
                 True
             """
             return True

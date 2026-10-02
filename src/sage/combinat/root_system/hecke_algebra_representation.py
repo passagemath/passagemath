@@ -870,7 +870,7 @@ class CherednikOperatorsEigenvectors(UniqueRepresentation, SageObject):
             sage: E.cartan_type()
             ['B', 3, 1]
 
-            sage: NonSymmetricMacdonaldPolynomials(["B", 2, 1]).cartan_type()           # needs sage.graphs
+            sage: NonSymmetricMacdonaldPolynomials(["B", 2, 1]).cartan_type()
             ['B', 2, 1]
         """
         return self._T_Y.cartan_type()

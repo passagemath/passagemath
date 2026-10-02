@@ -113,10 +113,10 @@ class LoopCrystals(Category_singleton):
 
                 sage: C = crystals.KirillovReshetikhin(['D',4,1], 2, 1)
                 sage: G = C.digraph()
-                sage: G.latex_options()  # optional - dot2tex graphviz
+                sage: G.latex_options()         # optional - graphviz                   # needs dot2tex
                 LaTeX options for Digraph on 29 vertices:
                 {...'edge_options': <function ... at ...>...}
-                sage: view(G, tightpage=True)  # optional - dot2tex graphviz, not tested (opens external window)
+                sage: view(G, tightpage=True)   # not tested (opens external window), optional - graphviz, needs dot2tex
             """
             from sage.graphs.dot2tex_utils import have_dot2tex
 

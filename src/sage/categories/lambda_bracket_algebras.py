@@ -154,7 +154,7 @@ class LambdaBracketAlgebras(Category_over_base_ring):
                 sage: E = V.0; H = V.1; F = V.2
                 sage: H.bracket(H)
                 {1: 2*B['K']}
-                sage: E.bracket(F)
+                sage: E.bracket(F)                                                      # needs sage.rings.number_field
                 {0: B[alphacheck[1]], 1: B['K']}
             """
             return self._bracket_(rhs)
@@ -188,7 +188,7 @@ class LambdaBracketAlgebras(Category_over_base_ring):
                 sage: E = V.0; H = V.1; F = V.2
                 sage: H._bracket_(H)
                 {1: 2*B['K']}
-                sage: E._bracket_(F)
+                sage: E._bracket_(F)                                                    # needs sage.rings.number_field
                 {0: B[alphacheck[1]], 1: B['K']}
             """
 
@@ -207,9 +207,9 @@ class LambdaBracketAlgebras(Category_over_base_ring):
                 2*T^(2)L
                 sage: V = lie_conformal_algebras.Affine(QQ, 'A1')
                 sage: E = V.0; H = V.1; F = V.2
-                sage: E.nproduct(H, 0) == - 2*E
+                sage: E.nproduct(H, 0) == - 2*E                                         # needs sage.rings.number_field
                 True
-                sage: E.nproduct(F, 1)
+                sage: E.nproduct(F, 1)                                                  # needs sage.rings.number_field
                 B['K']
             """
             return self._nproduct_(rhs,n)
@@ -233,9 +233,9 @@ class LambdaBracketAlgebras(Category_over_base_ring):
                 2*T^(2)L
                 sage: V = lie_conformal_algebras.Affine(QQ, 'A1')
                 sage: E = V.0; H = V.1; F = V.2
-                sage: E._nproduct_(H, 0) == - 2*E
+                sage: E._nproduct_(H, 0) == - 2*E                                       # needs sage.rings.number_field
                 True
-                sage: E._nproduct_(F, 1)
+                sage: E._nproduct_(F, 1)                                                # needs sage.rings.number_field
                 B['K']
             """
             if n >= 0:

@@ -109,7 +109,7 @@ def ReflectionGroup(*args, **kwds):
         sage: ReflectionGroup(CartanType((['A',2],['A',2])))
         Reducible real reflection group of rank 4 and type A2 x A2
 
-        sage: C = CartanMatrix(['A',2])
+        sage: C = CartanMatrix(['A',2])                                                 # needs sage.graphs
         sage: ReflectionGroup(C)
         Irreducible real reflection group of rank 2 and type A2
 
@@ -400,11 +400,11 @@ class RealReflectionGroup(ComplexReflectionGroup):
         EXAMPLES::
 
             sage: W = ReflectionGroup(['A',3])
-            sage: W.cartan_type()
+            sage: W.cartan_type()                                                       # needs sage.graphs
             ['A', 3]
 
             sage: W = ReflectionGroup(['A',3], ['B',3])
-            sage: W.cartan_type()
+            sage: W.cartan_type()                                                       # needs sage.graphs
             A3xB3 relabelled by {1: 3, 2: 2, 3: 1}
 
         TESTS:
@@ -556,16 +556,16 @@ class RealReflectionGroup(ComplexReflectionGroup):
         EXAMPLES::
 
             sage: W = ReflectionGroup(['A',3], ['B',2])
-            sage: W.fundamental_weights()
+            sage: W.fundamental_weights()                                               # needs sage.graphs
             Finite family {1: (3/4, 1/2, 1/4, 0, 0), 2: (1/2, 1, 1/2, 0, 0), 3: (1/4, 1/2, 3/4, 0, 0), 4: (0, 0, 0, 1, 1/2), 5: (0, 0, 0, 1, 1)}
 
             sage: W = ReflectionGroup(['A',3])
-            sage: W.fundamental_weights()
+            sage: W.fundamental_weights()                                               # needs sage.graphs
             Finite family {1: (3/4, 1/2, 1/4), 2: (1/2, 1, 1/2), 3: (1/4, 1/2, 3/4)}
 
             sage: W = ReflectionGroup(['A',3])
             sage: S = W.simple_reflections()
-            sage: N = W.fundamental_weights()
+            sage: N = W.fundamental_weights()                                           # needs sage.graphs
             sage: for i in W.index_set():
             ....:     for j in W.index_set():
             ....:         print("{} {} {} {}".format(i, j, N[i], N[i]*S[j].to_matrix()))
@@ -596,7 +596,7 @@ class RealReflectionGroup(ComplexReflectionGroup):
         EXAMPLES::
 
             sage: W = ReflectionGroup(['A',3])
-            sage: [ W.fundamental_weight(i) for i in W.index_set() ]
+            sage: [ W.fundamental_weight(i) for i in W.index_set() ]                    # needs sage.graphs
             [(3/4, 1/2, 1/4), (1/2, 1, 1/2), (1/4, 1/2, 3/4)]
         """
         return self.fundamental_weights()[i]
@@ -609,7 +609,7 @@ class RealReflectionGroup(ComplexReflectionGroup):
         EXAMPLES::
 
             sage: G = ReflectionGroup(['B',3])
-            sage: G.coxeter_diagram().edges(labels=True, sort=True)
+            sage: G.coxeter_diagram().edges(labels=True, sort=True)                     # needs sage.graphs
             [(1, 2, 4), (2, 3, 3)]
         """
         from sage.graphs.graph import Graph
@@ -632,7 +632,7 @@ class RealReflectionGroup(ComplexReflectionGroup):
         EXAMPLES::
 
             sage: G = ReflectionGroup(['A',3])
-            sage: G.coxeter_matrix()
+            sage: G.coxeter_matrix()                                                    # needs sage.graphs
             [1 3 2]
             [3 1 3]
             [2 3 1]
@@ -736,13 +736,13 @@ class RealReflectionGroup(ComplexReflectionGroup):
             sage: W = ReflectionGroup(['A',2])
             sage: x = W.from_reduced_word([1])
             sage: y = W.w0
-            sage: W.bruhat_cone(x, y)
+            sage: W.bruhat_cone(x, y)                                                   # needs sage.geometry.polyhedron
             A 2-dimensional polyhedron in QQ^2 defined as the convex hull of 1 vertex and 2 rays
 
             sage: W = ReflectionGroup(['E',6])
             sage: x = W.one()
             sage: y = W.w0
-            sage: W.bruhat_cone(x, y, side='lower')
+            sage: W.bruhat_cone(x, y, side='lower')                                     # needs sage.geometry.polyhedron
             A 6-dimensional polyhedron in QQ^6 defined as the convex hull of 1 vertex and 6 rays
 
         TESTS::
