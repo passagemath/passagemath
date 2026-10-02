@@ -90,7 +90,7 @@ SAGE_SPKG_CONFIGURE([pari], [
                 [AC_MSG_RESULT([libpari's version does not match GP's version. Not good])
                          sage_spkg_install_pari=yes],
                  [AC_MSG_RESULT([cross compiling. Assume they match])])
-              AC_MSG_CHECKING([is GP's version good enough? ])
+              AC_MSG_CHECKING([is GP's version in the acceptable range? ])
               AX_COMPARE_VERSION([$gp_version], [ge], [$SAGE_PARI_MINVER], [
                AX_COMPARE_VERSION([$gp_version], [lt], [$SAGE_PARI_MAXVER], [
                   AC_MSG_RESULT([yes])
