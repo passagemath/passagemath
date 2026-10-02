@@ -8,6 +8,6 @@ sdh_make USE_GRAPHICS=0 USE_FFTW=0 USE_REGEX=0 PREFIX="$SAGE_INST_LOCAL"
 sdh_make_install PREFIX="$SAGE_INST_LOCAL"
 
 # https://github.com/stblake/mathilda/tree/main/kernel
-cmake -GNinja -S kernel -B kernel/build -DCMAKE_BUILD_TYPE=Release
+sdh_cmake -GNinja -S kernel -B kernel/build -DCMAKE_BUILD_TYPE=Release
 cmake --build kernel/build -j
 DESTDIR=$SAGE_DESTDIR cmake --install kernel/build  # installs the kernelspec
