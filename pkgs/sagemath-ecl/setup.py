@@ -9,18 +9,7 @@ from sage_setup import sage_setup
 
 sage_setup('sagemath-ecl',
            recurse_packages=('sage', 'passagemath_ecl'),
-           required_modules=('gsl', 'ecl'),
+           required_modules=('ecl'),
            spkgs=['maxima'],
            package_data={
-               "sage.interfaces": [
-                   "sage-maxima.lisp",
-               ],
-               "sage": [
-                   "ext_data/*",
-                   "ext_data/singular/*",
-                   "ext_data/singular/function_field/*",
-                   "ext_data/magma/*",
-                   "ext_data/magma/latex/*",
-                   "ext_data/magma/sage/*",
-               ],
-            })
+           })
