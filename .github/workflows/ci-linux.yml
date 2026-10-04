@@ -122,6 +122,6 @@ jobs:
       logs_artifact_suffix: "-upstream"
       extra_sage_packages: gdbm libxml2 graphviz libuuid
       targets: _sagemath
-      targets_optional: ptest-nodoc
+      targets_optional: ptest-no-deps
       docker_push_repository: ghcr.io/${{ github.repository }}/upstream-
       max_parallel: 8
