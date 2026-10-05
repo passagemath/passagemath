@@ -38,7 +38,8 @@ perl -0pi.bak -e 's/#include <string\.h>/typedef __SIZE_TYPE__ gap3_size_t;\next
 sed -i.bak 's/ LOPTS="$(LOPTS) -static"/ LOPTS="$(LOPTS)"/g' src/src/Makefile
 
 cd src/src
-# https://github.com/passagemath/upstream-gap3-jm/blob/master/sage/Makefile#L34 hardcodes CC
+# Patch out https://github.com/passagemath/upstream-gap3-jm/blob/master/sage/Makefile#L34 hardcoding CC=gcc
+sed -i.bak 's/CC=gcc//g' Makefile
 sdh_make COPTS="-std=gnu17"
 
 cd ..
