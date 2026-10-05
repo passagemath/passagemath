@@ -14,7 +14,7 @@ diff -ru e-antic-2.1.1.orig/libeantic/e-antic/fmpz_poly_extra.h e-antic-2.1.1/li
  /// Return an upper bound on the bitsize of largest real root of `pol`.
  LIBEANTIC_API slong fmpz_poly_positive_root_upper_bound_2exp(const fmpz_poly_t pol);
  
-@@ -57,14 +53,16 @@
+@@ -57,38 +53,42 @@
  
  LIBEANTIC_API slong _fmpz_poly_positive_root_upper_bound_2exp_local_max(const fmpz * pol, slong len);
  
@@ -32,7 +32,7 @@ diff -ru e-antic-2.1.1.orig/libeantic/e-antic/fmpz_poly_extra.h e-antic-2.1.1/li
  
  LIBEANTIC_API slong _fmpz_poly_descartes_bound(fmpz * p, slong len, slong bound);
 
- #if __FLINT_RELEASE < 30600
++#if __FLINT_RELEASE < 30600
  /// Isolate the real roots of `(pol, len)` contained in the
  /// interval \f$(0, 1)\f$. The array `exact_roots` will be set by
  /// the exact dyadic roots found by the algorithm and
@@ -53,7 +53,7 @@ diff -ru e-antic-2.1.1.orig/libeantic/e-antic/fmpz_poly_extra.h e-antic-2.1.1/li
  /// `c = c_array + i` and `k = k_array[i]` represents the
  /// open interval \f$(c 2^k, (c + 1) 2^k)\f$.
  LIBEANTIC_API void fmpz_poly_isolate_real_roots(fmpq * exact_roots, slong * n_exact, fmpz * c_array, slong * k_array, slong * n_interval, fmpz_poly_t pol);
- #endif
++#endif
  ///@}
  
  //// \name Root refinement
