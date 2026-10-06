@@ -14,7 +14,7 @@ Feature for testing the presence of ``kenzo``
 # (at your option) any later version.
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
-
+import os
 
 from . import Feature, FeatureTestResult, PythonModule
 from .join_feature import JoinFeature
@@ -65,7 +65,7 @@ class Kenzo(Feature):
 
         try:
             from sage.env import KENZO_FAS
-            if KENZO_FAS:
+            if KENZO_FAS and os.path.exists(KENZO_FAS):
                 ecl_eval("(require :kenzo \"{}\")".format(KENZO_FAS))
             else:
                 ecl_eval("(require :kenzo)")

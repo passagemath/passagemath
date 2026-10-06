@@ -15,6 +15,7 @@ if "TMPDIR" in os.environ:
 
 wheel = Path(sys.argv[1])
 
+# maxima.fas is already shipped by passagemath-ecl
 with InWheel(wheel, wheel):
     # SAGE_LOCAL/bin/maxima --> sage_wheels/bin/maxima
     command = f'set -o pipefail; (cd {shlex.quote(SAGE_LOCAL)} && tar cf - --dereference bin/maxima share/maxima share/info/*maxima*) | (mkdir -p sage_wheels && cd sage_wheels && tar xvf -)'
