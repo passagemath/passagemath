@@ -10,15 +10,10 @@ from sage_setup import sage_setup
 sage_setup('sagemath-symbolics',
            recurse_packages=('sage', 'passagemath_symbolics'),
            required_modules=('flint', 'gsl', 'factory'),
-           spkgs=['maxima'],
+           spkgs=['flint', 'gsl', 'singular'],
            package_data={
-               "sage.interfaces": [
-                   "sage-maxima.lisp",
-               ],
                "sage": [
                    "ext_data/*",
-                   "ext_data/singular/*",
-                   "ext_data/singular/function_field/*",
                    "ext_data/magma/*",
                    "ext_data/magma/latex/*",
                    "ext_data/magma/sage/*",
