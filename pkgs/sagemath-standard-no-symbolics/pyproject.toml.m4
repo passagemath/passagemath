@@ -50,6 +50,7 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_glpk
     SPKG_INSTALL_REQUIRES_sagemath_graphs
     SPKG_INSTALL_REQUIRES_sagemath_groups
+    SPKG_INSTALL_REQUIRES_sagemath_highs
     SPKG_INSTALL_REQUIRES_sagemath_homfly
     SPKG_INSTALL_REQUIRES_sagemath_lcalc
     SPKG_INSTALL_REQUIRES_sagemath_libbraiding

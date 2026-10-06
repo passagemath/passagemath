@@ -90,7 +90,7 @@ plot        = [SPKG_INSTALL_REQUIRES_sagemath_plot]
 
 # the whole package
 standard    = [
-    "passagemath-polyhedra[flint,fpylll,linbox,glpk,graphs,groups,pari,RDF]",
+    "passagemath-polyhedra[flint,fpylll,linbox,glpk,graphs,groups,highs,pari,RDF]",
     "passagemath-plot[tachyon]",
 ]
 
