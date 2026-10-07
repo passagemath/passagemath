@@ -23,10 +23,12 @@ AUTHORS:
 # ****************************************************************************
 
 from sage.combinat.partition import Partitions
-from sage.libs.lrcalc import lrcalc
 from sage.misc.cachefunc import cached_method
+from sage.misc.lazy_import import lazy_import
 
 from . import sfa
+
+lazy_import('sage.libs.lrcalc', 'lrcalc')
 
 
 class SymmetricFunctionAlgebra_orthogonal(sfa.SymmetricFunctionAlgebra_generic):
