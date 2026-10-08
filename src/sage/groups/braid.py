@@ -74,6 +74,7 @@ from sage.categories.action import Action
 from sage.categories.groups import Groups
 from sage.combinat.permutation import Permutation, Permutations
 from sage.combinat.subset import Subsets
+from sage.features import FeatureNotPresentError
 from sage.features.sagemath import sage__libs__braiding
 from sage.functions.generalized import sign
 from sage.groups.artin import FiniteTypeArtinGroup, FiniteTypeArtinGroupElement
@@ -1558,10 +1559,13 @@ class Braid(FiniteTypeArtinGroupElement):
             (s0*s1*s0,)
         """
         if algorithm == 'libbraiding':
-            lnf = leftnormalform(self)
-            B = self.parent()
-            return tuple([B.delta()**lnf[0][0]] + [B(b) for b in lnf[1:]])
-        elif algorithm == 'artin':
+            try:
+                lnf = leftnormalform(self)
+                B = self.parent()
+                return tuple([B.delta()**lnf[0][0]] + [B(b) for b in lnf[1:]])
+            except (FeatureNotPresentError, ImportError):
+                return FiniteTypeArtinGroupElement.left_normal_form.f(self)
+        if algorithm == 'artin':
             return FiniteTypeArtinGroupElement.left_normal_form.f(self)
         raise ValueError("invalid algorithm")
 
