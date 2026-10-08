@@ -94,23 +94,53 @@ class DiscreteRandomVariable(RandomVariable_generic):
     """
     def __init__(self, X, f, codomain=None, check=False):
         r"""
-        Create free binary string monoid on `n` generators.
+        Create a discrete random variable on the discrete probability
+        space ``X`` with values given by the dictionary ``f``.
 
         INPUT:
 
-        - ``X`` -- a probability space
-        - ``f`` -- dictionary such that X[x] = value for x in X
-          is the discrete function on X
+        - ``X`` -- a discrete probability space
+        - ``f`` -- dictionary such that ``X[x] = value`` for ``x`` in ``X``
+          is the discrete function on ``X``
+        - ``codomain`` -- (default: the real field) the codomain of the
+          random variable
+        - ``check`` -- boolean (default: ``False``); if ``True`` and
+          ``self is X`` (that is, we are initializing a
+          :class:`DiscreteProbabilitySpace` through its inherited
+          :class:`DiscreteRandomVariable` interface), verify that the
+          values of ``f`` sum to one.
+
+        EXAMPLES::
+
+            sage: X = DiscreteProbabilitySpace([1, 2], {1: 1/2, 2: 1/2})
+            sage: F = DiscreteRandomVariable(X, {1: 1, 2: 2})
+            sage: F.function()
+            {1: 1, 2: 2}
+
+        The ``check`` flag has no effect for a normal random variable,
+        since its values need not sum to one::
+
+            sage: F = DiscreteRandomVariable(X, {1: 1, 2: 2}, check=True)
+            sage: F.function()
+            {1: 1, 2: 2}
         """
         if not isinstance(X, DiscreteProbabilitySpace):
             raise TypeError("Argument X (= %s) must be a discrete probability space" % X)
-        if check:
-            raise NotImplementedError("Not implemented")
         if codomain is None:
             from sage.rings.real_mpfr import RealField
             RR = RealField()
         else:
             RR = codomain
+        if check and self is X:
+            # Called from DiscreteProbabilitySpace.__init__: ``f`` is
+            # the probability function and must sum to one.
+            one = sum(f.values())
+            if isinstance(RR, RationalField):
+                if not one == 1:
+                    raise TypeError("argument P (= %s) does not define a probability function" % f)
+            else:
+                if not abs(one - 1) < 2 ** (-RR.precision() + 1):
+                    raise TypeError("argument P (= %s) does not define a probability function" % f)
         RandomVariable_generic.__init__(self, X, RR)
         self._function = f
 
@@ -398,19 +428,8 @@ class DiscreteProbabilitySpace(ProbabilitySpace_generic,DiscreteRandomVariable):
             codomain = RealField()
         if not isinstance(codomain, sage.rings.abc.RealField) and not isinstance(codomain, RationalField):
             raise TypeError("Argument codomain (= %s) must be the reals or rationals" % codomain)
-        if check:
-            one = sum(P.values())
-            if isinstance(codomain, RationalField):
-                if not one == 1:
-                    raise TypeError("argument P (= %s) does not define a probability function" % P)
-            else:
-                if not abs(one - 1) < 2 ** (-codomain.precision() + 1):
-                    raise TypeError("argument P (= %s) does not define a probability function" % P)
         ProbabilitySpace_generic.__init__(self, X, codomain)
-        # The probability function has already been checked above, so
-        # pass check=False to avoid DiscreteRandomVariable's
-        # unimplemented check.
-        DiscreteRandomVariable.__init__(self, self, P, codomain, False)
+        DiscreteRandomVariable.__init__(self, self, P, codomain, check)
 
     def __repr__(self):
         """
