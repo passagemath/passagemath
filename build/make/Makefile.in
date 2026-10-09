@@ -225,6 +225,7 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_kenzo				\
 	sagemath_maxima				\
 	sagemath_symbolics			\
+	sagemath_mathilda			\
 	sagemath_msolve				\
 	sagemath_latte_4ti2			\
 	sagemath_cddlib				\
