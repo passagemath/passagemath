@@ -13,6 +13,10 @@ if [ -n "$SAGE_MPFR_PREFIX" ]; then
     BUILD_OPTIONS="$BUILD_OPTIONS -DMPFR_DIR=$SAGE_MPFR_PREFIX"
 fi
 
+# Patch out all homebrew library discovery
+sed -i.bak -E 's,-(I|L)(/usr/local/|/usr|/opt/homebrew)[^ ]*,,g' makefile
+sed -i.bak -E '/=.*READLINE_PREFIX/d' makefile
+
 sdh_make USE_GRAPHICS=0 USE_FFTW=0 USE_REGEX=0 PREFIX="$SAGE_INST_LOCAL"
 sdh_make_install PREFIX="$SAGE_INST_LOCAL"
 
