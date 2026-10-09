@@ -17,7 +17,7 @@ wheel = Path(sys.argv[1])
 
 # SAGE_LOCAL/bin/mathilda --> sage_wheels/bin/mathilda
 with InWheel(wheel, wheel):
-    command = f'set -o pipefail; (cd {shlex.quote(SAGE_LOCAL)} && tar cf - --dereference bin/mathilda bin/xmathilda) | (mkdir -p sage_wheels && cd sage_wheels && tar xvf -)'
+    command = f'set -o pipefail; (cd {shlex.quote(SAGE_LOCAL)} && tar cf - --dereference bin/Mathilda bin/xmathilda share/mathilda) | (mkdir -p sage_wheels && cd sage_wheels && tar xvf -)'
     print(f'Running {command}')
     sys.stdout.flush()
     if os.system(f"bash -c {shlex.quote(command)}") != 0:
