@@ -1,1 +1,4 @@
-cd src && sdh_pip_install .
+cd src
+# Unrestrict setuptools
+sed -E -i.bak 's/('"'"'setuptools)[^._a-z"'"'"']*/\1/' pyproject.toml
+sdh_pip_install .

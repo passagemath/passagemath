@@ -14,7 +14,12 @@ if [ -n "$MSYSTEM" ]; then
     cmake --build .
     DESTDIR=$SAGE_DESTDIR cmake --install .
 else
-    sdh_configure
+    # Use out of tree build as a workaround for
+    # https://github.com/passagemath/passagemath/issues/2857
+    mkdir build
+    cd build
+    cp ../configure .
+    sdh_configure --srcdir=..
     sdh_make
     sdh_make_install
 fi

@@ -1,0 +1,364 @@
+From eabe3e2d8fae67829999947ed690e4de47384a29 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Fri, 25 Sep 2026 06:43:25 +0000
+Subject: [PATCH 1/2] Load share package binaries prebuilt beside the Lisp
+ image
+
+Share packages built with MK:DEFSYSTEM (draw, lapack, linearalgebra,
+...) compile their Lisp files into each user's maxima_objdir when first
+loaded.  That makes a first test suite run slower than later ones, lets
+parallel runs race on the same files, and needs a C compiler with ECL
+or GCL.  Binaries put anywhere else were never found.
+
+lisp-utils/defsystem.lisp: a :BINARY-PATHNAME form may return a second
+value, a read-only directory of prebuilt binaries laid out like the
+binary root.  OPERATE-ON-SYSTEM takes all binaries of a system from
+there (PREBUILT-BINARY-ROOT) when every file of the system has a binary
+there that is not older than its source; otherwise the system compiles
+into its own binary root as before.  COMPONENT-FULL-PATHNAME maps the
+root.  LOAD-FILE-OPERATION recompiles a prebuilt binary that fails to
+load into the binary root instead of deleting it.
+
+src/init-cl.lisp: MAXIMA-OBJDIR returns the same subdirectory of
+*MAXIMA-PREBUILT-OBJDIR*, the image directory, as its second value, so
+no .system file or share loader changes.  maxima -d prints it.
+
+"make share-binaries" compiles the packages into
+src/binary-<lisp>/share and checks that loading them then compiles
+nothing.  "make install" installs them after share/, so that none is
+older than its installed source, and refuses them if a share source
+changed since.
+
+share/lapack/load-lapack.lisp: no heap warning when a prebuilt dgesvd
+binary exists.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_013Nbcx71VaDbQhYD8Wy7rNY
+---
+ ChangeLog                 |  9 ++++
+ Makefile.am               | 32 ++++++++++++++
+ lisp-utils/defsystem.lisp | 92 ++++++++++++++++++++++++++++++++++++---
+ src/Makefile.am           | 43 ++++++++++++++++++
+ src/globals.lisp          |  1 +
+ src/init-cl.lisp          | 16 +++++--
+ 6 files changed, 183 insertions(+), 10 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 7fcfd0953..cdf6ab0b0 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,12 @@
+ Maxima 5.50-post change log
+ ===========================
+ 
++Other changes:
++--------------
++* Share packages that compile their Lisp files on first load (draw,
++  lapack, linearalgebra, ...) can be compiled when Maxima is built:
++  "make share-binaries" compiles them beside the Lisp image, and
++  "make install" installs them there.  Maxima loads such a package
++  from there, without compiling or writing anything, unless one of its
++  sources is newer; then it compiles the package into maxima_objdir as
++  before
+diff --git a/Makefile.am b/Makefile.am
+index 0111c6855..289f61b8a 100755
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -162,4 +162,36 @@ clean-local:
+ 	rm -rf bin
+ 	rm -rf binary
+ 
++.PHONY: share-binaries
++share-binaries:
++	cd src && $(MAKE) $(AM_MAKEFLAGS) share-binaries
++
++## Install the share package binaries from "make share-binaries" beside
++## each image.  This directory is installed after share/, so that no
++## binary is older than the installed source it was compiled from.
++## Installing resets modification times, so refuse binaries that are
++## older than a share source: Maxima would take them to be current.
++install-data-hook:
++	@for l in $(lisps_enabled); do \
++	  test -d src/binary-$$l/share || continue; \
++	  if test ! -f src/binary-$$l/share.stamp || \
++	     test -n "`find $(top_srcdir)/share -newer src/binary-$$l/share.stamp \
++	              \( -name '*.lisp' -o -name '*.system' -o -name '*.cmn' \) \
++	              2>/dev/null`"; then \
++	    echo "Share sources changed after make share-binaries for $$l."; \
++	    echo "Run make share-binaries again before installing."; \
++	    exit 1; \
++	  fi; \
++	  echo "Installing share package binaries for $$l"; \
++	  for f in `cd src/binary-$$l && find share -type f`; do \
++	    d="$(DESTDIR)$(verpkglibdir)/binary-$$l/`dirname $$f`"; \
++	    $(MKDIR_P) "$$d" && $(INSTALL_DATA) "src/binary-$$l/$$f" "$$d" || exit 1; \
++	  done; \
++	done
++
++uninstall-hook:
++	for l in $(lisps_enabled); do \
++	  rm -rf "$(DESTDIR)$(verpkglibdir)/binary-$$l/share"; \
++	done
++
+ check-local: all
+diff --git a/lisp-utils/defsystem.lisp b/lisp-utils/defsystem.lisp
+index 9bde83f80..51645db5b 100644
+--- a/lisp-utils/defsystem.lisp
++++ b/lisp-utils/defsystem.lisp
+@@ -2303,6 +2303,10 @@ D
+ 					; if NIL, inherit
+   (binary-pathname *binary-pathname-default*)
+   binary-root-dir
++  prebuilt-binary-root-dir		; A read-only directory of
++					; binaries laid out like
++					; BINARY-ROOT-DIR, or NIL.
++					; See *PREBUILT-BINARY-ROOT*.
+   binary-extension			; A string, e.g., "fasl". If
+ 					; NIL, uses default for
+ 					; machine-type.
+@@ -2743,6 +2747,27 @@ the system definition, if provided."
+   (clrhash *source-pathnames-table*)
+   (clrhash *binary-pathnames-table*))
+ 
++;;; A system may name a second, read-only directory of binaries laid
++;;; out like its binary root: the second value of its :BINARY-PATHNAME
++;;; form, e.g. binaries compiled and installed along with the program
++;;; that loads the system.  OPERATE-ON-SYSTEM takes all binaries of the
++;;; system from there when every file of the system has a binary there
++;;; that is not older than its source.  Otherwise, e.g. after a source
++;;; was edited, the system uses its own binary root as usual, compiling
++;;; there whatever is missing or out of date.  A system never mixes
++;;; binaries from the two places, and never writes to the prebuilt one.
++(defvar *prebuilt-binary-root* nil
++  "A cons (ROOT . PREBUILT) while OPERATE-ON-SYSTEM loads a system
++   from its prebuilt binaries: binary pathnames under the system's
++   binary root ROOT are then taken from PREBUILT.  Otherwise NIL.")
++
++(defun component-prebuilt-root (component)
++  "The directory to use in place of COMPONENT's binary root, or NIL."
++  (and *prebuilt-binary-root*
++       (equal (component-root-dir component :binary)
++              (car *prebuilt-binary-root*))
++       (cdr *prebuilt-binary-root*)))
++
+ (defun component-full-pathname (component type &optional (version *version*))
+   (when component
+     (case type
+@@ -2753,10 +2778,12 @@ the system definition, if provided."
+ 	       (setf (gethash component *source-pathnames-table*) new)
+ 	       new))))
+       (:binary
+-        (let ((old (gethash component *binary-pathnames-table*)))
++        (let ((old (and (not (component-prebuilt-root component))
++			(gethash component *binary-pathnames-table*))))
+ 	 (or old
+ 	     (let ((new (component-full-pathname-i component type version)))
+-	       (setf (gethash component *binary-pathnames-table*) new)
++	       (unless (component-prebuilt-root component)
++		 (setf (gethash component *binary-pathnames-table*) new))
+ 	       new))))
+       (otherwise
+        (component-full-pathname-i component type version)))))
+@@ -2777,7 +2804,9 @@ the system definition, if provided."
+ 	 (append-directories
+ 	  (if version-replace
+ 	      version-dir
+-	      (append-directories (component-root-dir component type)
++	      (append-directories (or (and (eq type :binary)
++					   (component-prebuilt-root component))
++				      (component-root-dir component type))
+ 				  version-dir))
+ 	  (component-pathname component type))))
+ 
+@@ -3043,11 +3072,14 @@ the system definition, if provided."
+   (setf (component-root-dir component :binary)
+ 	(eval (component-root-dir component :binary)))
+ 
+-  ;; Evaluate the pathname arg
++  ;; Evaluate the pathname arg.  A :BINARY-PATHNAME form may return a
++  ;; second value, a directory of prebuilt binaries.
+   (setf (component-pathname component :source)
+ 	(eval (component-pathname component :source)))
+-  (setf (component-pathname component :binary)
+-	(eval (component-pathname component :binary)))
++  (multiple-value-bind (binary prebuilt)
++      (eval (component-pathname component :binary))
++    (setf (component-pathname component :binary) binary)
++    (setf (component-prebuilt-binary-root-dir component) prebuilt))
+ 
+   ;; Pass along the host and devices
+   (setf (component-host component)
+@@ -3636,9 +3668,41 @@ the system definition, if provided."
+ 		     #-openmcl (optimize (inhibit-warnings 3)))
+ 	    (unless (component-operation operation)
+ 	      (error "Operation ~A undefined." operation))
+-	    (operate-on-component system operation force))))
++	    (let ((*prebuilt-binary-root*
++		   (prebuilt-binary-root system operation force)))
++	      (operate-on-component system operation force)))))
+     (when dribble (dribble))))
+ 
++(defun prebuilt-binary-root (system operation force)
++  "Returns (ROOT . PREBUILT) if OPERATION on SYSTEM should use the
++   system's prebuilt binaries, else NIL.  That needs a prebuilt
++   directory, an operation that only loads or compiles what is out of
++   date, and a binary there for every file of SYSTEM that is not
++   older than its source."
++  (let ((root (component-root-dir system :binary))
++        (prebuilt (component-prebuilt-binary-root-dir system)))
++    (when (and root prebuilt
++               (not (equal root prebuilt))
++               (or (find operation '(load :load))
++                   (and (find operation '(compile :compile))
++                        (find force '(:new-source :new-source-and-dependents)))))
++      (let ((*prebuilt-binary-root* (cons root prebuilt)))
++        (when (prebuilt-binaries-current-p system)
++          (tell-user-generic
++           (format nil "Using prebuilt binaries in ~A" prebuilt))
++          *prebuilt-binary-root*)))))
++
++(defun prebuilt-binaries-current-p (component)
++  "True if no file of COMPONENT needs compiling, with binary pathnames
++   taken as *PREBUILT-BINARY-ROOT* says."
++  (case (component-type component)
++    ((:file :private-file)
++     (or (component-load-only component)
++         (not (needs-compilation component nil))))
++    (t
++     (every #'prebuilt-binaries-current-p
++            (component-components component)))))
++
+ 
+ (defun compile-system (name &key force
+ 			    (version *version*)
+@@ -4838,6 +4902,20 @@ or does not contain valid compiled code."
+                      (setf (component-load-time component)
+                            (file-write-date binary-pname)))
+                    (error (condition)
++                     (when (component-prebuilt-root component)
++                       ;; Leave a prebuilt binary alone and compile into
++                       ;; the system's own binary root instead.
++                       (format *error-output*
++                               "MK:DEFSYSTEM: Error loading ~A: ~A~%; Recompiling...~%"
++                               binary-pname condition)
++                       (let ((*prebuilt-binary-root* nil))
++                         (compile-file-operation component t)
++                         (setq binary-pname
++                               (component-full-pathname component :binary))
++                         (funcall (load-function component) binary-pname)
++                         (setf (component-load-time component)
++                               (file-write-date binary-pname))
++                         (return-from load-file-operation t)))
+                      (format *error-output*
+                              "MK:DEFSYSTEM: Error loading ~A: ~A~%; Deleting binary and recompiling...~%"
+                              binary-pname condition)
+diff --git a/src/Makefile.am b/src/Makefile.am
+index a03076cb0..fd0433bfd 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -78,6 +78,49 @@ lisps_enabled = @lisps_enabled@
+ bd:
+ 	for l in $(lisps_enabled); do for d in $(binary_subdirs); do $(MKDIR_P) binary-$$l$$d; done; done
+ 
++## Share packages that compile their Lisp files with MK:DEFSYSTEM when
++## first loaded.  "make share-binaries" compiles each of them, in a
++## fresh Maxima, into binary-<lispname>/share/, which "make install"
++## installs beside the image.  Maxima loads a package from there unless
++## one of its sources is newer, and else compiles it into maxima_objdir
++## as before (see MAXIMA-OBJDIR in init-cl.lisp).  Keep lapack before
++## hompack and fmin_cobyla before bf_fmin_cobyla: they share binaries.
++## The last loop checks that loading each package now compiles nothing;
++## share.stamp then records when the binaries were complete.
++SHARE_BINARY_PACKAGES = draw graphs numericalio nelder_mead linearalgebra \
++  lapack minpack hompack colnew fmin_cobyla bf_fmin_cobyla fftpack5 \
++  dlsode fft decfp gentran affine
++
++.PHONY: share-binaries
++share-binaries: $(BUILT_FILES)
++	@for l in $(lisps_enabled); do \
++	  dir=$(abs_builddir)/binary-$$l; \
++	  rm -rf $$dir/share $$dir/share-check $$dir/share.stamp; \
++	  case $$l in \
++	    sbcl) opts="--dynamic-space-size 2048";; \
++	    *) opts="";; \
++	  esac; \
++	  for p in $(SHARE_BINARY_PACKAGES); do \
++	    echo "Compiling share package $$p for $$l"; \
++	    MAXIMA_LISP_OPTIONS="$$opts" $(top_builddir)/maxima-local -l $$l \
++	      --no-init -q --quit-on-error \
++	      --batch-string="maxima_objdir: \"$$dir\"\$$ load($$p)\$$" \
++	      > $$dir/share-$$p.log 2>&1 || exit 1; \
++	    if grep 'Maxima encountered a Lisp error' $$dir/share-$$p.log; then \
++	      exit 1; \
++	    fi; \
++	  done; \
++	  for p in $(SHARE_BINARY_PACKAGES); do \
++	    $(top_builddir)/maxima-local -l $$l --no-init -q --quit-on-error \
++	      --batch-string="maxima_objdir: \"$$dir/share-check\"\$$ load($$p)\$$" \
++	      > /dev/null 2>&1 || exit 1; \
++	    if test -n "`find $$dir/share-check -type f 2>/dev/null`"; then \
++	      echo "Loading $$p with $$l compiled it again"; exit 1; \
++	    fi; \
++	  done; \
++	  touch $$dir/share.stamp; \
++	done
++
+ ## Some hunks of lisp that get used by more than one implementation
+ ##
+ ## *MAXIMA-BINARY-DIRECTORY* tells maxima.system (for the lisps that
+diff --git a/src/globals.lisp b/src/globals.lisp
+index a85841443..0d3554d3b 100644
+--- a/src/globals.lisp
++++ b/src/globals.lisp
+@@ -1601,6 +1601,7 @@
+ (defvar *maxima-layout-autotools*)
+ (defvar *maxima-demodir*)
+ (defvar *maxima-objdir*)		;; Where to store object (fasl) files.
++(defvar *maxima-prebuilt-objdir* nil)	;; Read-only fasl files built with Maxima.
+ 
+ (defvar *maxima-prefix*)
+ (defvar *maxima-infodir*)
+diff --git a/src/init-cl.lisp b/src/init-cl.lisp
+index fcc2bbe56..8a59635cb 100644
+--- a/src/init-cl.lisp
++++ b/src/init-cl.lisp
+@@ -57,7 +57,8 @@ maxima [options] --batch-string='batch_answers_from_file:false; ...'
+                  *maxima-userdir*
+                  *maxima-tempdir*
+                  *maxima-lang-subdir*
+-                 *maxima-objdir*))
++                 *maxima-objdir*
++                 *maxima-prebuilt-objdir*))
+     ;; Neatly print out the name of the variable (sans *) and the
+     ;; corresponding value.
+     (format t "~a:~25t~a~%"
+@@ -299,6 +300,10 @@ maxima [options] --batch-string='batch_answers_from_file:false; ...'
+     ;;       the function MAXIMA-OBJDIR-BASE may have to be adapted,
+     ;;       because its job is to strip these subdirectories.
+ 
++    ;; Share packages compiled when Maxima was built sit beside the
++    ;; image, laid out like *MAXIMA-OBJDIR* (see MAXIMA-OBJDIR).
++    (setq *maxima-prebuilt-objdir* *maxima-imagesdir*)
++
+     (when maxima-htmldir-env
+       (setq *maxima-htmldir* (combine-path (maxima-parse-dirstring maxima-htmldir-env) "doc" "info")))
+ 
+@@ -957,8 +962,13 @@ maxima [options] --batch-string='batch_answers_from_file:false; ...'
+ (setf *builtin-$rules* (copy-list $rules))
+ 
+ (defun maxima-objdir (&rest subdirs)
+-  "Return a pathname string such that subdirs is a subdirectory of maxima_objdir"
+-  (apply #'combine-path *maxima-objdir* subdirs))
++  "Return a pathname string such that subdirs is a subdirectory of maxima_objdir.
++  The second value names the same subdirectory of *MAXIMA-PREBUILT-OBJDIR*,
++  or is NIL.  MK:DEFSYSTEM takes it from a :BINARY-PATHNAME form as a
++  read-only directory of prebuilt binaries for the system."
++  (values (apply #'combine-path *maxima-objdir* subdirs)
++          (and *maxima-prebuilt-objdir*
++               (apply #'combine-path *maxima-prebuilt-objdir* subdirs))))
+ 
+ (defun maxima-objdir-base ()
+   "Return the Maxima object directory stripped of the subdirectories
+-- 
+2.55.0
+

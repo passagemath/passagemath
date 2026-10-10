@@ -903,7 +903,7 @@ def desolve_system(des, vars, ics=None, ivar=None, algorithm='maxima'):
         sage: de2 = diff(x2,t) == -2
         sage: desolve_system([de1, de2], [x1, x2], ivar=t)                              # needs sage.libs.maxima
         [x1(t) == epsilon*t + x1(0), x2(t) == -2*t + x2(0)]
-        sage: desolve_system([de1, de2], [x1, x2], ics=[1,1], ivar=t)                   # needs sage.libs.maxima
+        sage: desolve_system([de1, de2], [x1, x2], ics=[1,1], ivar=t)
         Traceback (most recent call last):
         ...
         ValueError: Initial conditions aren't complete: number of vars is different
@@ -1764,6 +1764,7 @@ def desolve_mintides(f, ics, initial, final, delta, tolrel=1e-16, tolabs=1e-16):
     import subprocess
     if subprocess.call('command -v gcc', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE):
         raise RuntimeError('Unable to run because gcc cannot be found')
+    from sage.calculus.tides import _tides_compile_flags
     from sage.interfaces.tides import genfiles_mintides
     from sage.misc.temporary_file import tmp_dir
     tempdir = tmp_dir()
@@ -1774,10 +1775,11 @@ def desolve_mintides(f, ics, initial, final, delta, tolrel=1e-16, tolabs=1e-16):
     genfiles_mintides(intfile, drfile, f, [N(_) for _ in ics],
                       N(initial), N(final), N(delta), N(tolrel),
                       N(tolabs), fileoutput)
+    tides_library, tides_libdir, tides_include = _tides_compile_flags()
     subprocess.check_call('gcc -o ' + runmefile + ' ' + os.path.join(tempdir, '*.c ') +
-                          os.path.join('$SAGE_LOCAL', 'lib', 'libTIDES.a') + ' $LDFLAGS '
-                          + os.path.join('-L$SAGE_LOCAL', 'lib ') + ' -lm  -O2 ' +
-                          os.path.join('-I$SAGE_LOCAL', 'include '),
+                          tides_library + ' $LDFLAGS '
+                          + tides_libdir + ' -lm  -O2 ' +
+                          tides_include,
                           shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     subprocess.check_call(os.path.join(tempdir, 'runme'), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     with open(fileoutput) as outfile:
@@ -1858,6 +1860,7 @@ def desolve_tides_mpfr(f, ics, initial, final, delta, tolrel=1e-16, tolabs=1e-16
     import subprocess
     if subprocess.call('command -v gcc', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE):
         raise RuntimeError('Unable to run because gcc cannot be found')
+    from sage.calculus.tides import _tides_compile_flags
     from sage.functions.log import log
     from sage.functions.other import ceil
     from sage.interfaces.tides import genfiles_mpfr
@@ -1869,10 +1872,11 @@ def desolve_tides_mpfr(f, ics, initial, final, delta, tolrel=1e-16, tolabs=1e-16
     runmefile = os.path.join(tempdir, 'runme')
     genfiles_mpfr(intfile, drfile, f, ics, initial, final, delta, [], [],
                   digits, tolrel, tolabs, fileoutput)
+    tides_library, tides_libdir, tides_include = _tides_compile_flags()
     subprocess.check_call('gcc -o ' + runmefile + ' ' + os.path.join(tempdir, '*.c ') +
-                          os.path.join('$SAGE_LOCAL', 'lib', 'libTIDES.a') + ' $LDFLAGS '
-                          + os.path.join('-L$SAGE_LOCAL', 'lib ') + '-lmpfr -lgmp -lm  -O2 -w ' +
-                          os.path.join('-I$SAGE_LOCAL', 'include '),
+                          tides_library + ' $LDFLAGS '
+                          + tides_libdir + '-lmpfr -lgmp -lm  -O2 -w ' +
+                          tides_include,
                           shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     subprocess.check_call(os.path.join(tempdir, 'runme'), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     with open(fileoutput) as outfile:

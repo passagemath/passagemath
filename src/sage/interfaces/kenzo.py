@@ -26,6 +26,8 @@ but wrappers around ECL objects.
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
+import os
+
 from sage.structure.sage_object import SageObject
 from sage.homology.homology_group import HomologyGroup
 from sage.rings.integer_ring import ZZ
@@ -107,7 +109,7 @@ kenzo_names = ['add',
 # are replaced with underscores to get valid Python identifiers.
 if Kenzo().is_present():
     from sage.env import KENZO_FAS
-    if KENZO_FAS:
+    if KENZO_FAS and os.path.exists(KENZO_FAS):
         ecl_eval("(require :kenzo \"{}\")".format(KENZO_FAS))
     else:
         ecl_eval("(require :kenzo)")
