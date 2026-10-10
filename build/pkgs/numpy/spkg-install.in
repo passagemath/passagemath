@@ -13,6 +13,9 @@ else
     export NUMPY_FCONFIG=""
 fi
 
+# Do not use the broken vendored-meson
+sed -i.bak '/^meson *=/d' pyproject.toml
+
 ### Per https://github.com/numpy/numpy/releases/tag/v1.26.0b1
 ### "NumPy-specific build customization":
 ###
