@@ -5,14 +5,6 @@ if [ "$UNAME" = "Darwin" ]; then
    unset CC
 fi
 
-BUILD_OPTIONS=
-if [ -n "$SAGE_GMP_PREFIX" ]; then
-    BUILD_OPTIONS="$BUILD_OPTIONS -DGMP_DIR=$SAGE_GMP_PREFIX"
-fi
-if [ -n "$SAGE_MPFR_PREFIX" ]; then
-    BUILD_OPTIONS="$BUILD_OPTIONS -DMPFR_DIR=$SAGE_MPFR_PREFIX"
-fi
-
 # Patch out all homebrew library discovery
 sed -i.bak -E 's,-(I|L)(/usr/local/|/usr|/opt/homebrew)[^ ]*,,g' makefile
 sed -i.bak -E '/=.*READLINE_PREFIX/d' makefile
@@ -24,10 +16,10 @@ sdh_make_install PREFIX="$SAGE_INST_LOCAL"
 
 # https://github.com/stblake/mathilda/tree/main/kernel
 sdh_cmake -GNinja \
+          -DCMAKE_PREFIX_PATH="${SAGE_LOCAL}" \
           -DCMAKE_SYSTEM_PREFIX_PATH="$SAGE_LOCAL" \
           -DCMAKE_BUILD_RPATH="${SAGE_LOCAL}/lib" \
           -DCMAKE_INSTALL_RPATH="${SAGE_LOCAL}/lib" \
-          $BUILD_OPTIONS \
           -S kernel -B kernel/build -DCMAKE_BUILD_TYPE=Release
 cmake --build kernel/build -j
 DESTDIR=$SAGE_DESTDIR cmake --install kernel/build  # installs the kernelspec
