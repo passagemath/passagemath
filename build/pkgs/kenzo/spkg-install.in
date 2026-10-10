@@ -15,7 +15,13 @@ echo "Now installing Kenzo as '$ECLLIB/kenzo.fas'..."
 cp -f kenzo--all-systems.fasb "$ECLLIB/kenzo.fas" \
     || sdh_die "Failed to install 'kenzo--all-systems.fasb' as '$ECLLIB/kenzo.fas'."
 
-if [ $? -ne 0 ]; then
-    echo >&2 "Error installing Kenzo."
-    exit 1
-fi
+# Also install it into the versioned ECL directory if it exists.
+# This is so it is found with a simple (REQUIRE :KENZO).
+# This is also the location shipped by the passagemath-ecl wheel.
+for ECLLIB in "${SAGE_LOCAL}/lib/"ecl-*; do
+    if [ -d "$ECLLIB" ]; then
+        echo "Now installing the Kenzo library as '$ECLLIB/kenzo.fas'..."
+        cp -f kenzo--all-systems.fasb "$ECLLIB/kenzo.fas" \
+            || sdh_die "Failed to install 'kenzo--all-systems.fasb' as '$ECLLIB/kenzo.fas'."
+    fi
+done

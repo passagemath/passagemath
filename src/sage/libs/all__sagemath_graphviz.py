@@ -1,1 +1,1 @@
-# sage_setup: distribution = sagemath-gap3
+# sage_setup: distribution = sagemath-graphviz

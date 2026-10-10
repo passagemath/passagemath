@@ -266,21 +266,6 @@ else:
             os.environ['SYMPOW_PKGLIBEXECDIR'] = os.path.join(p, 'libexec', 'sympow')
             break
 
-try:
-    import ecl
-except ImportError:
-    pass
-else:
-    for p in ecl.__path__:
-        fas = os.path.join(p, 'maxima.fas')
-        if os.path.exists(fas):
-            MAXIMA_FAS = fas
-            break
-    for p in ecl.__path__:
-        fas = os.path.join(p, 'kenzo.fas')
-        if os.path.exists(fas):
-            KENZO_FAS = fas
-            break
 SAGE_NAUTY_BINS_PREFIX = var("SAGE_NAUTY_BINS_PREFIX", "")
 SAGE_ECMBIN = var("SAGE_ECMBIN", "ecm")
 RUBIKS_BINS_PREFIX = var("RUBIKS_BINS_PREFIX", "")

@@ -796,6 +796,8 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
 
             return UnicodeArt(repr(self).splitlines())
 
+        disp = display = _unicode_art_matrix
+
         def __invert__(self):
             """
             Return the inverse morphism of ``self``.

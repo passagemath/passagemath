@@ -454,6 +454,13 @@ if [ -z "$JUPYTER_CONFIG_DIR" ]; then
     export JUPYTER_CONFIG_DIR="$DOT_SAGE/jupyter-4.1"
 fi
 
+if [ -n "$SAGE_LOCAL" ]; then
+    if [ -n "$JUPYTER_PATH" ]; then
+        JUPYTER_PATH=":$JUPYTER_PATH"
+    fi
+    export JUPYTER_PATH="$SAGE_LOCAL/share/jupyter:$JUPYTER_PATH"
+fi
+
 if [ -z "$MPLCONFIGDIR" ]; then
     # We hardcode a version number in the directory name. The idea is
     # that we keep using the same version number as long as that is

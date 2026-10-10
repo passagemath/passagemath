@@ -1,0 +1,16 @@
+cd src
+set -ex
+
+cd tests
+mkdir -p build && cd build
+cmake ..
+sdh_make
+
+status=0
+
+# Run all test binaries
+for t in *_tests; do
+    if ! ./$t; then status=1; fi
+done
+
+exit $status

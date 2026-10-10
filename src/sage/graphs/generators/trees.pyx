@@ -420,8 +420,12 @@ def RandomLobster(n, p, q, seed=None):
     """
     if seed is None:
         seed = int(current_randstate().long_seed() % sys.maxsize)
-    import networkx
-    return Graph(networkx.random_lobster(n, p, q, seed=seed))
+    try:
+        from networkx import random_lobster_graph
+    except ImportError:
+        # Fallback for networkx < 3.6
+        from networkx import random_lobster as random_lobster_graph
+    return Graph(random_lobster_graph(n, p, q, seed=seed))
 
 
 def RandomTree(n, seed=None):

@@ -191,7 +191,10 @@ from sage.combinat.permutation import Permutation
 from sage.combinat.skew_tableau import SemistandardSkewTableaux
 from sage.combinat.skew_partition import SkewPartition
 from sage.rings.integer import Integer
-import lrcalc
+try:
+    import lrcalc
+except ImportError:
+    lrcalc = None
 
 
 def _lrcalc_dict_to_sage(result) -> dict:

@@ -16,5 +16,5 @@ if [ "$SAGE_EDITABLE" = yes ]; then
         sdh_build_and_store_wheel --config-setting build-dir=$(pwd)/build-meson --no-build-isolation .
     fi
 else
-    sdh_pip_install --config-setting build-dir=$(pwd)/build-meson --no-build-isolation .
+    sdh_pip_install --no-build-isolation .
 fi

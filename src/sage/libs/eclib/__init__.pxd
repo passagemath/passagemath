@@ -18,6 +18,8 @@ from sage.libs.ntl.types cimport ZZ_c
 # case, we start by listing all relevant include files in the correct
 # order.
 
+cdef extern from "<signal.h>": pass
+cdef extern from "<setjmp.h>": pass
 cdef extern from "eclib/vector.h": pass
 cdef extern from "eclib/xmod.h": pass
 cdef extern from "eclib/svector.h": pass

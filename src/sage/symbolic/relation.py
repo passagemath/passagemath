@@ -825,10 +825,10 @@ def solve(f, *args, explicit_solutions=None, multiplicities=None, to_poly_solve=
         [x == sin(x)]
         sage: solve(sin(x)==x,x,explicit_solutions=True)
         []
-        sage: solve(abs(1-abs(1-x)) == 10, x)
-        [abs(abs(x - 1) - 1) == 10]
-        sage: solve(abs(1-abs(1-x)) == 10, x, to_poly_solve=True)
-        [x == -10, x == 12]
+        sage: solve(sin(x)==cos(x), x)
+        [sin(x) == cos(x)]
+        sage: solve(sin(x)==cos(x), x, to_poly_solve=True)
+        [x == 1/4*pi + pi*z...]
 
         sage: from sage.symbolic.expression import Expression
         sage: Expression.solve(x^2==1, x)                                               # needs sage.libs.maxima
@@ -959,10 +959,10 @@ def solve(f, *args, explicit_solutions=None, multiplicities=None, to_poly_solve=
     The following examples show the use of the keyword ``to_poly_solve``::
 
         sage: # needs sage.libs.maxima
-        sage: solve(abs(1-abs(1-x)) == 10, x)
-        [abs(abs(x - 1) - 1) == 10]
-        sage: solve(abs(1-abs(1-x)) == 10, x, to_poly_solve=True)
-        [x == -10, x == 12]
+        sage: solve(sin(x)==cos(x), x)
+        [sin(x) == cos(x)]
+        sage: solve(sin(x)==cos(x), x, to_poly_solve=True)
+        [x == 1/4*pi + pi*z...]
         sage: var('Q')
         Q
         sage: solve(Q*sqrt(Q^2 + 2) - 1, Q)
@@ -1371,6 +1371,14 @@ def _solve_expression(f, x, explicit_solutions, multiplicities,
 
         sage: (x^2>1).solve(x)                                                          # needs sage.libs.maxima
         [[x < -1], [x > 1]]
+
+    Maxima 5.49 no longer raises an error for these inputs::
+
+        sage: # needs sage.libs.maxima
+        sage: solve(acot(x), x)
+        [...]
+        sage: solve(acot(x), x, to_poly_solve=True)
+        []
 
     :issue:`7491` fixed::
 

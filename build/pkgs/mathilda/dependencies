@@ -1,0 +1,1 @@
+$(MP_LIBRARY) readline mpfr flint ecm $(BLAS) xeus xeus_zmq nlohmann_json | cmake ninja_build

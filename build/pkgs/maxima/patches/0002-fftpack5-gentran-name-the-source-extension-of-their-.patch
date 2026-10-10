@@ -1,0 +1,45 @@
+From be14b9cc4d9ba20d41b87b31a74662499d60dc1c Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Fri, 25 Sep 2026 06:39:23 +0000
+Subject: [PATCH 2/2] fftpack5, gentran: name the source extension of their
+ Lisp files
+
+fftpack5.system and gentran.system left the extension of their Lisp
+sources to MK:DEFSYSTEM's default, which is "lsp" with ECL, so
+load(fftpack5) and load(gentran) stopped there with "Source file ...
+not found".
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_013Nbcx71VaDbQhYD8Wy7rNY
+---
+ share/contrib/gentran/gentran.system | 1 +
+ share/fftpack5/fftpack5.system       | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/share/contrib/gentran/gentran.system b/share/contrib/gentran/gentran.system
+index ebb5455ce..637a992f2 100644
+--- a/share/contrib/gentran/gentran.system
++++ b/share/contrib/gentran/gentran.system
+@@ -8,6 +8,7 @@
+ (mk:defsystem gentran
+   :source-pathname (maxima::maxima-load-pathname-directory)
+   :binary-pathname (maxima::maxima-objdir "share" "gentran")
++  :source-extension "lisp"
+   :components
+   ((:file "allgentran")))
+ 
+diff --git a/share/fftpack5/fftpack5.system b/share/fftpack5/fftpack5.system
+index 83968f762..ac2b904ce 100644
+--- a/share/fftpack5/fftpack5.system
++++ b/share/fftpack5/fftpack5.system
+@@ -3,6 +3,7 @@
+ (mk:defsystem fftpack5-double
+   :source-pathname (maxima::maxima-load-pathname-directory)
+   :binary-pathname (maxima::maxima-objdir "share" "fftpack5")
++  :source-extension "lisp"
+   :components
+   ((:file "fftpack5"
+     :source-extension "lisp")
+-- 
+2.55.0
+
