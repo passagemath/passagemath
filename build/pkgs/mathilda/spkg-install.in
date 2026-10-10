@@ -17,7 +17,9 @@ fi
 sed -i.bak -E 's,-(I|L)(/usr/local/|/usr|/opt/homebrew)[^ ]*,,g' makefile
 sed -i.bak -E '/=.*READLINE_PREFIX/d' makefile
 
-sdh_make USE_GRAPHICS=0 USE_FFTW=0 USE_REGEX=0 PREFIX="$SAGE_INST_LOCAL" PKG_CONFIG=pkg-config
+# libmathilda.a is not built by "all"; we build it now with our variable setting;
+# the later build invoked by the kernel cmake build system becomes a no-op.
+sdh_make USE_GRAPHICS=0 USE_FFTW=0 USE_REGEX=0 PREFIX="$SAGE_INST_LOCAL" PKG_CONFIG=pkg-config all libmathilda.a
 sdh_make_install PREFIX="$SAGE_INST_LOCAL"
 
 # https://github.com/stblake/mathilda/tree/main/kernel
