@@ -371,6 +371,9 @@ jobs:
           - os: macos-26
             arch: arm64
             build: macosx
+          - os: ubuntu-24.04-riscv
+            arch: riscv64
+            build: manylinux
     env:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq liblzma bzip2 info libxml2 libuuid
@@ -811,6 +814,9 @@ jobs:
           - os: macos-26
             arch: arm64
             build: macosx
+          - os: ubuntu-24.04-riscv
+            arch: riscv64
+            build: manylinux
     env:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq liblzma bzip2 info libxml2 libuuid
@@ -1127,6 +1133,9 @@ jobs:
           - os: macos-26
             arch: arm64
             build: macosx
+          - os: ubuntu-24.04-riscv
+            arch: riscv64
+            build: manylinux
     env:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq liblzma bzip2 info libxml2 libuuid
