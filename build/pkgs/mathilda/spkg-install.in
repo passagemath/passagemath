@@ -17,7 +17,7 @@ fi
 sed -i.bak -E 's,-(I|L)(/usr/local/|/usr|/opt/homebrew)[^ ]*,,g' makefile
 sed -i.bak -E '/=.*READLINE_PREFIX/d' makefile
 
-sdh_make USE_GRAPHICS=0 USE_FFTW=0 USE_REGEX=0 PREFIX="$SAGE_INST_LOCAL"
+sdh_make USE_GRAPHICS=0 USE_FFTW=0 USE_REGEX=0 PREFIX="$SAGE_INST_LOCAL" PKG_CONFIG=pkg-config
 sdh_make_install PREFIX="$SAGE_INST_LOCAL"
 
 # https://github.com/stblake/mathilda/tree/main/kernel
