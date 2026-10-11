@@ -1,0 +1,10 @@
+{
+    "display_name": "Mathilda",
+    "argv": [
+        "sage",
+        "-sh",
+        "-c",
+        "xmathilda -f {connection_file}"
+    ],
+    "language": "mathilda"
+}
