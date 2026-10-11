@@ -33,6 +33,13 @@ test = [
     SPKG_INSTALL_REQUIRES_sagemath_repl
 ]
 
+jupyterlab      = [
+    SPKG_INSTALL_REQUIRES_jupyterlab
+]
+notebook        = [
+    SPKG_INSTALL_REQUIRES_notebook
+]
+
 [tool.cibuildwheel.linux]
 repair-wheel-command = [
     'python3 -m pip install passagemath-conf auditwheel',
