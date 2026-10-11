@@ -73,3 +73,30 @@ About this pip-installable distribution package
 This pip-installable source distribution ``passagemath-mathilda`` provides an
 interface to the computer algebra system
 `Mathilda <https://passagemath.org/docs/latest/html/en/reference/spkg/mathilda.html>`__.
+
+
+Examples
+--------
+
+Running Mathilda from the command line::
+
+    $ pipx run --spec "passagemath-mathilda" sage -sh -c mathilda
+
+
+What is included
+----------------
+
+- Mathilda Jupyter kernel spec
+
+- the binary wheels on PyPI ship a prebuilt copy of Mathilda, including
+  a Jupyter kernel
+
+
+Available as extras, from other distributions
+---------------------------------------------
+
+``pip install "passagemath-mathilda[notebook]"``
+ installs the Jupyter notebook
+
+``pip install "passagemath-mathilda[jupyterlab]"``
+ installs JupyterLab
