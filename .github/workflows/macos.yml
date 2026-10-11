@@ -23,9 +23,7 @@ on:
         #  https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
         description: 'Stringified JSON object'
         default: >-
-          [["15-intel", "",           "homebrew-macos-usrlocal-minimal"],
-           ["15-intel", "",           "homebrew-macos-usrlocal-standard"],
-           ["15-intel", "",           "conda-forge-macos-minimal"],
+          [["15-intel", "",           "conda-forge-macos-minimal"],
            ["15-intel", "",           "conda-forge-macos-standard"],
            ["15",       "",           "homebrew-macos-opthomebrew-minimal"],
            ["15",       "",           "homebrew-macos-opthomebrew-standard"],
