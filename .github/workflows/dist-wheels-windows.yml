@@ -43,7 +43,7 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Cache sdists
         id: cache-sdists
@@ -111,7 +111,7 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Cache noarch-wheels
         id: cache-noarch-wheels
@@ -221,7 +221,7 @@ jobs:
       #
       CIBW_PLATFORM: windows
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: msys2/setup-msys2@v2.27.0
         # Pin as done in https://github.com/aleaxit/gmpy/pull/583

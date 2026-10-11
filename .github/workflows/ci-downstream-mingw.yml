@@ -56,7 +56,7 @@ jobs:
           - clang-aarch64
     steps:
       - name: Check out passagemath
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - uses: msys2/setup-msys2@v2
         name: Setup msys2

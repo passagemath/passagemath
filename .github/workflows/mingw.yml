@@ -56,7 +56,7 @@ jobs:
           env:     clang-aarch64
     steps:
       - name: Check out SageMath
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: ${{ inputs.sage_repo }}
           ref: ${{ inputs.sage_ref }}
