@@ -18,7 +18,7 @@ jobs:
     env:
       CAN_DEPLOY: {{"${{"}} secrets.SAGEMATH_PYPI_API_TOKEN != '' {{"}}"}}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v4
       - name: make sdist
         run: |
@@ -71,7 +71,7 @@ jobs:
       # Use 'build', not 'pip wheel'
       CIBW_BUILD_FRONTEND: build
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           repository:   sagemath/sage
           ref:          develop

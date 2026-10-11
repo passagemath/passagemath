@@ -85,7 +85,7 @@ jobs:
         continue-on-error: true
         if: env.HAVE_MNT
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Install test prerequisites
         # From docker.yml
         run: |

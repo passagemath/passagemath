@@ -43,7 +43,7 @@ jobs:
     outputs:
       build_targets:     ${{ steps.build-targets.outputs.build_targets }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Get all packages that have changed
         id: changed-files
         uses: tj-actions/changed-files@v46
@@ -65,7 +65,7 @@ jobs:
               echo "build_targets=$build_targets" >> $GITHUB_OUTPUT
           fi
           cat $GITHUB_OUTPUT
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: ${{ github.base_ref }}
           path: worktree-base

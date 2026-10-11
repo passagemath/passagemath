@@ -122,7 +122,7 @@ jobs:
 
       - name: Checkout
         id: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Get changed files and packages
         id: changed-files
@@ -169,7 +169,7 @@ jobs:
           fi
           cat $GITHUB_OUTPUT
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: ${{ github.base_ref }}
           path: worktree-base
@@ -328,7 +328,7 @@ jobs:
 
       - name: Checkout
         id: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install test prerequisites
         # From docker.yml
@@ -438,7 +438,7 @@ jobs:
 
       - name: Checkout
         id: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install test prerequisites
         # From docker.yml
@@ -570,7 +570,7 @@ jobs:
 
       - name: Checkout
         id: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install test prerequisites
         # From docker.yml
