@@ -1,1 +1,2 @@
-passagemath-mathilda
+# This file is updated on every release by the update-version script
+passagemath-mathilda ~= 10.8.13.0
