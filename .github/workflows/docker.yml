@@ -71,12 +71,6 @@ on:
            "conda-forge-python3.14",
            "nixos-python3.14",
            "ubuntu-bionic-toolchain-gcc_10-i386",
-           "fedora-41-arm64v8",
-           "fedora-42-arm64v8",
-           "fedora-43-arm64v8",
-           "fedora-44-arm64v8",
-           "fedora-45-arm64v8",
-           "fedora-45-python3.14-arm64v8",
           ]
         # 'tox -e update_docker_platforms' updates above
       tox_packages_factors:
