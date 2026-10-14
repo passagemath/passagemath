@@ -2,6 +2,7 @@
 # cdivision=False
 # cython: cdivision_warnings=False
 # cython: profile=False
+# distutils: language = c++
 r"""
 Modular symbols by numerical integration
 
@@ -161,6 +162,10 @@ AUTHORS:
 #                  https://www.gnu.org/licenses/
 # ***************************************************************************
 
+cimport libcpp.complex
+from libcpp.cmath cimport exp, log, ceil, sqrt
+from libcpp.complex cimport exp as cexp
+
 from cysignals.memory cimport sig_malloc, sig_free, sig_realloc
 from cysignals.signals cimport sig_check
 
@@ -173,21 +178,6 @@ from sage.rings.complex_mpfr import ComplexField
 from sage.rings.integer cimport Integer
 from sage.rings.rational cimport Rational
 from sage.rings.real_mpfr cimport RealNumber, RealField
-
-
-cdef extern from "<math.h>":
-    double log(double)
-    double exp(double)
-    double cos(double)
-    double sin(double)
-    double ceil(double)
-    double sqrt(double)
-
-# doing this before cimport ComplexNumber does not compile
-# don't ask me why
-cdef extern from "<complex.h>":
-    complex cexp(complex)
-    complex csqrt(complex)
 
 ctypedef long long llong
 
@@ -1438,7 +1428,7 @@ cdef class ModularSymbolNumerical:
         return s
 
     # the version using double is 70-80 times faster it seems.
-    cdef complex _integration_to_tau_double(self, complex tau,
+    cdef libcpp.complex.complex[double] _integration_to_tau_double(self, libcpp.complex.complex[double] tau,
                                             int number_of_terms) noexcept:
         r"""
         Given a point `\tau` in the upper half plane
@@ -1466,7 +1456,7 @@ cdef class ModularSymbolNumerical:
         """
         # verbose("       enter integrations_to_tau_double with tau=%s,"
         #        " T=%s" % (tau,number_of_terms), level=5)
-        cdef complex q, s
+        cdef libcpp.complex.complex[double] q, s
         cdef int n
         # self.nc_sums += 1
         # self.nc_terms += Integer(number_of_terms)
@@ -1477,11 +1467,11 @@ cdef class ModularSymbolNumerical:
         if number_of_terms > self._lans:
             self._add_an_coefficients(number_of_terms)
 
-        q = complex(0, TWOPI)  # 2 pi i
+        q = libcpp.complex.complex[double](0.0, TWOPI)  # 2 pi i
         q *= tau
         q = cexp(q)
         verbose("     start sum over %s terms " % number_of_terms, level=4)
-        s = 0
+        s = libcpp.complex.complex[double](0.0, 0.0)
         n = number_of_terms
         # using Horner's rule
         while n > 0:
@@ -1922,7 +1912,7 @@ cdef class ModularSymbolNumerical:
             llong m, Q, epsQ, a, u
             double yy, taui
             int T, prec, j
-            double complex  tauc, tauphc, int1c, int2c, twopii, ze1, ze2, su
+            libcpp.complex.complex[double] tauc, tauphc, int1c, int2c, twopii, ze1, ze2, su
             ComplexNumber tau, tauph, int1, int2
             llong * wQ = [0L, 0L, 0L, 0L]
             object ka
@@ -1998,12 +1988,12 @@ cdef class ModularSymbolNumerical:
             ze2 = - twopii / m * u
             ze2 = cexp(ze2)
             j = 0
-            su = 0
+            su = libcpp.complex.complex[double](0.0, 0.0)
             verbose("      summing up %s partial sums, having set u = %s,"
                     " z1 =%s, z2=%s" % (m, u, ze1, ze2), level=4)
             while j < m:
                 sig_check()
-                su += ka[j] * ((ze1 ** j) - epsQ * (ze2 ** j))
+                su += ka[j] * ((ze1 ** <double>j) - epsQ * (ze2 ** <double>j))
                 j += 1
             CC = ComplexField(prec)
             return CC(su)
@@ -2043,7 +2033,7 @@ cdef class ModularSymbolNumerical:
         cdef:
             ComplexNumber tau0, tau1, int1, int2
             RealNumber x1, x2, s
-            complex tau0c, tau1c, int1c, int2c, ze1, ze2, su, twopii
+            libcpp.complex.complex[double] tau0c, tau1c, int1c, int2c, ze1, ze2, su, twopii
             llong g, u, v, uu, vv, D, a, aa, m, mm, Q, QQ, z, xi, xixi
             int oi, j
             double x1d, x2d, sd
