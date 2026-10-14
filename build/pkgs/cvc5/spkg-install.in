@@ -1,0 +1,23 @@
+# -*- shell-script -*-
+cd src
+mkdir build
+cd build
+
+sdh_cmake -GNinja -DGENERATORS=on \
+          -DCMAKE_SYSTEM_PREFIX_PATH="$SAGE_LOCAL" \
+          -DCMAKE_BUILD_RPATH="${SAGE_LOCAL}/lib" \
+          -DCMAKE_INSTALL_RPATH="${SAGE_LOCAL}/lib" \
+          -DCMAKE_INSTALL_PREFIX="$SAGE_LOCAL" \
+          -DENABLE_GPL=on \
+          -DBUILD_SHARED_LIBS=on \
+          -DENABLE_AUTO_DOWNLOAD=on \
+          -DONLY_PYTHON_EXT_SRC=on \
+          -DUSE_KISSAT=on \
+          -DUSE_MPFR=on \
+          -DUSE_NORMALIZ=on \
+          -DUSE_POLY=on \
+          $BUILD_OPTIONS ..
+
+set -e
+cmake --build .
+DESTDIR=$SAGE_DESTDIR cmake --install .
