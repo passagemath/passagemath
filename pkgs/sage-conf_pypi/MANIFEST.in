@@ -5,6 +5,8 @@ graft sage_root
 # Without the following line, sage_root/build/bin is missing when run on ubuntu-24.04
 graft sage_root/build/bin
 # Exclude what is shipped by passagemath-bootstrap
+prune sage_root/build/sage_bootstrap
+prune sage_root/build/test
 exclude sage_root/build/bin/sage-download-file
 exclude sage_root/build/bin/sage-get-system-packages
 exclude sage_root/build/bin/sage-guess-package-system
@@ -52,3 +54,4 @@ global-exclude __pycache__
 global-exclude *.py[co]
 global-exclude *.so
 global-exclude .DS_Store
+global-exclude *.egg-info
