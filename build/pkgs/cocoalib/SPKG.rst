@@ -15,7 +15,5 @@ License
 Upstream Contact
 ----------------
 
--  Authors: http://cocoa.dima.unige.it/research/
--  Email: cocoa@dima.unige.it
--  Website: http://cocoa.dima.unige.it/
--  Releases: http://cocoa.dima.unige.it/cocoalib/
+- https://sites.google.com/view/cocoa-cocoalib
+- https://github.com/cocoa-official/CoCoALib
