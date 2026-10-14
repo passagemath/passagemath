@@ -1,3 +1,4 @@
+# sage_setup: distribution = passagemath-repl
 r"""
 Library of cythonized methods
 

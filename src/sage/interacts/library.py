@@ -1,3 +1,4 @@
+# sage_setup: distribution = passagemath-repl
 # sage.doctest: needs sage.symbolic
 r"""
 Sage Interacts
