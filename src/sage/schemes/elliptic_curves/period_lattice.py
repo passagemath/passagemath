@@ -1152,7 +1152,7 @@ class PeriodLattice_ell(PeriodLattice):
 
             sage: # needs database_cremona_mini_ellcurve
             sage: EllipticCurve('389a1').period_lattice().sigma(CC(2,1))
-            2.60912163570108 - 0.200865080824587*I
+            2.60912163570... - 0.200865080824...*I
         """
         if prec is None:
             prec = self._compute_default_prec()
