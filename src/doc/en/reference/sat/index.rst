@@ -116,6 +116,7 @@ Details on Specific Converterts
 .. toctree::
    :maxdepth: 1
 
+   sage/sat/converters/anf2cnf
    sage/sat/converters/polybori
 
 Highlevel Interfaces
