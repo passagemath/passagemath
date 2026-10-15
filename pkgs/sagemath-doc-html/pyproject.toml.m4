@@ -26,6 +26,7 @@ requires = [
     SPKG_INSTALL_REQUIRES_sagemath_rankwidth
     SPKG_INSTALL_REQUIRES_sagemath_rubiks
     SPKG_INSTALL_REQUIRES_sagemath_sympow
+    SPKG_INSTALL_REQUIRES_sagemath_tides
     SPKG_INSTALL_REQUIRES_sagemath_database_cunningham
     SPKG_INSTALL_REQUIRES_sagemath_database_jones_numfield
     SPKG_INSTALL_REQUIRES_sagemath_database_kohel
