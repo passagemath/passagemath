@@ -540,8 +540,12 @@ sdh_generate_windows_lib_files() {
         set -ex
 
         # Set path to dumpbin & lib
-        PATH="$PATH:$(find "/c/Program Files/Microsoft Visual Studio/2022/" -name "Hostx86")/x64/"
-        find "/c/Program Files/Microsoft Visual Studio/2022/" -name dumpbin.exe
+        msvc="/c/Program Files/Microsoft Visual Studio/"
+        cd "$msvc"
+        for a in $(find . -name Hostx86); do
+            echo "Found $msvc$a"
+            PATH="$PATH:$msvc$a/x64/"
+        done
 
         # See http://stackoverflow.com/questions/9946322/
         cd "$SAGE_DESTDIR$SAGE_LOCAL/bin"
