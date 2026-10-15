@@ -1,5 +1,5 @@
---- a/xeus-6.0.6/CMakeLists.txt
-+++ b/xeus-6.0.6/CMakeLists.txt
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
 @@ -183,7 +183,7 @@ macro(xeus_create_target target_name linkage output_name)
          PUBLIC nlohmann_json::nlohmann_json
      )
