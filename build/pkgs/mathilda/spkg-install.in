@@ -5,9 +5,8 @@ if [ "$UNAME" = "Darwin" ]; then
    unset CC
 fi
 
-# Patch out all homebrew library discovery
-sed -i.bak -E 's,-(I|L)(/usr/local/|/usr|/opt/homebrew)[^ ]*,,g' makefile
-sed -i.bak -E '/=.*READLINE_PREFIX/d' makefile
+# Disable all homebrew library discovery
+export HOMEBREW=
 
 # libmathilda.a is not built by "all"; we build it now with our variable setting;
 # the later build invoked by the kernel cmake build system becomes a no-op.
