@@ -265,6 +265,13 @@ else:
             os.environ['SYMPOW_PKGDATADIR'] = os.path.join(p, 'share', 'sympow')
             os.environ['SYMPOW_PKGLIBEXECDIR'] = os.path.join(p, 'libexec', 'sympow')
             break
+    for p in sage_wheels.__path__:
+        mathilda_share = os.path.join(p, 'share/mathilda')
+        if os.path.exists(mathilda_share):
+            MATHILDA_HOME = mathilda_share
+            os.environ['MATHILDA_HOME'] = MATHILDA_HOME
+            break
+
 
 SAGE_NAUTY_BINS_PREFIX = var("SAGE_NAUTY_BINS_PREFIX", "")
 SAGE_ECMBIN = var("SAGE_ECMBIN", "ecm")
