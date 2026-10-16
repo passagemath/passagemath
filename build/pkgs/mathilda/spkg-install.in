@@ -8,6 +8,9 @@ fi
 # Disable all homebrew library discovery
 export HOMEBREW=
 
+# Patch out other ad-hoc library discovery
+sed -i.bak -E 's,-(I|L)(/usr/local/|/usr)[^ ]*,,g' makefile
+
 # libmathilda.a is not built by "all"; we build it now with our variable setting;
 # the later build invoked by the kernel cmake build system becomes a no-op.
 sdh_make USE_GRAPHICS=0 USE_FFTW=0 USE_REGEX=0 PREFIX="$SAGE_INST_LOCAL" PKG_CONFIG=pkg-config all lib
