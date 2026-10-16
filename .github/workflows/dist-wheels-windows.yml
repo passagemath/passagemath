@@ -381,6 +381,13 @@ jobs:
         with:
           package-dir: unpacked/passagemath_categories
 
+      - name: sagemath-mathilda
+        id:   sagemath-mathilda
+        if:   (success() || failure()) && steps.unpack.outcome == 'success'
+        uses: pypa/cibuildwheel@v4.3.1
+        with:
+          package-dir: unpacked/passagemath_mathilda
+
       - name: sagemath-graphs
         id:   sagemath-graphs
         if:   (success() || failure()) && steps.unpack.outcome == 'success'
@@ -543,6 +550,7 @@ jobs:
          'sagemath-gsl',
          'sagemath-highs',
          'sagemath-homfly',
+         'sagemath-mathilda',
          'sagemath-modules',
          'sagemath-planarity',
          'sagemath-plot',
