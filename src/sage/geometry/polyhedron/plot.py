@@ -32,6 +32,44 @@ lazy_import("sage.plot.plot3d.texture", "Texture")
 #############################################################
 
 
+def _validate_polygon_style(style):
+    """
+    Validate a polygon callback result without modifying its dictionary.
+
+    EXAMPLES::
+
+        sage: from sage.geometry.polyhedron.plot import _validate_polygon_style
+        sage: style = {'color': 'red'}
+        sage: _validate_polygon_style(style) is style
+        True
+        sage: _validate_polygon_style(False)
+        False
+        sage: _validate_polygon_style(None)
+        Traceback (most recent call last):
+        ...
+        TypeError: polygon callback must return a dictionary or False
+        sage: _validate_polygon_style({'opacity': 0.5})
+        Traceback (most recent call last):
+        ...
+        ValueError: polygon callback supports only the 'color' option
+        sage: _validate_polygon_style({'color': (1, 0, 0, 0.5)})
+        Traceback (most recent call last):
+        ...
+        ValueError: polygon callbacks do not support RGBA colors; use uniform alpha or opacity
+    """
+    if style is False:
+        return False
+    if not isinstance(style, dict):
+        raise TypeError("polygon callback must return a dictionary or False")
+    if any(key != 'color' for key in style):
+        raise ValueError("polygon callback supports only the 'color' option")
+    color = style.get('color')
+    if isinstance(color, (tuple, list)) and len(color) == 4:
+        raise ValueError("polygon callbacks do not support RGBA colors; "
+                         "use uniform alpha or opacity")
+    return style
+
+
 def cyclic_sort_vertices_2d(Vlist):
     """
     Return the vertices/rays in cyclic order if possible.
@@ -130,6 +168,34 @@ def cyclic_sort_vertices_2d(Vlist):
     return result
 
 #########################################################################
+
+
+def _validate_element_style(style, kind):
+    """Validate callback dictionaries without modifying caller-owned state."""
+    if kind == 'polygon':
+        return _validate_polygon_style(style)
+    if style is False:
+        return False
+    if not isinstance(style, dict):
+        raise TypeError(f"{kind} callback must return a dictionary or False")
+    metric = 'size' if kind == 'point' else 'thickness'
+    if set(style) - {'color', metric}:
+        raise ValueError(f"{kind} callback supports only 'color' and '{metric}'")
+    color = style.get('color')
+    if isinstance(color, (tuple, list)) and len(color) == 4:
+        raise ValueError(f"{kind} callbacks do not support RGBA colors; "
+                         "use uniform alpha or opacity")
+    if metric in style:
+        import math
+        value = style[metric]
+        try:
+            valid = (not isinstance(value, (bool, str))
+                     and math.isfinite(float(value)) and float(value) > 0)
+        except (TypeError, ValueError, OverflowError):
+            valid = False
+        if not valid:
+            raise ValueError(f"{kind} callback '{metric}' must be positive and finite")
+    return style
 
 
 def projection_func_identity(x):
@@ -372,6 +438,7 @@ class Projection(SageObject):
         self.lines = Sequence([])
         self.arrows = Sequence([])
         self.polygons = Sequence([])
+        self._polygon_faces = []
         self.polyhedron_ambient_dim = polyhedron.ambient_dim()
         self.polyhedron_dim = polyhedron.dim()
 
@@ -834,6 +901,27 @@ class Projection(SageObject):
             sage: cylinder = Polyhedron(vertices=[(0, 0, 0), (1, 0, 0), (0, 1, 0)], lines=[(0, 0, 1)])
             sage: len(cylinder.projection().polygons)
             3
+
+
+        For bounded full-dimensional inputs, each polygon is associated with
+        its original mathematical face by incidence, not face-list order.
+        Verify the vertex sets with two backends, translated/reordered boxes,
+        and a tetrahedron::
+
+            sage: from itertools import product
+            sage: vertices = list(product((0, 1), (0, 2), (0, 3)))
+            sage: translated = [tuple(a+b for a, b in zip(v, (7, -4, 9)))
+            ....:               for v in reversed(vertices)]
+            sage: tetrahedron = [(0, 0, 0), (1, 0, 0), (0, 1, 0), (0, 0, 1)]
+            sage: for backend in ('ppl', 'field'):
+            ....:     for points in (vertices, translated, tetrahedron):
+            ....:         p = Polyhedron(vertices=points, base_ring=QQ, backend=backend)
+            ....:         proj = p.projection()
+            ....:         assert len(proj._polygon_faces) == len(proj.polygons) == len(p.faces(2))
+            ....:         for indices, face in zip(proj.polygons, proj._polygon_faces):
+            ....:             assert face.polyhedron() is p and face.dim() == 2
+            ....:             assert {tuple(proj.coords[i]) for i in indices} == {tuple(v) for v in face.vertices()}
+            ....:         assert set(proj._polygon_faces) == set(p.faces(2))
         """
         assert polyhedron.ambient_dim() == 3, "Requires polyhedron in 3d"
 
@@ -848,9 +936,19 @@ class Projection(SageObject):
 
         faces = []
         face_inequalities = []
+        polygon_faces = []
+        record_faces = polyhedron.dim() == 3 and polyhedron.is_compact()
+        if record_faces:
+            from sage.geometry.polyhedron.face import PolyhedronFace
         for facet_equation in defining_equation():
             vertices = list(facet_equation.incident())
             face_inequalities.append(facet_equation)
+            if record_faces:
+                # Use the defining inequality and its incident vertices, not
+                # the enumeration order of polyhedron.faces(2).
+                polygon_faces.append(PolyhedronFace(
+                    polyhedron, tuple(v.index() for v in vertices),
+                    (facet_equation.index(),)))
             vertices = cyclic_sort_vertices_2d(vertices)
             if len(vertices) >= 3:
                 v0, v1, v2 = (vector(v) for v in vertices[:3])
@@ -880,6 +978,7 @@ class Projection(SageObject):
         if polyhedron.n_lines() == 0:
             assert faces, "no vertices?"
             self.polygons.extend( [self.coord_indices_of(f) for f in faces] )
+            self._polygon_faces.extend(polygon_faces)
             return
 
         # now some special cases if there are lines (dim < ambient_dim)
@@ -1001,7 +1100,7 @@ class Projection(SageObject):
                 for p in self.polygons]
         return sum(poly)
 
-    def render_vertices_3d(self, **kwds):
+    def render_vertices_3d(self, point_style=None, **kwds):
         """
         Return the 3d rendering of the vertices.
 
@@ -1013,9 +1112,11 @@ class Projection(SageObject):
             sage: verts.bounding_box()                                                  # needs sage.plot
             ((-1.0, -1.0, -1.0), (1.0, 1.0, 1.0))
         """
+        if point_style is not None:
+            return self._render_styled_elements_3d('point', point_style, kwds)
         return point3d(self.coordinates_of(self.points), **kwds)
 
-    def render_wireframe_3d(self, **kwds):
+    def render_wireframe_3d(self, line_style=None, **kwds):
         r"""
         Return the 3d wireframe rendering.
 
@@ -1027,6 +1128,8 @@ class Projection(SageObject):
             sage: print(wire.tachyon().split('\n')[77])  # for testing                  # needs sage.plot
             FCylinder base 1.0 1.0 -1.0 apex -1.0 1.0 -1.0 rad 0.005 texture...
         """
+        if line_style is not None:
+            return self._render_styled_elements_3d('line', line_style, kwds)
         wireframe = []
         for l in self.lines:
             l_coords = self.coordinates_of(l)
@@ -1036,9 +1139,157 @@ class Projection(SageObject):
             wireframe.append(arrow3d(a_coords[0], a_coords[1], **kwds))
         return sum(wireframe)
 
-    def render_solid_3d(self, **kwds):
+    def _check_element_style(self, style, kind):
+        """Check original geometry before evaluating a user callback."""
+        if not callable(style):
+            name = {'point': 'point_style', 'line': 'line_style',
+                    'polygon': 'face_style'}[kind]
+            raise TypeError(f"{name} must be callable")
+        if (self.polyhedron_dim != 3 or self.polyhedron_ambient_dim != 3
+                or not self.parent_polyhedron.is_compact()):
+            raise NotImplementedError(
+                f"{kind} callbacks require a bounded polyhedron of "
+                "dimension 3 and ambient dimension 3")
+        if self.dimension != 3:
+            raise NotImplementedError(
+                f"{kind} callbacks require a 3-dimensional projection")
+
+    def _check_face_style(self, face_style):
+        """Check the original geometry and the rendered dimension."""
+        self._check_element_style(face_style, 'polygon')
+
+    def _wireframe_faces(self, kind):
+        """Map coordinates to original faces by vertex and H-incidence.
+
+        Construct only when a point or line callback is requested. No
+        enumeration of the face lattice is needed for ordinary fixed styles.
+
+        TESTS:
+
+        Match every plotting element to its original mathematical face,
+        including translated, reordered input and another exact backend::
+
+            sage: from itertools import product
+            sage: vertices = list(product((0, 1), (0, 2), (0, 3)))
+            sage: for backend in ('ppl', 'field'):
+            ....:     for shifted in (False, True):
+            ....:         points = ([(x+7, y-4, z+9) for x, y, z in vertices[::-1]]
+            ....:                   if shifted else vertices)
+            ....:         p = Polyhedron(vertices=points, backend=backend)
+            ....:         q = p.projection()
+            ....:         assert not hasattr(q, '_wireframe_face_cache')
+            ....:         for kind, dim in (('point', 0), ('line', 1)):
+            ....:             pairs = q._wireframe_faces(kind)
+            ....:             assert set(f for _, f in pairs) == set(p.faces(dim))
+            ....:             assert len(pairs) == (8, 12)[dim]
+            ....:             for indices, face in pairs:
+            ....:                 assert face.polyhedron() is p
+            ....:                 assert {tuple(q.coords[i]) for i in indices} == {
+            ....:                     tuple(v) for v in face.vertices()}
+            ....:             assert q._wireframe_faces(kind) is pairs
+
+        Rendering preserves that correspondence after a custom projection;
+        callbacks still receive the original, untransformed faces::
+
+            sage: transform = lambda v: (2*v[0]+5, v[1]-4, 3*v[2])
+            sage: q = p.projection()(transform)
+            sage: for kind, dim in (('point', 0), ('line', 1)):                 # needs sage.plot
+            ....:     calls = []
+            ....:     def style(face):
+            ....:         calls.append(face)
+            ....:         return {}
+            ....:     options = dict(point_opts=False, line_opts=False, polygon_opts=False)
+            ....:     options[kind + '_opts'] = {}
+            ....:     options[kind + '_style'] = style
+            ....:     g = q.render_3d(**options)
+            ....:     items = g.threejs_repr(g.default_render_params())
+            ....:     assert set(calls) == set(p.faces(dim))
+            ....:     assert len(items) == len(calls)
+            ....:     for (_, item), face in zip(items, calls):
+            ....:         positions = [item['point']] if kind == 'point' else item['points']
+            ....:         assert {tuple(v) for v in positions} == {
+            ....:             tuple(map(float, transform(v))) for v in face.vertices()}
+
+        Hiding alternating elements leaves the remaining rainbow colors in
+        their original slots::
+
+            sage: p = Polyhedron(vertices=vertices)
+            sage: for kind in ('point', 'line'):                              # needs sage.plot
+            ....:     options = dict(point=False, line=False, polygon=False, wireframe='rainbow')
+            ....:     options[kind] = lambda face: {}
+            ....:     g = p.plot(**options)
+            ....:     full = g.threejs_repr(g.default_render_params())
+            ....:     calls = []
+            ....:     def selected(face):
+            ....:         calls.append(face)
+            ....:         return {} if len(calls) % 2 else False
+            ....:     options[kind] = selected
+            ....:     g = p.plot(**options)
+            ....:     hidden = g.threejs_repr(g.default_render_params())
+            ....:     assert [d['color'] for _, d in hidden] == [d['color'] for _, d in full][::2]
+        """
+        from sage.geometry.polyhedron.face import PolyhedronFace
+        p = self.parent_polyhedron
+        indices = (tuple((i,) for i in self.points) if kind == 'point'
+                   else tuple(tuple(edge) for edge in self.lines))
+        cache = self.__dict__.setdefault('_wireframe_face_cache', {})
+        if kind in cache and cache[kind][0] == indices:
+            return cache[kind][1]
+        vertices = {tuple(v): v for v in p.vertex_generator()}
+        result = []
+        for element in indices:
+            try:
+                generators = [vertices[tuple(self.coords[i])] for i in element]
+            except (KeyError, IndexError) as error:
+                raise ValueError("mathematical faces and plotting elements are inconsistent") from error
+            common = set(h.index() for h in generators[0].incident())
+            for v in generators[1:]:
+                common.intersection_update(h.index() for h in v.incident())
+            face = PolyhedronFace(p, tuple(sorted(v.index() for v in generators)),
+                                  tuple(sorted(common)))
+            result.append((element, face))
+        result = tuple(result)
+        cache[kind] = (indices, result)
+        return result
+
+    def _render_styled_elements_3d(self, kind, callback, kwds):
+        """Render selected original vertices or compact edges independently."""
+        self._check_element_style(callback, kind)
+        if 'texture_list' in kwds:
+            raise ValueError(f"{kind} callbacks cannot be combined with texture_list")
+        elements = self._wireframe_faces(kind)
+        color = kwds.get('color', (0, 0, 1))
+        colors = (rainbow(len(elements), 'rgbtuple') if color == 'rainbow'
+                  else [color] * len(elements))
+        from sage.plot.plot3d.base import Graphics3d
+        graphics = Graphics3d()
+        for (indices, face), default_color in zip(elements, colors):
+            style = _validate_element_style(callback(face), kind)
+            if style is False:
+                continue
+            options = dict(kwds, color=default_color)
+            options.update(style)
+            coords = self.coordinates_of(indices)
+            graphics += (point3d(coords[0], **options) if kind == 'point'
+                         else line3d(coords, **options))
+        return graphics
+
+    def render_solid_3d(self, face_style=None, **kwds):
         """
         Return solid 3d rendering of a 3d polytope.
+
+        INPUT:
+
+        - ``face_style`` -- callable (default: ``None``); receives an original
+          two-dimensional face and returns a dictionary containing only
+          ``color``, or ``False`` to hide that face. Requires a bounded,
+          full-dimensional polyhedron and a 3-dimensional projection.
+          RGBA colors and an explicit ``texture_list`` are not supported.
+          An empty dictionary uses the color from ``kwds``. The callback's
+          color overrides that default; :meth:`Polyhedron.plot` handles its
+          global keyword precedence before passing the callback here.
+
+        - ``**kwds`` -- uniform rendering options, including transparency
 
         EXAMPLES::
 
@@ -1046,12 +1297,67 @@ class Projection(SageObject):
             sage: p_solid = p.render_solid_3d(opacity=.7)                               # needs sage.plot
             sage: type(p_solid)                                                         # needs sage.plot
             <class 'sage.plot.plot3d.index_face_set.IndexFaceSet'>
+
+        Facets with more than four vertices retain their original vertex sets::
+
+            sage: # needs sage.plot
+            sage: vertices = [(x, y, z) for x, y in
+            ....:             [(0, 0), (2, 0), (3, 1), (1, 3), (-1, 1)] for z in (0, 2)]
+            sage: prism = Polyhedron(vertices=vertices)
+            sage: q = prism.projection()
+            sage: len(q.polygons), sorted(len(f.vertices()) for f in q._polygon_faces)
+            (7, [4, 4, 4, 4, 4, 5, 5])
+            sage: all(frozenset(tuple(q.coords[i]) for i in indices)
+            ....:     == frozenset(tuple(v) for v in face.vertices())
+            ....:     for indices, face in zip(q.polygons, q._polygon_faces))
+            True
+            sage: q.render_solid_3d(face_style=lambda f: {'color': 'red'})
+            Graphics3d Object
+
+        Callback colors use RGB; unsupported combinations fail explicitly::
+
+            sage: # needs sage.plot
+            sage: q = polytopes.hypercube(3).projection()
+            sage: q.render_solid_3d(face_style=lambda f: {'color': (1, 0, 0, 0.5)})
+            Traceback (most recent call last):
+            ...
+            ValueError: polygon callbacks do not support RGBA colors; use uniform alpha or opacity
+            sage: q.render_solid_3d(face_style=lambda f: {}, texture_list=[])
+            Traceback (most recent call last):
+            ...
+            ValueError: polygon callbacks cannot be combined with texture_list
+            sage: q(lambda v: v[:2])
+            The projection of a polyhedron into 2 dimensions
+            sage: q.render_solid_3d(face_style=lambda f: {})
+            Traceback (most recent call last):
+            ...
+            NotImplementedError: polygon callbacks require a 3-dimensional projection
         """
         polys = self.polygons
         n = len(polys)
         N = max([-1] + [i for p in polys for i in p]) + 1
         coords = self.coordinates_of(range(N))
         col = kwds.pop('color', (0, 0, 1))
+        if face_style is not None:
+            self._check_face_style(face_style)
+            if 'texture_list' in kwds:
+                raise ValueError("polygon callbacks cannot be combined with texture_list")
+            if len(self._polygon_faces) != n:
+                raise ValueError("mathematical faces and plotting polygons are inconsistent")
+            textures = []
+            visible_polys = []
+            default_colors = (rainbow(n, 'rgbtuple') if col == 'rainbow'
+                              else [col] * n)
+            for polygon, face, default_color in zip(polys, self._polygon_faces, default_colors):
+                style = _validate_polygon_style(face_style(face))
+                if style is False:
+                    continue
+                visible_polys.append(polygon)
+                textures.append(Texture(color=style.get('color', default_color)))
+            if not visible_polys:
+                from sage.plot.plot3d.base import Graphics3d
+                return Graphics3d()
+            return polygons3d(visible_polys, coords, texture_list=textures, **kwds)
         if col == 'rainbow':
             t_list = [Texture(rainbow(n, 'rgbtuple')[i]) for i in range(n)]
             return polygons3d(polys, coords, texture_list=t_list, **kwds)
@@ -1156,10 +1462,26 @@ class Projection(SageObject):
             plt += self.render_fill_2d(**polygon_opts)
         return plt
 
-    def render_3d(self, point_opts=None, line_opts=None, polygon_opts=None):
+    def render_3d(self, point_opts=None, line_opts=None, polygon_opts=None,
+                  face_style=None, point_style=None, line_style=None):
         """
         Return 3d rendering of a polyhedron projected into
         3-dimensional ambient space.
+
+        INPUT:
+
+        - ``point_opts``, ``line_opts``, ``polygon_opts`` -- option dictionaries;
+          ``False`` disables the corresponding primitives
+
+        - ``face_style`` -- optional polygon callback; see
+          :meth:`render_solid_3d`. It is not called when polygons are disabled.
+
+        - ``point_style``, ``line_style`` -- optional callbacks receiving
+          original zero- and one-dimensional faces. Return a dictionary
+          containing ``color`` and optionally ``size`` (points) or
+          ``thickness`` (lines), or ``False`` to hide the element. Disabled
+          primitive options suppress callback evaluation. Requires a bounded
+          full-dimensional 3d polyhedron and a 3d projection.
 
         EXAMPLES::
 
@@ -1209,6 +1531,10 @@ class Projection(SageObject):
             sage: polytopes.hypercube(3).plot(polygon='rainbow', alpha=0.4)             # needs sage.plot
             Graphics3d Object
         """
+        for kind, style in (('point', point_style), ('line', line_style),
+                            ('polygon', face_style)):
+            if style is not None:
+                self._check_element_style(style, kind)
         pplt = None
         lplt = None
         pgplt = None
@@ -1220,15 +1546,15 @@ class Projection(SageObject):
             polygon_opts = {}
         if isinstance(point_opts, dict):
             point_opts.setdefault('size', 10)
-            pplt = self.render_vertices_3d(**point_opts)
+            pplt = self.render_vertices_3d(point_style=point_style, **point_opts)
         if isinstance(line_opts, dict):
             line_opts.setdefault('width', 1) # controls the width of arrow3d for a ray
             line_opts.setdefault('thickness', 1) # controls the thickness of line3d
-            lplt = self.render_wireframe_3d(**line_opts)
+            lplt = self.render_wireframe_3d(line_style=line_style, **line_opts)
         if isinstance(polygon_opts, dict):
             if 'threejs_flat_shading' not in polygon_opts:
                 polygon_opts['threejs_flat_shading'] = True
-            pgplt = self.render_solid_3d(**polygon_opts)
+            pgplt = self.render_solid_3d(face_style=face_style, **polygon_opts)
         # zorder is not available
         return sum(_ for _ in [pplt, lplt, pgplt] if _ is not None)
 
