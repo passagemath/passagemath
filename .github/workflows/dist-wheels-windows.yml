@@ -237,6 +237,7 @@ jobs:
             python-setuptools
             patch
             bison
+            flex
             mingw-w64-${{ matrix.env }}-cmake
             mingw-w64-${{ matrix.env }}-ninja
             mingw-w64-${{ matrix.env }}-gtest
