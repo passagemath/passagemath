@@ -244,7 +244,7 @@ jobs:
             mingw-w64-${{ matrix.env }}-readline
             mingw-w64-${{ matrix.env }}-texinfo
           msystem: ${{ matrix.msystem }}
-          path-type: inherit
+          path-type: minimal
 
       - name: Download sdists
         uses: actions/download-artifact@v4
