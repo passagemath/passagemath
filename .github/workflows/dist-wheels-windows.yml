@@ -209,6 +209,7 @@ jobs:
         LIB="${GITHUB_WORKSPACE}\\sage-local\\bin;${GITHUB_WORKSPACE}\\sage-local\\lib;%LIB%"
         PKG_CONFIG_PATH=$(pwd)/prefix/lib/pkgconfig:$PKG_CONFIG_PATH
         ACLOCAL_PATH=/usr/share/aclocal
+        FC=${{ contains(matrix.msystem, 'clang') && 'flang' || 'gfortran' }}
         LINBOX_CONFIGURE=--without-ntl
         GIAC_CONFIGURE=--disable-ntl
         SAGE_MACAULAY2_BUILD_OPTIONS=-DWITH_PYTHON=off
