@@ -14,6 +14,7 @@ from sage_setup import sage_setup
 
 sage_setup(['sagemath-mathilda'],
            recurse_packages=('sage', 'passagemath_mathilda'),
+           required_modules=('mathilda',),
            spkgs=['mathilda'],
            package_data={
            },

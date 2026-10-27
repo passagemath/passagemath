@@ -99,6 +99,7 @@ jobs:
             ${{ contains(inputs.extra_sage_packages, 'libpng')            && format('mingw-w64-{0}-libpng',                   matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'm4ri')              && format('mingw-w64-{0}-m4ri',                     matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'm4rie')             && format('mingw-w64-{0}-m4rie',                    matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'mathilda')          && format('mingw-w64-{0}-mathilda',                 matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'mpfi')              && format('mingw-w64-{0}-mpfi',                     matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'msolve')            && format('mingw-w64-{0}-msolve',                   matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'nauty')             && format('mingw-w64-{0}-nauty',                    matrix.env) || '' }}
@@ -116,6 +117,8 @@ jobs:
             ${{ contains(inputs.extra_sage_packages, 'sqlite')            && format('mingw-w64-{0}-sqlite3',                  matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'symmetrica')        && format('mingw-w64-{0}-symmetrica',               matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'tdlib')             && format('mingw-w64-{0}-treedec',                  matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'xeus')              && format('mingw-w64-{0}-xeus',                     matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'xeus_zmq')          && format('mingw-w64-{0}-xeus-zmq',                 matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'zlib')              && format('mingw-w64-{0}-zlib',                     matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'calver')            && format('mingw-w64-{0}-python-calver',            matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'cysignals')         && format('mingw-w64-{0}-python-cysignals',         matrix.env) || '' }}
