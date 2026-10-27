@@ -6,6 +6,7 @@
 #include <functional>
 #include <vector>
 #include <algorithm>
+#include <iterator>
 #include "functions.h"
 #include "data.h"
 
