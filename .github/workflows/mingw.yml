@@ -116,6 +116,8 @@ jobs:
             ${{ contains(inputs.extra_sage_packages, 'sqlite')            && format('mingw-w64-{0}-sqlite3',                  matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'symmetrica')        && format('mingw-w64-{0}-symmetrica',               matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'tdlib')             && format('mingw-w64-{0}-treedec',                  matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'xeus')              && format('mingw-w64-{0}-xeus',                     matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'xeus_zmq')          && format('mingw-w64-{0}-xeus-zmq',                 matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'zlib')              && format('mingw-w64-{0}-zlib',                     matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'calver')            && format('mingw-w64-{0}-python-calver',            matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'cysignals')         && format('mingw-w64-{0}-python-cysignals',         matrix.env) || '' }}
