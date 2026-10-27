@@ -209,6 +209,7 @@ jobs:
         LIB="${GITHUB_WORKSPACE}\\sage-local\\bin;${GITHUB_WORKSPACE}\\sage-local\\lib;%LIB%"
         PKG_CONFIG_PATH=$(pwd)/prefix/lib/pkgconfig:$PKG_CONFIG_PATH
         ACLOCAL_PATH=/usr/share/aclocal
+        FC=${{ contains(matrix.msystem, 'clang') && 'flang' || 'gfortran' }}
         LINBOX_CONFIGURE=--without-ntl
         GIAC_CONFIGURE=--disable-ntl
         SAGE_MACAULAY2_BUILD_OPTIONS=-DWITH_PYTHON=off
@@ -237,6 +238,7 @@ jobs:
             python-setuptools
             patch
             bison
+            flex
             mingw-w64-${{ matrix.env }}-cmake
             mingw-w64-${{ matrix.env }}-ninja
             mingw-w64-${{ matrix.env }}-gtest
@@ -244,7 +246,7 @@ jobs:
             mingw-w64-${{ matrix.env }}-readline
             mingw-w64-${{ matrix.env }}-texinfo
           msystem: ${{ matrix.msystem }}
-          path-type: inherit
+          path-type: minimal
 
       - name: Download sdists
         uses: actions/download-artifact@v4
@@ -380,6 +382,13 @@ jobs:
         uses: pypa/cibuildwheel@v4.3.1
         with:
           package-dir: unpacked/passagemath_categories
+
+      - name: sagemath-mathilda
+        id:   sagemath-mathilda
+        if:   (success() || failure()) && steps.unpack.outcome == 'success'
+        uses: pypa/cibuildwheel@v4.3.1
+        with:
+          package-dir: unpacked/passagemath_mathilda
 
       - name: sagemath-graphs
         id:   sagemath-graphs
@@ -543,6 +552,7 @@ jobs:
          'sagemath-gsl',
          'sagemath-highs',
          'sagemath-homfly',
+         'sagemath-mathilda',
          'sagemath-modules',
          'sagemath-planarity',
          'sagemath-plot',

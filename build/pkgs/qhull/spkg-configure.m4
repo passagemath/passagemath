@@ -17,7 +17,8 @@ SAGE_SPKG_CONFIGURE([qhull], [
                ], [
                   sage_spkg_install_qhull=yes
                ])dnl AC_CHECK_HEADER
-           ], [
+           ], [dnl
+               AC_MSG_RESULT([no])
                sage_spkg_install_qhull=yes
            ])dnl AX_COMPARE_VERSION
     ])dnl IF

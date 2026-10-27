@@ -8,8 +8,8 @@ fi
 # Disable all homebrew library discovery
 export HOMEBREW=
 
-# Patch out other ad-hoc library discovery
-sed -i.bak -E 's,-(I|L)(/usr/local/|/usr)[^ ]*,,g' makefile
+# Disable other ad-hoc library discovery
+export SYSTEM_PREFIX=
 
 # Link libdl for dladdr on older glibc systems
 sed -i.bak '/foreach/s/readline/readline dl/' kernel/CMakeLists.txt
@@ -28,3 +28,5 @@ sdh_cmake -GNinja \
           -S kernel -B kernel/build -DCMAKE_BUILD_TYPE=Release
 cmake --build kernel/build -j
 DESTDIR=$SAGE_DESTDIR cmake --install kernel/build  # installs the kernelspec
+
+sdh_generate_windows_lib_files mathilda
