@@ -9346,6 +9346,22 @@ class CyclicPermutations(Permutations_mset):
          [0, 3, 2, 1]]
         sage: CyclicPermutations([1,1,1]).list()                                        # needs sage.combinat
         [[1, 1, 1]]
+
+    TESTS:
+
+    Check that the cardinality, ranks and membership agree with the iteration::
+
+        sage: # needs sage.combinat
+        sage: for mset in [[1], range(4), [1,1,2,2], [1,2,3,3], [1,1,2,2,3]]:
+        ....:     C = CyclicPermutations(mset)
+        ....:     L = C.list()
+        ....:     assert C.cardinality() == len(L), (mset, C.cardinality(), len(L))
+        ....:     assert [C.unrank(r) for r in range(len(L))] == L, mset
+        ....:     assert [C.rank(p) for p in L] == list(range(len(L))), mset
+        ....:     assert sorted(list(p) for p in Permutations(mset) if p in C) == sorted(L), mset
+        sage: C = CyclicPermutations(range(4))
+        sage: all(C.random_element() in C.list() for _ in range(20))
+        True
     """
     @staticmethod
     def __classcall_private__(cls, mset):
@@ -9418,6 +9434,77 @@ class CyclicPermutations(Permutations_mset):
              [0, 3, 2, 1]]
         """
         return list(self.__iter__(distinct=distinct))
+
+    def _necklaces(self):
+        """
+        Return the necklaces whose content is given by the multiplicities
+        of the elements of ``self.mset``.
+
+        EXAMPLES::
+
+            sage: CyclicPermutations([1,1,2,2])._necklaces()                            # needs sage.combinat
+            Necklaces with evaluation [2, 0, 2, 0]
+        """
+        content = [0] * len(self.mset)
+        index_list = map(self.mset.index, self.mset)
+        for i in index_list:
+            content[i] += 1
+
+        from .necklace import Necklaces
+        return Necklaces(content)
+
+    def __contains__(self, x) -> bool:
+        """
+        EXAMPLES::
+
+            sage: C = CyclicPermutations(range(4))
+            sage: [0, 2, 3, 1] in C                                                     # needs sage.combinat
+            True
+            sage: [2, 3, 1, 0] in C                                                     # needs sage.combinat
+            False
+            sage: [0, 1, 2] in C
+            False
+        """
+        if not super().__contains__(x):
+            return False
+        return [self.mset.index(i) + 1 for i in x] in self._necklaces()
+
+    def cardinality(self):
+        """
+        Return the cardinality of the set.
+
+        EXAMPLES::
+
+            sage: CyclicPermutations(range(4)).cardinality()                            # needs sage.combinat
+            6
+            sage: CyclicPermutations([1,1,2,2]).cardinality()                           # needs sage.combinat
+            2
+        """
+        return self._necklaces().cardinality()
+
+    def rank(self, p):
+        """
+        The rank of an element of ``self``.
+
+        EXAMPLES::
+
+            sage: C = CyclicPermutations(range(4))
+            sage: C.rank([0, 3, 2, 1])                                                  # needs sage.combinat
+            5
+        """
+        return self._rank_from_iterator(p)
+
+    def unrank(self, r):
+        """
+        The element of ``self`` with rank ``r``.
+
+        EXAMPLES::
+
+            sage: C = CyclicPermutations(range(4))
+            sage: C.unrank(5)                                                           # needs sage.combinat
+            [0, 3, 2, 1]
+        """
+        return self._unrank_from_iterator(r)
 
 #################################################
 
