@@ -166,6 +166,26 @@ class Polyhedron_base6(Polyhedron_base5):
           * ``False``: Switches off the drawing of the corresponding
             graphics object
 
+          * A callable receiving a zero-, one-, or two-dimensional
+            :class:`~sage.geometry.polyhedron.face.PolyhedronFace` of the
+            original polyhedron for ``point``, ``line``, or ``polygon``, respectively,
+            and returning a dictionary or ``False``. All support ``color``;
+            ``point`` also supports a positive finite ``size`` and ``line``
+            a positive finite ``thickness``. An empty dictionary inherits the wireframe or fill
+            options for that element. RGBA colors are not supported; use uniform ``alpha`` or
+            ``opacity`` instead. Returning ``False`` hides only that element;
+            other dimensions are styled independently. This requires a bounded polyhedron whose dimension and
+            ambient dimension are both 3. Empty polyhedra produce an empty
+            plot without calling the function.
+
+            The function is called once per face on each plot; the order is
+            unspecified. Its dictionary is not modified and its exceptions
+            propagate. Options take precedence in this order: ``wireframe``/``fill``,
+            callback result, global keywords. Disabled base options suppress
+            the corresponding callback. Rainbow colors use the unfiltered
+            element order, so hiding elements retains their palette positions. Transparency is uniform and
+            can be specified by the global ``alpha`` or ``opacity`` option.
+
         - ``wireframe``, ``fill`` -- similar to ``point``, ``line``,
           and ``polygon``, but ``fill`` is used for the graphics
           objects in the dimension of the polytope (or of dimension 2
@@ -375,7 +395,183 @@ class Polyhedron_base6(Polyhedron_base5):
             sage: type(Polyhedron([(0,0,0,0), (1,1,1,1), (1,0,0,0)]).plot())            # needs sage.symbolic
             <class 'sage.plot.graphics.Graphics'>
 
+        Color the original mathematical faces (:issue:`33686`). For a
+        box with side lengths 1, 2, 3, the face areas are 2, 3, 6::
+
+            sage: # needs sage.plot
+            sage: from itertools import product
+            sage: box = Polyhedron(vertices=list(product((0, 1), (0, 2), (0, 3))))
+            sage: areas = []
+            sage: def face_style(face):
+            ....:     assert face.polyhedron() is box and face.dim() == 2
+            ....:     vertices = [vector(v) for v in face.vertices()]
+            ....:     edges = sorted((v - vertices[0] for v in vertices[1:]), key=lambda v: v.norm())
+            ....:     area = edges[0].cross_product(edges[1]).norm()
+            ....:     areas.append(area)
+            ....:     return {'color': {2: 'red', 3: 'green', 6: 'blue'}[area]}
+            sage: box.plot(polygon=face_style)
+            Graphics3d Object
+            sage: sorted(areas)
+            [2, 2, 3, 3, 6, 6]
+
+        Style original vertices and edges independently, and hide elements
+        without changing other dimensions (:issue:`33686`)::
+
+            sage: # needs sage.plot
+            sage: seen = []
+            sage: def vertex_style(face):
+            ....:     assert face.polyhedron() is box and face.dim() == 0
+            ....:     seen.append(face)
+            ....:     return {'color': 'red', 'size': 18} if face.vertices()[0][2] == 3 else False
+            sage: def edge_style(face):
+            ....:     assert face.polyhedron() is box and face.dim() == 1
+            ....:     seen.append(face)
+            ....:     return {'color': 'green', 'thickness': 4} if all(v[2] == 3 for v in face.vertices()) else False
+            sage: g = box.plot(point=vertex_style, line=edge_style, polygon=False)
+            sage: items = g.threejs_repr(g.default_render_params())
+            sage: len(seen), sorted(kind for kind, data in items)
+            (20, ['line', 'line', 'line', 'line', 'point', 'point', 'point', 'point'])
+            sage: sorted(set(data['color'] for kind, data in items))
+            ['#008000', '#ff0000']
+            sage: all(data['size'] == 18 for kind, data in items if kind == 'point')
+            True
+            sage: all(data['linewidth'] == 4 for kind, data in items if kind == 'line')
+            True
+
         TESTS:
+
+        Point and line dictionaries follow keyword precedence and are not
+        changed. Empty inputs and disabled wireframes do not evaluate them::
+
+            sage: # needs sage.plot
+            sage: point_options = {'color': 'red', 'size': 18}
+            sage: g = box.plot(point=lambda f: point_options, line=False, polygon=False, color='blue', size=12)
+            sage: items = g.threejs_repr(g.default_render_params())
+            sage: set((data['color'], data['size']) for kind, data in items)
+            {('#0000ff', 12.0)}
+            sage: point_options
+            {'color': 'red', 'size': 18}
+            sage: calls = []
+            sage: box.plot(wireframe=False, point=lambda f: calls.append(f), line=lambda f: calls.append(f))
+            Graphics3d Object
+            sage: calls
+            []
+            sage: Polyhedron(vertices=[], ambient_dim=3).plot(point=vertex_style, line=edge_style)
+            Graphics object consisting of 0 graphics primitives
+            sage: box.plot(point=lambda f: True)
+            Traceback (most recent call last):
+            ...
+            TypeError: point callback must return a dictionary or False
+            sage: box.plot(line=lambda f: {'thickness': 0})
+            Traceback (most recent call last):
+            ...
+            ValueError: line callback 'thickness' must be positive and finite
+            sage: polytopes.hypercube(2).plot(point=vertex_style)
+            Traceback (most recent call last):
+            ...
+            NotImplementedError: point callbacks require a bounded polyhedron of dimension 3 and ambient dimension 3
+
+        The function is evaluated again on each plot and its dictionary is
+        not mutated. Global color overrides both fill and callback color::
+
+            sage: # needs sage.plot
+            sage: style = {'color': 'red'}
+            sage: calls = []
+            sage: def callback(face):
+            ....:     calls.append(face)
+            ....:     return style
+            sage: g = box.plot(point=False, line=False, polygon=callback,
+            ....:              fill='yellow', color='blue', alpha=0.4)
+            sage: surface = g.threejs_repr(g.default_render_params())[0][1]
+            sage: surface['faceColors']
+            ['#0000ff', '#0000ff', '#0000ff', '#0000ff', '#0000ff', '#0000ff']
+            sage: surface['opacity']
+            0.4
+            sage: style
+            {'color': 'red'}
+            sage: box.plot(polygon=callback)
+            Graphics3d Object
+            sage: len(calls)
+            12
+            sage: g = box.plot(point=False, line=False, fill='yellow', polygon=lambda f: {})
+            sage: g.threejs_repr(g.default_render_params())[0][1]['faceColors']
+            ['#ffff00', '#ffff00', '#ffff00', '#ffff00', '#ffff00', '#ffff00']
+
+        A global rainbow also overrides callback colors::
+
+            sage: # needs sage.plot
+            sage: g = box.plot(point=False, line=False, polygon=lambda f: {'color': 'red'}, color='rainbow')
+            sage: len(set(g.threejs_repr(g.default_render_params())[0][1]['faceColors']))
+            6
+
+        Hide individual faces without hiding their edges and vertices::
+
+            sage: # needs sage.plot
+            sage: calls = []
+            sage: def top_only(face):
+            ....:     calls.append(face)
+            ....:     return {'color': 'red'} if all(v[2] == 3 for v in face.vertices()) else False
+            sage: g = box.plot(point=False, line=False, polygon=top_only, color='blue')
+            sage: data = g.threejs_repr(g.default_render_params())[0][1]
+            sage: len(calls), len(data['faces']), data['faceColors']
+            (6, 1, ['#0000ff'])
+            sage: g = box.plot(point=False, line=False, polygon=lambda f: False)
+            sage: g.threejs_repr(g.default_render_params())
+            []
+            sage: g = box.plot(polygon=lambda f: False)
+            sage: any(kind == 'surface' for kind, data in g.threejs_repr(g.default_render_params()))
+            False
+
+        Only an entire face attaining the maximum is highlighted. Maximizing
+        ``z`` gives one face; maximizing ``x+y+z`` gives only a vertex::
+
+            sage: # needs sage.plot
+            sage: counts = []
+            sage: for objective in (vector([0, 0, 1]), vector([1, 1, 1])):
+            ....:     optimum = max(objective.dot_product(vector(v)) for v in box.vertices())
+            ....:     def optimal_style(face):
+            ....:         optimal = all(objective.dot_product(vector(v)) == optimum
+            ....:                       for v in face.vertices())
+            ....:         return {'color': 'red' if optimal else 'gray'}
+            ....:     g = box.plot(point=False, line=False, polygon=optimal_style)
+            ....:     counts.append(g.threejs_repr(g.default_render_params())[0][1]['faceColors'].count('#ff0000'))
+            sage: counts
+            [1, 0]
+
+        Invalid results and user exceptions are not silently ignored::
+
+            sage: box.plot(polygon=lambda f: 'red')                                  # needs sage.plot
+            Traceback (most recent call last):
+            ...
+            TypeError: polygon callback must return a dictionary or False
+            sage: box.plot(polygon=lambda f: {'opacity': 0.5})                        # needs sage.plot
+            Traceback (most recent call last):
+            ...
+            ValueError: polygon callback supports only the 'color' option
+            sage: def broken(face):
+            ....:     raise RuntimeError('user callback failed')
+            sage: box.plot(polygon=broken)                                           # needs sage.plot
+            Traceback (most recent call last):
+            ...
+            RuntimeError: user callback failed
+
+        Empty inputs do not call the function. Unsupported dimensions and
+        unbounded objects fail before calling it::
+
+            sage: Polyhedron(vertices=[], ambient_dim=3).plot(polygon=broken)         # needs sage.plot
+            Graphics object consisting of 0 graphics primitives
+            sage: polytopes.hypercube(2).plot(polygon=broken)
+            Traceback (most recent call last):
+            ...
+            NotImplementedError: polygon callbacks require a bounded polyhedron of dimension 3 and ambient dimension 3
+            sage: polytopes.hypercube(4).plot(polygon=broken)
+            Traceback (most recent call last):
+            ...
+            NotImplementedError: polygon callbacks require a bounded polyhedron of dimension 3 and ambient dimension 3
+            sage: Polyhedron(rays=[(1, 0, 0), (0, 1, 0), (0, 0, 1)]).plot(polygon=broken)
+            Traceback (most recent call last):
+            ...
+            NotImplementedError: polygon callbacks require a bounded polyhedron of dimension 3 and ambient dimension 3
 
         Check that :issue:`30015` is fixed::
 
@@ -429,11 +625,46 @@ class Polyhedron_base6(Polyhedron_base5):
                     merged.update(opt)
             return merged
 
+        styles = {}
+
+        def wrap_callback(callback, kind):
+            from .plot import _validate_element_style
+
+            def style(face):
+                result = _validate_element_style(callback(face), kind)
+                if result is False:
+                    return False
+                result = dict(result)
+                # Global keywords take precedence, just as for fixed styles.
+                for key in ('color', 'size' if kind == 'point' else 'thickness'):
+                    if key in kwds and (key == 'color' or kind != 'polygon'):
+                        result[key] = kwds[key]
+                if result.get('color') == 'rainbow':
+                    result.pop('color')  # use the renderer's stable palette
+                return result
+
+            return style
+
+        elements = [point, line, polygon]
+        for i, kind in enumerate(('point', 'line', 'polygon')):
+            if not callable(elements[i]):
+                continue
+            if not self.is_empty():
+                if (self.dim() != 3 or self.ambient_dim() != 3
+                        or not self.is_compact()):
+                    raise NotImplementedError(
+                        f"{kind} callbacks require a bounded polyhedron of "
+                        "dimension 3 and ambient dimension 3")
+                name = {'point': 'point_style', 'line': 'line_style',
+                        'polygon': 'face_style'}[kind]
+                styles[name] = wrap_callback(elements[i], kind)
+            elements[i] = None
+
         d = min(self.dim(), 2)
         opts = [wireframe] * d + [fill] + [False] * (2-d)
         # The point/line/polygon options take precedence over wireframe/fill
         opts = [merge_options(opt1, opt2, kwds)
-                for opt1, opt2 in zip(opts, [point, line, polygon])]
+                for opt1, opt2 in zip(opts, elements)]
 
         def project(polyhedron, ortho):
             if polyhedron.ambient_dim() <= 3:
@@ -455,7 +686,7 @@ class Polyhedron_base6(Polyhedron_base5):
         except AttributeError:
             raise NotImplementedError('plotting of {0}-dimensional polyhedra not implemented'
                                           .format(self.ambient_dim()))
-        return plot_method(*opts)
+        return plot_method(*opts, **styles)
 
     def show(self, **kwds):
         r"""
