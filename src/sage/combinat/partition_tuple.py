@@ -267,6 +267,7 @@ from sage.categories.finite_enumerated_sets import FiniteEnumeratedSets
 from sage.categories.infinite_enumerated_sets import InfiniteEnumeratedSets
 from sage.misc.cachefunc import cached_method
 from sage.misc.lazy_import import lazy_import
+from sage.misc.misc_c import prod
 from sage.rings.finite_rings.integer_mod_ring import IntegerModRing
 from sage.rings.integer_ring import ZZ
 from sage.rings.semirings.non_negative_integer_semiring import NN
@@ -2988,6 +2989,16 @@ class RegularPartitionTuples_level_size(PartitionTuples_level_size):
          ([3], [], [2, 2]),
          ([3], [], [2, 1, 1]),
          ([2, 1], [], [4])]
+
+    TESTS:
+
+    Check that the cardinality agrees with the iteration::
+
+        sage: # needs sage.libs.flint
+        sage: for level, size, ell in [(2,4,2), (2,4,3), (3,4,2), (3,7,(2,1,4))]:
+        ....:     RPT = PartitionTuples(level=level, size=size, regular=ell)
+        ....:     n = RPT.cardinality()
+        ....:     assert n == len(RPT.list()), (RPT, n)
     """
 
     def __init__(self, level, size, regular):
@@ -3091,6 +3102,25 @@ class RegularPartitionTuples_level_size(PartitionTuples_level_size):
                  for v, ell in zip(iv, self._ell)]
             for cp in itertools.product(*[p[i] for i in range(self._level)]):
                 yield self._element_constructor_(cp)
+
+    def cardinality(self):
+        r"""
+        Return the number of `\ell`-regular partition tuples of level
+        ``level`` and size ``size``.
+
+        EXAMPLES::
+
+            sage: PartitionTuples(level=2, size=3, regular=2).cardinality()             # needs sage.libs.flint
+            6
+            sage: PartitionTuples(level=3, size=7, regular=(2,1,4)).cardinality()       # needs sage.libs.flint
+            56
+        """
+        counts = [[RegularPartitions_n(v, ell).cardinality() if ell > 0
+                   else Partitions_n(v).cardinality()
+                   for v in range(self._size + 1)]
+                  for ell in self._ell]
+        return ZZ.sum(prod(c[v] for c, v in zip(counts, iv))
+                      for iv in IntegerVectors(self._size, self._level))
 
     def _an_element_(self):
         """
