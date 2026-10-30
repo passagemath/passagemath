@@ -1,4 +1,4 @@
- zlib freetype | $(PYTHON_TOOLCHAIN) pkgconf $(PYTHON)
+ zlib freetype pybind11 | pkgconf
 
 ----------
 All lines of this file are ignored except the first.
