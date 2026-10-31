@@ -113,6 +113,14 @@ if not homfly.found()
   )
 endif
 
+# version 11.0 is needed for primesieve_jump_to()
+primesieve = dependency(
+  'primesieve',
+  version: '>=11.0',
+  required: get_option('primesieve'),
+  disabler: true,
+)
+
 py.install_sources(
   '__init__.py',
   'all.py',
@@ -128,6 +136,7 @@ py.install_sources(
   'm4rie.pxd',
   'meataxe.pxd',
   'meataxe.pyx',
+  'primesieve.pyx',
   'sirocco.pyx',
   subdir: 'sage/libs',
 )
@@ -137,6 +146,7 @@ extension_data = {
   'homfly': files('homfly.pyx'),
   'libecm': files('libecm.pyx'),
   'meataxe': files('meataxe.pyx'),
+  'primesieve': files('primesieve.pyx'),
 }
 
 dependencies = [py_dep, cysignals, gc, gmp]
@@ -151,6 +161,8 @@ foreach name, pyx : extension_data
     deps += [homfly]
   elif name == 'libecm'
     deps += [ecm]
+  elif name == 'primesieve'
+    deps += [primesieve]
   endif
 
   py.extension_module(
