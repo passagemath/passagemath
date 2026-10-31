@@ -44,6 +44,6 @@ sdh_cmake -GNinja \
 # we try to use the external primesieve first, and if
 # cmake cannot find it, we build a vendored copy
 
-(primc_config OFF) || primc_config ON
+(primc_config OFF) || primc_config ON || sdh_die "Failure installing"
 
 sdh_generate_windows_lib_files primecount
