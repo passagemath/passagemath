@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-environment
 from sage.cli.options import CliOptions
 
 

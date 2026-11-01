@@ -9,6 +9,7 @@ include sage/misc/package_dir.py
 include sage/misc/temporary_file.py
 include sage/misc/viewer.py
 
+graft sage/cli
 graft sage/features
 
 include VERSION.txt
