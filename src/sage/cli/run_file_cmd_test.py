@@ -37,3 +37,13 @@ def test_run_file_cmd_with_options_for_the_file(capsys, tmp_path):
         captured = capsys.readouterr()
         assert result == 0
         assert captured.out == f"{[str(file), '--input', 'x', '-v', '--version']}\n"
+
+
+def test_run_file_cmd_with_separator(capsys, tmp_path):
+    file = tmp_path / "test.py"
+    file.write_text("import sys; print(sys.argv)")
+    with patch.object(sys, 'argv', ["sage", "-q", "--", str(file), "-v", "--", "x"]):
+        result = main()
+        captured = capsys.readouterr()
+        assert result == 0
+        assert captured.out == f"{[str(file), '-v', '--', 'x']}\n"
