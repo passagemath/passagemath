@@ -781,12 +781,12 @@ def ensure_interruptible_after(seconds: float, max_wait_after_interrupt: float =
 
         sage: # needs sage.misc.cython
         sage: cython(r'''
-        ....: from posix.time cimport clock_gettime, CLOCK_REALTIME, timespec, time_t
+        ....: from posix.time cimport clock_gettime, CLOCK_MONOTONIC, timespec, time_t
         ....: from cysignals.signals cimport sig_check
         ....:
         ....: cpdef void uninterruptible_sleep(double seconds):
         ....:     cdef timespec start_time, target_time
-        ....:     clock_gettime(CLOCK_REALTIME, &start_time)
+        ....:     clock_gettime(CLOCK_MONOTONIC, &start_time)
         ....:
         ....:     cdef time_t floor_seconds = <time_t>seconds
         ....:     target_time.tv_sec = start_time.tv_sec + floor_seconds
@@ -796,7 +796,7 @@ def ensure_interruptible_after(seconds: float, max_wait_after_interrupt: float =
         ....:         target_time.tv_sec += 1
         ....:
         ....:     while True:
-        ....:         clock_gettime(CLOCK_REALTIME, &start_time)
+        ....:         clock_gettime(CLOCK_MONOTONIC, &start_time)
         ....:         if start_time.tv_sec > target_time.tv_sec or (start_time.tv_sec == target_time.tv_sec and start_time.tv_nsec >= target_time.tv_nsec):
         ....:             break
         ....:
@@ -831,12 +831,12 @@ def ensure_interruptible_after(seconds: float, max_wait_after_interrupt: float =
 
         sage: # needs sage.misc.cython
         sage: cython(r'''
-        ....: from posix.time cimport clock_gettime, CLOCK_REALTIME, timespec, time_t
+        ....: from posix.time cimport clock_gettime, CLOCK_MONOTONIC, timespec, time_t
         ....: from cysignals.signals cimport sig_check
         ....:
         ....: cpdef void interruptible_sleep(double seconds):
         ....:     cdef timespec start_time, target_time
-        ....:     clock_gettime(CLOCK_REALTIME, &start_time)
+        ....:     clock_gettime(CLOCK_MONOTONIC, &start_time)
         ....:
         ....:     cdef time_t floor_seconds = <time_t>seconds
         ....:     target_time.tv_sec = start_time.tv_sec + floor_seconds
@@ -847,7 +847,7 @@ def ensure_interruptible_after(seconds: float, max_wait_after_interrupt: float =
         ....:
         ....:     while True:
         ....:         sig_check()
-        ....:         clock_gettime(CLOCK_REALTIME, &start_time)
+        ....:         clock_gettime(CLOCK_MONOTONIC, &start_time)
         ....:         if start_time.tv_sec > target_time.tv_sec or (start_time.tv_sec == target_time.tv_sec and start_time.tv_nsec >= target_time.tv_nsec):
         ....:             break
         ....: ''')
@@ -878,7 +878,30 @@ def ensure_interruptible_after(seconds: float, max_wait_after_interrupt: float =
         ValueError
         sage: data
         {'alarm_raised': False, 'elapsed': ...}
+
+    Elapsed interruption time must not include adjustments to the system
+    wall clock. Simulate forward and backward wall-clock jumps while the
+    monotonic clock advances by the requested interval::
+
+        sage: from unittest.mock import patch
+        sage: from cysignals.alarm import AlarmInterrupt
+        sage: for wall_end in (1002r, 998r):
+        ....:     with patch('sage.doctest.util.walltime', side_effect=[1000r, wall_end, wall_end]), patch('time.monotonic', side_effect=[10r, 10.5r]), patch('cysignals.alarm.alarm'), patch('cysignals.alarm.cancel_alarm'):
+        ....:         with ensure_interruptible_after(0.5) as data:
+        ....:             raise AlarmInterrupt
+        ....:     assert data == {'alarm_raised': True, 'elapsed': 0.5}
+
+    A genuine excessive elapsed delay must still fail with the unchanged
+    default allowance::
+
+        sage: with patch('sage.doctest.util.walltime', side_effect=[1000r, 1000.5r, 1000.5r]), patch('time.monotonic', side_effect=[10r, 10.75r]), patch('cysignals.alarm.alarm'), patch('cysignals.alarm.cancel_alarm'):
+        ....:     with ensure_interruptible_after(0.5):
+        ....:         raise AlarmInterrupt
+        Traceback (most recent call last):
+        ...
+        RuntimeError: Function is not interruptible within 0.5000 seconds, only after 0.7500 seconds
     """
+    from time import monotonic
     from cysignals.alarm import alarm, cancel_alarm, AlarmInterrupt
 
     seconds = float(seconds)
@@ -886,7 +909,7 @@ def ensure_interruptible_after(seconds: float, max_wait_after_interrupt: float =
     inaccuracy_tolerance = float(inaccuracy_tolerance)
     # use Python float to avoid slowdown with Sage Integer (see https://github.com/sagemath/cysignals/issues/215)
     data = {}
-    start_time = walltime()
+    start_time = monotonic()
     alarm(seconds)
     alarm_raised = False
 
@@ -896,9 +919,8 @@ def ensure_interruptible_after(seconds: float, max_wait_after_interrupt: float =
         e.__traceback__ = None  # workaround for https://github.com/python/cpython/pull/129276
         alarm_raised = True
     finally:
-        before_cancel_alarm_elapsed = walltime() - start_time
         cancel_alarm()
-        elapsed = walltime() - start_time
+        elapsed = monotonic() - start_time
         data["elapsed"] = elapsed
         data["alarm_raised"] = alarm_raised
 
