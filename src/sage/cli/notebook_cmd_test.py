@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-environment
 import argparse
 
 import pytest

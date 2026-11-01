@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-environment
 from sage.cli.eval_cmd import EvalCmd
 from sage.cli.options import CliOptions
 import pytest

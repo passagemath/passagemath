@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-environment
 import os
 import sys
 

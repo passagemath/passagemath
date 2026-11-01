@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-environment
 #!/usr/bin/env python3
 
 import argparse

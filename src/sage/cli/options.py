@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-environment
 from dataclasses import dataclass
 
 
