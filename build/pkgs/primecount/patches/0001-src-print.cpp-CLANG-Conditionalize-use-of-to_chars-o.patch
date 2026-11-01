@@ -1,0 +1,25 @@
+From 26df15d9bade03d5e160ed3f17e3b487ab448d32 Mon Sep 17 00:00:00 2001
+From: Matthias Koeppe <mkoeppe@math.ucdavis.edu>
+Date: Sat, 31 Oct 2026 17:02:47 -0700
+Subject: [PATCH] src/print.cpp [CLANG]: Conditionalize use of to_chars on
+ macOS deployment version
+
+---
+ src/print.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/print.cpp b/src/print.cpp
+index 10f74d83..4136ecae 100644
+--- a/src/print.cpp
++++ b/src/print.cpp
+@@ -33,6 +33,7 @@ void print_threads(int threads)
+ } // namespace
+ 
+ #if __cplusplus >= 201703L && \
++    (!defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) || __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 130400) && \
+     __has_include(<charconv>)
+ 
+ #include <primecount.hpp>
+-- 
+2.56.0
+
