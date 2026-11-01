@@ -2,8 +2,6 @@
 import argparse
 
 from sage.cli.options import CliOptions
-from sage.repl.preparse import preparse
-from sage.all import sage_globals
 
 
 class EvalCmd:
@@ -37,6 +35,9 @@ class EvalCmd:
         r"""
         Execute the given command.
         """
+        from sage.repl.preparse import preparse
+        from sage.all import sage_globals
+
         code = preparse(self.options.command)
         eval(compile(code, "<cmdline>", "exec"), sage_globals())
         return 0
