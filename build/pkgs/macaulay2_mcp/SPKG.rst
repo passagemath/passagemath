@@ -1,13 +1,16 @@
-macaulay2_mcp: MCP server for Macaulay2: Groebner bases, resolutions, Betti tables, and more, for Claude Code, opencode, and any MCP client
-===========================================================================================================================================
+macaulay2_mcp: MCP server for Macaulay2: Groebner bases, resolutions, Betti tables, and more
+============================================================================================
 
 Description
 -----------
 
-MCP server for Macaulay2: Groebner bases, resolutions, Betti tables, and more, for Claude Code, opencode, and any MCP client
+MCP server for Macaulay2: Groebner bases, resolutions, Betti tables, and more, for
+Claude Code, opencode, and any MCP client
 
 License
 -------
+
+GPLv3
 
 Upstream Contact
 ----------------
