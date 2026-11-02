@@ -25,6 +25,10 @@ if [ -r "$SAGE_LOCAL/include/readline/readline.h" ]; then
     BUILD_OPTIONS="$BUILD_OPTIONS -DREADLINE_ROOT_DIR=${SAGE_LOCAL}"
 fi
 
+if [ "$SAGE_FAT_BINARY" = "yes" ]; then
+    BUILD_OPTIONS="$BUILD_OPTIONS -DBUILD_NATIVE=off"
+fi
+
 machine=$($CC -dumpmachine)
 if [[ $machine =~ aarch64-* ]]; then
     sed -i.bak '/quadmath/d' M2/Macaulay2/d/CMakeLists.txt
