@@ -64,7 +64,7 @@ on Windows currently requires the use of Windows Subsystem for Linux (WSL)
 or virtualization.
 
 The supported Python versions in the passagemath-10.8.x series are 3.11.x-3.14.x;
-the passagemath-10.6.x series (EOL 2026-10) still supports Python 3.10.x.
+the passagemath-10.10.x series is adding support for Python 3.15.
 
 
 About this pip-installable distribution package
