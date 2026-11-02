@@ -4,10 +4,13 @@ if [ "$UNAME" = "Darwin" ]; then
 fi
 cd src
 
-# Issue #33054: primecount needs "-std=gnu++..."
-# so it gains access to 128-bit integers for full functionality.
-CXXFLAGS=$(echo "${CXXFLAGS}" | sed "s/-std=c++/-std=gnu++/g")
-export CXXFLAGS
+# primecount 8.8 uses an advanced C++17 library feature when compiled
+# with -std=c++17 or -std=gnu++17 or newer, which is set by our configure script
+# and may not actually be supported by the compiler. Leave it to the build
+# system of primecount to set flags for the language standard.
+# https://github.com/passagemath/passagemath/issues/2999
+export CXX=$(echo "$CXX" | sed 's/-std=[a-z0-9+]*//g')
+export CXXFLAGS=$(echo "$CXXFLAGS" | sed 's/-std=[a-z0-9+]*//g')
 
 primc_config(){
 echo "Configuring primecount: building primesieve $1"
@@ -44,6 +47,6 @@ sdh_cmake -GNinja \
 # we try to use the external primesieve first, and if
 # cmake cannot find it, we build a vendored copy
 
-(primc_config OFF) || primc_config ON
+(primc_config OFF) || primc_config ON || sdh_die "Failure installing"
 
 sdh_generate_windows_lib_files primecount

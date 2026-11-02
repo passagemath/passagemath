@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-environment
 from sage.cli.run_file_cmd import RunFileCmd
 from sage.cli.options import CliOptions
 from unittest.mock import patch
