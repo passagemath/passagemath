@@ -4,7 +4,7 @@ Test sage-get-system-packages commandline utility and get_system_packages module
 """
 
 # ****************************************************************************
-#       Copyright (C) 2026 PassageMath Contributors
+#       Copyright (C) 2026 Deepak Kambala <deepakkambala21@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

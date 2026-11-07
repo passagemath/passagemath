@@ -6,7 +6,7 @@ and packaging formats.
 
 # ****************************************************************************
 #       Copyright (C) 2017-2026 Matthias Koeppe <mkoeppe@math.ucdavis.edu>
-#                     2026 PassageMath Contributors
+#                     2026 Deepak Kambala <deepakkambala21@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
