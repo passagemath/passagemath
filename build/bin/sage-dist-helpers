@@ -56,12 +56,16 @@
 #    be given as arguments.  If $SAGE_DESTDIR is not set then the command is
 #    run with $SAGE_SUDO, if set.
 #
-# - sdh_pip_install [--no-deps] [--build-isolation] [--no-build-isolation] [...]
+# - sdh_pip_install [--no-deps] [--build-isolation] [--no-build-isolation]
+#                   [--env-dir[=DIR]] [--sdist-extract-dir[=DIR]] [...]
 #
-#    Builds a wheel using `pip wheel` with the given options [...], then installs
+#    Builds a wheel using `python3 -m build` with the given options [...], then installs
 #    the wheel.  Unless the special option --no-build-isolation is given,
 #    the wheel is built using build isolation.
 #    If the special option --no-deps is given, it is passed to pip install.
+#    The option --env-dir specifies the directory used for the isolated build environment,
+#    preserving it upon build failures.
+#    The option --sdist-extract-dir specifies the directory to extract intermediate sdists.
 #    If $SAGE_DESTDIR is not set then the command is run with $SAGE_SUDO, if
 #    set.
 #
@@ -210,6 +214,8 @@ sdh_build_wheel() {
     export PIP_NO_INDEX=1
     install_options=""
     build_options=""
+    env_dir=""
+    sdist_extract_dir=""
     # pip has --no-build-isolation but no flag that turns the default back on...
     if [ -n "$ENABLE_SYSTEM_SITE_PACKAGES" ]; then
         # No isolation, so that system site packages (through the sage venv) take effect.
@@ -250,6 +256,20 @@ sdh_build_wheel() {
             --no-deps)
                 install_options="$install_options $1"
                 ;;
+            --env-dir)
+                shift
+                env_dir="$1"
+                ;;
+            --env-dir=*)
+                env_dir="${1#*=}"
+                ;;
+            --sdist-extract-dir)
+                shift
+                sdist_extract_dir="$1"
+                ;;
+            --sdist-extract-dir=*)
+                sdist_extract_dir="${1#*=}"
+                ;;
             -C|--config-settings|--config-setting)
                 shift
                 # Per 'python -m build --help', options which begin with a hyphen
@@ -262,7 +282,66 @@ sdh_build_wheel() {
         esac
         shift
     done
-    if python3 -m build $dist_option --outdir=dist $build_isolation_option $build_options "$@"; then
+
+    if [ -z "$env_dir" ]; then
+        env_dir="${SAGE_BUILD_ENV_DIR:-}"
+    fi
+    if [ -z "$env_dir" ]; then
+        if [ -n "$SAGE_BUILD_DIR" -a -n "$PKG_NAME" -a -d "$SAGE_BUILD_DIR/$PKG_NAME" ]; then
+            env_dir="$SAGE_BUILD_DIR/$PKG_NAME/build-env"
+        elif [ -n "$PKG_NAME" ]; then
+            env_dir="$(pwd)/build-env-$PKG_NAME"
+        else
+            env_dir="$(pwd)/build-env"
+        fi
+    fi
+
+    env_dir_option=""
+    if [ -n "$env_dir" -a "$env_dir" != "none" ]; then
+        case $build_isolation_option in
+            *--no-isolation*)
+                # No build isolation, so no isolated build environment to keep
+                ;;
+            *)
+                if [ -z "$SAGE_BUILD_SUPPORTS_ENV_DIR" ]; then
+                    if python3 -m build --help 2>&1 | grep -q -- '--env-dir'; then
+                        SAGE_BUILD_SUPPORTS_ENV_DIR=yes
+                    else
+                        SAGE_BUILD_SUPPORTS_ENV_DIR=no
+                    fi
+                fi
+                if [ "$SAGE_BUILD_SUPPORTS_ENV_DIR" = "yes" ]; then
+                    # Clean up previous build environment if it exists (python -m build requires empty or non-existent dir)
+                    rm -rf "$env_dir"
+                    env_dir_option="--env-dir=$env_dir"
+                fi
+                ;;
+        esac
+    fi
+
+    if [ -z "$sdist_extract_dir" ]; then
+        sdist_extract_dir="${SAGE_BUILD_SDIST_EXTRACT_DIR:-}"
+    fi
+    if [ -z "$sdist_extract_dir" -a -z "$dist_option" ]; then
+        if [ -n "$SAGE_BUILD_DIR" -a -n "$PKG_NAME" -a -d "$SAGE_BUILD_DIR/$PKG_NAME" ]; then
+            sdist_extract_dir="$SAGE_BUILD_DIR/$PKG_NAME/sdist-extract"
+        fi
+    fi
+    sdist_extract_dir_option=""
+    if [ -n "$sdist_extract_dir" -a "$sdist_extract_dir" != "none" ]; then
+        if [ -z "$SAGE_BUILD_SUPPORTS_SDIST_EXTRACT_DIR" ]; then
+            if python3 -m build --help 2>&1 | grep -q -- '--sdist-extract-dir'; then
+                SAGE_BUILD_SUPPORTS_SDIST_EXTRACT_DIR=yes
+            else
+                SAGE_BUILD_SUPPORTS_SDIST_EXTRACT_DIR=no
+            fi
+        fi
+        if [ "$SAGE_BUILD_SUPPORTS_SDIST_EXTRACT_DIR" = "yes" ]; then
+            sdist_extract_dir_option="--sdist-extract-dir=$sdist_extract_dir"
+        fi
+    fi
+
+    if python3 -m build $dist_option --outdir=dist $build_isolation_option $build_options $env_dir_option $sdist_extract_dir_option "$@"; then
         : # successful
     elif [ "$SAGE_VENV_FLAGS" = DISABLED ]; then
         sdh_die "Error building a wheel for $PKG_NAME"
@@ -272,12 +351,12 @@ sdh_build_wheel() {
                 sdh_die "Error building a wheel for $PKG_NAME"
                 ;;
             *)
-                echo >&2 "Warning: building with \"python3 -m build $dist_option --outdir=dist $build_isolation_option $build_options $@\" failed."
+                echo >&2 "Warning: building with \"python3 -m build $dist_option --outdir=dist $build_isolation_option $build_options $env_dir_option $sdist_extract_dir_option $@\" failed."
                 unset PIP_FIND_LINKS
                 export PIP_NO_BINARY=:all:
                 build_isolation_option="--no-isolation --skip-dependency-check"
-                echo >&2 "Retrying with \"python3 -m build $dist_option --outdir=dist $build_isolation_option $build_options $@\"."
-                if python3 -m build $dist_option --outdir=dist $build_isolation_option $build_options "$@"; then
+                echo >&2 "Retrying with \"python3 -m build $dist_option --outdir=dist $build_isolation_option $build_options $sdist_extract_dir_option $@\"."
+                if python3 -m build $dist_option --outdir=dist $build_isolation_option $build_options $sdist_extract_dir_option "$@"; then
                     echo >&2 "Warning: Wheel building needed to use \"$build_isolation_option\" to succeed. This means that a dependencies file in build/pkgs/ needs to be updated. Please report this to sage-devel@googlegroups.com, including the build log of this package."
                 else
                     sdh_die "Error building a wheel for $PKG_NAME"
