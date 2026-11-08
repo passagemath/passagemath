@@ -1,1 +1,2 @@
-build
+# Require 1.6 for --sdist-extract-dir, --env-dir
+build >= 1.6
