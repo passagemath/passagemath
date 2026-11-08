@@ -44,7 +44,10 @@ py-modules = [
     "sage.misc.temporary_file",
     "sage.misc.viewer",
 ]
-packages = ["sage.features"]
+packages = [
+    "sage.cli",
+    "sage.features",
+]
 script-files = [
     # The sage script
     "bin/sage",
