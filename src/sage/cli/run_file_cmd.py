@@ -22,8 +22,8 @@ class RunFileCmd:
         """
         parser.add_argument(
             "file",
-            nargs="*",
-            help="execute the given file as sage code",
+            nargs=argparse.REMAINDER,
+            help="execute the given file as sage code, passing the remaining arguments to it",
         )
 
     def __init__(self, options: CliOptions):
@@ -31,8 +31,8 @@ class RunFileCmd:
         Initialize the command.
         """
         self.options = options
-        # shift sys.argv for compatibility with the old sage bash script and python command when consuming arguments from the command line
-        del sys.argv[0]
+        # set sys.argv to the file and its arguments for compatibility with the old sage bash script and python command
+        sys.argv = list(options.file)
 
     def run(self) -> int:
         r"""

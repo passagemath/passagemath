@@ -49,6 +49,9 @@ def main() -> int:
         return InteractiveShellCmd(CliOptions()).run()
 
     args = parser.parse_args(input_args)
+    if args.file[:1] == ["--"]:
+        # like python, treat "--" before the file as the end of the options
+        del args.file[0]
     options = CliOptions(**vars(args))
 
     logging.basicConfig(level=logging.DEBUG if options.verbose else logging.INFO)
