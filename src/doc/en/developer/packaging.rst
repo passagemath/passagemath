@@ -456,9 +456,13 @@ begin with ``sdh_``, which stands for "Sage-distribution helper".
   installing packages into Sage with pip. The last argument must be
   ``.`` to indicate installation from the current directory.
 
-  ``sdh_pip_install`` actually does the installation via ``pip wheel``,
+  ``sdh_pip_install`` actually builds a wheel using ``python3 -m build``,
   creating a wheel file in ``dist/``, followed by
   ``sdh_store_and_pip_install_wheel`` (see below).
+  Options supported include ``--build-isolation``, ``--no-build-isolation``,
+  ``--env-dir`` (to specify and keep the isolated build environment),
+  ``--sdist-extract-dir`` (to specify the directory for extracting intermediate source distributions),
+  and ``--no-deps``.
 
 - ``sdh_pip_editable_install [...]``: The equivalent of running ``pip install -e``
   with the given arguments, as well as additional default arguments used for
