@@ -12,6 +12,8 @@
 #   -d DIR      directory to extract archive contents into
 
 
+import sys
+
 try:
     import sage_bootstrap
 except ImportError:
@@ -20,4 +22,4 @@ except ImportError:
     import sage_bootstrap
 
 from sage_bootstrap.uncompress.cmdline import run
-run()
+sys.exit(run())

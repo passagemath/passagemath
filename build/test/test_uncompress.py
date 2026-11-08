@@ -28,6 +28,22 @@ from sage_bootstrap.uncompress.action import (
 )
 
 
+EXECUTABLE = os.path.join(
+    os.path.dirname(os.path.dirname(__file__)),
+    'bin',
+    'sage-uncompress-spkg',
+)
+
+
+def run_uncompress(*args):
+    proc = subprocess.Popen(
+        [EXECUTABLE] + list(args),
+        stdin=None, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+    )
+    proc.communicate()
+    return proc.returncode
+
+
 class UncompressTarFileTestCase(unittest.TestCase):
 
     def setUp(self):
@@ -63,6 +79,19 @@ class UncompressTarFileTestCase(unittest.TestCase):
         subprocess.check_call([
             'diff', '-r', 'src', 'dst'
         ], cwd=self.tmp)
+
+    def test_cmdline(self):
+        dst = os.path.join(self.tmp, 'dst')
+        self.assertEqual(run_uncompress('-d', dst, self.filename), 0)
+        subprocess.check_call([
+            'diff', '-r', 'src', 'dst'
+        ], cwd=self.tmp)
+        # the destination directory exists now
+        self.assertEqual(run_uncompress('-d', dst, self.filename), 1)
+
+    def test_cmdline_unknown_file_type(self):
+        filename = os.path.join(self.tmp, 'src', 'content')
+        self.assertEqual(run_uncompress(filename), 1)
 
 
 class UncompressZipFileTestCase(unittest.TestCase):
