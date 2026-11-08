@@ -78,56 +78,37 @@ if [[ "$ARGS" != *"--sdist-extract-dir=$CUSTOM_SDIST"* ]]; then
     exit 1
 fi
 
-# Test 5: SAGE_BUILD_ENV_DIR env var
-ENVVAR_DIR="$TEST_DIR/envvar-env"
-SAGE_BUILD_ENV_DIR="$ENVVAR_DIR" sdh_build_wheel .
-ARGS=$(cat "$MOCK_BUILD_ARGS_FILE")
-if [[ "$ARGS" != *"--env-dir=$ENVVAR_DIR"* ]]; then
-    echo "FAIL: Test 5 failed to use SAGE_BUILD_ENV_DIR" >&2
-    exit 1
-fi
-
-# Test 6: SAGE_BUILD_ENV_DIR=none disables --env-dir
-SAGE_BUILD_ENV_DIR="none" sdh_build_wheel .
+# Test 5: --env-dir=none disables passing --env-dir
+sdh_build_wheel --env-dir=none .
 ARGS=$(cat "$MOCK_BUILD_ARGS_FILE")
 if [[ "$ARGS" == *"--env-dir"* ]]; then
-    echo "FAIL: Test 6 failed to disable --env-dir when SAGE_BUILD_ENV_DIR=none" >&2
+    echo "FAIL: Test 5 failed to disable --env-dir when --env-dir=none" >&2
     exit 1
 fi
 
-# Test 7: --no-build-isolation suppresses --env-dir
+# Test 6: --no-build-isolation suppresses --env-dir
 sdh_build_wheel --no-build-isolation .
 ARGS=$(cat "$MOCK_BUILD_ARGS_FILE")
 if [[ "$ARGS" == *"--env-dir"* ]]; then
-    echo "FAIL: Test 7 passed --env-dir despite --no-build-isolation" >&2
+    echo "FAIL: Test 6 passed --env-dir despite --no-build-isolation" >&2
     exit 1
 fi
 
-# Test 8: Pre-existing env-dir is cleaned before build
+# Test 7: Pre-existing env-dir is cleaned before build
 PREEXISTING="$TEST_DIR/preexisting"
 mkdir -p "$PREEXISTING"
 touch "$PREEXISTING/dummy"
 sdh_build_wheel --env-dir "$PREEXISTING" .
 if [ -e "$PREEXISTING/dummy" ]; then
-    echo "FAIL: Test 8 failed to clean preexisting env-dir contents" >&2
+    echo "FAIL: Test 7 failed to clean preexisting env-dir contents" >&2
     exit 1
 fi
 
-# Test 9: --sdist-then-wheel sets default --sdist-extract-dir
+# Test 8: --sdist-then-wheel sets default --sdist-extract-dir
 sdh_build_wheel --sdist-then-wheel .
 ARGS=$(cat "$MOCK_BUILD_ARGS_FILE")
 if [[ "$ARGS" != *"--sdist-extract-dir=$SAGE_BUILD_DIR/$PKG_NAME/sdist-extract"* ]]; then
-    echo "FAIL: Test 9 failed to set default --sdist-extract-dir" >&2
-    exit 1
-fi
-
-# Test 10: When python3 -m build lacks support for flags
-unset SAGE_BUILD_SUPPORTS_ENV_DIR
-unset SAGE_BUILD_SUPPORTS_SDIST_EXTRACT_DIR
-MOCK_BUILD_NO_FLAGS=1 sdh_build_wheel .
-ARGS=$(cat "$MOCK_BUILD_ARGS_FILE")
-if [[ "$ARGS" == *"--env-dir"* ]] || [[ "$ARGS" == *"--sdist-extract-dir"* ]]; then
-    echo "FAIL: Test 10 passed unsupported flags to build" >&2
+    echo "FAIL: Test 8 failed to set default --sdist-extract-dir" >&2
     exit 1
 fi
 

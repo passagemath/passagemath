@@ -284,9 +284,6 @@ sdh_build_wheel() {
     done
 
     if [ -z "$env_dir" ]; then
-        env_dir="${SAGE_BUILD_ENV_DIR:-}"
-    fi
-    if [ -z "$env_dir" ]; then
         if [ -n "$SAGE_BUILD_DIR" -a -n "$PKG_NAME" -a -d "$SAGE_BUILD_DIR/$PKG_NAME" ]; then
             env_dir="$SAGE_BUILD_DIR/$PKG_NAME/build-env"
         elif [ -n "$PKG_NAME" ]; then
@@ -303,25 +300,13 @@ sdh_build_wheel() {
                 # No build isolation, so no isolated build environment to keep
                 ;;
             *)
-                if [ -z "$SAGE_BUILD_SUPPORTS_ENV_DIR" ]; then
-                    if python3 -m build --help 2>&1 | grep -q -- '--env-dir'; then
-                        SAGE_BUILD_SUPPORTS_ENV_DIR=yes
-                    else
-                        SAGE_BUILD_SUPPORTS_ENV_DIR=no
-                    fi
-                fi
-                if [ "$SAGE_BUILD_SUPPORTS_ENV_DIR" = "yes" ]; then
-                    # Clean up previous build environment if it exists (python -m build requires empty or non-existent dir)
-                    rm -rf "$env_dir"
-                    env_dir_option="--env-dir=$env_dir"
-                fi
+                # Clean up previous build environment if it exists (python -m build requires empty or non-existent dir)
+                rm -rf "$env_dir"
+                env_dir_option="--env-dir=$env_dir"
                 ;;
         esac
     fi
 
-    if [ -z "$sdist_extract_dir" ]; then
-        sdist_extract_dir="${SAGE_BUILD_SDIST_EXTRACT_DIR:-}"
-    fi
     if [ -z "$sdist_extract_dir" -a -z "$dist_option" ]; then
         if [ -n "$SAGE_BUILD_DIR" -a -n "$PKG_NAME" -a -d "$SAGE_BUILD_DIR/$PKG_NAME" ]; then
             sdist_extract_dir="$SAGE_BUILD_DIR/$PKG_NAME/sdist-extract"
@@ -329,16 +314,7 @@ sdh_build_wheel() {
     fi
     sdist_extract_dir_option=""
     if [ -n "$sdist_extract_dir" -a "$sdist_extract_dir" != "none" ]; then
-        if [ -z "$SAGE_BUILD_SUPPORTS_SDIST_EXTRACT_DIR" ]; then
-            if python3 -m build --help 2>&1 | grep -q -- '--sdist-extract-dir'; then
-                SAGE_BUILD_SUPPORTS_SDIST_EXTRACT_DIR=yes
-            else
-                SAGE_BUILD_SUPPORTS_SDIST_EXTRACT_DIR=no
-            fi
-        fi
-        if [ "$SAGE_BUILD_SUPPORTS_SDIST_EXTRACT_DIR" = "yes" ]; then
-            sdist_extract_dir_option="--sdist-extract-dir=$sdist_extract_dir"
-        fi
+        sdist_extract_dir_option="--sdist-extract-dir=$sdist_extract_dir"
     fi
 
     if python3 -m build $dist_option --outdir=dist $build_isolation_option $build_options $env_dir_option $sdist_extract_dir_option "$@"; then
