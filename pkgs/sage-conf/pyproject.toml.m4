@@ -4,6 +4,7 @@ requires = [
     SPKG_INSTALL_REQUIRES_setuptools
     SPKG_INSTALL_REQUIRES_python_build
     SPKG_INSTALL_REQUIRES_packaging
+    SPKG_INSTALL_REQUIRES_sage_bootstrap
 ]
 build-backend = "setuptools.build_meta"
 
