@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-environment
+from sage.cli import main
 from sage.cli.run_file_cmd import RunFileCmd
 from sage.cli.options import CliOptions
 from unittest.mock import patch
@@ -26,3 +27,23 @@ def test_run_file_cmd_with_args(capsys, tmp_path):
         result = run_file_cmd.run()
         captured = capsys.readouterr()
         assert captured.out == "2\n"
+
+
+def test_run_file_cmd_with_options_for_the_file(capsys, tmp_path):
+    file = tmp_path / "test.py"
+    file.write_text("import sys; print(sys.argv)")
+    with patch.object(sys, 'argv', ["sage", "-q", str(file), "--input", "x", "-v", "--version"]):
+        result = main()
+        captured = capsys.readouterr()
+        assert result == 0
+        assert captured.out == f"{[str(file), '--input', 'x', '-v', '--version']}\n"
+
+
+def test_run_file_cmd_with_separator(capsys, tmp_path):
+    file = tmp_path / "test.py"
+    file.write_text("import sys; print(sys.argv)")
+    with patch.object(sys, 'argv', ["sage", "-q", "--", str(file), "-v", "--", "x"]):
+        result = main()
+        captured = capsys.readouterr()
+        assert result == 0
+        assert captured.out == f"{[str(file), '-v', '--', 'x']}\n"
