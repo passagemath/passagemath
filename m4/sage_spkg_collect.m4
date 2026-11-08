@@ -378,10 +378,11 @@ AC_DEFUN([SAGE_SYSTEM_PACKAGE_NOTICE], [
         SYSTEM=$(build/bin/sage-guess-package-system 2>& AS_MESSAGE_FD)
         AC_MSG_RESULT([$SYSTEM])
         AS_IF([test $SYSTEM != unknown], [
+            PATH="build/bin:$PATH"
             print_sys () {
                 build/bin/sage-print-system-package-command $SYSTEM --verbose="    " --prompt="      $ " --sudo "$[@]"
             }
-            SYSTEM_PACKAGES=$(build/bin/sage-get-system-packages $SYSTEM $SAGE_NEED_SYSTEM_PACKAGES)
+            SYSTEM_PACKAGES=$($SAGE_BOOTSTRAP_PYTHON build/bin/sage-get-system-packages $SYSTEM $SAGE_NEED_SYSTEM_PACKAGES)
             AS_IF([test -n "$SYSTEM_PACKAGES"], [
                 COMMAND=$(print_sys update && print_sys install $SYSTEM_PACKAGES && SAGE_ROOT="$SAGE_ROOT" print_sys setup-build-env)
                 AC_MSG_NOTICE([
@@ -394,7 +395,7 @@ $COMMAND
 ])
                 AS_VAR_SET([need_reconfig_msg], [yes])
             ])
-            SYSTEM_PACKAGES=$(build/bin/sage-get-system-packages $SYSTEM $SAGE_NEED_SYSTEM_PACKAGES_OPTIONAL)
+            SYSTEM_PACKAGES=$($SAGE_BOOTSTRAP_PYTHON build/bin/sage-get-system-packages $SYSTEM $SAGE_NEED_SYSTEM_PACKAGES_OPTIONAL)
             AS_IF([test -n "$SYSTEM_PACKAGES"], [
                 COMMAND=$(print_sys update && print_sys install $SYSTEM_PACKAGES && SAGE_ROOT="$SAGE_ROOT" print_sys setup-build-env)
                 AC_MSG_NOTICE([

@@ -24,9 +24,8 @@ variables:
 import os
 
 
-try:
-    SAGE_ROOT = os.environ['SAGE_ROOT']
-except KeyError:
+SAGE_ROOT = os.environ.get('SAGE_ROOT')
+if not SAGE_ROOT or not os.path.isdir(os.path.join(SAGE_ROOT, 'build', 'pkgs')):
     try:
         import sage_root
     except ImportError:
@@ -55,5 +54,3 @@ try:
     os.mkdir(SAGE_DISTFILES)
 except OSError:
     pass
-
-assert os.path.isdir(SAGE_DISTFILES)
