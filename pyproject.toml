@@ -225,13 +225,22 @@ extra = [
 
 [dependency-groups]
 dev = [
-  "conda-lock",
+  "cibuildwheel",
   "grayskull",
   "meson",
   "pygithub",
   "python-build",
   "tqdm",
   "uv",
+  "virtualenv >=21.14.13",
+  'cypari2 >=2.2.1; sys_platform != "win32"', # Duplicate build-system requirement to fix editable installs with uv
+  'cysignals >=1.12.1', # Duplicate build-system requirement to fix editable installs with uv
+  'cython >=3.1.0', # Duplicate build-system requirement to fix editable installs with uv
+  'gmpy2 >=2.1.5', # Duplicate build-system requirement to fix editable installs with uv
+  'jinja2', # Duplicate build-system requirement to fix editable installs with uv
+  'memory_allocator', # Duplicate build-system requirement to fix editable installs with uv
+  'meson-python', # Duplicate build-system requirement to fix editable installs with uv
+  'numpy >=2.3.0', # Duplicate build-system requirement to fix editable installs with uv
 ]
 docs = [
   "furo",
