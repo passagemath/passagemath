@@ -83,6 +83,11 @@ class GetSystemPackagesTestCase(unittest.TestCase):
         self.assertEqual(rc, 0)
         self.assertIn("'numpy >=2.1',", stdout)
 
+    def test_install_requires_toml_with_comment(self):
+        rc, stdout, stderr = self.run_command('install-requires-toml', 'pynormaliz')
+        self.assertEqual(rc, 0)
+        self.assertIn("'pynormaliz >=2.18;", stdout)
+
     def test_versions(self):
         rc, stdout, stderr = self.run_command('versions', 'numpy')
         self.assertEqual(rc, 0)

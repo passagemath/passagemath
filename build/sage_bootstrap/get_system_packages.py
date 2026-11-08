@@ -105,7 +105,7 @@ def extract_from_pyproject_toml(sage_root, pkg_base):
         return []
 
     pkg_pattern = re.sub(r'[-_]', '[-_]', re.escape(pkg_base))
-    line_re = re.compile(r"^\s*['\"](" + pkg_pattern + r".*?)['\"],?\s*$")
+    line_re = re.compile(r"^\s*['\"](" + pkg_pattern + r".*?)['\"],?(?:\s*#.*)?$")
 
     matches = set()
     in_section = False
