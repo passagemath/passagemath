@@ -293,7 +293,7 @@ def LoggingBackendFactory(solver=None, printing=True, doctest_file=None, test_me
     :class:`LoggingBackend` in its doctest-writing mode::
 
         sage: fname = tmp_filename()
-        sage: compute_something(solver = LoggingBackendFactory(solver='GLPK', printing=False,
+        sage: compute_something(solver = LoggingBackendFactory(solver='Highs', printing=False,
         ....:                                                  doctest_file=fname))
         4711
         sage: with open(fname) as f:
@@ -307,7 +307,7 @@ def LoggingBackendFactory(solver=None, printing=True, doctest_file=None, test_me
         |        sage: p.solve()
         |        Traceback (most recent call last):
         |        ...
-        |        MIPSolverException: GLPK: The LP (relaxation) problem has no dual feasible solution
+        |        MIPSolverException: HiGHS: Problem is unbounded
 
     We then copy from the generated file and paste into the source
     code of the COIN backend.
