@@ -107,12 +107,26 @@ jobs:
       targets_optional: '$(echo $(export PATH=build/bin:$PATH && sage-package list :optional: :experimental: --has-file "spkg-install.in|spkg-install|requirements.txt" --no-file "huge|has_nonfree_dependencies" | grep -v sagemath_doc | grep -v cypari | grep -v ^_))'
       max_parallel: 8
 
-  upstream:
+  upstream-prepare-artifact:
     if: ${{ success() || failure() }}
     needs: [standard]
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        mkdir -p upstream
+        echo 'sed -i.bak "/m4_pushdef.*MIN.*VERSION/s/3[.0-9]*/3.13.0/;/m4_pushdef.*LT.*VERSION/s/3[.0-9]*/3.15.0/;" ../build/pkgs/python3/spkg-configure.m4' > upstream/update-pkgs.sh
+    - uses: actions/upload-artifact@v4
+      with:
+        path: upstream
+        name: upstream
+
+  upstream:
+    if: ${{ success() || failure() }}
+    needs: [standard, upstream-prepare-artifact]
     uses: ./.github/workflows/docker.yml
     with:
       incremental: true
+      upstream_artifact: upstream
       free_disk_space: true
       from_docker_repository: ghcr.io/${{ github.repository }}/
       from_docker_target: "with-targets-pre"
