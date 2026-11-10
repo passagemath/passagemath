@@ -74,22 +74,3 @@ Subject: [PATCH 2/2] Add whatsnew entry for #287
  doc/source/whatsnew.rst | 6 ++++++
  1 file changed, 6 insertions(+)
 
-diff --git a/doc/source/whatsnew.rst b/doc/source/whatsnew.rst
-index 8ef0a42a..0b48dc0d 100644
---- a/doc/source/whatsnew.rst
-+++ b/doc/source/whatsnew.rst
-@@ -17,8 +17,14 @@ v2.2.0.dev0
-   ``FILE`` type. This could happen with an already-preprocessed system
-   header, which spells out the real struct. (`#281`_).
- 
-+* Fixed building on CPython 3.16, which removed
-+  ``Py_FileSystemDefaultEncoding``. A file name with an embedded null
-+  character passed to ``ffi.dlopen()`` now raises ``ValueError`` instead of
-+  ``TypeError``. (`#287`_).
-+
- .. _`#265`: https://github.com/python-cffi/cffi/pull/265
- .. _`#281`: https://github.com/python-cffi/cffi/pull/281
-+.. _`#287`: https://github.com/python-cffi/cffi/pull/287
- 
- v2.1.0
- ======
