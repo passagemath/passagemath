@@ -293,3 +293,6 @@ select = [
 [tool.uv]
 # Don't use build isolation for sage (it's incompatible with meson-python's editable install)
 no-build-isolation-package = ["sagemath"]
+
+[tool.uv.extra-build-dependencies]
+sagemath = ["meson-python"]
