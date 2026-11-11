@@ -1,0 +1,50 @@
+commit 292dd87ff9394005f7ad34607d7848394de9bd64
+Author: kabirvashisht4-glitch <kabirvashisht82@gmail.com>
+Date:   Wed Aug 26 19:58:25 2026 +0530
+
+    meson: add pari_prefix option to select the PARI to build against
+    
+    On macOS the build unconditionally adds Homebrew's prefix to the PARI
+    search path, with no way to override it. When cypari2 is built inside an
+    environment that ships its own PARI -- a SageMath tree, for example --
+    Homebrew's copy is found instead, so cypari2 and the surrounding
+    extensions link against two distinct libpari.
+    
+    Each copy owns a separate PARI stack, so a GEN allocated by one is
+    interpreted against the other's avma and the process segfaults on every
+    conversion. meson.build already warns about this failure mode.
+    
+    Add a pari_prefix option, following the existing pari_datadir option,
+    which is searched ahead of any system location.
+
+diff --git a/meson.build b/meson.build
+index 3d36103..f756bb0 100644
+--- a/meson.build
++++ b/meson.build
+@@ -45,6 +45,18 @@ gmp = dependency('gmp', required: false)
+ # Also require shared library, since otherwise every Cython extension would include it's own copy of pari leading to hard-to-debug segmentation faults at runtime
+ pari_header_include_dirs = [] # additional dirs to search for PARI headers
+ pari_lib_dirs = [] # additional dirs to search for the PARI library
++
++# An explicitly configured prefix takes precedence over any system location.
++# cypari2 is frequently built inside an environment that ships its own PARI
++# (for example a SageMath tree). Picking up a different copy there links the
++# two halves of the same process against two distinct libpari, each with its
++# own PARI stack, which is exactly the situation the note above warns about.
++pari_prefix = get_option('pari_prefix')
++if pari_prefix != ''
++  message('PARI prefix: ' + pari_prefix)
++  pari_header_include_dirs += include_directories(pari_prefix + '/include')
++  pari_lib_dirs += [pari_prefix + '/lib']
++endif
+ if host_machine.system() == 'darwin'
+   brew = find_program('brew', required: false)
+   if brew.found()
+
+diff --git a/meson.options b/meson.options
+new file mode 100644
+index 0000000..cfd7525
+--- /dev/null
++++ b/meson.options
+@@ -0,0 +1,1 @@
++option('pari_prefix', type: 'string', value:  '', description: 'location of the PARI installation to build against; takes precedence over any system location')
