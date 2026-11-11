@@ -40,10 +40,11 @@ index 3d36103..f756bb0 100644
  if host_machine.system() == 'darwin'
    brew = find_program('brew', required: false)
    if brew.found()
+
 diff --git a/meson.options b/meson.options
-index b06d352..491d693 100644
---- a/meson.options
+new file mode 100644
+index 0000000..cfd7525
+--- /dev/null
 +++ b/meson.options
-@@ -1 +1,2 @@
+@@ -0,0 +1,1 @@
 +option('pari_prefix', type: 'string', value:  '', description: 'location of the PARI installation to build against; takes precedence over any system location')
- option('pari_datadir', type: 'string', value:  '', description: 'location of the share directory of PARI')
