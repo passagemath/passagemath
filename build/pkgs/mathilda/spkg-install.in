@@ -14,10 +14,13 @@ export SYSTEM_PREFIX=
 # Link libdl for dladdr on older glibc systems
 sed -i.bak '/foreach/s/readline/readline dl/' kernel/CMakeLists.txt
 
+# Set variable for later use by cmake build system in kernel
+MATHILDA_MAKE_FLAGS="USE_GRAPHICS=0 USE_FFTW=0 USE_REGEX=0 PREFIX=$SAGE_INST_LOCAL PKG_CONFIG=pkg-config"
+
 # libmathilda.a is not built by "all"; we build it now with our variable setting;
 # the later build invoked by the kernel cmake build system becomes a no-op.
-sdh_make USE_GRAPHICS=0 USE_FFTW=0 USE_REGEX=0 PREFIX="$SAGE_INST_LOCAL" PKG_CONFIG=pkg-config all lib
-sdh_make_install USE_GRAPHICS=0 USE_FFTW=0 USE_REGEX=0 PREFIX="$SAGE_INST_LOCAL" PKG_CONFIG=pkg-config
+sdh_make $MATHILDA_MAKE_FLAGS all lib
+sdh_make_install $MATHILDA_MAKE_FLAGS
 
 # https://github.com/stblake/mathilda/tree/main/kernel
 sdh_cmake -GNinja \
@@ -25,6 +28,7 @@ sdh_cmake -GNinja \
           -DCMAKE_SYSTEM_PREFIX_PATH="$SAGE_LOCAL" \
           -DCMAKE_BUILD_RPATH="${SAGE_LOCAL}/lib" \
           -DCMAKE_INSTALL_RPATH="${SAGE_LOCAL}/lib" \
+          -DMATHILDA_MAKE_FLAGS="$MATHILDA_MAKE_FLAGS" \
           -S kernel -B kernel/build -DCMAKE_BUILD_TYPE=Release
 cmake --build kernel/build -j
 DESTDIR=$SAGE_DESTDIR cmake --install kernel/build  # installs the kernelspec
