@@ -1294,6 +1294,42 @@
 .. |codespace-fedora-45-python3.14-standard| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-45-python3.14-standard%2Fdevcontainer.json
 
+.. |image-fedora-46-python3.14-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-46-python3.14-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-46-python3.14-minimal-with-system-packages
+
+.. |image-fedora-46-python3.14-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-46-python3.14-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-46-python3.14-minimal-configured
+
+.. |image-fedora-46-python3.14-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-46-python3.14-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-46-python3.14-minimal-with-targets-pre
+
+.. |image-fedora-46-python3.14-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-46-python3.14-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-46-python3.14-minimal-with-targets
+
+.. |image-fedora-46-python3.14-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-46-python3.14-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-46-python3.14-minimal-with-targets-optional
+
+.. |codespace-fedora-46-python3.14-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-46-python3.14-minimal%2Fdevcontainer.json
+
+.. |image-fedora-46-python3.14-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-46-python3.14-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-46-python3.14-standard-with-system-packages
+
+.. |image-fedora-46-python3.14-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-46-python3.14-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-46-python3.14-standard-configured
+
+.. |image-fedora-46-python3.14-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-46-python3.14-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-46-python3.14-standard-with-targets-pre
+
+.. |image-fedora-46-python3.14-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-46-python3.14-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-46-python3.14-standard-with-targets
+
+.. |image-fedora-46-python3.14-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-46-python3.14-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-46-python3.14-standard-with-targets-optional
+
+.. |codespace-fedora-46-python3.14-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-46-python3.14-standard%2Fdevcontainer.json
+
 .. |image-centos-stream-9-python3.12-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-9-python3.12-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-9-python3.12-minimal-with-system-packages
 
@@ -1761,6 +1797,42 @@
 
 .. |codespace-opensuse-16.0-python3.13-standard| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-opensuse-16.0-python3.13-standard%2Fdevcontainer.json
+
+.. |image-opensuse-16.1-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-16.1-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-16.1-minimal-with-system-packages
+
+.. |image-opensuse-16.1-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-16.1-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-16.1-minimal-configured
+
+.. |image-opensuse-16.1-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-16.1-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-16.1-minimal-with-targets-pre
+
+.. |image-opensuse-16.1-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-16.1-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-16.1-minimal-with-targets
+
+.. |image-opensuse-16.1-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-16.1-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-16.1-minimal-with-targets-optional
+
+.. |codespace-opensuse-16.1-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-opensuse-16.1-minimal%2Fdevcontainer.json
+
+.. |image-opensuse-16.1-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-16.1-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-16.1-standard-with-system-packages
+
+.. |image-opensuse-16.1-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-16.1-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-16.1-standard-configured
+
+.. |image-opensuse-16.1-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-16.1-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-16.1-standard-with-targets-pre
+
+.. |image-opensuse-16.1-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-16.1-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-16.1-standard-with-targets
+
+.. |image-opensuse-16.1-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-16.1-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-16.1-standard-with-targets-optional
+
+.. |codespace-opensuse-16.1-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-opensuse-16.1-standard%2Fdevcontainer.json
 
 .. |image-opensuse-tumbleweed-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-tumbleweed-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-tumbleweed-minimal-with-system-packages
@@ -2454,6 +2526,14 @@
    * -    ‑*standard*
      - |image-fedora-45-python3.14-standard-with-system-packages| |image-fedora-45-python3.14-standard-with-targets-pre| |image-fedora-45-python3.14-standard-with-targets| |image-fedora-45-python3.14-standard-with-targets-optional|
      - |codespace-fedora-45-python3.14-standard|
+   * - **fedora**-46-python3.14 
+       
+          ‑*minimal*
+     - |image-fedora-46-python3.14-minimal-with-system-packages| |image-fedora-46-python3.14-minimal-with-targets-pre| |image-fedora-46-python3.14-minimal-with-targets| |image-fedora-46-python3.14-minimal-with-targets-optional|
+     - |codespace-fedora-46-python3.14-minimal|
+   * -    ‑*standard*
+     - |image-fedora-46-python3.14-standard-with-system-packages| |image-fedora-46-python3.14-standard-with-targets-pre| |image-fedora-46-python3.14-standard-with-targets| |image-fedora-46-python3.14-standard-with-targets-optional|
+     - |codespace-fedora-46-python3.14-standard|
    * - **centos**-stream-9-python3.12 
        
           ‑*minimal*
@@ -2558,6 +2638,14 @@
    * -    ‑*standard*
      - |image-opensuse-16.0-python3.13-standard-with-system-packages| |image-opensuse-16.0-python3.13-standard-with-targets-pre| |image-opensuse-16.0-python3.13-standard-with-targets| |image-opensuse-16.0-python3.13-standard-with-targets-optional|
      - |codespace-opensuse-16.0-python3.13-standard|
+   * - **opensuse**-16.1 
+       
+          ‑*minimal*
+     - |image-opensuse-16.1-minimal-with-system-packages| |image-opensuse-16.1-minimal-with-targets-pre| |image-opensuse-16.1-minimal-with-targets| |image-opensuse-16.1-minimal-with-targets-optional|
+     - |codespace-opensuse-16.1-minimal|
+   * -    ‑*standard*
+     - |image-opensuse-16.1-standard-with-system-packages| |image-opensuse-16.1-standard-with-targets-pre| |image-opensuse-16.1-standard-with-targets| |image-opensuse-16.1-standard-with-targets-optional|
+     - |codespace-opensuse-16.1-standard|
    * - **opensuse**-tumbleweed 
        
           ‑*minimal*
