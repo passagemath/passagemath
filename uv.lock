@@ -1,21 +1,21 @@
 version = 1
-revision = 5
+revision = 3
 requires-python = ">=3.11, <3.15"
 resolution-markers = [
     "python_full_version >= '3.14' and sys_platform == 'win32'",
     "python_full_version >= '3.14' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version >= '3.14' and sys_platform == 'ios'",
     "python_full_version == '3.13.*' and sys_platform == 'win32'",
-    "python_full_version == '3.12.*' and sys_platform == 'win32'",
-    "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform == 'win32'",
-    "python_full_version < '3.11.5' and sys_platform == 'win32'",
     "python_full_version == '3.13.*' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version == '3.13.*' and sys_platform == 'ios'",
+    "python_full_version == '3.12.*' and sys_platform == 'win32'",
     "python_full_version == '3.12.*' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version == '3.12.*' and sys_platform == 'ios'",
+    "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform == 'win32'",
     "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform != 'ios' and sys_platform != 'win32'",
-    "python_full_version < '3.11.5' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform == 'ios'",
+    "python_full_version < '3.11.5' and sys_platform == 'win32'",
+    "python_full_version < '3.11.5' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version < '3.11.5' and sys_platform == 'ios'",
 ]
 
@@ -696,10 +696,10 @@ version = "1.3.3"
 source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
     "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform == 'win32'",
-    "python_full_version < '3.11.5' and sys_platform == 'win32'",
     "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform != 'ios' and sys_platform != 'win32'",
-    "python_full_version < '3.11.5' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform == 'ios'",
+    "python_full_version < '3.11.5' and sys_platform == 'win32'",
+    "python_full_version < '3.11.5' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version < '3.11.5' and sys_platform == 'ios'",
 ]
 dependencies = [
@@ -789,9 +789,9 @@ resolution-markers = [
     "python_full_version >= '3.14' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version >= '3.14' and sys_platform == 'ios'",
     "python_full_version == '3.13.*' and sys_platform == 'win32'",
-    "python_full_version == '3.12.*' and sys_platform == 'win32'",
     "python_full_version == '3.13.*' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version == '3.13.*' and sys_platform == 'ios'",
+    "python_full_version == '3.12.*' and sys_platform == 'win32'",
     "python_full_version == '3.12.*' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version == '3.12.*' and sys_platform == 'ios'",
 ]
@@ -1121,8 +1121,8 @@ version = "2.2.2"
 source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
     "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform != 'ios' and sys_platform != 'win32'",
-    "python_full_version < '3.11.5' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform == 'ios'",
+    "python_full_version < '3.11.5' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version < '3.11.5' and sys_platform == 'ios'",
 ]
 dependencies = [
@@ -1180,10 +1180,10 @@ version = "1.12.5"
 source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
     "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform == 'win32'",
-    "python_full_version < '3.11.5' and sys_platform == 'win32'",
     "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform != 'ios' and sys_platform != 'win32'",
-    "python_full_version < '3.11.5' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform == 'ios'",
+    "python_full_version < '3.11.5' and sys_platform == 'win32'",
+    "python_full_version < '3.11.5' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version < '3.11.5' and sys_platform == 'ios'",
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/ba/be/3dd297fb25113abf40dd5de66088ce6883b62c417caa6b5fc2a84b9d48bf/cysignals-1.12.5.tar.gz", hash = "sha256:8f8ed409043d028b59d063dc4c069cbf12a750534757ce06f38eeac5ff368700", size = 86022, upload-time = "2025-09-24T02:47:35.065Z" }
@@ -3087,10 +3087,10 @@ version = "3.6.1"
 source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
     "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform == 'win32'",
-    "python_full_version < '3.11.5' and sys_platform == 'win32'",
     "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform != 'ios' and sys_platform != 'win32'",
-    "python_full_version < '3.11.5' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform == 'ios'",
+    "python_full_version < '3.11.5' and sys_platform == 'win32'",
+    "python_full_version < '3.11.5' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version < '3.11.5' and sys_platform == 'ios'",
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/6a/51/63fe664f3908c97be9d2e4f1158eb633317598cfa6e1fc14af5383f17512/networkx-3.6.1.tar.gz", hash = "sha256:26b7c357accc0c8cde558ad486283728b65b6a95d85ee1cd66bafab4c8168509", size = 2517025, upload-time = "2025-12-08T17:02:39.908Z" }
@@ -3107,9 +3107,9 @@ resolution-markers = [
     "python_full_version >= '3.14' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version >= '3.14' and sys_platform == 'ios'",
     "python_full_version == '3.13.*' and sys_platform == 'win32'",
-    "python_full_version == '3.12.*' and sys_platform == 'win32'",
     "python_full_version == '3.13.*' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version == '3.13.*' and sys_platform == 'ios'",
+    "python_full_version == '3.12.*' and sys_platform == 'win32'",
     "python_full_version == '3.12.*' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version == '3.12.*' and sys_platform == 'ios'",
 ]
@@ -3168,10 +3168,10 @@ version = "2.4.6"
 source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
     "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform == 'win32'",
-    "python_full_version < '3.11.5' and sys_platform == 'win32'",
     "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform != 'ios' and sys_platform != 'win32'",
-    "python_full_version < '3.11.5' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform == 'ios'",
+    "python_full_version < '3.11.5' and sys_platform == 'win32'",
+    "python_full_version < '3.11.5' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version < '3.11.5' and sys_platform == 'ios'",
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/d0/ad/fed0499ce6a338d2a03ebae59cd15093910c8875328855781952abf6c2fe/numpy-2.4.6.tar.gz", hash = "sha256:f3a3570c4a2a16746ac2c31a7c7c7b0c186b95ce902e33db6f28094ed7387dda", size = 20735807, upload-time = "2026-05-18T23:37:14.07Z" }
@@ -3258,9 +3258,9 @@ resolution-markers = [
     "python_full_version >= '3.14' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version >= '3.14' and sys_platform == 'ios'",
     "python_full_version == '3.13.*' and sys_platform == 'win32'",
-    "python_full_version == '3.12.*' and sys_platform == 'win32'",
     "python_full_version == '3.13.*' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version == '3.13.*' and sys_platform == 'ios'",
+    "python_full_version == '3.12.*' and sys_platform == 'win32'",
     "python_full_version == '3.12.*' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version == '3.12.*' and sys_platform == 'ios'",
 ]
@@ -3598,8 +3598,8 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-graphs", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-graphs", marker = "extra == 'test'", editable = "pkgs/sagemath-graphs" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -3623,8 +3623,8 @@ requires-dist = [
     { name = "cysignals", specifier = ">=1.11.2,!=1.12.0" },
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
-    { name = "passagemath-graphs", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-graphs", marker = "extra == 'test'", editable = "pkgs/sagemath-graphs" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -3657,13 +3657,13 @@ requires-dist = [
     { name = "cysignals", specifier = ">=1.11.2,!=1.12.0" },
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-flint", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-ntl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-pari", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-singular", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-flint", marker = "extra == 'test'", editable = "pkgs/sagemath-flint" },
+    { name = "passagemath-modules", marker = "extra == 'test'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-ntl", marker = "extra == 'test'", editable = "pkgs/sagemath-ntl" },
+    { name = "passagemath-pari", marker = "extra == 'test'", editable = "pkgs/sagemath-pari" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
+    { name = "passagemath-singular", marker = "extra == 'test'", editable = "pkgs/sagemath-singular" },
 ]
 provides-extras = ["test"]
 
@@ -3679,8 +3679,8 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-graphs", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-graphs", marker = "extra == 'test'", editable = "pkgs/sagemath-graphs" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -3700,8 +3700,8 @@ test = [
 [package.metadata]
 requires-dist = [
     { name = "memory-allocator", specifier = "<0.2" },
-    { name = "passagemath-objects", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-objects", editable = "pkgs/sagemath-objects" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -3728,11 +3728,11 @@ requires-dist = [
     { name = "cysignals", specifier = ">=1.11.2,!=1.12.0" },
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-flint", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-pari", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-polyhedra", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-flint", marker = "extra == 'test'", editable = "pkgs/sagemath-flint" },
+    { name = "passagemath-pari", marker = "extra == 'test'", editable = "pkgs/sagemath-pari" },
+    { name = "passagemath-polyhedra", marker = "extra == 'test'", editable = "pkgs/sagemath-polyhedra" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -3748,8 +3748,8 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-graphs", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-graphs", marker = "extra == 'test'", editable = "pkgs/sagemath-graphs" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -3775,10 +3775,10 @@ requires-dist = [
     { name = "cysignals", specifier = ">=1.11.2,!=1.12.0" },
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
-    { name = "passagemath-graphs", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", specifier = "==10.8.14rc3" },
-    { name = "passagemath-pari", marker = "sys_platform != 'win32' and extra == 'test'" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-graphs", editable = "pkgs/sagemath-graphs" },
+    { name = "passagemath-modules", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-pari", marker = "sys_platform != 'win32' and extra == 'test'", editable = "pkgs/sagemath-pari" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -3849,16 +3849,16 @@ requires-dist = [
     { name = "gmpy2", marker = "sys_platform == 'win32'", specifier = "~=2.3b1" },
     { name = "lrcalc", marker = "extra == 'lrcalc'", specifier = "~=2.1" },
     { name = "memory-allocator", specifier = "<0.2" },
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-combinat", extras = ["findstat", "graphs", "lrcalc", "modules", "species", "symmetrica"], marker = "extra == 'standard'" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap", marker = "extra == 'species'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap3", marker = "extra == 'gap3'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-glucose", marker = "extra == 'glucose'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-graphs", marker = "extra == 'graphs'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-kissat", marker = "extra == 'kissat'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", marker = "extra == 'modules'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-combinat", extras = ["findstat", "graphs", "lrcalc", "modules", "species", "symmetrica"], marker = "extra == 'standard'", editable = "pkgs/sagemath-combinat" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-gap", marker = "extra == 'species'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap3", marker = "extra == 'gap3'", editable = "pkgs/sagemath-gap3" },
+    { name = "passagemath-glucose", marker = "extra == 'glucose'", editable = "pkgs/sagemath-glucose" },
+    { name = "passagemath-graphs", marker = "extra == 'graphs'", editable = "pkgs/sagemath-graphs" },
+    { name = "passagemath-kissat", marker = "extra == 'kissat'", editable = "pkgs/sagemath-kissat" },
+    { name = "passagemath-modules", marker = "extra == 'modules'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
     { name = "requests", marker = "extra == 'findstat'", specifier = ">=2.13.0" },
 ]
 provides-extras = ["test", "gap3", "glucose", "kissat", "lrcalc", "symmetrica", "graphs", "modules", "species", "findstat", "standard"]
@@ -3882,11 +3882,11 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-combinat", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-graphs", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-groups", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-combinat", marker = "extra == 'test'", editable = "pkgs/sagemath-combinat" },
+    { name = "passagemath-graphs", marker = "extra == 'test'", editable = "pkgs/sagemath-graphs" },
+    { name = "passagemath-groups", marker = "extra == 'test'", editable = "pkgs/sagemath-groups" },
+    { name = "passagemath-modules", marker = "extra == 'test'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -3909,8 +3909,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -3923,8 +3923,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -3937,8 +3937,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -3951,8 +3951,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -3965,8 +3965,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -3979,8 +3979,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -3993,8 +3993,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4008,9 +4008,9 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-database-stein-watkins-mini", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-database-stein-watkins-mini", editable = "pkgs/sagemath-database-stein-watkins-mini" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4023,8 +4023,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4037,8 +4037,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4073,10 +4073,10 @@ requires-dist = [
     { name = "cysignals", specifier = ">=1.11.2,!=1.12.0" },
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -4105,11 +4105,11 @@ requires-dist = [
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
     { name = "memory-allocator", specifier = "<0.2" },
-    { name = "passagemath-linbox", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", specifier = "==10.8.14rc3" },
-    { name = "passagemath-ntl", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-schemes", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-linbox", editable = "pkgs/sagemath-linbox" },
+    { name = "passagemath-modules", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-ntl", editable = "pkgs/sagemath-ntl" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
+    { name = "passagemath-schemes", marker = "extra == 'test'", editable = "pkgs/sagemath-schemes" },
 ]
 provides-extras = ["test"]
 
@@ -4154,11 +4154,11 @@ tox = [
 requires-dist = [
     { name = "cython", marker = "extra == 'cython'", specifier = ">=3.1.0,<3.4.0" },
     { name = "packaging", specifier = ">=26.3" },
-    { name = "passagemath-bootstrap", marker = "extra == 'package'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-conf", marker = "sys_platform != 'win32' and extra == 'conf'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-docbuild", marker = "extra == 'docbuild'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-standard", marker = "extra == 'sage'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-sws2rst", marker = "extra == 'sws2rst'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-bootstrap", marker = "extra == 'package'", editable = "pkgs/sage-bootstrap" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32' and extra == 'conf'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-docbuild", marker = "extra == 'docbuild'", editable = "pkgs/sage-docbuild" },
+    { name = "passagemath-standard", marker = "extra == 'sage'", editable = "pkgs/sagemath-standard" },
+    { name = "passagemath-sws2rst", marker = "extra == 'sws2rst'", editable = "pkgs/sage-sws2rst" },
     { name = "platformdirs" },
     { name = "pytest", marker = "extra == 'pytest'" },
     { name = "rst2ipynb", marker = "extra == 'rst2ipynb'", specifier = ">=0.2.2" },
@@ -4185,10 +4185,10 @@ test = [
 [package.metadata]
 requires-dist = [
     { name = "numpy", specifier = ">=2.1" },
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-ntl", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-modules", marker = "extra == 'test'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-ntl", editable = "pkgs/sagemath-ntl" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -4217,13 +4217,13 @@ requires-dist = [
     { name = "cysignals", specifier = ">=1.11.2,!=1.12.0" },
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-ecl", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-maxima", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-symbolics", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-ecl", editable = "pkgs/sagemath-ecl" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-maxima", marker = "extra == 'test'", editable = "pkgs/sagemath-maxima" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
+    { name = "passagemath-symbolics", marker = "extra == 'test'", editable = "pkgs/sagemath-symbolics" },
 ]
 provides-extras = ["test"]
 
@@ -4250,11 +4250,11 @@ requires-dist = [
     { name = "cysignals", specifier = ">=1.11.2,!=1.12.0" },
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-graphs", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-singular", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-graphs", marker = "extra == 'test'", editable = "pkgs/sagemath-graphs" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
+    { name = "passagemath-singular", marker = "extra == 'test'", editable = "pkgs/sagemath-singular" },
 ]
 provides-extras = ["test"]
 
@@ -4497,77 +4497,77 @@ requires-dist = [
     { name = "jupyterlab", marker = "extra == 'jupyterlab'" },
     { name = "memory-allocator", specifier = "<0.2" },
     { name = "notebook", marker = "extra == 'notebook'", specifier = ">=6.1.1" },
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap", extras = ["4ti2interface", "agt", "caratinterface", "cddinterface", "curlinterface", "difsets", "normalizinterface", "numericalsgps", "rcwa", "semigroups", "sglppow", "simpcomp", "smallsemi", "sonata", "standard", "unitlib", "yangbaxter"], marker = "extra == 'full'" },
-    { name = "passagemath-gap", extras = ["aclib", "cryst", "hap", "polycyclic", "polymaking"], marker = "extra == 'hapcryst'" },
-    { name = "passagemath-gap", extras = ["aclib", "crystcat", "nq", "polycyclic"], marker = "extra == 'hap'" },
-    { name = "passagemath-gap", extras = ["alnuth"], marker = "extra == 'polycyclic'" },
-    { name = "passagemath-gap", extras = ["alnuth"], marker = "extra == 'radiroot'" },
-    { name = "passagemath-gap", extras = ["alnuth", "polycyclic", "radiroot"], marker = "extra == 'polenta'" },
-    { name = "passagemath-gap", extras = ["cryst"], marker = "extra == 'crystcat'" },
-    { name = "passagemath-gap", extras = ["cryst"], marker = "extra == 'yangbaxter'" },
-    { name = "passagemath-gap", extras = ["ctbllib"], marker = "extra == 'help'" },
-    { name = "passagemath-gap", extras = ["ctbllib", "irredsol", "tomlib", "transgrp"], marker = "extra == 'standard'" },
-    { name = "passagemath-gap", extras = ["grpconst", "polycyclic"], marker = "extra == 'cubefree'" },
-    { name = "passagemath-gap", extras = ["hap"], marker = "extra == 'xmod'" },
-    { name = "passagemath-gap", extras = ["irredsol"], marker = "extra == 'grpconst'" },
-    { name = "passagemath-gap", extras = ["jupyterkernel"], marker = "extra == 'jupyterlab'" },
-    { name = "passagemath-gap", extras = ["jupyterkernel"], marker = "extra == 'notebook'" },
-    { name = "passagemath-gap", extras = ["polenta"], marker = "extra == 'guarana'" },
-    { name = "passagemath-gap", extras = ["polenta"], marker = "extra == 'nilmat'" },
-    { name = "passagemath-gap", extras = ["polycyclic"], marker = "extra == 'aclib'" },
-    { name = "passagemath-gap", extras = ["polycyclic"], marker = "extra == 'corefreesub'" },
-    { name = "passagemath-gap", extras = ["polycyclic"], marker = "extra == 'cryst'" },
-    { name = "passagemath-gap", extras = ["polycyclic"], marker = "extra == 'deepthought'" },
-    { name = "passagemath-gap", extras = ["polycyclic"], marker = "extra == 'fr'" },
-    { name = "passagemath-gap", extras = ["polycyclic"], marker = "extra == 'fwtree'" },
-    { name = "passagemath-gap", extras = ["polycyclic"], marker = "extra == 'lpres'" },
-    { name = "passagemath-gap", extras = ["polycyclic"], marker = "extra == 'modisom'" },
-    { name = "passagemath-gap", extras = ["polycyclic"], marker = "extra == 'nq'" },
-    { name = "passagemath-gap", extras = ["polycyclic"], marker = "extra == 'resclasses'" },
-    { name = "passagemath-gap", extras = ["polycyclic"], marker = "extra == 'symbcompcc'" },
-    { name = "passagemath-gap", extras = ["resclasses"], marker = "extra == 'rcwa'" },
-    { name = "passagemath-gap-pkg-agt-data", marker = "extra == 'agt'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap-pkg-caratinterface", marker = "extra == 'caratinterface'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap-pkg-cddinterface", marker = "extra == 'cddinterface'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap-pkg-ctbllib-data", marker = "extra == 'ctbllib'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap-pkg-curlinterface", marker = "extra == 'curlinterface'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap-pkg-difsets-data", marker = "extra == 'difsets'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap-pkg-factint-data", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap-pkg-float", marker = "extra == 'float'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap-pkg-irredsol-data", marker = "extra == 'irredsol'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-gap", extras = ["4ti2interface", "agt", "caratinterface", "cddinterface", "curlinterface", "difsets", "normalizinterface", "numericalsgps", "rcwa", "semigroups", "sglppow", "simpcomp", "smallsemi", "sonata", "standard", "unitlib", "yangbaxter"], marker = "extra == 'full'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["aclib", "cryst", "hap", "polycyclic", "polymaking"], marker = "extra == 'hapcryst'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["aclib", "crystcat", "nq", "polycyclic"], marker = "extra == 'hap'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["alnuth"], marker = "extra == 'polycyclic'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["alnuth"], marker = "extra == 'radiroot'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["alnuth", "polycyclic", "radiroot"], marker = "extra == 'polenta'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["cryst"], marker = "extra == 'crystcat'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["cryst"], marker = "extra == 'yangbaxter'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["ctbllib"], marker = "extra == 'help'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["ctbllib", "irredsol", "tomlib", "transgrp"], marker = "extra == 'standard'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["grpconst", "polycyclic"], marker = "extra == 'cubefree'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["hap"], marker = "extra == 'xmod'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["irredsol"], marker = "extra == 'grpconst'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["jupyterkernel"], marker = "extra == 'jupyterlab'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["jupyterkernel"], marker = "extra == 'notebook'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["polenta"], marker = "extra == 'guarana'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["polenta"], marker = "extra == 'nilmat'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["polycyclic"], marker = "extra == 'aclib'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["polycyclic"], marker = "extra == 'corefreesub'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["polycyclic"], marker = "extra == 'cryst'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["polycyclic"], marker = "extra == 'deepthought'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["polycyclic"], marker = "extra == 'fr'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["polycyclic"], marker = "extra == 'fwtree'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["polycyclic"], marker = "extra == 'lpres'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["polycyclic"], marker = "extra == 'modisom'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["polycyclic"], marker = "extra == 'nq'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["polycyclic"], marker = "extra == 'resclasses'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["polycyclic"], marker = "extra == 'symbcompcc'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap", extras = ["resclasses"], marker = "extra == 'rcwa'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap-pkg-agt-data", marker = "extra == 'agt'", editable = "pkgs/sagemath-gap-pkg-agt-data" },
+    { name = "passagemath-gap-pkg-caratinterface", marker = "extra == 'caratinterface'", editable = "pkgs/sagemath-gap-pkg-caratinterface" },
+    { name = "passagemath-gap-pkg-cddinterface", marker = "extra == 'cddinterface'", editable = "pkgs/sagemath-gap-pkg-cddinterface" },
+    { name = "passagemath-gap-pkg-ctbllib-data", marker = "extra == 'ctbllib'", editable = "pkgs/sagemath-gap-pkg-ctbllib-data" },
+    { name = "passagemath-gap-pkg-curlinterface", marker = "extra == 'curlinterface'", editable = "pkgs/sagemath-gap-pkg-curlinterface" },
+    { name = "passagemath-gap-pkg-difsets-data", marker = "extra == 'difsets'", editable = "pkgs/sagemath-gap-pkg-difsets-data" },
+    { name = "passagemath-gap-pkg-factint-data", editable = "pkgs/sagemath-gap-pkg-factint-data" },
+    { name = "passagemath-gap-pkg-float", marker = "extra == 'float'", editable = "pkgs/sagemath-gap-pkg-float" },
+    { name = "passagemath-gap-pkg-irredsol-data", marker = "extra == 'irredsol'", editable = "pkgs/sagemath-gap-pkg-irredsol-data" },
     { name = "passagemath-gap-pkg-jupyterkernel", marker = "extra == 'jupyterkernel'" },
-    { name = "passagemath-gap-pkg-normalizinterface", marker = "extra == 'normalizinterface'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap-pkg-numericalsgps-data", marker = "extra == 'numericalsgps'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap-pkg-perfgrp-data", marker = "extra == 'perfgrp'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap-pkg-primgrp-data", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap-pkg-rcwa-data", marker = "extra == 'rcwa'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap-pkg-semigroups", marker = "extra == 'semigroups'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap-pkg-sglppow-data", marker = "extra == 'sglppow'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap-pkg-simpcomp-data", marker = "extra == 'simpcomp'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap-pkg-smallgrp-data", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap-pkg-smallsemi-data", marker = "extra == 'smallsemi'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap-pkg-sonata-data", marker = "extra == 'sonata'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap-pkg-tomlib-data", marker = "extra == 'tomlib'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap-pkg-transgrp-data", marker = "extra == 'transgrp'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap-pkg-unitlib-data", marker = "extra == 'unitlib'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap-pkg-yangbaxter-data", marker = "extra == 'yangbaxter'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-graphviz", marker = "extra == 'automata'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-graphviz", marker = "extra == 'corefreesub'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-graphviz", marker = "extra == 'digraphs'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-graphviz", marker = "extra == 'fining'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-graphviz", marker = "extra == 'hap'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-graphviz", marker = "extra == 'numericalsgps'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-graphviz", marker = "extra == 'sgpviz'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-latte-4ti2", marker = "extra == '4ti2interface'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-pari", marker = "extra == 'alnuth'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-pari", marker = "extra == 'standard'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-polymake", marker = "extra == 'polymaking'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", specifier = "==10.8.14rc3" },
-    { name = "passagemath-singular", marker = "extra == 'singular'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-singular", marker = "extra == 'standard'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-gap-pkg-normalizinterface", marker = "extra == 'normalizinterface'", editable = "pkgs/sagemath-gap-pkg-normalizinterface" },
+    { name = "passagemath-gap-pkg-numericalsgps-data", marker = "extra == 'numericalsgps'", editable = "pkgs/sagemath-gap-pkg-numericalsgps-data" },
+    { name = "passagemath-gap-pkg-perfgrp-data", marker = "extra == 'perfgrp'", editable = "pkgs/sagemath-gap-pkg-perfgrp-data" },
+    { name = "passagemath-gap-pkg-primgrp-data", editable = "pkgs/sagemath-gap-pkg-primgrp-data" },
+    { name = "passagemath-gap-pkg-rcwa-data", marker = "extra == 'rcwa'", editable = "pkgs/sagemath-gap-pkg-rcwa-data" },
+    { name = "passagemath-gap-pkg-semigroups", marker = "extra == 'semigroups'", editable = "pkgs/sagemath-gap-pkg-semigroups" },
+    { name = "passagemath-gap-pkg-sglppow-data", marker = "extra == 'sglppow'", editable = "pkgs/sagemath-gap-pkg-sglppow-data" },
+    { name = "passagemath-gap-pkg-simpcomp-data", marker = "extra == 'simpcomp'", editable = "pkgs/sagemath-gap-pkg-simpcomp-data" },
+    { name = "passagemath-gap-pkg-smallgrp-data", editable = "pkgs/sagemath-gap-pkg-smallgrp-data" },
+    { name = "passagemath-gap-pkg-smallsemi-data", marker = "extra == 'smallsemi'", editable = "pkgs/sagemath-gap-pkg-smallsemi-data" },
+    { name = "passagemath-gap-pkg-sonata-data", marker = "extra == 'sonata'", editable = "pkgs/sagemath-gap-pkg-sonata-data" },
+    { name = "passagemath-gap-pkg-tomlib-data", marker = "extra == 'tomlib'", editable = "pkgs/sagemath-gap-pkg-tomlib-data" },
+    { name = "passagemath-gap-pkg-transgrp-data", marker = "extra == 'transgrp'", editable = "pkgs/sagemath-gap-pkg-transgrp-data" },
+    { name = "passagemath-gap-pkg-unitlib-data", marker = "extra == 'unitlib'", editable = "pkgs/sagemath-gap-pkg-unitlib-data" },
+    { name = "passagemath-gap-pkg-yangbaxter-data", marker = "extra == 'yangbaxter'", editable = "pkgs/sagemath-gap-pkg-yangbaxter-data" },
+    { name = "passagemath-graphviz", marker = "extra == 'automata'", editable = "pkgs/sagemath-graphviz" },
+    { name = "passagemath-graphviz", marker = "extra == 'corefreesub'", editable = "pkgs/sagemath-graphviz" },
+    { name = "passagemath-graphviz", marker = "extra == 'digraphs'", editable = "pkgs/sagemath-graphviz" },
+    { name = "passagemath-graphviz", marker = "extra == 'fining'", editable = "pkgs/sagemath-graphviz" },
+    { name = "passagemath-graphviz", marker = "extra == 'hap'", editable = "pkgs/sagemath-graphviz" },
+    { name = "passagemath-graphviz", marker = "extra == 'numericalsgps'", editable = "pkgs/sagemath-graphviz" },
+    { name = "passagemath-graphviz", marker = "extra == 'sgpviz'", editable = "pkgs/sagemath-graphviz" },
+    { name = "passagemath-latte-4ti2", marker = "extra == '4ti2interface'", editable = "pkgs/sagemath-latte-4ti2" },
+    { name = "passagemath-pari", marker = "extra == 'alnuth'", editable = "pkgs/sagemath-pari" },
+    { name = "passagemath-pari", marker = "extra == 'standard'", editable = "pkgs/sagemath-pari" },
+    { name = "passagemath-polymake", marker = "extra == 'polymaking'", editable = "pkgs/sagemath-polymake" },
+    { name = "passagemath-repl", editable = "pkgs/sagemath-repl" },
+    { name = "passagemath-singular", marker = "extra == 'singular'", editable = "pkgs/sagemath-singular" },
+    { name = "passagemath-singular", marker = "extra == 'standard'", editable = "pkgs/sagemath-singular" },
     { name = "pexpect", specifier = ">=4.8.0" },
 ]
 provides-extras = ["test", "4ti2interface", "aclib", "agt", "alnuth", "automata", "caratinterface", "cddinterface", "corefreesub", "cryst", "crystcat", "ctbllib", "cubefree", "curlinterface", "deepthought", "difsets", "digraphs", "fining", "float", "fr", "fwtree", "grpconst", "guarana", "hap", "hapcryst", "help", "irredsol", "lpres", "modisom", "nilmat", "nq", "normalizinterface", "numericalsgps", "perfgrp", "polenta", "polycyclic", "polymaking", "radiroot", "rcwa", "resclasses", "semigroups", "sglppow", "sgpviz", "simpcomp", "singular", "smallsemi", "sonata", "symbcompcc", "tomlib", "transgrp", "xmod", "unitlib", "yangbaxter", "jupyterkernel", "jupyterlab", "notebook", "standard", "full"]
@@ -4582,8 +4582,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4596,8 +4596,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4610,8 +4610,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4624,8 +4624,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4638,8 +4638,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4652,8 +4652,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4666,8 +4666,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4680,8 +4680,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4694,8 +4694,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4722,8 +4722,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4736,8 +4736,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4750,8 +4750,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4764,8 +4764,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4778,8 +4778,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4792,8 +4792,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4806,8 +4806,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4820,8 +4820,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4834,8 +4834,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4848,8 +4848,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4862,8 +4862,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4876,8 +4876,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4890,8 +4890,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4904,8 +4904,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4918,8 +4918,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -4942,13 +4942,13 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-combinat", marker = "extra == 'test'" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap", specifier = "==10.8.14rc3" },
-    { name = "passagemath-groups", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", marker = "extra == 'test'" },
-    { name = "passagemath-repl", marker = "extra == 'test'" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-combinat", marker = "extra == 'test'", editable = "pkgs/sagemath-combinat" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-gap", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-groups", editable = "pkgs/sagemath-groups" },
+    { name = "passagemath-modules", marker = "extra == 'test'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
     { name = "pexpect", specifier = ">=4.8.0" },
 ]
 provides-extras = ["test"]
@@ -4973,8 +4973,8 @@ requires-dist = [
     { name = "cysignals", specifier = ">=1.11.2,!=1.12.0" },
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
-    { name = "passagemath-polyhedra", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-polyhedra", marker = "extra == 'test'", editable = "pkgs/sagemath-polyhedra" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -4993,9 +4993,9 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-symbolics", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
+    { name = "passagemath-symbolics", marker = "extra == 'test'", editable = "pkgs/sagemath-symbolics" },
 ]
 provides-extras = ["test"]
 
@@ -5016,7 +5016,7 @@ requires-dist = [
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
     { name = "memory-allocator", specifier = "<0.2" },
-    { name = "passagemath-objects", specifier = "==10.8.14rc3" },
+    { name = "passagemath-objects", editable = "pkgs/sagemath-objects" },
 ]
 provides-extras = ["test"]
 
@@ -5032,8 +5032,8 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-combinat", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-combinat", marker = "extra == 'test'", editable = "pkgs/sagemath-combinat" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -5168,37 +5168,37 @@ requires-dist = [
     { name = "khoca", marker = "extra == 'khoca'" },
     { name = "memory-allocator", specifier = "<0.2" },
     { name = "networkx", marker = "extra == 'networkx'", specifier = ">=3.1" },
-    { name = "passagemath-benzene", marker = "extra == 'benzene'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-bliss", marker = "extra == 'bliss'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-buckygen", marker = "extra == 'buckygen'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-cliquer", marker = "extra == 'cliquer'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-cmr", marker = "extra == 'cmr'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-combinat", marker = "extra == 'combinat'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-combinat", marker = "extra == 'sat'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap", marker = "extra == 'gap'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-graphs", extras = ["cliquer", "combinat", "databases", "groups", "mip", "modules", "planarity", "polyhedra", "rankwidth", "repl"], marker = "extra == 'standard'" },
-    { name = "passagemath-graphs", extras = ["nauty"], marker = "extra == 'groups'" },
-    { name = "passagemath-graphs", extras = ["rankwidth"], marker = "extra == 'rw'" },
-    { name = "passagemath-graphviz", marker = "extra == 'graphviz'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-groups", marker = "extra == 'groups'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-mcqd", marker = "extra == 'mcqd'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", marker = "extra == 'homology'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", marker = "extra == 'modules'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-nauty", marker = "extra == 'nauty'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-pari", marker = "extra == 'pari'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-planarity", marker = "extra == 'planarity'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-plantri", marker = "extra == 'plantri'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-plot", marker = "extra == 'plot'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-plot", extras = ["tachyon"], marker = "extra == 'standard'" },
-    { name = "passagemath-polyhedra", marker = "extra == 'mip'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-polyhedra", marker = "extra == 'polyhedra'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-rankwidth", marker = "extra == 'rankwidth'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'repl'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-tdlib", marker = "extra == 'tdlib'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-benzene", marker = "extra == 'benzene'", editable = "pkgs/sagemath-benzene" },
+    { name = "passagemath-bliss", marker = "extra == 'bliss'", editable = "pkgs/sagemath-bliss" },
+    { name = "passagemath-buckygen", marker = "extra == 'buckygen'", editable = "pkgs/sagemath-buckygen" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-cliquer", marker = "extra == 'cliquer'", editable = "pkgs/sagemath-cliquer" },
+    { name = "passagemath-cmr", marker = "extra == 'cmr'", editable = "pkgs/sagemath-cmr" },
+    { name = "passagemath-combinat", marker = "extra == 'combinat'", editable = "pkgs/sagemath-combinat" },
+    { name = "passagemath-combinat", marker = "extra == 'sat'", editable = "pkgs/sagemath-combinat" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-gap", marker = "extra == 'gap'", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-graphs", extras = ["cliquer", "combinat", "databases", "groups", "mip", "modules", "planarity", "polyhedra", "rankwidth", "repl"], marker = "extra == 'standard'", editable = "pkgs/sagemath-graphs" },
+    { name = "passagemath-graphs", extras = ["nauty"], marker = "extra == 'groups'", editable = "pkgs/sagemath-graphs" },
+    { name = "passagemath-graphs", extras = ["rankwidth"], marker = "extra == 'rw'", editable = "pkgs/sagemath-graphs" },
+    { name = "passagemath-graphviz", marker = "extra == 'graphviz'", editable = "pkgs/sagemath-graphviz" },
+    { name = "passagemath-groups", marker = "extra == 'groups'", editable = "pkgs/sagemath-groups" },
+    { name = "passagemath-mcqd", marker = "extra == 'mcqd'", editable = "pkgs/sagemath-mcqd" },
+    { name = "passagemath-modules", marker = "extra == 'homology'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", marker = "extra == 'modules'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-nauty", marker = "extra == 'nauty'", editable = "pkgs/sagemath-nauty" },
+    { name = "passagemath-pari", marker = "extra == 'pari'", editable = "pkgs/sagemath-pari" },
+    { name = "passagemath-planarity", marker = "extra == 'planarity'", editable = "pkgs/sagemath-planarity" },
+    { name = "passagemath-plantri", marker = "extra == 'plantri'", editable = "pkgs/sagemath-plantri" },
+    { name = "passagemath-plot", marker = "extra == 'plot'", editable = "pkgs/sagemath-plot" },
+    { name = "passagemath-plot", extras = ["tachyon"], marker = "extra == 'standard'", editable = "pkgs/sagemath-plot" },
+    { name = "passagemath-polyhedra", marker = "extra == 'mip'", editable = "pkgs/sagemath-polyhedra" },
+    { name = "passagemath-polyhedra", marker = "extra == 'polyhedra'", editable = "pkgs/sagemath-polyhedra" },
+    { name = "passagemath-rankwidth", marker = "extra == 'rankwidth'", editable = "pkgs/sagemath-rankwidth" },
+    { name = "passagemath-repl", marker = "extra == 'repl'", editable = "pkgs/sagemath-repl" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
+    { name = "passagemath-tdlib", marker = "extra == 'tdlib'", editable = "pkgs/sagemath-tdlib" },
     { name = "phitigra", marker = "extra == 'editor'", specifier = ">=0.2.6" },
     { name = "regina", marker = "extra == 'regina'" },
 ]
@@ -5218,8 +5218,8 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -5254,15 +5254,15 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-combinat", marker = "extra == 'representations'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-combinat", marker = "extra == 'semigroups'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-coxeter3", marker = "extra == 'coxeter3'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap3", marker = "extra == 'gap3'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-groups", extras = ["additive", "matrix", "representations", "semigroups"], marker = "extra == 'standard'" },
-    { name = "passagemath-modules", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-combinat", marker = "extra == 'representations'", editable = "pkgs/sagemath-combinat" },
+    { name = "passagemath-combinat", marker = "extra == 'semigroups'", editable = "pkgs/sagemath-combinat" },
+    { name = "passagemath-coxeter3", marker = "extra == 'coxeter3'", editable = "pkgs/sagemath-coxeter3" },
+    { name = "passagemath-gap", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap3", marker = "extra == 'gap3'", editable = "pkgs/sagemath-gap3" },
+    { name = "passagemath-groups", extras = ["additive", "matrix", "representations", "semigroups"], marker = "extra == 'standard'", editable = "pkgs/sagemath-groups" },
+    { name = "passagemath-modules", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test", "coxeter3", "gap", "gap3", "additive", "affine", "lie", "matrix", "permutation", "presentation", "representations", "semigroups", "standard"]
 
@@ -5293,10 +5293,10 @@ requires-dist = [
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
     { name = "memory-allocator", specifier = "<0.2" },
     { name = "numpy", specifier = ">=2.1" },
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-modules", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -5332,9 +5332,9 @@ requires-dist = [
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
     { name = "memory-allocator", specifier = "<0.2" },
-    { name = "passagemath-objects", specifier = "==10.8.14rc3" },
-    { name = "passagemath-polyhedra", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-objects", editable = "pkgs/sagemath-objects" },
+    { name = "passagemath-polyhedra", marker = "extra == 'test'", editable = "pkgs/sagemath-polyhedra" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -5358,8 +5358,8 @@ requires-dist = [
     { name = "cysignals", specifier = ">=1.11.2,!=1.12.0" },
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
-    { name = "passagemath-graphs", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-graphs", marker = "extra == 'test'", editable = "pkgs/sagemath-graphs" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -5386,11 +5386,11 @@ requires-dist = [
     { name = "cysignals", specifier = ">=1.11.2,!=1.12.0" },
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-flint", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-flint", editable = "pkgs/sagemath-flint" },
+    { name = "passagemath-modules", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -5410,10 +5410,10 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-ecl", specifier = "==10.8.14rc3" },
-    { name = "passagemath-graphs", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-ecl", editable = "pkgs/sagemath-ecl" },
+    { name = "passagemath-graphs", editable = "pkgs/sagemath-graphs" },
+    { name = "passagemath-modules", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -5429,8 +5429,8 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-combinat", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-combinat", marker = "extra == 'test'", editable = "pkgs/sagemath-combinat" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -5457,11 +5457,11 @@ requires-dist = [
     { name = "cysignals", specifier = ">=1.11.2,!=1.12.0" },
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-cddlib", specifier = "==10.8.14rc3" },
-    { name = "passagemath-flint", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-polyhedra", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-cddlib", editable = "pkgs/sagemath-cddlib" },
+    { name = "passagemath-flint", marker = "extra == 'test'", editable = "pkgs/sagemath-flint" },
+    { name = "passagemath-polyhedra", marker = "extra == 'test'", editable = "pkgs/sagemath-polyhedra" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -5492,13 +5492,13 @@ requires-dist = [
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
     { name = "memory-allocator", specifier = "<0.2" },
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", specifier = "==10.8.14rc3" },
-    { name = "passagemath-objects", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-schemes", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-modules", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-objects", editable = "pkgs/sagemath-objects" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
+    { name = "passagemath-schemes", marker = "extra == 'test'", editable = "pkgs/sagemath-schemes" },
 ]
 provides-extras = ["test"]
 
@@ -5525,11 +5525,11 @@ requires-dist = [
     { name = "cysignals", specifier = ">=1.11.2,!=1.12.0" },
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
-    { name = "passagemath-combinat", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-graphs", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-groups", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-schemes", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-combinat", marker = "extra == 'test'", editable = "pkgs/sagemath-combinat" },
+    { name = "passagemath-graphs", marker = "extra == 'test'", editable = "pkgs/sagemath-graphs" },
+    { name = "passagemath-groups", marker = "extra == 'test'", editable = "pkgs/sagemath-groups" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
+    { name = "passagemath-schemes", marker = "extra == 'test'", editable = "pkgs/sagemath-schemes" },
 ]
 provides-extras = ["test"]
 
@@ -5561,12 +5561,12 @@ requires-dist = [
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
     { name = "memory-allocator", specifier = "<0.2" },
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-objects", specifier = "==10.8.14rc3" },
-    { name = "passagemath-pari", marker = "extra == 'pari'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-objects", editable = "pkgs/sagemath-objects" },
+    { name = "passagemath-pari", marker = "extra == 'pari'", editable = "pkgs/sagemath-pari" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test", "pari"]
 
@@ -5588,11 +5588,11 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", specifier = "==10.8.14rc3" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-modules", marker = "extra == 'test'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-repl", editable = "pkgs/sagemath-repl" },
     { name = "pexpect", specifier = ">=4.8.0" },
 ]
 provides-extras = ["test"]
@@ -5626,13 +5626,13 @@ requires-dist = [
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
     { name = "memory-allocator", specifier = "<0.2" },
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-iml", specifier = "==10.8.14rc3" },
-    { name = "passagemath-m4ri-m4rie", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-iml", editable = "pkgs/sagemath-iml" },
+    { name = "passagemath-m4ri-m4rie", editable = "pkgs/sagemath-m4ri-m4rie" },
+    { name = "passagemath-modules", marker = "extra == 'test'", editable = "pkgs/sagemath-modules" },
     { name = "passagemath-primesieve-primecount", marker = "extra == 'primecountpy'" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test", "primecountpy"]
 
@@ -5649,9 +5649,9 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-flint", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-polyhedra", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-flint", marker = "extra == 'test'", editable = "pkgs/sagemath-flint" },
+    { name = "passagemath-polyhedra", marker = "extra == 'test'", editable = "pkgs/sagemath-polyhedra" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -5680,11 +5680,11 @@ requires-dist = [
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
     { name = "memory-allocator", specifier = "<0.2" },
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", specifier = "==10.8.14rc3" },
-    { name = "passagemath-pari", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-modules", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-pari", marker = "extra == 'test'", editable = "pkgs/sagemath-pari" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -5787,37 +5787,37 @@ requires-dist = [
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
     { name = "jupyterlab", marker = "extra == 'jupyterlab'" },
     { name = "notebook", marker = "extra == 'notebook'", specifier = ">=6.1.1" },
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-flint", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gfan", marker = "extra == 'gfaninterface'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gfan", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gfan", marker = "extra == 'tropical'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gfan", marker = "extra == 'tropicaltoric'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gfan", marker = "extra == 'valuations'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-latte-4ti2", marker = "extra == 'fourtitwo'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-latte-4ti2", marker = "extra == 'matchingfields'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-latte-4ti2", marker = "extra == 'monomialalgebras'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-latte-4ti2", marker = "extra == 'phylogenetictrees'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-latte-4ti2", marker = "extra == 'polyhedra'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-latte-4ti2", marker = "extra == 'posets'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-linbox", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-macaulay2", extras = ["jupyterkernel"], marker = "extra == 'jupyterlab'" },
-    { name = "passagemath-macaulay2", extras = ["jupyterkernel"], marker = "extra == 'notebook'" },
-    { name = "passagemath-macaulay2-doc", specifier = "==10.8.14rc3" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-flint", editable = "pkgs/sagemath-flint" },
+    { name = "passagemath-gfan", marker = "extra == 'gfaninterface'", editable = "pkgs/sagemath-gfan" },
+    { name = "passagemath-gfan", marker = "extra == 'test'", editable = "pkgs/sagemath-gfan" },
+    { name = "passagemath-gfan", marker = "extra == 'tropical'", editable = "pkgs/sagemath-gfan" },
+    { name = "passagemath-gfan", marker = "extra == 'tropicaltoric'", editable = "pkgs/sagemath-gfan" },
+    { name = "passagemath-gfan", marker = "extra == 'valuations'", editable = "pkgs/sagemath-gfan" },
+    { name = "passagemath-latte-4ti2", marker = "extra == 'fourtitwo'", editable = "pkgs/sagemath-latte-4ti2" },
+    { name = "passagemath-latte-4ti2", marker = "extra == 'matchingfields'", editable = "pkgs/sagemath-latte-4ti2" },
+    { name = "passagemath-latte-4ti2", marker = "extra == 'monomialalgebras'", editable = "pkgs/sagemath-latte-4ti2" },
+    { name = "passagemath-latte-4ti2", marker = "extra == 'phylogenetictrees'", editable = "pkgs/sagemath-latte-4ti2" },
+    { name = "passagemath-latte-4ti2", marker = "extra == 'polyhedra'", editable = "pkgs/sagemath-latte-4ti2" },
+    { name = "passagemath-latte-4ti2", marker = "extra == 'posets'", editable = "pkgs/sagemath-latte-4ti2" },
+    { name = "passagemath-linbox", marker = "extra == 'test'", editable = "pkgs/sagemath-linbox" },
+    { name = "passagemath-macaulay2", extras = ["jupyterkernel"], marker = "extra == 'jupyterlab'", editable = "pkgs/sagemath-macaulay2" },
+    { name = "passagemath-macaulay2", extras = ["jupyterkernel"], marker = "extra == 'notebook'", editable = "pkgs/sagemath-macaulay2" },
+    { name = "passagemath-macaulay2-doc", editable = "pkgs/sagemath-macaulay2-doc" },
     { name = "passagemath-macaulay2-jupyterkernel", marker = "extra == 'jupyterkernel'" },
-    { name = "passagemath-modules", specifier = "==10.8.14rc3" },
-    { name = "passagemath-msolve", marker = "extra == 'msolve'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-msolve", marker = "extra == 'whitneystratifications'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-nauty", marker = "extra == 'nauty'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-nauty", marker = "extra == 'nautygraphs'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-nauty", marker = "extra == 'oscillators'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-polymake", marker = "extra == 'polymake'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-polymake", marker = "extra == 'statepolytope'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-qepcad", marker = "extra == 'coincidentrootloci'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", specifier = "==10.8.14rc3" },
-    { name = "passagemath-topcom", marker = "extra == 'polyhedra'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-topcom", marker = "extra == 'topcom'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-topcom", marker = "extra == 'triangulations'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-modules", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-msolve", marker = "extra == 'msolve'", editable = "pkgs/sagemath-msolve" },
+    { name = "passagemath-msolve", marker = "extra == 'whitneystratifications'", editable = "pkgs/sagemath-msolve" },
+    { name = "passagemath-nauty", marker = "extra == 'nauty'", editable = "pkgs/sagemath-nauty" },
+    { name = "passagemath-nauty", marker = "extra == 'nautygraphs'", editable = "pkgs/sagemath-nauty" },
+    { name = "passagemath-nauty", marker = "extra == 'oscillators'", editable = "pkgs/sagemath-nauty" },
+    { name = "passagemath-polymake", marker = "extra == 'polymake'", editable = "pkgs/sagemath-polymake" },
+    { name = "passagemath-polymake", marker = "extra == 'statepolytope'", editable = "pkgs/sagemath-polymake" },
+    { name = "passagemath-qepcad", marker = "extra == 'coincidentrootloci'", editable = "pkgs/sagemath-qepcad" },
+    { name = "passagemath-repl", editable = "pkgs/sagemath-repl" },
+    { name = "passagemath-topcom", marker = "extra == 'polyhedra'", editable = "pkgs/sagemath-topcom" },
+    { name = "passagemath-topcom", marker = "extra == 'topcom'", editable = "pkgs/sagemath-topcom" },
+    { name = "passagemath-topcom", marker = "extra == 'triangulations'", editable = "pkgs/sagemath-topcom" },
 ]
 provides-extras = ["test", "coincidentrootloci", "fourtitwo", "gfaninterface", "matchingfields", "monomialalgebras", "msolve", "nauty", "nautygraphs", "oscillators", "phylogenetictrees", "polyhedra", "polymake", "posets", "statepolytope", "topcom", "triangulations", "tropical", "tropicaltoric", "valuations", "whitneystratifications", "jupyterkernel", "jupyterlab", "notebook"]
 
@@ -5831,8 +5831,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -5878,9 +5878,9 @@ requires-dist = [
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
     { name = "jupyterlab", marker = "extra == 'jupyterlab'" },
     { name = "notebook", marker = "extra == 'notebook'", specifier = ">=6.1.1" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-objects", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-objects", editable = "pkgs/sagemath-objects" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test", "jupyterlab", "notebook"]
 
@@ -5904,11 +5904,11 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-ecl", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-symbolics", marker = "extra == 'symbolics'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-ecl", editable = "pkgs/sagemath-ecl" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
+    { name = "passagemath-symbolics", marker = "extra == 'symbolics'", editable = "pkgs/sagemath-symbolics" },
     { name = "pexpect", specifier = ">=4.8.0" },
 ]
 provides-extras = ["test", "symbolics"]
@@ -5936,9 +5936,9 @@ requires-dist = [
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
     { name = "memory-allocator", specifier = "<0.2" },
-    { name = "passagemath-cliquer", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-graphs", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-cliquer", marker = "extra == 'test'", editable = "pkgs/sagemath-cliquer" },
+    { name = "passagemath-graphs", marker = "extra == 'test'", editable = "pkgs/sagemath-graphs" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -5958,10 +5958,10 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", specifier = "==10.8.14rc3" },
-    { name = "passagemath-pari", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-modules", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-pari", marker = "extra == 'test'", editable = "pkgs/sagemath-pari" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -6106,41 +6106,41 @@ requires-dist = [
     { name = "memory-allocator", specifier = "<0.2" },
     { name = "mpmath", specifier = ">=1.1.0,<1.4" },
     { name = "numpy", marker = "extra == 'numpy'", specifier = ">=2.1" },
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-flint", marker = "extra == 'flint'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-linbox", marker = "extra == 'linbox'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-m4ri-m4rie", marker = "extra == 'm4ri'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-meataxe", marker = "extra == 'meataxe'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", extras = ["finitefield", "numberfield", "combinat", "flint", "invariant", "linbox", "m4ri", "m4rie", "mpfi", "ntl", "numpy", "padics", "pari"], marker = "extra == 'standard'" },
-    { name = "passagemath-modules", extras = ["flint"], marker = "extra == 'cbf'" },
-    { name = "passagemath-modules", extras = ["flint"], marker = "extra == 'cif'" },
-    { name = "passagemath-modules", extras = ["flint"], marker = "extra == 'mpfi'" },
-    { name = "passagemath-modules", extras = ["flint"], marker = "extra == 'numberfield'" },
-    { name = "passagemath-modules", extras = ["flint"], marker = "extra == 'rbf'" },
-    { name = "passagemath-modules", extras = ["flint"], marker = "extra == 'rif'" },
-    { name = "passagemath-modules", extras = ["gap"], marker = "extra == 'ucf'" },
-    { name = "passagemath-modules", extras = ["gf"], marker = "extra == 'finitefield'" },
-    { name = "passagemath-modules", extras = ["m4ri"], marker = "extra == 'gf2'" },
-    { name = "passagemath-modules", extras = ["m4ri", "pari"], marker = "extra == 'm4rie'" },
-    { name = "passagemath-modules", extras = ["m4rie"], marker = "extra == 'gf2e'" },
-    { name = "passagemath-modules", extras = ["m4rie"], marker = "extra == 'gf2n'" },
-    { name = "passagemath-modules", extras = ["meataxe"], marker = "extra == 'gfpn'" },
-    { name = "passagemath-modules", extras = ["numberfield"], marker = "extra == 'aa'" },
-    { name = "passagemath-modules", extras = ["numberfield"], marker = "extra == 'cyclotomicfield'" },
-    { name = "passagemath-modules", extras = ["numberfield"], marker = "extra == 'qqbar'" },
-    { name = "passagemath-modules", extras = ["numberfield"], marker = "extra == 'quadraticfield'" },
-    { name = "passagemath-modules", extras = ["numpy"], marker = "extra == 'cdf'" },
-    { name = "passagemath-modules", extras = ["numpy"], marker = "extra == 'rdf'" },
-    { name = "passagemath-modules", extras = ["pari"], marker = "extra == 'gf'" },
-    { name = "passagemath-modules", extras = ["pari"], marker = "extra == 'zp'" },
-    { name = "passagemath-modules", extras = ["zp"], marker = "extra == 'padics'" },
-    { name = "passagemath-modules", extras = ["zp"], marker = "extra == 'qp'" },
-    { name = "passagemath-modules", extras = ["zp"], marker = "extra == 'qq'" },
-    { name = "passagemath-modules", extras = ["zp"], marker = "extra == 'zq'" },
-    { name = "passagemath-ntl", marker = "extra == 'ntl'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-pari", marker = "extra == 'pari'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-flint", marker = "extra == 'flint'", editable = "pkgs/sagemath-flint" },
+    { name = "passagemath-linbox", marker = "extra == 'linbox'", editable = "pkgs/sagemath-linbox" },
+    { name = "passagemath-m4ri-m4rie", marker = "extra == 'm4ri'", editable = "pkgs/sagemath-m4ri-m4rie" },
+    { name = "passagemath-meataxe", marker = "extra == 'meataxe'", editable = "pkgs/sagemath-meataxe" },
+    { name = "passagemath-modules", extras = ["finitefield", "numberfield", "combinat", "flint", "invariant", "linbox", "m4ri", "m4rie", "mpfi", "ntl", "numpy", "padics", "pari"], marker = "extra == 'standard'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["flint"], marker = "extra == 'cbf'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["flint"], marker = "extra == 'cif'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["flint"], marker = "extra == 'mpfi'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["flint"], marker = "extra == 'numberfield'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["flint"], marker = "extra == 'rbf'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["flint"], marker = "extra == 'rif'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["gap"], marker = "extra == 'ucf'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["gf"], marker = "extra == 'finitefield'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["m4ri"], marker = "extra == 'gf2'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["m4ri", "pari"], marker = "extra == 'm4rie'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["m4rie"], marker = "extra == 'gf2e'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["m4rie"], marker = "extra == 'gf2n'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["meataxe"], marker = "extra == 'gfpn'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["numberfield"], marker = "extra == 'aa'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["numberfield"], marker = "extra == 'cyclotomicfield'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["numberfield"], marker = "extra == 'qqbar'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["numberfield"], marker = "extra == 'quadraticfield'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["numpy"], marker = "extra == 'cdf'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["numpy"], marker = "extra == 'rdf'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["pari"], marker = "extra == 'gf'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["pari"], marker = "extra == 'zp'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["zp"], marker = "extra == 'padics'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["zp"], marker = "extra == 'qp'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["zp"], marker = "extra == 'qq'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["zp"], marker = "extra == 'zq'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-ntl", marker = "extra == 'ntl'", editable = "pkgs/sagemath-ntl" },
+    { name = "passagemath-pari", marker = "extra == 'pari'", editable = "pkgs/sagemath-pari" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test", "flint", "fpylll", "gsl", "linbox", "m4ri", "m4rie", "meataxe", "mpfi", "mpfr", "mpmath", "ntl", "numpy", "pari", "rdf", "cdf", "rr", "cc", "rif", "cif", "rbf", "cbf", "gf", "gf2", "gf2e", "gf2n", "gfpn", "qqbar", "aa", "ucf", "zp", "qp", "zq", "qq", "finitefield", "numberfield", "quadraticfield", "cyclotomicfield", "padics", "standard"]
 
@@ -6162,10 +6162,10 @@ requires-dist = [
     { name = "cysignals", specifier = ">=1.11.2,!=1.12.0" },
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-flint", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", specifier = "==10.8.14rc3" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-flint", editable = "pkgs/sagemath-flint" },
+    { name = "passagemath-modules", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-repl", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -6190,9 +6190,9 @@ requires-dist = [
     { name = "cysignals", specifier = ">=1.11.2,!=1.12.0" },
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-graphs", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-graphs", editable = "pkgs/sagemath-graphs" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -6220,10 +6220,10 @@ requires-dist = [
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
     { name = "memory-allocator", specifier = "<0.2" },
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-modules", marker = "extra == 'test'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -6272,11 +6272,11 @@ requires-dist = [
     { name = "cysignals", specifier = ">=1.11.2,!=1.12.0" },
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-flint", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-pari", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-polyhedra", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-flint", marker = "extra == 'test'", editable = "pkgs/sagemath-flint" },
+    { name = "passagemath-pari", marker = "extra == 'test'", editable = "pkgs/sagemath-pari" },
+    { name = "passagemath-polyhedra", marker = "extra == 'test'", editable = "pkgs/sagemath-polyhedra" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -6347,20 +6347,20 @@ requires-dist = [
     { name = "jupyterlab", marker = "extra == 'jupyterlab'" },
     { name = "memory-allocator", specifier = "<0.2" },
     { name = "notebook", marker = "extra == 'notebook'", specifier = ">=6.1.1" },
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-pari", extras = ["galdata", "seadata-small"], marker = "extra == 'standard'" },
-    { name = "passagemath-pari", extras = ["jupyterkernel"], marker = "extra == 'jupyterlab'" },
-    { name = "passagemath-pari", extras = ["jupyterkernel"], marker = "extra == 'notebook'" },
-    { name = "passagemath-pari-elldata", marker = "extra == 'elldata'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-pari-galdata", marker = "extra == 'galdata'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-pari-galpol", marker = "extra == 'galpol'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-pari-nflistdata", marker = "extra == 'nflistdata'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-pari-nftables", marker = "extra == 'nftables'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-pari-seadata", marker = "extra == 'seadata'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-pari-seadata-big", marker = "extra == 'seadata-big'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-pari-seadata-small", marker = "extra == 'seadata-small'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-pari", extras = ["galdata", "seadata-small"], marker = "extra == 'standard'", editable = "pkgs/sagemath-pari" },
+    { name = "passagemath-pari", extras = ["jupyterkernel"], marker = "extra == 'jupyterlab'", editable = "pkgs/sagemath-pari" },
+    { name = "passagemath-pari", extras = ["jupyterkernel"], marker = "extra == 'notebook'", editable = "pkgs/sagemath-pari" },
+    { name = "passagemath-pari-elldata", marker = "extra == 'elldata'", editable = "pkgs/sagemath-pari-elldata" },
+    { name = "passagemath-pari-galdata", marker = "extra == 'galdata'", editable = "pkgs/sagemath-pari-galdata" },
+    { name = "passagemath-pari-galpol", marker = "extra == 'galpol'", editable = "pkgs/sagemath-pari-galpol" },
+    { name = "passagemath-pari-nflistdata", marker = "extra == 'nflistdata'", editable = "pkgs/sagemath-pari-nflistdata" },
+    { name = "passagemath-pari-nftables", marker = "extra == 'nftables'", editable = "pkgs/sagemath-pari-nftables" },
+    { name = "passagemath-pari-seadata", marker = "extra == 'seadata'", editable = "pkgs/sagemath-pari-seadata" },
+    { name = "passagemath-pari-seadata-big", marker = "extra == 'seadata-big'", editable = "pkgs/sagemath-pari-seadata-big" },
+    { name = "passagemath-pari-seadata-small", marker = "extra == 'seadata-small'", editable = "pkgs/sagemath-pari-seadata-small" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test", "elldata", "galdata", "galpol", "nflistdata", "nftables", "seadata", "seadata-big", "seadata-small", "jupyterkernel", "jupyterlab", "notebook", "standard"]
 
@@ -6374,8 +6374,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -6388,8 +6388,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -6402,8 +6402,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -6416,8 +6416,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -6430,8 +6430,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -6444,8 +6444,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -6458,8 +6458,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -6472,8 +6472,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
 ]
 
 [[package]]
@@ -6490,8 +6490,8 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-graphs", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-graphs", editable = "pkgs/sagemath-graphs" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -6507,8 +6507,8 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-graphs", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-graphs", marker = "extra == 'test'", editable = "pkgs/sagemath-graphs" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -6572,14 +6572,14 @@ requires-dist = [
     { name = "matplotlib", specifier = ">=3.7.0" },
     { name = "memory-allocator", specifier = "<0.2" },
     { name = "numpy", specifier = ">=2.1" },
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-graphs", marker = "extra == 'graphs'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", specifier = "==10.8.14rc3" },
-    { name = "passagemath-plot", extras = ["tachyon"], marker = "sys_platform != 'win32' and extra == 'test'" },
-    { name = "passagemath-polyhedra", marker = "extra == 'polyhedra'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-symbolics", marker = "extra == 'symbolics'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-tachyon", marker = "extra == 'tachyon'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-graphs", marker = "extra == 'graphs'", editable = "pkgs/sagemath-graphs" },
+    { name = "passagemath-modules", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-plot", extras = ["tachyon"], marker = "sys_platform != 'win32' and extra == 'test'", editable = "pkgs/sagemath-plot" },
+    { name = "passagemath-polyhedra", marker = "extra == 'polyhedra'", editable = "pkgs/sagemath-polyhedra" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
+    { name = "passagemath-symbolics", marker = "extra == 'symbolics'", editable = "pkgs/sagemath-symbolics" },
+    { name = "passagemath-tachyon", marker = "extra == 'tachyon'", editable = "pkgs/sagemath-tachyon" },
     { name = "pillow", specifier = ">=7.2.0" },
     { name = "playwright", marker = "extra == 'playwright'" },
     { name = "scipy", specifier = ">=1.11" },
@@ -6728,43 +6728,43 @@ requires-dist = [
     { name = "gmpy2", specifier = "~=2.1b999" },
     { name = "gmpy2", marker = "sys_platform == 'win32'", specifier = "~=2.3b1" },
     { name = "memory-allocator", specifier = "<0.2" },
-    { name = "passagemath-cddlib", marker = "extra == 'cddlib'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-cddlib", marker = "extra == 'cddlib'", editable = "pkgs/sagemath-cddlib" },
     { name = "passagemath-coin-or-cbc", marker = "extra == 'cbc-sage'" },
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-conf", marker = "sys_platform != 'win32' and extra == 'conf'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32' and extra == 'conf'", editable = "pkgs/sage-conf_pypi" },
     { name = "passagemath-cplex", marker = "extra == 'cplex-sage'" },
-    { name = "passagemath-database-polytopes-4d", marker = "extra == 'polytopes-db-4d'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-flint", marker = "extra == 'flint'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-glpk", specifier = "==10.8.14rc3" },
-    { name = "passagemath-graphs", marker = "extra == 'graphs'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-groups", marker = "extra == 'groups'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-database-polytopes-4d", marker = "extra == 'polytopes-db-4d'", editable = "pkgs/sagemath-database-polytopes-4d" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-flint", marker = "extra == 'flint'", editable = "pkgs/sagemath-flint" },
+    { name = "passagemath-glpk", editable = "pkgs/sagemath-glpk" },
+    { name = "passagemath-graphs", marker = "extra == 'graphs'", editable = "pkgs/sagemath-graphs" },
+    { name = "passagemath-groups", marker = "extra == 'groups'", editable = "pkgs/sagemath-groups" },
     { name = "passagemath-gurobi", marker = "extra == 'gurobi-sage'" },
-    { name = "passagemath-highs", marker = "extra == 'highs'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-latte-4ti2", marker = "extra == '4ti2'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-latte-4ti2", marker = "extra == 'latte-int'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-linbox", marker = "extra == 'linbox'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", specifier = "==10.8.14rc3" },
-    { name = "passagemath-palp", marker = "extra == 'palp'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-pari", marker = "extra == 'pari'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-plot", marker = "extra == 'plot'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-plot", extras = ["tachyon"], marker = "extra == 'standard'" },
-    { name = "passagemath-polyhedra", extras = ["cbc-sage"], marker = "extra == 'cbc'" },
-    { name = "passagemath-polyhedra", extras = ["cbc-sage"], marker = "extra == 'coin'" },
-    { name = "passagemath-polyhedra", extras = ["cbc-sage"], marker = "extra == 'coin-sage'" },
-    { name = "passagemath-polyhedra", extras = ["cddlib"], marker = "extra == 'rdf'" },
-    { name = "passagemath-polyhedra", extras = ["cplex-sage"], marker = "extra == 'cplex'" },
-    { name = "passagemath-polyhedra", extras = ["cvxopt-sage"], marker = "extra == 'cvxopt'" },
-    { name = "passagemath-polyhedra", extras = ["flint"], marker = "extra == 'numberfield'" },
-    { name = "passagemath-polyhedra", extras = ["glpk-sage"], marker = "extra == 'glpk'" },
-    { name = "passagemath-polyhedra", extras = ["gurobi-sage"], marker = "extra == 'gurobi'" },
-    { name = "passagemath-polyhedra", extras = ["latte-int"], marker = "extra == 'latte'" },
-    { name = "passagemath-polyhedra", extras = ["polytopes-db-4d"], marker = "extra == 'databases'" },
-    { name = "passagemath-polyhedra", extras = ["rdf", "flint", "fpylll", "glpk", "graphs", "groups", "highs", "linbox", "pari"], marker = "extra == 'standard'" },
-    { name = "passagemath-polymake", marker = "extra == 'polymake'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-highs", marker = "extra == 'highs'", editable = "pkgs/sagemath-highs" },
+    { name = "passagemath-latte-4ti2", marker = "extra == '4ti2'", editable = "pkgs/sagemath-latte-4ti2" },
+    { name = "passagemath-latte-4ti2", marker = "extra == 'latte-int'", editable = "pkgs/sagemath-latte-4ti2" },
+    { name = "passagemath-linbox", marker = "extra == 'linbox'", editable = "pkgs/sagemath-linbox" },
+    { name = "passagemath-modules", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-palp", marker = "extra == 'palp'", editable = "pkgs/sagemath-palp" },
+    { name = "passagemath-pari", marker = "extra == 'pari'", editable = "pkgs/sagemath-pari" },
+    { name = "passagemath-plot", marker = "extra == 'plot'", editable = "pkgs/sagemath-plot" },
+    { name = "passagemath-plot", extras = ["tachyon"], marker = "extra == 'standard'", editable = "pkgs/sagemath-plot" },
+    { name = "passagemath-polyhedra", extras = ["cbc-sage"], marker = "extra == 'cbc'", editable = "pkgs/sagemath-polyhedra" },
+    { name = "passagemath-polyhedra", extras = ["cbc-sage"], marker = "extra == 'coin'", editable = "pkgs/sagemath-polyhedra" },
+    { name = "passagemath-polyhedra", extras = ["cbc-sage"], marker = "extra == 'coin-sage'", editable = "pkgs/sagemath-polyhedra" },
+    { name = "passagemath-polyhedra", extras = ["cddlib"], marker = "extra == 'rdf'", editable = "pkgs/sagemath-polyhedra" },
+    { name = "passagemath-polyhedra", extras = ["cplex-sage"], marker = "extra == 'cplex'", editable = "pkgs/sagemath-polyhedra" },
+    { name = "passagemath-polyhedra", extras = ["cvxopt-sage"], marker = "extra == 'cvxopt'", editable = "pkgs/sagemath-polyhedra" },
+    { name = "passagemath-polyhedra", extras = ["flint"], marker = "extra == 'numberfield'", editable = "pkgs/sagemath-polyhedra" },
+    { name = "passagemath-polyhedra", extras = ["glpk-sage"], marker = "extra == 'glpk'", editable = "pkgs/sagemath-polyhedra" },
+    { name = "passagemath-polyhedra", extras = ["gurobi-sage"], marker = "extra == 'gurobi'", editable = "pkgs/sagemath-polyhedra" },
+    { name = "passagemath-polyhedra", extras = ["latte-int"], marker = "extra == 'latte'", editable = "pkgs/sagemath-polyhedra" },
+    { name = "passagemath-polyhedra", extras = ["polytopes-db-4d"], marker = "extra == 'databases'", editable = "pkgs/sagemath-polyhedra" },
+    { name = "passagemath-polyhedra", extras = ["rdf", "flint", "fpylll", "glpk", "graphs", "groups", "highs", "linbox", "pari"], marker = "extra == 'standard'", editable = "pkgs/sagemath-polyhedra" },
+    { name = "passagemath-polymake", marker = "extra == 'polymake'", editable = "pkgs/sagemath-polymake" },
     { name = "passagemath-ppl" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-topcom", marker = "extra == 'topcom'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
+    { name = "passagemath-topcom", marker = "extra == 'topcom'", editable = "pkgs/sagemath-topcom" },
     { name = "pynormaliz", marker = "platform_machine != 'aarch64' and platform_machine != 'arm64' and extra == 'normaliz'", specifier = ">=2.18" },
     { name = "pyscipopt", marker = "extra == 'scip'" },
 ]
@@ -6788,11 +6788,11 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-polyhedra", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-polyhedra", marker = "extra == 'test'", editable = "pkgs/sagemath-polyhedra" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
     { name = "pexpect", specifier = ">=4.8.0" },
 ]
 provides-extras = ["test"]
@@ -6925,9 +6925,9 @@ requires-dist = [
     { name = "cysignals", specifier = ">=1.11.2,!=1.12.0" },
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", specifier = "==10.8.14rc3" },
-    { name = "passagemath-symbolics", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-repl", editable = "pkgs/sagemath-repl" },
+    { name = "passagemath-symbolics", marker = "extra == 'test'", editable = "pkgs/sagemath-symbolics" },
 ]
 provides-extras = ["test"]
 
@@ -6945,8 +6945,8 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-graphs", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-graphs", editable = "pkgs/sagemath-graphs" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -6986,8 +6986,8 @@ requires-dist = [
     { name = "jupyterlab", marker = "extra == 'jupyterlab'" },
     { name = "marimo", marker = "extra == 'marimo'" },
     { name = "notebook", marker = "extra == 'notebook'", specifier = ">=6.1.1" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-objects", specifier = "==10.8.14rc3" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-objects", editable = "pkgs/sagemath-objects" },
     { name = "sphinx", marker = "extra == 'sphinx'", specifier = ">=6.2,<9" },
     { name = "typing-extensions", specifier = ">=4.13.0" },
 ]
@@ -7005,8 +7005,8 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-groups", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-groups", marker = "extra == 'test'", editable = "pkgs/sagemath-groups" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -7138,50 +7138,50 @@ requires-dist = [
     { name = "gmpy2", marker = "sys_platform == 'win32'", specifier = "~=2.3b1" },
     { name = "memory-allocator", specifier = "<0.2" },
     { name = "numpy", marker = "extra == 'numpy'", specifier = ">=2.1" },
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-database-kohel", marker = "extra == 'database-kohel'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-eclib", marker = "extra == 'eclib'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-flint", specifier = "==10.8.14rc3" },
-    { name = "passagemath-graphs", marker = "extra == 'toric'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-lcalc", marker = "extra == 'lcalc'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-linbox", marker = "extra == 'linbox'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-meataxe", marker = "extra == 'meataxe'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", extras = ["flint"], marker = "extra == 'mpfi'" },
-    { name = "passagemath-modules", extras = ["m4ri"], marker = "extra == 'm4ri'" },
-    { name = "passagemath-modules", extras = ["m4rie"], marker = "extra == 'm4rie'" },
-    { name = "passagemath-msolve", marker = "extra == 'msolve'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-ntl", marker = "extra == 'ntl'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-palp", marker = "extra == 'palp'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-palp", marker = "extra == 'toric'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-pari", marker = "extra == 'pari'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-polyhedra", specifier = "==10.8.14rc3" },
-    { name = "passagemath-polyhedra", marker = "extra == 'toric'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-database-kohel", marker = "extra == 'database-kohel'", editable = "pkgs/sagemath-database-kohel" },
+    { name = "passagemath-eclib", marker = "extra == 'eclib'", editable = "pkgs/sagemath-eclib" },
+    { name = "passagemath-flint", editable = "pkgs/sagemath-flint" },
+    { name = "passagemath-graphs", marker = "extra == 'toric'", editable = "pkgs/sagemath-graphs" },
+    { name = "passagemath-lcalc", marker = "extra == 'lcalc'", editable = "pkgs/sagemath-lcalc" },
+    { name = "passagemath-linbox", marker = "extra == 'linbox'", editable = "pkgs/sagemath-linbox" },
+    { name = "passagemath-meataxe", marker = "extra == 'meataxe'", editable = "pkgs/sagemath-meataxe" },
+    { name = "passagemath-modules", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["flint"], marker = "extra == 'mpfi'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["m4ri"], marker = "extra == 'm4ri'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-modules", extras = ["m4rie"], marker = "extra == 'm4rie'", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-msolve", marker = "extra == 'msolve'", editable = "pkgs/sagemath-msolve" },
+    { name = "passagemath-ntl", marker = "extra == 'ntl'", editable = "pkgs/sagemath-ntl" },
+    { name = "passagemath-palp", marker = "extra == 'palp'", editable = "pkgs/sagemath-palp" },
+    { name = "passagemath-palp", marker = "extra == 'toric'", editable = "pkgs/sagemath-palp" },
+    { name = "passagemath-pari", marker = "extra == 'pari'", editable = "pkgs/sagemath-pari" },
+    { name = "passagemath-polyhedra", editable = "pkgs/sagemath-polyhedra" },
+    { name = "passagemath-polyhedra", marker = "extra == 'toric'", editable = "pkgs/sagemath-polyhedra" },
     { name = "passagemath-primesieve-primecount", marker = "extra == 'primecountpy'" },
-    { name = "passagemath-qepcad", marker = "extra == 'qepcad'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-schemes", extras = ["finitefield", "numberfield", "eclib", "flint", "lcalc", "linbox", "mpfi", "ntl", "numpy", "padics", "pari", "singular", "sympow", "toric"], marker = "extra == 'standard'" },
-    { name = "passagemath-schemes", extras = ["flint"], marker = "extra == 'cbf'" },
-    { name = "passagemath-schemes", extras = ["flint"], marker = "extra == 'rbf'" },
-    { name = "passagemath-schemes", extras = ["gf"], marker = "extra == 'finitefield'" },
-    { name = "passagemath-schemes", extras = ["m4ri"], marker = "extra == 'gf2'" },
-    { name = "passagemath-schemes", extras = ["m4rie"], marker = "extra == 'gf2e'" },
-    { name = "passagemath-schemes", extras = ["m4rie"], marker = "extra == 'gf2n'" },
-    { name = "passagemath-schemes", extras = ["meataxe"], marker = "extra == 'gfpn'" },
-    { name = "passagemath-schemes", extras = ["numberfield"], marker = "extra == 'aa'" },
-    { name = "passagemath-schemes", extras = ["numberfield"], marker = "extra == 'cyclotomicfield'" },
-    { name = "passagemath-schemes", extras = ["numberfield"], marker = "extra == 'qqbar'" },
-    { name = "passagemath-schemes", extras = ["numberfield"], marker = "extra == 'quadraticfield'" },
-    { name = "passagemath-schemes", extras = ["numberfield"], marker = "extra == 'ucf'" },
-    { name = "passagemath-schemes", extras = ["numpy"], marker = "extra == 'cdf'" },
-    { name = "passagemath-schemes", extras = ["numpy"], marker = "extra == 'rdf'" },
-    { name = "passagemath-schemes", extras = ["pari"], marker = "extra == 'gf'" },
-    { name = "passagemath-schemes", extras = ["zp"], marker = "extra == 'padics'" },
-    { name = "passagemath-schemes", extras = ["zp"], marker = "extra == 'qp'" },
-    { name = "passagemath-schemes", extras = ["zp"], marker = "extra == 'qq'" },
-    { name = "passagemath-schemes", extras = ["zp"], marker = "extra == 'zq'" },
-    { name = "passagemath-singular", specifier = "==10.8.14rc3" },
-    { name = "passagemath-sympow", marker = "extra == 'sympow'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-qepcad", marker = "extra == 'qepcad'", editable = "pkgs/sagemath-qepcad" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
+    { name = "passagemath-schemes", extras = ["finitefield", "numberfield", "eclib", "flint", "lcalc", "linbox", "mpfi", "ntl", "numpy", "padics", "pari", "singular", "sympow", "toric"], marker = "extra == 'standard'", editable = "pkgs/sagemath-schemes" },
+    { name = "passagemath-schemes", extras = ["flint"], marker = "extra == 'cbf'", editable = "pkgs/sagemath-schemes" },
+    { name = "passagemath-schemes", extras = ["flint"], marker = "extra == 'rbf'", editable = "pkgs/sagemath-schemes" },
+    { name = "passagemath-schemes", extras = ["gf"], marker = "extra == 'finitefield'", editable = "pkgs/sagemath-schemes" },
+    { name = "passagemath-schemes", extras = ["m4ri"], marker = "extra == 'gf2'", editable = "pkgs/sagemath-schemes" },
+    { name = "passagemath-schemes", extras = ["m4rie"], marker = "extra == 'gf2e'", editable = "pkgs/sagemath-schemes" },
+    { name = "passagemath-schemes", extras = ["m4rie"], marker = "extra == 'gf2n'", editable = "pkgs/sagemath-schemes" },
+    { name = "passagemath-schemes", extras = ["meataxe"], marker = "extra == 'gfpn'", editable = "pkgs/sagemath-schemes" },
+    { name = "passagemath-schemes", extras = ["numberfield"], marker = "extra == 'aa'", editable = "pkgs/sagemath-schemes" },
+    { name = "passagemath-schemes", extras = ["numberfield"], marker = "extra == 'cyclotomicfield'", editable = "pkgs/sagemath-schemes" },
+    { name = "passagemath-schemes", extras = ["numberfield"], marker = "extra == 'qqbar'", editable = "pkgs/sagemath-schemes" },
+    { name = "passagemath-schemes", extras = ["numberfield"], marker = "extra == 'quadraticfield'", editable = "pkgs/sagemath-schemes" },
+    { name = "passagemath-schemes", extras = ["numberfield"], marker = "extra == 'ucf'", editable = "pkgs/sagemath-schemes" },
+    { name = "passagemath-schemes", extras = ["numpy"], marker = "extra == 'cdf'", editable = "pkgs/sagemath-schemes" },
+    { name = "passagemath-schemes", extras = ["numpy"], marker = "extra == 'rdf'", editable = "pkgs/sagemath-schemes" },
+    { name = "passagemath-schemes", extras = ["pari"], marker = "extra == 'gf'", editable = "pkgs/sagemath-schemes" },
+    { name = "passagemath-schemes", extras = ["zp"], marker = "extra == 'padics'", editable = "pkgs/sagemath-schemes" },
+    { name = "passagemath-schemes", extras = ["zp"], marker = "extra == 'qp'", editable = "pkgs/sagemath-schemes" },
+    { name = "passagemath-schemes", extras = ["zp"], marker = "extra == 'qq'", editable = "pkgs/sagemath-schemes" },
+    { name = "passagemath-schemes", extras = ["zp"], marker = "extra == 'zq'", editable = "pkgs/sagemath-schemes" },
+    { name = "passagemath-singular", editable = "pkgs/sagemath-singular" },
+    { name = "passagemath-sympow", marker = "extra == 'sympow'", editable = "pkgs/sagemath-sympow" },
     { name = "scipy", specifier = ">=1.11" },
 ]
 provides-extras = ["test", "flint", "fpylll", "gsl", "linbox", "m4ri", "m4rie", "meataxe", "mpfi", "mpfr", "mpmath", "ntl", "numpy", "pari", "primecountpy", "eclib", "lcalc", "msolve", "palp", "qepcad", "singular", "sympow", "rdf", "cdf", "rr", "cc", "rif", "cif", "rbf", "cbf", "gf", "gf2", "gf2e", "gf2n", "gfpn", "qqbar", "aa", "ucf", "zp", "qp", "zq", "qq", "finitefield", "numberfield", "quadraticfield", "cyclotomicfield", "toric", "padics", "database-kohel", "standard"]
@@ -7240,15 +7240,15 @@ requires-dist = [
     { name = "jupyterlab", marker = "extra == 'jupyterlab'" },
     { name = "memory-allocator", specifier = "<0.2" },
     { name = "notebook", marker = "extra == 'notebook'", specifier = ">=6.1.1" },
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-flint", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", specifier = "==10.8.14rc3" },
-    { name = "passagemath-pari", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-singular", extras = ["jupyterkernel"], marker = "extra == 'jupyterlab'" },
-    { name = "passagemath-singular", extras = ["jupyterkernel"], marker = "extra == 'notebook'" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-flint", editable = "pkgs/sagemath-flint" },
+    { name = "passagemath-modules", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-pari", editable = "pkgs/sagemath-pari" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
+    { name = "passagemath-singular", extras = ["jupyterkernel"], marker = "extra == 'jupyterlab'", editable = "pkgs/sagemath-singular" },
+    { name = "passagemath-singular", extras = ["jupyterkernel"], marker = "extra == 'notebook'", editable = "pkgs/sagemath-singular" },
     { name = "passagemath-singular-jupyterkernel", marker = "extra == 'jupyterkernel'" },
     { name = "pexpect", specifier = ">=4.8.0" },
 ]
@@ -7288,13 +7288,13 @@ requires-dist = [
     { name = "cysignals", specifier = ">=1.11.2,!=1.12.0" },
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
-    { name = "passagemath-combinat", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-graphs", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-groups", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", specifier = "==10.8.14rc3" },
-    { name = "passagemath-polyhedra", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-schemes", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-combinat", marker = "extra == 'test'", editable = "pkgs/sagemath-combinat" },
+    { name = "passagemath-graphs", marker = "extra == 'test'", editable = "pkgs/sagemath-graphs" },
+    { name = "passagemath-groups", marker = "extra == 'test'", editable = "pkgs/sagemath-groups" },
+    { name = "passagemath-modules", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-polyhedra", marker = "extra == 'test'", editable = "pkgs/sagemath-polyhedra" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
+    { name = "passagemath-schemes", marker = "extra == 'test'", editable = "pkgs/sagemath-schemes" },
 ]
 provides-extras = ["test"]
 
@@ -7525,59 +7525,59 @@ requires-dist = [
     { name = "matroid-database", marker = "extra == 'database-matroids'" },
     { name = "networkx", marker = "extra == 'networkx'", specifier = ">=3.1" },
     { name = "notebook", marker = "extra == 'notebook'", specifier = ">=6.1.1" },
-    { name = "passagemath-benzene", marker = "extra == 'benzene'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-bliss", marker = "extra == 'bliss'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-brial", marker = "extra == 'brial'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-buckygen", marker = "extra == 'buckygen'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-cliquer", marker = "extra == 'cliquer'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-cmr", marker = "extra == 'cmr'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-coxeter3", marker = "extra == 'coxeter3'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-database-cremona-ellcurve", marker = "extra == 'database-cremona-ellcurve'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-database-cunningham", marker = "extra == 'database-cunningham'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-database-jones-numfield", marker = "extra == 'database-jones-numfield'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-database-kohel", marker = "extra == 'database-kohel'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-database-mutation-class", marker = "extra == 'database-mutation-class'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-database-odlyzko-zeta", marker = "extra == 'database-odlyzko-zeta'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-database-polytopes-4d", marker = "extra == 'database-polytopes-4d'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-database-stein-watkins", marker = "extra == 'database-stein-watkins'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-database-stein-watkins-mini", marker = "extra == 'database-stein-watkins-mini'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-database-symbolic-data", marker = "extra == 'database-symbolic-data'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-eclib", marker = "extra == 'eclib'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-fricas", marker = "extra == 'fricas'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-frobby", marker = "extra == 'frobby'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap3", marker = "extra == 'gap3'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gfan", marker = "extra == 'gfan'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-giac", marker = "extra == 'giac'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-glucose", marker = "extra == 'glucose'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-graphviz", marker = "extra == 'graphviz'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-kenzo", marker = "extra == 'kenzo'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-kissat", marker = "extra == 'kissat'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-latte-4ti2", marker = "extra == '4ti2'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-latte-4ti2", marker = "extra == 'latte'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-latte-4ti2", marker = "extra == 'latte-int'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-lie", marker = "extra == 'lie'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-lrslib", marker = "extra == 'lrslib'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-macaulay2", marker = "extra == 'macaulay2'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-maxima", specifier = "==10.8.14rc3" },
-    { name = "passagemath-mcqd", marker = "extra == 'mcqd'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-meataxe", marker = "extra == 'meataxe'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-msolve", marker = "extra == 'msolve'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-nauty", marker = "extra == 'nauty'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-palp", marker = "extra == 'palp'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-planarity", marker = "extra == 'planarity'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-plantri", marker = "extra == 'plantri'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-polymake", marker = "extra == 'polymake'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-qepcad", marker = "extra == 'qepcad'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-rankwidth", marker = "extra == 'rankwidth'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-rankwidth", marker = "extra == 'rw'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-rubiks", marker = "extra == 'rubiks'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-sirocco", marker = "extra == 'sirocco'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-standard-no-symbolics", specifier = "==10.8.14rc3" },
-    { name = "passagemath-symbolics", specifier = "==10.8.14rc3" },
-    { name = "passagemath-sympow", marker = "extra == 'sympow'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-tdlib", marker = "extra == 'tdlib'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-tides", marker = "extra == 'tides'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-topcom", marker = "extra == 'topcom'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-benzene", marker = "extra == 'benzene'", editable = "pkgs/sagemath-benzene" },
+    { name = "passagemath-bliss", marker = "extra == 'bliss'", editable = "pkgs/sagemath-bliss" },
+    { name = "passagemath-brial", marker = "extra == 'brial'", editable = "pkgs/sagemath-brial" },
+    { name = "passagemath-buckygen", marker = "extra == 'buckygen'", editable = "pkgs/sagemath-buckygen" },
+    { name = "passagemath-cliquer", marker = "extra == 'cliquer'", editable = "pkgs/sagemath-cliquer" },
+    { name = "passagemath-cmr", marker = "extra == 'cmr'", editable = "pkgs/sagemath-cmr" },
+    { name = "passagemath-coxeter3", marker = "extra == 'coxeter3'", editable = "pkgs/sagemath-coxeter3" },
+    { name = "passagemath-database-cremona-ellcurve", marker = "extra == 'database-cremona-ellcurve'", editable = "pkgs/sagemath-database-cremona-ellcurve" },
+    { name = "passagemath-database-cunningham", marker = "extra == 'database-cunningham'", editable = "pkgs/sagemath-database-cunningham" },
+    { name = "passagemath-database-jones-numfield", marker = "extra == 'database-jones-numfield'", editable = "pkgs/sagemath-database-jones-numfield" },
+    { name = "passagemath-database-kohel", marker = "extra == 'database-kohel'", editable = "pkgs/sagemath-database-kohel" },
+    { name = "passagemath-database-mutation-class", marker = "extra == 'database-mutation-class'", editable = "pkgs/sagemath-database-mutation-class" },
+    { name = "passagemath-database-odlyzko-zeta", marker = "extra == 'database-odlyzko-zeta'", editable = "pkgs/sagemath-database-odlyzko-zeta" },
+    { name = "passagemath-database-polytopes-4d", marker = "extra == 'database-polytopes-4d'", editable = "pkgs/sagemath-database-polytopes-4d" },
+    { name = "passagemath-database-stein-watkins", marker = "extra == 'database-stein-watkins'", editable = "pkgs/sagemath-database-stein-watkins" },
+    { name = "passagemath-database-stein-watkins-mini", marker = "extra == 'database-stein-watkins-mini'", editable = "pkgs/sagemath-database-stein-watkins-mini" },
+    { name = "passagemath-database-symbolic-data", marker = "extra == 'database-symbolic-data'", editable = "pkgs/sagemath-database-symbolic-data" },
+    { name = "passagemath-eclib", marker = "extra == 'eclib'", editable = "pkgs/sagemath-eclib" },
+    { name = "passagemath-fricas", marker = "extra == 'fricas'", editable = "pkgs/sagemath-fricas" },
+    { name = "passagemath-frobby", marker = "extra == 'frobby'", editable = "pkgs/sagemath-frobby" },
+    { name = "passagemath-gap3", marker = "extra == 'gap3'", editable = "pkgs/sagemath-gap3" },
+    { name = "passagemath-gfan", marker = "extra == 'gfan'", editable = "pkgs/sagemath-gfan" },
+    { name = "passagemath-giac", marker = "extra == 'giac'", editable = "pkgs/sagemath-giac" },
+    { name = "passagemath-glucose", marker = "extra == 'glucose'", editable = "pkgs/sagemath-glucose" },
+    { name = "passagemath-graphviz", marker = "extra == 'graphviz'", editable = "pkgs/sagemath-graphviz" },
+    { name = "passagemath-kenzo", marker = "extra == 'kenzo'", editable = "pkgs/sagemath-kenzo" },
+    { name = "passagemath-kissat", marker = "extra == 'kissat'", editable = "pkgs/sagemath-kissat" },
+    { name = "passagemath-latte-4ti2", marker = "extra == '4ti2'", editable = "pkgs/sagemath-latte-4ti2" },
+    { name = "passagemath-latte-4ti2", marker = "extra == 'latte'", editable = "pkgs/sagemath-latte-4ti2" },
+    { name = "passagemath-latte-4ti2", marker = "extra == 'latte-int'", editable = "pkgs/sagemath-latte-4ti2" },
+    { name = "passagemath-lie", marker = "extra == 'lie'", editable = "pkgs/sagemath-lie" },
+    { name = "passagemath-lrslib", marker = "extra == 'lrslib'", editable = "pkgs/sagemath-lrslib" },
+    { name = "passagemath-macaulay2", marker = "extra == 'macaulay2'", editable = "pkgs/sagemath-macaulay2" },
+    { name = "passagemath-maxima", editable = "pkgs/sagemath-maxima" },
+    { name = "passagemath-mcqd", marker = "extra == 'mcqd'", editable = "pkgs/sagemath-mcqd" },
+    { name = "passagemath-meataxe", marker = "extra == 'meataxe'", editable = "pkgs/sagemath-meataxe" },
+    { name = "passagemath-msolve", marker = "extra == 'msolve'", editable = "pkgs/sagemath-msolve" },
+    { name = "passagemath-nauty", marker = "extra == 'nauty'", editable = "pkgs/sagemath-nauty" },
+    { name = "passagemath-palp", marker = "extra == 'palp'", editable = "pkgs/sagemath-palp" },
+    { name = "passagemath-planarity", marker = "extra == 'planarity'", editable = "pkgs/sagemath-planarity" },
+    { name = "passagemath-plantri", marker = "extra == 'plantri'", editable = "pkgs/sagemath-plantri" },
+    { name = "passagemath-polymake", marker = "extra == 'polymake'", editable = "pkgs/sagemath-polymake" },
+    { name = "passagemath-qepcad", marker = "extra == 'qepcad'", editable = "pkgs/sagemath-qepcad" },
+    { name = "passagemath-rankwidth", marker = "extra == 'rankwidth'", editable = "pkgs/sagemath-rankwidth" },
+    { name = "passagemath-rankwidth", marker = "extra == 'rw'", editable = "pkgs/sagemath-rankwidth" },
+    { name = "passagemath-rubiks", marker = "extra == 'rubiks'", editable = "pkgs/sagemath-rubiks" },
+    { name = "passagemath-sirocco", marker = "extra == 'sirocco'", editable = "pkgs/sagemath-sirocco" },
+    { name = "passagemath-standard-no-symbolics", editable = "pkgs/sagemath-standard-no-symbolics" },
+    { name = "passagemath-symbolics", editable = "pkgs/sagemath-symbolics" },
+    { name = "passagemath-sympow", marker = "extra == 'sympow'", editable = "pkgs/sagemath-sympow" },
+    { name = "passagemath-tdlib", marker = "extra == 'tdlib'", editable = "pkgs/sagemath-tdlib" },
+    { name = "passagemath-tides", marker = "extra == 'tides'", editable = "pkgs/sagemath-tides" },
+    { name = "passagemath-topcom", marker = "extra == 'topcom'", editable = "pkgs/sagemath-topcom" },
     { name = "pygcgopt", marker = "extra == 'gcg'" },
     { name = "pynormaliz", marker = "platform_machine != 'aarch64' and platform_machine != 'arm64' and extra == 'normaliz'", specifier = ">=2.18" },
     { name = "pyscipopt", marker = "extra == 'scip'" },
@@ -7677,45 +7677,45 @@ requires-dist = [
     { name = "memory-allocator", specifier = "<0.2" },
     { name = "networkx", specifier = ">=3.1" },
     { name = "numpy", specifier = ">=2.1" },
-    { name = "passagemath-brial", specifier = "==10.8.14rc3" },
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-cddlib", specifier = "==10.8.14rc3" },
-    { name = "passagemath-cliquer", specifier = "==10.8.14rc3" },
-    { name = "passagemath-combinat", specifier = "==10.8.14rc3" },
-    { name = "passagemath-eclib", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-flint", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap-pkg-ctbllib-data", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap-pkg-irredsol-data", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap-pkg-tomlib-data", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gap-pkg-transgrp-data", specifier = "==10.8.14rc3" },
-    { name = "passagemath-glpk", specifier = "==10.8.14rc3" },
-    { name = "passagemath-graphs", specifier = "==10.8.14rc3" },
-    { name = "passagemath-groups", specifier = "==10.8.14rc3" },
-    { name = "passagemath-highs", specifier = "==10.8.14rc3" },
-    { name = "passagemath-homfly", specifier = "==10.8.14rc3" },
-    { name = "passagemath-lcalc", specifier = "==10.8.14rc3" },
-    { name = "passagemath-libbraiding", specifier = "==10.8.14rc3" },
-    { name = "passagemath-libecm", specifier = "==10.8.14rc3" },
-    { name = "passagemath-linbox", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", specifier = "==10.8.14rc3" },
-    { name = "passagemath-nauty", specifier = "==10.8.14rc3" },
-    { name = "passagemath-ntl", specifier = "==10.8.14rc3" },
-    { name = "passagemath-objects", specifier = "==10.8.14rc3" },
-    { name = "passagemath-palp", specifier = "==10.8.14rc3" },
-    { name = "passagemath-pari", specifier = "==10.8.14rc3" },
-    { name = "passagemath-pari-galdata", specifier = "==10.8.14rc3" },
-    { name = "passagemath-pari-seadata-small", specifier = "==10.8.14rc3" },
-    { name = "passagemath-planarity", specifier = "==10.8.14rc3" },
-    { name = "passagemath-plot", specifier = "==10.8.14rc3" },
-    { name = "passagemath-polyhedra", specifier = "==10.8.14rc3" },
+    { name = "passagemath-brial", editable = "pkgs/sagemath-brial" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-cddlib", editable = "pkgs/sagemath-cddlib" },
+    { name = "passagemath-cliquer", editable = "pkgs/sagemath-cliquer" },
+    { name = "passagemath-combinat", editable = "pkgs/sagemath-combinat" },
+    { name = "passagemath-eclib", editable = "pkgs/sagemath-eclib" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-flint", editable = "pkgs/sagemath-flint" },
+    { name = "passagemath-gap", editable = "pkgs/sagemath-gap" },
+    { name = "passagemath-gap-pkg-ctbllib-data", editable = "pkgs/sagemath-gap-pkg-ctbllib-data" },
+    { name = "passagemath-gap-pkg-irredsol-data", editable = "pkgs/sagemath-gap-pkg-irredsol-data" },
+    { name = "passagemath-gap-pkg-tomlib-data", editable = "pkgs/sagemath-gap-pkg-tomlib-data" },
+    { name = "passagemath-gap-pkg-transgrp-data", editable = "pkgs/sagemath-gap-pkg-transgrp-data" },
+    { name = "passagemath-glpk", editable = "pkgs/sagemath-glpk" },
+    { name = "passagemath-graphs", editable = "pkgs/sagemath-graphs" },
+    { name = "passagemath-groups", editable = "pkgs/sagemath-groups" },
+    { name = "passagemath-highs", editable = "pkgs/sagemath-highs" },
+    { name = "passagemath-homfly", editable = "pkgs/sagemath-homfly" },
+    { name = "passagemath-lcalc", editable = "pkgs/sagemath-lcalc" },
+    { name = "passagemath-libbraiding", editable = "pkgs/sagemath-libbraiding" },
+    { name = "passagemath-libecm", editable = "pkgs/sagemath-libecm" },
+    { name = "passagemath-linbox", editable = "pkgs/sagemath-linbox" },
+    { name = "passagemath-modules", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-nauty", editable = "pkgs/sagemath-nauty" },
+    { name = "passagemath-ntl", editable = "pkgs/sagemath-ntl" },
+    { name = "passagemath-objects", editable = "pkgs/sagemath-objects" },
+    { name = "passagemath-palp", editable = "pkgs/sagemath-palp" },
+    { name = "passagemath-pari", editable = "pkgs/sagemath-pari" },
+    { name = "passagemath-pari-galdata", editable = "pkgs/sagemath-pari-galdata" },
+    { name = "passagemath-pari-seadata-small", editable = "pkgs/sagemath-pari-seadata-small" },
+    { name = "passagemath-planarity", editable = "pkgs/sagemath-planarity" },
+    { name = "passagemath-plot", editable = "pkgs/sagemath-plot" },
+    { name = "passagemath-polyhedra", editable = "pkgs/sagemath-polyhedra" },
     { name = "passagemath-ppl" },
     { name = "passagemath-primesieve-primecount" },
-    { name = "passagemath-repl", specifier = "==10.8.14rc3" },
-    { name = "passagemath-schemes", specifier = "==10.8.14rc3" },
-    { name = "passagemath-singular", specifier = "==10.8.14rc3" },
-    { name = "passagemath-tachyon", specifier = "==10.8.14rc3" },
+    { name = "passagemath-repl", editable = "pkgs/sagemath-repl" },
+    { name = "passagemath-schemes", editable = "pkgs/sagemath-schemes" },
+    { name = "passagemath-singular", editable = "pkgs/sagemath-singular" },
+    { name = "passagemath-tachyon", editable = "pkgs/sagemath-tachyon" },
     { name = "pexpect", specifier = ">=4.8.0" },
     { name = "pillow", specifier = ">=7.2.0" },
     { name = "pkgconfig" },
@@ -7797,22 +7797,22 @@ requires-dist = [
     { name = "gmpy2", marker = "sys_platform == 'win32'", specifier = "~=2.3b1" },
     { name = "mathics3", marker = "extra == 'mathics3'" },
     { name = "numpy", specifier = ">=2.1" },
-    { name = "passagemath-categories", specifier = "==10.8.14rc3" },
-    { name = "passagemath-conf", marker = "sys_platform != 'win32' and extra == 'conf'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-flint", specifier = "==10.8.14rc3" },
-    { name = "passagemath-fricas", marker = "extra == 'fricas'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-giac", marker = "extra == 'giac'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-gsl", specifier = "==10.8.14rc3" },
-    { name = "passagemath-maxima", marker = "extra == 'maxima'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-modules", specifier = "==10.8.14rc3" },
-    { name = "passagemath-ntl", specifier = "==10.8.14rc3" },
-    { name = "passagemath-plot", marker = "extra == 'plot'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-categories", editable = "pkgs/sagemath-categories" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32' and extra == 'conf'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-flint", editable = "pkgs/sagemath-flint" },
+    { name = "passagemath-fricas", marker = "extra == 'fricas'", editable = "pkgs/sagemath-fricas" },
+    { name = "passagemath-giac", marker = "extra == 'giac'", editable = "pkgs/sagemath-giac" },
+    { name = "passagemath-gsl", editable = "pkgs/sagemath-gsl" },
+    { name = "passagemath-maxima", marker = "extra == 'maxima'", editable = "pkgs/sagemath-maxima" },
+    { name = "passagemath-modules", editable = "pkgs/sagemath-modules" },
+    { name = "passagemath-ntl", editable = "pkgs/sagemath-ntl" },
+    { name = "passagemath-plot", marker = "extra == 'plot'", editable = "pkgs/sagemath-plot" },
     { name = "passagemath-primesieve-primecount", marker = "extra == 'primecount'" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-singular", marker = "extra == 'singular'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-symbolics", extras = ["maxima", "primecount", "singular", "test"], marker = "extra == 'standard'" },
-    { name = "passagemath-tides", marker = "extra == 'tides'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
+    { name = "passagemath-singular", marker = "extra == 'singular'", editable = "pkgs/sagemath-singular" },
+    { name = "passagemath-symbolics", extras = ["maxima", "primecount", "singular", "test"], marker = "extra == 'standard'", editable = "pkgs/sagemath-symbolics" },
+    { name = "passagemath-tides", marker = "extra == 'tides'", editable = "pkgs/sagemath-tides" },
     { name = "sympy", specifier = ">=1.6,<2.0" },
 ]
 provides-extras = ["conf", "test", "fricas", "giac", "ginac", "mathics3", "maxima", "ntl", "primecount", "pynac", "singular", "sympy", "tides", "plot", "standard"]
@@ -7830,9 +7830,9 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-linbox", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-schemes", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-linbox", marker = "extra == 'test'", editable = "pkgs/sagemath-linbox" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
+    { name = "passagemath-schemes", marker = "extra == 'test'", editable = "pkgs/sagemath-schemes" },
 ]
 provides-extras = ["test"]
 
@@ -7857,9 +7857,9 @@ requires-dist = [
     { name = "cysignals", specifier = ">=1.11.2,!=1.12.0" },
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-objects", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-objects", editable = "pkgs/sagemath-objects" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -7883,8 +7883,8 @@ requires-dist = [
     { name = "cysignals", specifier = ">=1.11.2,!=1.12.0" },
     { name = "cysignals", marker = "python_full_version >= '3.14'", specifier = ">=1.12.6" },
     { name = "cysignals", marker = "sys_platform == 'win32'", specifier = "!=1.12.4" },
-    { name = "passagemath-graphs", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-graphs", marker = "extra == 'test'", editable = "pkgs/sagemath-graphs" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
 ]
 provides-extras = ["test"]
 
@@ -7904,10 +7904,10 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-conf", marker = "sys_platform != 'win32'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-symbolics", specifier = "==10.8.14rc3" },
+    { name = "passagemath-conf", marker = "sys_platform != 'win32'", editable = "pkgs/sage-conf_pypi" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
+    { name = "passagemath-symbolics", editable = "pkgs/sagemath-symbolics" },
 ]
 provides-extras = ["test"]
 
@@ -7928,10 +7928,10 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "passagemath-environment", specifier = "==10.8.14rc3" },
-    { name = "passagemath-flint", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-polyhedra", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
-    { name = "passagemath-repl", marker = "extra == 'test'", specifier = "==10.8.14rc3" },
+    { name = "passagemath-environment", editable = "pkgs/sagemath-environment" },
+    { name = "passagemath-flint", marker = "extra == 'test'", editable = "pkgs/sagemath-flint" },
+    { name = "passagemath-polyhedra", marker = "extra == 'test'", editable = "pkgs/sagemath-polyhedra" },
+    { name = "passagemath-repl", marker = "extra == 'test'", editable = "pkgs/sagemath-repl" },
     { name = "pexpect", specifier = ">=4.8.0" },
 ]
 provides-extras = ["test"]
@@ -8036,10 +8036,10 @@ version = "0.25.3"
 source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
     "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform == 'win32'",
-    "python_full_version < '3.11.5' and sys_platform == 'win32'",
     "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform != 'ios' and sys_platform != 'win32'",
-    "python_full_version < '3.11.5' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform == 'ios'",
+    "python_full_version < '3.11.5' and sys_platform == 'win32'",
+    "python_full_version < '3.11.5' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version < '3.11.5' and sys_platform == 'ios'",
 ]
 dependencies = [
@@ -8062,9 +8062,9 @@ resolution-markers = [
     "python_full_version >= '3.14' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version >= '3.14' and sys_platform == 'ios'",
     "python_full_version == '3.13.*' and sys_platform == 'win32'",
-    "python_full_version == '3.12.*' and sys_platform == 'win32'",
     "python_full_version == '3.13.*' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version == '3.13.*' and sys_platform == 'ios'",
+    "python_full_version == '3.12.*' and sys_platform == 'win32'",
     "python_full_version == '3.12.*' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version == '3.12.*' and sys_platform == 'ios'",
 ]
@@ -8920,10 +8920,10 @@ version = "3.3.1"
 source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
     "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform == 'win32'",
-    "python_full_version < '3.11.5' and sys_platform == 'win32'",
     "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform != 'ios' and sys_platform != 'win32'",
-    "python_full_version < '3.11.5' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform == 'ios'",
+    "python_full_version < '3.11.5' and sys_platform == 'win32'",
+    "python_full_version < '3.11.5' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version < '3.11.5' and sys_platform == 'ios'",
 ]
 dependencies = [
@@ -8941,9 +8941,9 @@ version = "3.5.0"
 source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
     "python_full_version == '3.13.*' and sys_platform == 'win32'",
-    "python_full_version == '3.12.*' and sys_platform == 'win32'",
     "python_full_version == '3.13.*' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version == '3.13.*' and sys_platform == 'ios'",
+    "python_full_version == '3.12.*' and sys_platform == 'win32'",
     "python_full_version == '3.12.*' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version == '3.12.*' and sys_platform == 'ios'",
 ]
@@ -9287,10 +9287,10 @@ version = "1.17.1"
 source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
     "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform == 'win32'",
-    "python_full_version < '3.11.5' and sys_platform == 'win32'",
     "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform != 'ios' and sys_platform != 'win32'",
-    "python_full_version < '3.11.5' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform == 'ios'",
+    "python_full_version < '3.11.5' and sys_platform == 'win32'",
+    "python_full_version < '3.11.5' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version < '3.11.5' and sys_platform == 'ios'",
 ]
 dependencies = [
@@ -9369,9 +9369,9 @@ resolution-markers = [
     "python_full_version >= '3.14' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version >= '3.14' and sys_platform == 'ios'",
     "python_full_version == '3.13.*' and sys_platform == 'win32'",
-    "python_full_version == '3.12.*' and sys_platform == 'win32'",
     "python_full_version == '3.13.*' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version == '3.13.*' and sys_platform == 'ios'",
+    "python_full_version == '3.12.*' and sys_platform == 'win32'",
     "python_full_version == '3.12.*' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version == '3.12.*' and sys_platform == 'ios'",
 ]
@@ -9520,12 +9520,12 @@ resolution-markers = [
     "python_full_version >= '3.14' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version >= '3.14' and sys_platform == 'ios'",
     "python_full_version == '3.13.*' and sys_platform == 'win32'",
-    "python_full_version == '3.12.*' and sys_platform == 'win32'",
-    "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform == 'win32'",
     "python_full_version == '3.13.*' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version == '3.13.*' and sys_platform == 'ios'",
+    "python_full_version == '3.12.*' and sys_platform == 'win32'",
     "python_full_version == '3.12.*' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version == '3.12.*' and sys_platform == 'ios'",
+    "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform == 'win32'",
     "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform != 'ios' and sys_platform != 'win32'",
     "python_full_version >= '3.11.5' and python_full_version < '3.12' and sys_platform == 'ios'",
 ]
