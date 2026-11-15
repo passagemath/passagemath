@@ -28,6 +28,7 @@ classifiers = [
   "Topic :: Scientific/Engineering :: Mathematics",
 ]
 dependencies = [
+  #'passagemath-standard',
   'conway-polynomials >=0.8',
   'cypari2 >=2.2.1; sys_platform != "win32"',
   'six >=1.15.0',
@@ -290,3 +291,10 @@ exclude = [
   "pkgs/sagemath-doc-html",
   "pkgs/sagemath-doc-pdf",
 ]
+
+[tool.uv.build-backend]
+# This project does not ship any Python modules directly.
+module-name = []
+
+[tool.uv.sources]
+passagemath-standard = { workspace = true }
