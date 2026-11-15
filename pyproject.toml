@@ -1,36 +1,17 @@
 [build-system]
-build-backend = 'mesonpy'
+build-backend = 'uv_build'
 # Minimum requirements for the build system to execute.
 requires = [
-  'cypari2 >=2.2.1; sys_platform != "win32"',
-  'meson-python',
-  # Exclude 1.12.0 because of https://github.com/sagemath/cysignals/issues/212, https://github.com/passagemath/passagemath/issues/445
-  'cysignals >=1.11.2, != 1.12.0',
-  # Exclude 1.12.4 because of https://github.com/passagemath/passagemath/issues/1318
-  'cysignals !=1.12.4; sys_platform == "win32"',
-  # Exclude old versions of cysignals that do not declare their incompatibility with Python 3.14
-  'cysignals >= 1.12.6; python_version >= "3.14"',
-  'cython >=3.1.0,<3.4.0',
-  'gmpy2 ~=2.1.b999',
-  'gmpy2 ~=2.3.b1; sys_platform == "win32"',
-  'jinja2',
-  'memory_allocator <0.2',
-  'numpy >=2.1',
+  'uv_build>=0.13.8,<0.14',
 ]
-[tool.meson-python.args]
-# Prevent meson from trying to install the autoconf subprojects
-# otherwise we hit https://github.com/mesonbuild/meson-python/issues/598
-# The subprojects have to set the rpath to the build directory, which should work as long as
-# we don't use build isolation.
-# Also don't install subprojects providing static libraries as per https://mesonbuild.com/meson-python/how-to-guides/shared-libraries.html#static-library-from-subproject
-# This actually covers all current subprojects; so just don't install any of them. 
-install = ['--skip-subprojects']
-# Ensure that ``library`` targets are built as static, and nothing gets installed
-setup = ['--default-library=static']
 
 [project]
 authors = [
   { email = "sage-support@googlegroups.com", name = "The Sage Developers" },
+]
+maintainers = [
+    {name = "Matthias Köppe"},
+    {name = "passagemath contributors"},
 ]
 classifiers = [
   "Development Status :: 6 - Mature",
@@ -47,6 +28,7 @@ classifiers = [
   "Topic :: Scientific/Engineering :: Mathematics",
 ]
 dependencies = [
+  #'passagemath-standard',
   'conway-polynomials >=0.8',
   'cypari2 >=2.2.1; sys_platform != "win32"',
   'six >=1.15.0',
@@ -83,12 +65,21 @@ dependencies = [
   'pkgconfig',
   'traitlets',
 ]
-description = "Sage: Open Source Mathematics Software: Standard Python Library"
-dynamic = ["version"]
+description = "passagemath: Open Source Mathematical Software"
 license = "GPL-2.0-or-later"
-name = "sagemath"
-requires-python = ">=3.12, <3.15"
-urls = { Homepage = "https://www.sagemath.org" }
+name = "passagemath"
+version = "10.8.13rc3"
+requires-python = ">=3.11, <3.15"
+
+[project.urls]
+"release notes" = "https://github.com/passagemath/passagemath/releases"
+"repo (upstream)" = "https://github.com/sagemath/sage"
+"repo" = "https://github.com/passagemath/passagemath"
+documentation = "https://passagemath.org/docs/latest"
+"homepage (upstream)" = "https://www.sagemath.org"
+"discourse" = "https://passagemath.discourse.group"
+"tracker (upstream)" = "https://github.com/sagemath/sage/issues"
+"tracker" = "https://github.com/passagemath/passagemath/issues"
 
 [project.optional-dependencies]
 R = ['rpy2 >=3.3']
@@ -98,7 +89,6 @@ extra = [
   #'p_group_cohomology >=3.3', # Only used in tests, not available on PyPI
   'pycosat >=0.6.3',
   'pynormaliz >=2.18; platform_machine != "aarch64" and platform_machine != "arm64"', # Not yet available for Linux aarch64
-  'sage_numerical_backends_coin',
   'symengine >= 0.6.1', # Only used in tests
 ]
 #giac = ['sagemath_giac'] # Not yet available on PyPI (https://github.com/sagemath/sagemath-giac/issues/3)
@@ -290,6 +280,21 @@ select = [
   "F401", # Unused import - these files are by definition collections of imports.
 ]
 
-[tool.uv]
-# Don't use build isolation for sage (it's incompatible with meson-python's editable install)
-no-build-isolation-package = ["sagemath"]
+[tool.uv.workspace]
+members = [
+  "pkgs/sage*",
+]
+exclude = [
+  "pkgs/sage-conf",
+  "pkgs/sage-conf_conda",
+  "pkgs/sage-project-cookiecutter",
+  "pkgs/sagemath-doc-html",
+  "pkgs/sagemath-doc-pdf",
+]
+
+[tool.uv.build-backend]
+# This project does not ship any Python modules directly.
+module-name = []
+
+[tool.uv.sources]
+passagemath-standard = { workspace = true }

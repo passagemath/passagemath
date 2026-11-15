@@ -10,5 +10,6 @@ from sage_setup import sage_setup
 sage_setup(['sagemath-modules'],
            recurse_packages=('sage', 'passagemath_modules'),
            interpreters=['CDF', 'RDF', 'RR', 'CC'],
+           spkgs=['gsl'],
            required_modules=('gsl',),
            package_data={})
