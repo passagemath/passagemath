@@ -77,7 +77,7 @@ def _make_wrapper(backend, attr):
         else:
             if self._printing:
                 print("# result: {}".format(result))
-            if self._doctest:
+            if self._doctest and result is not None:
                 self._doctest.write("        {}\n".format(result))
             if self._test_method:
                 if result is None:
@@ -293,12 +293,13 @@ def LoggingBackendFactory(solver=None, printing=True, doctest_file=None, test_me
     :class:`LoggingBackend` in its doctest-writing mode::
 
         sage: fname = tmp_filename()
-        sage: compute_something(solver = LoggingBackendFactory(solver='GLPK', printing=False,
+        sage: compute_something(solver = LoggingBackendFactory(solver='Highs', printing=False,
         ....:                                                  doctest_file=fname))
         4711
         sage: with open(fname) as f:
         ....:     for line in f.readlines(): _ = sys.stdout.write('|{}'.format(line))
-        |        sage: p = get_solver(solver='GLPK')
+        |        sage: from sage.numerical.backends.generic_backend import get_solver
+        |        sage: p = get_solver(solver='Highs')
         |        sage: p.add_variable(obj=42, name='Helloooooo')
         |        0
         |        sage: p.add_variable(obj=1789)
@@ -306,10 +307,38 @@ def LoggingBackendFactory(solver=None, printing=True, doctest_file=None, test_me
         |        sage: p.solve()
         |        Traceback (most recent call last):
         |        ...
-        |        MIPSolverException: GLPK: The LP (relaxation) problem has no dual feasible solution
+        |        MIPSolverException: HiGHS: Problem is unbounded
 
     We then copy from the generated file and paste into the source
     code of the COIN backend.
+
+    The generated doctest is self-contained and omits results equal to
+    ``None``, but retains zero results (:issue:`24145`)::
+
+        sage: fname = tmp_filename()
+        sage: solver = LoggingBackendFactory(solver='Highs', printing=False,
+        ....:                                doctest_file=fname)
+        sage: backend = solver()
+        sage: backend.set_sense(1)
+        sage: _ = backend.ncols()
+        sage: with open(fname) as f:
+        ....:     transcript = f.read()
+        sage: for line in transcript.splitlines():
+        ....:     print('|' + line)
+        |        sage: from sage.numerical.backends.generic_backend import get_solver
+        |        sage: p = get_solver(solver='Highs')
+        |        sage: p.set_sense(1)
+        |        sage: p.ncols()
+        |        0
+
+    Replay the generated transcript in an empty namespace::
+
+        sage: import doctest
+        sage: test = doctest.DocTestParser().get_doctest(
+        ....:     transcript.replace('sage: ', '>>> '), {},
+        ....:     'logging_backend', None, 0)
+        sage: doctest.DocTestRunner().run(test)
+        TestResults(failed=0, attempted=4)
 
     If this test seems valuable enough that all backends should be
     tested against it, we should create a test method instead of a
@@ -365,6 +394,7 @@ def LoggingBackendFactory(solver=None, printing=True, doctest_file=None, test_me
 
     if doctest_file is not None:
         doctest = open(doctest_file, "w", 1)  # line-buffered
+        doctest.write("        sage: from sage.numerical.backends.generic_backend import get_solver\n")
     else:
         doctest = None
     if test_method_file is not None:

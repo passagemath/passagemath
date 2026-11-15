@@ -33,6 +33,9 @@ jobs:
         SAGE_CI_FIXES_FROM_REPOSITORIES: ${{ vars.SAGE_CI_FIXES_FROM_REPOSITORIES }}
       if: false
 
+    - name: Bootstrap
+      run: ./bootstrap
+
     - name: Install prerequisites
       id: deps
       run: pip install uv
