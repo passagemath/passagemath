@@ -68,7 +68,7 @@ dependencies = [
 description = "passagemath: Open Source Mathematical Software"
 license = "GPL-2.0-or-later"
 name = "passagemath"
-version = "10.8.13rc3"
+version = "10.8.14"
 requires-python = ">=3.11, <3.15"
 
 [project.urls]
