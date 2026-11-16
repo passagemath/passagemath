@@ -401,7 +401,7 @@ default_required_modules = ('fflas-ffpack', 'flint', 'givaro', 'gsl', 'linbox', 
                             'libpng', 'gdlib', 'm4ri', 'zlib', 'cblas', 'ecl')
 
 
-default_optional_modules = ('lapack',)
+default_optional_modules = ('lapack', 'mathilda')
 
 
 def cython_aliases(required_modules=None, optional_modules=None):

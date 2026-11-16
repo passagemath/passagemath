@@ -88,6 +88,7 @@ from sage.all__sagemath_combinat import *
 from sage.all__sagemath_graphs import *
 from sage.all__sagemath_groups import *
 from sage.all__sagemath_polyhedra import *
+from sage.all__sagemath_mathilda import *
 
 from sage.databases.all import *
 from sage.sets.all import *

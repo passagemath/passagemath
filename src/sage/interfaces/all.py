@@ -56,6 +56,6 @@ lazy_import('sage.interfaces.singular', ['singular', 'singular_version', 'Singul
 # The following variable is used by sage-shell-mode in emacs:
 interfaces = ['gap', 'gap3', 'giac', 'gp', 'mathematica', 'gnuplot',
               'kash', 'magma', 'macaulay2', 'maple', 'maxima',
-              'mathematica', 'mathics3', 'mwrank', 'octave', 'r', 'singular',
-              'sage0', 'sage']
+              'mathematica', 'mathics3', 'mathilda', 'mwrank', 'octave',
+              'r', 'singular', 'sage0', 'sage']
 del lazy_import
