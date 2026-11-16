@@ -4918,12 +4918,17 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
             True
 
         Number fields defined by non-monic and non-integral
-        polynomials are supported (:issue:`252`)::
+        polynomials are supported (:issue:`252`). The units returned
+        below differ slightly depending on the CPU and the pari version::
 
             sage: K.<a> = NumberField(2*x^2 - 1/3)
-            sage: K._S_class_group_and_units(tuple(K.primes_above(2) + K.primes_above(3)))
-            ([6*a + 2, -6*a + 3, -1, -12*a - 5], [])  # 64-bit
-            ([6*a + 2, -6*a - 3, -1, -12*a - 5], [])  # 32-bit
+            sage: ps = tuple(K.primes_above(2) + K.primes_above(3))
+            sage: units, gens = K._S_class_group_and_units(ps)
+            sage: gens
+            []
+            sage: units
+            [6*a + 2, -6*a ... 3, -1, -12*a - 5]
+
         """
         K_pari = self.pari_bnf(proof=proof)
         S_pari = [p.pari_prime() for p in sorted(set(S))]
