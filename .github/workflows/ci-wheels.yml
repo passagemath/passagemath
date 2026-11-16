@@ -85,6 +85,7 @@ jobs:
                             "sagemath-linbox",
                             "sagemath-lrslib",
                             "sagemath-macaulay2",
+                            "sagemath-mathilda",
                             "sagemath-maxima",
                             "sagemath-mcqd",
                             "sagemath-meataxe",
