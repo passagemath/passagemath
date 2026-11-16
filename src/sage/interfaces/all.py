@@ -38,6 +38,7 @@ lazy_import('sage.interfaces.magma', ['magma', 'Magma'])
 lazy_import('sage.interfaces.magma_free', 'magma_free')
 lazy_import('sage.interfaces.maple', ['maple', 'Maple'])
 lazy_import('sage.interfaces.mathematica', ['mathematica', 'Mathematica'])
+lazy_import('sage.interfaces.mathilda', ['mathilda', 'Mathilda'])
 lazy_import('sage.interfaces.mathics3', ['mathics3', 'Mathics3'])
 lazy_import('sage.interfaces.matlab', ['matlab', 'matlab_version', 'Matlab'])
 lazy_import('sage.interfaces.mupad', ['mupad', 'Mupad'])  # NOT functional yet
