@@ -83,6 +83,7 @@ Features
    sage/features/phitigra
    sage/features/polymake
    sage/features/poppler
+   sage/features/primesieve
    sage/features/qepcad
    sage/features/rankwidth
    sage/features/rubiks
