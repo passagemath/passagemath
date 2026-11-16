@@ -116,40 +116,6 @@ cdef long _next_sink = 0
 
 # --- helpers -----------------------------------------------------------------
 
-def _mapped_library():
-    """
-    Return the path of the ``libmathilda`` mapped into this process, or ``None``.
-
-    EXAMPLES::
-
-        sage: from sage.libs.mathilda import _mapped_library
-        sage: _mapped_library().endswith("libmathilda.so.0")
-        True
-    """
-    try:
-        with open("/proc/self/maps") as maps:
-            for line in maps:
-                fields = line.split()
-                if len(fields) >= 6 and "libmathilda" in fields[-1]:
-                    return fields[-1]
-    except OSError:
-        pass
-    return None
-
-
-def library():
-    """
-    Return the path of the ``libmathilda`` this module is linked against.
-
-    EXAMPLES::
-
-        sage: from sage.libs.mathilda import library
-        sage: library().endswith("libmathilda.so.0")
-        True
-    """
-    return _mapped_library() or "libmathilda.so.0"
-
-
 def init():
     """
     Initialise the kernel (symbol table, builtins, ``init.m`` bootstrap).
