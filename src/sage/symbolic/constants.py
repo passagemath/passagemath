@@ -41,7 +41,7 @@ type the following::
     sage: gp(pi)                                                                        # needs sage.libs.pari
     3.1415926535897932384626433832795028842
     sage: pari(pi)                                                                      # needs sage.libs.pari
-    3.14159265358979
+    3.14159265358...
     sage: kash(pi)                    # optional - kash
     3.14159265358979323846264338328
     sage: mathematica(pi)             # optional - mathematica
