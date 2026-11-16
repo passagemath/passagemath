@@ -237,7 +237,7 @@ jobs:
       - name: Determine Docker tags to use
         run: |
             # This line needs to be run before the step "Merge CI fixes from sagemath/sage".
-            DOCKER_TAG="$(git describe --dirty --always)"
+            DOCKER_TAG="$(git describe --always)"
             echo "DOCKER_TAG=$DOCKER_TAG" >> $GITHUB_ENV
             # From the docker documentation via docker/update-env.sh:
             # "A tag name must be valid ASCII and may
