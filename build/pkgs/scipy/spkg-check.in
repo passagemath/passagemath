@@ -1,1 +1,1 @@
-python3 -c 'import scipy; scipy.test()'
+python3 -c 'import sys, scipy; sys.exit(not scipy.test())'
