@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-mathilda
+# delvewheel: patch
 r"""
 Interface to the Mathilda computer algebra system
 
