@@ -1681,6 +1681,13 @@ cdef class RealNumber(sage.structure.element.RingElement):
             3.5*^-15
             sage: mathematica.Log(3.5e6).sage()  # optional - mathematica
             15.06827352645964
+
+        The same with Mathilda, whose kernel runs in this process::
+
+            sage: mathilda(3.5e-15)              # needs sage.libs.mathilda
+            3.5e-15
+            sage: mathilda.Log(3.5e6).sage()     # needs sage.libs.mathilda
+            15.0683000000000
         """
         return self.str(10, e='*^')
 

@@ -5666,6 +5666,16 @@ cdef class Expression(Expression_abc):
             x^4 + y
             y
 
+        The same with Mathilda, whose kernel runs in this process::
+
+            sage: cmd = '{} /. {} -> {}'                    # needs sage.libs.mathilda
+            sage: for s1,s2 in subs:                        # needs sage.libs.mathilda
+            ....:     mathilda(cmd.format(E,s1,s2))
+            y + y^2 + y^4
+            x + x^4 + y
+            x^4 + y
+            y
+
         .. WARNING::
 
             Unexpected results may occur if the left-hand side of some substitution
