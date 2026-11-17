@@ -1037,6 +1037,9 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
             sage: mathematica(CC(3.5e-15, 2.3e15))  # indirect doctest, optional - mathematica
             3.5*^-15 + 2.3*^15*I
+
+            sage: mathilda(CC(3.5e-15, 2.3e15))     # indirect doctest, needs sage.libs.mathilda
+            3.5e-15 + 2.3e+15*I
         """
         return self.str(e='*^')
 
