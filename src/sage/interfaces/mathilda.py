@@ -120,6 +120,34 @@ _NUMBER = re.compile(r'[0-9]+(?:\.[0-9]*)?(?:[eE][-+]?[0-9]+)?'
                      r'|\.[0-9]+(?:[eE][-+]?[0-9]+)?')
 
 
+def _registered_function_names():
+    r"""
+    Return the functions registered for Mathilda through
+    :func:`sage.symbolic.expression.register_symbol`, keyed by the name that
+    :func:`_to_sage` emits for them.
+
+    EXAMPLES::
+
+        sage: from sage.interfaces.mathilda import _registered_function_names
+        sage: isinstance(_registered_function_names(), dict)
+        True
+
+    Names registered with :func:`sage.symbolic.expression.register_symbol` show
+    up under the lower-cased name that :func:`_to_sage` emits::
+
+        sage: from sage.symbolic.expression import register_symbol
+        sage: _ = register_symbol(lambda t: t + 1, dict(mathilda='SomeOtherName'))
+        sage: _registered_function_names()['someothername'](2)
+        3
+    """
+    try:
+        from sage.symbolic.expression import symbol_table
+    except ImportError:
+        return {}
+    return {name.lower(): function
+            for (name, _arity), function in symbol_table.get('mathilda', {}).items()}
+
+
 def _to_sage(expr):
     r"""
     Translate Mathilda output into Sage input, as far as the simple forms go.
@@ -760,6 +788,15 @@ class MathildaElement(ExtraTabCompletion, InterfaceElement):
             sage: mathilda('Expand[(x + 1)^2]').sage()
             x^2 + 2*x + 1
 
+        Names registered with :func:`~sage.symbolic.expression.register_symbol`
+        are recognised::
+
+            sage: from sage.symbolic.expression import register_symbol
+            sage: foo = lambda t: t^2 + 1
+            sage: _ = register_symbol(foo, dict(mathilda='Foo'))
+            sage: mathilda('Foo[x]').sage()
+            x^2 + 1
+
         Without a binding, a free symbol cannot be converted::
 
             sage: mathilda('z^2 + 1').sage()
@@ -768,8 +805,10 @@ class MathildaElement(ExtraTabCompletion, InterfaceElement):
             TypeError: cannot convert Mathilda output '1 + z^2' to a Sage object ...
         """
         text = str(self)
+        bound = _registered_function_names()
+        bound.update(locals)
         try:
-            return sage_eval(_to_sage(text), locals=locals)
+            return sage_eval(_to_sage(text), locals=bound)
         except Exception as error:
             raise TypeError('cannot convert Mathilda output %r to a Sage '
                             'object (%s); pass locals=... to bind symbols'
