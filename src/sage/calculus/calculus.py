@@ -2531,6 +2531,9 @@ def _is_function(v):
         sage: register_symbol(foo, dict(mathematica='Foo'))  # optional - mathematica
         sage: mathematica('Foo[x]').sage()                   # optional - mathematica
         x^2 + 1
+        sage: register_symbol(foo, dict(mathilda='Foo'))     # needs sage.libs.mathilda
+        sage: mathilda('Foo[x]').sage()                      # needs sage.libs.mathilda
+        x^2 + 1
     """
     # note that Sage variables are callable, so we only check the type
     return isinstance(v, (Function, FunctionType))

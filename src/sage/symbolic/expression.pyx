@@ -1199,6 +1199,22 @@ cdef class Expression(Expression_abc):
         from sage.symbolic.expression_conversions import InterfaceInit
         return InterfaceInit(I)(self)
 
+    def _mathilda_init_(self):
+        r"""
+        Return the Mathilda string for this expression.
+
+        Mathilda reads Mathematica's input syntax, so this is the Mathematica
+        form.  Delegating avoids a round trip through
+        :class:`~sage.symbolic.expression_conversions.InterfaceInit`, which
+        would dispatch back into this very hook.
+
+        EXAMPLES::
+
+            sage: (pi + 2*sin(x))._mathilda_init_()                                     # needs sage.symbolic
+            '(Pi)+((Sin[x])*(2))'
+        """
+        return self._mathematica_init_()
+
     def _gap_init_(self) -> str:
         """
         Convert symbolic object to GAP string.
