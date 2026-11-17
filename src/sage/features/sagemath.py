@@ -674,6 +674,34 @@ class sage__libs__m4ri(JoinFeature):
                              spkg='sagemath_m4ri_m4rie', type='standard')
 
 
+class sage__libs__mathilda(JoinFeature):
+    r"""
+    A :class:`sage.features.Feature` describing the presence of Cython modules
+    depending on Mathilda.
+
+    In addition to the modularization purposes that this tag serves,
+    it also provides attribution to the upstream project.
+
+    TESTS::
+
+        sage: from sage.features.sagemath import sage__libs__m4ri
+        sage: sage__libs__mathilda().is_present()                                           # needs sage.libs.mathilda
+        FeatureTestResult('sage.libs.mathilda', True)
+    """
+    def __init__(self):
+        r"""
+        TESTS::
+
+            sage: from sage.features.sagemath import sage__libs__mathilda
+            sage: isinstance(sage__libs__mathilda(), sage__libs__mathilda)
+            True
+        """
+        JoinFeature.__init__(self, 'sage.libs.mathilda',
+                             [PythonModule('sage.libs.mathilda'),
+                              PythonModule('sage.interfaces.mathilda')],
+                             spkg='sagemath_mathilda', type='standard')
+
+
 class sage__libs__ntl(JoinFeature):
     r"""
     A :class:`sage.features.Feature` describing the presence of :mod:`sage.libs.ntl`
