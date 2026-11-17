@@ -1030,12 +1030,21 @@ class InterfaceElement(Element):
             sage: mathematica([1,2,3])._sage_repr() # optional - mathematica
             '[1, 2, 3]'
 
+        The same with Mathilda::
+
+            sage: repr(mathilda([1,2,3]))    # needs sage.libs.mathilda
+            '{1, 2, 3}'
+            sage: mathilda([1,2,3])._sage_repr() # needs sage.libs.mathilda
+            '[1, 2, 3]'
+
         ::
 
             sage: gp(10.^80)._sage_repr()
             '1.0000000000000000000000000000000000000e80'
             sage: mathematica('10.^80')._sage_repr()  # optional - mathematica
             '1.e80'
+            sage: mathilda('10.^80')._sage_repr()     # needs sage.libs.mathilda
+            '1e+80'
 
         AUTHORS:
 

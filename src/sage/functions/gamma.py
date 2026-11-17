@@ -751,6 +751,8 @@ def _mathematica_gamma3(*args):
         gamma(4/3, 1)
         sage: mathematica('Gamma[4/3, 0, 1]').sage()  # indirect doctest, optional - mathematica
         gamma(4/3) - gamma(4/3, 1)
+        sage: mathilda('Gamma[4/3, 0, 1]').sage()     # indirect doctest, needs sage.libs.mathilda
+        gamma(4/3) - gamma(4/3, 1)
     """
     assert len(args) == 3
     return gamma_inc(args[0], args[1]) - gamma_inc(args[0], args[2])
