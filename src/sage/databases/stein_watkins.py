@@ -133,7 +133,6 @@ REFERENCE:
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
-import bz2
 import os
 
 from sage.env import sage_data_paths
@@ -217,6 +216,7 @@ class SteinWatkinsAllData:
             Stein-Watkins isogeny class of conductor 20
         """
         try:
+            import bz2
             file = bz2.open(self._file, 'rt', encoding='utf-8')
         except OSError:
             raise OSError("The Stein-Watkins data file %s must be installed." % self._file)

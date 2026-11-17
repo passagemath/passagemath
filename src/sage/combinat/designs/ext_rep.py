@@ -35,7 +35,6 @@ import xml.parsers.expat
 import re
 import os.path
 import gzip
-import bz2
 
 from urllib.request import urlopen
 
@@ -530,6 +529,7 @@ def open_extrep_file(fname):
         if ext == '.gz':
             f = gzip.GzipFile(fname)
         elif ext == '.bz2':
+            import bz2
             f = bz2.BZ2File(fname)
         else:
             f = open(fname, 'rb')
@@ -562,6 +562,7 @@ def open_extrep_url(url):
     if ext == '.gz':
         raise NotImplementedError
     elif ext == '.bz2':
+        import bz2
         return bz2.decompress(f.read())
     else:
         return f.read()
