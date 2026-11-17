@@ -161,7 +161,6 @@ import sys
 import types
 
 import zlib as comp
-import bz2 as comp_other
 
 from pickletools import genops
 
@@ -251,7 +250,8 @@ def explain_pickle(pickle=None, file=None, compress=True, **kwargs):
             p = comp.decompress(p)
         except Exception:
             try:
-                p = comp_other.decompress(p)
+                import bz2
+                p = bz2.decompress(p)
             except Exception:
                 # Maybe data is uncompressed?
                 pass
