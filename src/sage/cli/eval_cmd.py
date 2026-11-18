@@ -11,7 +11,9 @@ class CommandAction(argparse.Action):
     """
 
     def __call__(self, parser, namespace, values, option_string=None):
-        namespace.command = values[0] if values else None
+        if not values:
+            parser.error(f"argument {option_string}: expected a command")
+        namespace.command = values[0]
         namespace.command_args = values[1:]
 
 
