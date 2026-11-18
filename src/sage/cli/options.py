@@ -23,5 +23,8 @@ class CliOptions:
     """The command to execute."""
     command: str | None = None
 
+    """The arguments passed to the command."""
+    command_args: list[str] | None = None
+
     """The file to execute."""
     file: list[str] | None = None
