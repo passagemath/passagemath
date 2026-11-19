@@ -1,6 +1,6 @@
 SAGE_SPKG_CONFIGURE([openssl], [
   AX_CHECK_OPENSSL([
-    AC_MSG_CHECKING([whether OpenSSL >= 3.0.0 and provides required APIs])
+    AC_MSG_CHECKING([whether OpenSSL >= 3.0.0, < 4.0.0 and provides required APIs])
     AC_COMPILE_IFELSE(
         dnl Issue #32580: Need OpenSSL >= 1.1.1 for PEP 644
         dnl From https://www.openssl.org/docs/man3.0/man3/OPENSSL_VERSION_NUMBER.html:
@@ -22,6 +22,9 @@ SAGE_SPKG_CONFIGURE([openssl], [
             #include <openssl/ssl.h>
             #if OPENSSL_VERSION_NUMBER < 0x30000000L
             #error OpenSSL >= 3.0.0 is required
+            #endif
+            #if OPENSSL_VERSION_NUMBER >= 0x40000000L
+            #error OpenSSL < 4.0.0 is required
             #endif
             static void keylog_cb(const SSL *ssl, const char *line) {}
           ]], [[
