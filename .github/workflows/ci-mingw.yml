@@ -46,6 +46,7 @@ jobs:
         sagemath_polyhedra
         sagemath_rankwidth
         sagemath_sirocco
+        sagemath_symbolics
         sagemath_tdlib
       targets_optional: >-
         sagemath_bliss-check
@@ -138,6 +139,7 @@ jobs:
         sagemath_polyhedra
         sagemath_rankwidth
         sagemath_sirocco
+        sagemath_symbolics
         sagemath_tdlib
       targets_optional: >-
         sagemath_bliss-check
@@ -255,6 +257,7 @@ jobs:
         sagemath_polyhedra
         sagemath_rankwidth
         sagemath_sirocco
+        sagemath_symbolics
         sagemath_tdlib
       targets_optional: >-
         sagemath_bliss-check
