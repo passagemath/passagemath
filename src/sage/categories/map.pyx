@@ -1170,10 +1170,9 @@ cdef class Map(Element):
         cdef Map connecting = D._internal_coerce_map_from(new_domain)
         if connecting is None:
             raise TypeError("No coercion from %s to %s" % (new_domain, D))
-        elif connecting.codomain() is not D:
+        if connecting.codomain() is not D:
             raise RuntimeError("BUG: coerce_map_from should always return a map to self (%s)" % D)
-        else:
-            return self.pre_compose(connecting.__copy__())
+        return self.pre_compose(connecting.__copy__())
 
     def extend_codomain(self, new_codomain):
         r"""
