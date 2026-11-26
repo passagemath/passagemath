@@ -1,7 +1,20 @@
 # sage_setup: distribution = sagemath-environment
 import argparse
+import sys
 
 from sage.cli.options import CliOptions
+
+
+class CommandAction(argparse.Action):
+    r"""
+    Store the command and the arguments that follow it.
+    """
+
+    def __call__(self, parser, namespace, values, option_string=None):
+        if not values:
+            parser.error(f"argument {option_string}: expected a command")
+        namespace.command = values[0]
+        namespace.command_args = values[1:]
 
 
 class EvalCmd:
@@ -21,8 +34,10 @@ class EvalCmd:
         parser.add_argument(
             "-c",
             "--command",
-            nargs="?",
-            help="execute the given command as sage code",
+            # like python, everything after the command is passed to it
+            nargs=argparse.REMAINDER,
+            action=CommandAction,
+            help="execute the given command as sage code, passing the remaining arguments to it",
         )
 
     def __init__(self, options: CliOptions):
@@ -30,6 +45,8 @@ class EvalCmd:
         Initialize the command.
         """
         self.options = options
+        # like python, set sys.argv to "-c" and the arguments after the command
+        sys.argv = ["-c", *(options.command_args or [])]
 
     def run(self) -> int:
         r"""

@@ -49,17 +49,21 @@ def main() -> int:
         return InteractiveShellCmd(CliOptions()).run()
 
     args = parser.parse_args(input_args)
-    if args.file[:1] == ["--"]:
+    if args.command is not None:
+        # argparse stops collecting the arguments of the command at "--"
+        args.command_args += args.file
+        args.file = []
+    elif args.file[:1] == ["--"]:
         # like python, treat "--" before the file as the end of the options
         del args.file[0]
     options = CliOptions(**vars(args))
 
     logging.basicConfig(level=logging.DEBUG if options.verbose else logging.INFO)
 
-    if args.file:
-        return RunFileCmd(options).run()
-    elif args.command:
+    if args.command is not None:
         return EvalCmd(options).run()
+    elif args.file:
+        return RunFileCmd(options).run()
     elif args.notebook:
         return JupyterNotebookCmd(options).run()
     return InteractiveShellCmd(options).run()
