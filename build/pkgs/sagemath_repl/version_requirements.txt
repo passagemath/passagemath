@@ -1,2 +1,2 @@
 # This file is updated on every release by the update-version script
-passagemath-repl == 10.8.15rc0
+passagemath-repl == 10.8.15rc1
