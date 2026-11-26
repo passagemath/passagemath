@@ -744,6 +744,11 @@ if [ "$1" = '-sh' -o "$1" = '--sh' -o "$1" = '-buildsh' -o "$1" = '--buildsh' ];
         # and build/bin/sage-build-env are exported.
     fi
     shift
+    if [ "$1" = '-c' ]; then
+        # Run the commands with bash, not with the login shell, so that
+        # 'sage -sh -c' behaves the same for every user
+        exec bash "$@"
+    fi
     # If $SHELL is unset, default to bash
     if [ -z "$SHELL" ]; then
         export SHELL=bash
