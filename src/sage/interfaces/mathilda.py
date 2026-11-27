@@ -309,7 +309,7 @@ class Mathilda(ExtraTabCompletion, Interface):
 
             sage: from sage.interfaces.mathilda import mathilda
             sage: mathilda._kernel().version()
-            '0.6486'
+            '0.6764'
         """
         from sage.libs.mathilda import mathilda as kernel
         return kernel()
