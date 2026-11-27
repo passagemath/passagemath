@@ -10,18 +10,6 @@ Subject: [PATCH] Fix build on MinGW
  fplll/util.cpp    |  9 ---------
  4 files changed, 37 insertions(+), 32 deletions(-)
 
-diff --git a/.gitignore b/.gitignore
-index a1607aae..ef4ab189 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -1,6 +1,7 @@
- *.la
- *.lo
- *.trs
-+*.exe
- .clang-format
- .deps
- .dirstamp
 diff --git a/fplll/defs.h b/fplll/defs.h
 index 0e85dc0f..e788d6b2 100644
 --- a/fplll/defs.h
