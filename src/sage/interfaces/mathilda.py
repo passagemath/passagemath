@@ -573,9 +573,9 @@ class Mathilda(ExtraTabCompletion, Interface):
 
             sage: from sage.interfaces.mathilda import mathilda
             sage: mathilda._exponent_symbol()
-            'e'
+            '*^'
         """
-        return 'e'
+        return '*^'
 
     def _tab_completion(self):
         r"""
