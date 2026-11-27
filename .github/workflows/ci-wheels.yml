@@ -172,7 +172,7 @@ jobs:
           python_version_no_dot=${python_version/./}
           case $python_version_no_dot in
               310|311) python_version_abi3=$python_version_no_dot ;;
-              *t)      python_version_abi3=NO ;;
+              *t)      python_version_abi3=315 ;;
               *)       python_version_abi3=312 ;;
           esac
           pkg=${{ matrix.distribution }}
@@ -185,7 +185,7 @@ jobs:
                        *$pkg_underscore-*.whl) ;;
                        *musllinux*)            ;;
                        *_i686*)                ;;
-                       *-cp3*-cp$python_version_no_dot-*|*-cp$python_version_abi3-abi3-*|*-none-any*|passagemath_conf-*) echo "${whl%%-*} @ file://$WHEELHOUSE/$whl";;
+                       *-cp3*-cp$python_version_no_dot-*|*-cp$python_version_abi3-abi3*-*|*-none-any*|passagemath_conf-*) echo "${whl%%-*} @ file://$WHEELHOUSE/$whl";;
                    esac;
                done) | tee constraints.txt
               export PIP_CONSTRAINT=${GITHUB_WORKSPACE}/constraints.txt
