@@ -98,6 +98,8 @@ prune sage/libs/mpmath
 ## prune sage/tensor
 ## prune sage/topology
 
+prune sage/ext_data/notebook-ipython
+
 include sage/calculus/all__sagemath_standard_no_symbolics.py
 include sage/calculus/integration.p*
 
