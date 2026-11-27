@@ -398,6 +398,15 @@ Test external programs being called by Sage::
     sage: ret
     42
 
+The commands given with ``-c`` do not depend on the login shell::
+
+    sage: (out, err, ret) = check_executable(["env", "SHELL=false", "sage", "--sh", "-c",
+    ....:                                     "[[ -n $BASH_VERSION ]] && echo Hello World; exit 42"])
+    sage: out.find("Hello World\n") >= 0
+    True
+    sage: ret
+    42
+
     sage: # long time
     sage: (out, err, ret) = check_executable([
     ....:     "sage", "--ipython"], "\n3**33\n", pydebug_ignore_warnings=True)
