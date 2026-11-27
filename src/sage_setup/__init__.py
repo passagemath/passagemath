@@ -119,12 +119,18 @@ def sage_setup(distributions, *,
         import sysconfig
 
         extension_kwds = {}
-        if py_limited_api and os.environ.get('CIBUILDWHEEL', None) and sys.version_info >= (3, 12, 0, 0) and sysconfig.get_config_var("Py_GIL_DISABLED") != 1:
-            # https://cibuildwheel.pypa.io/en/stable/options/#examples_8
-            # https://cython.readthedocs.io/en/latest/src/userguide/limited_api.html#setuptools-and-setup-py
-            extension_kwds['define_macros'] = [("Py_LIMITED_API", 0x030C0000)]
-            extension_kwds['py_limited_api'] = True
-            options["bdist_wheel"] = {"py_limited_api": "cp312"}
+        if py_limited_api and os.environ.get('CIBUILDWHEEL', None):
+            if sys.version_info >= (3, 15, 0, 0):
+                # https://py-free-threading.github.io/abi3t/#build-tools
+                extension_kwds['define_macros'] = [("Py_TARGET_ABI3T", "0x030f0000")]
+                extension_kwds['py_limited_api'] = True
+                options["bdist_wheel"] = {"py_limited_api": "cp315"}
+            elif sys.version_info >= (3, 12, 0, 0) and sysconfig.get_config_var("Py_GIL_DISABLED") != 1:
+                # https://cibuildwheel.pypa.io/en/stable/options/#examples_8
+                # https://cython.readthedocs.io/en/latest/src/userguide/limited_api.html#setuptools-and-setup-py
+                extension_kwds['define_macros'] = [("Py_LIMITED_API", 0x030C0000)]
+                extension_kwds['py_limited_api'] = True
+                options["bdist_wheel"] = {"py_limited_api": "cp312"}
 
         if interpreters:
             log.info("Generating auto-generated sources")
