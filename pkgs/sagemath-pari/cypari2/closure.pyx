@@ -39,8 +39,13 @@ from cpython.object cimport PyObject_Call
 from cpython.ref cimport Py_INCREF
 
 from .paridecl cimport *
-from .stack cimport new_gen, new_gen_noclear, clone_gen_noclear, DetachGen
+from .stack cimport (new_gen, new_gen_noclear, clone_gen_noclear, DetachGen,
+                     callback_stack_limit, move_gens_above_to_heap)
 from .gen cimport objtogen
+from .types cimport gp_context
+from .paripriv cimport mt_is_thread
+
+include "callback_signals.pxi"
 
 try:
     from inspect import getfullargspec as getargspec
@@ -48,7 +53,20 @@ except ImportError:
     from inspect import getargspec
 
 
-cdef inline GEN call_python_func_impl "call_python_func"(GEN* args, object py_func) except NULL:
+# Nested Python callbacks share the calling thread's PARI evaluator.
+# A PARI error invalidates every enclosing callback's saved context.
+cdef list callback_errors = []
+
+cdef void note_callback_pari_error():
+    for i in range(len(callback_errors)):
+        callback_errors[i] = True
+
+cdef gp_context *enclosing_callback = NULL
+
+cdef extern from "pari/pari.h":
+    void *iferr_env
+
+cdef inline GEN call_python_func_impl(GEN* args, object py_func) except NULL:
     """
     Call ``py_func(*args)`` where ``py_func`` is a Python function
     and ``args`` is an array of ``GEN``s terminated by ``NULL``.
@@ -56,8 +74,8 @@ cdef inline GEN call_python_func_impl "call_python_func"(GEN* args, object py_fu
     The arguments are converted from ``GEN`` to a cypari ``gen`` before
     calling ``py_func``. The result is converted back to a PARI ``GEN``.
     """
-    # We need to ensure that nothing above avma is touched
-    avmaguard = new_gen_noclear(<GEN>avma)
+    # Use a real stack object as the boundary, since callbacks may clone it.
+    avmaguard = new_gen_noclear(cgetg(1, t_VEC))
 
     # How many arguments are there?
     cdef Py_ssize_t n = 0
@@ -72,23 +90,91 @@ cdef inline GEN call_python_func_impl "call_python_func"(GEN* args, object py_fu
         Py_INCREF(a)  # Need to increase refcount because the tuple steals it
         PyTuple_SET_ITEM(t, i, a)
 
-    # Call the Python function
-    r = PyObject_Call(py_func, t, <dict>NULL)
+    # Call the Python function.  Give PARI operations made by the callback a
+    # nested cysignals jump target, so their errors return through Python
+    # normally instead of jumping across the callback's Python frames.
+    cdef void *signal_state = NULL
+    cdef bint callback_had_pari_error = False
+    cdef GEN res = gnil
+    converted = None
+    callback_errors.append(False)
+    try:
+        signal_state = callback_signal_push()
+        try:
+            r = PyObject_Call(py_func, t, <dict>NULL)
+            if callback_errors[-1]:
+                raise RuntimeError(
+                    "a PARI error cannot be caught and suppressed inside a "
+                    "Python callback; the enclosing PARI evaluation was aborted"
+                )
+            if r is not None:
+                converted = objtogen(r)
+                if callback_errors[-1]:
+                    raise RuntimeError(
+                        "a PARI error cannot be caught and suppressed while "
+                        "converting a Python callback result; the enclosing "
+                        "PARI evaluation was aborted"
+                    )
+        finally:
+            # A callback or its result conversion can retain a Gen through a
+            # side effect instead of returning it.  Clone every stack Gen
+            # above the guard while the nested signal target is still active.
+            # If the guard was already cloned, this also handles Gens created
+            # after that move.
+            move_gens_above_to_heap(avmaguard)
 
-    # Convert the result to a GEN and copy it to the PARI stack
-    # (with a special case for None)
-    if r is None:
-        return gnil
+        if r is not None:
+            d = DetachGen(converted)
+            del converted
+            del r
+            res = d.detach()
+        d = DetachGen(avmaguard)
+        del avmaguard
+        d.detach()
+    finally:
+        callback_signal_pop(signal_state)
+        callback_had_pari_error = callback_errors.pop()
 
-    # Safely delete r and avmaguard
-    d = DetachGen(objtogen(r))
-    del r
-    res = d.detach()
-    d = DetachGen(avmaguard)
-    del avmaguard
-    d.detach()
+    if callback_had_pari_error:
+        raise RuntimeError(
+            "a PARI error cannot be caught and suppressed inside a Python "
+            "callback; the enclosing PARI evaluation was aborted"
+        )
 
     return res
+
+
+cdef GEN call_python_with_context "call_python_func"(GEN* args, object py_func) except NULL:
+    global enclosing_callback, iferr_env, callback_stack_limit
+    cdef pari_sp previous_limit = callback_stack_limit
+    callback_stack_limit = avma
+    cdef gp_context context
+    cdef gp_context *parent = enclosing_callback
+    gp_context_save(&context)
+    enclosing_callback = &context
+    # A nested PARI error must return through the Python callback before
+    # control can go back to an enclosing GP iferr handler.
+    iferr_env = NULL
+    try:
+        result = call_python_func_impl(args, py_func)
+    except BaseException:
+        if parent != NULL and not callback_errors[-1]:
+            # Unwind the abandoned GP frames, preserving user variables and
+            # live Gen objects created by the enclosing Python callback.
+            gp_context_save(&context)
+            context.eval = parent.eval
+            context.eval.avma = avma
+            context.parse = parent.parse
+            context.err_data = parent.err_data
+            context.iferr_env = NULL
+            gp_context_restore(&context)
+        raise
+    else:
+        iferr_env = context.iferr_env
+        return result
+    finally:
+        enclosing_callback = parent
+        callback_stack_limit = previous_limit
 
 
 # We rename this function to be able to call it with a different
@@ -108,6 +194,16 @@ cdef GEN call_python(GEN arg1, GEN arg2, GEN arg3, GEN arg4, GEN arg5,
     specifying how many arguments are valid and one ``ulong``, which is
     actually a Python callable object cast to ``ulong``.
     """
+    # PARI's pthread workers do not own the Python GIL and cannot safely
+    # enter this callback.  Report the condition through PARI's worker error
+    # channel without touching the Python C API.  Users can still use a
+    # Python callback with parallel APIs after setting ``nbthreads`` to 1;
+    # native PARI closures remain fully parallel.
+    global iferr_env
+    if mt_is_thread():
+        pari_err(e_MISC, "Python callbacks cannot run in PARI worker threads; set nbthreads to 1")
+        return NULL
+
     if nargs > 5:
         sig_error()
 
@@ -128,6 +224,12 @@ cdef GEN call_python(GEN arg1, GEN arg2, GEN arg3, GEN arg4, GEN arg5,
     cdef GEN r = call_python_func(args, <PyObject*>py_func)
     sig_unblock()
     if not r:  # An exception was raised
+        if enclosing_callback == NULL:
+            # A direct jump out of PARI would leave its evaluator pointing at
+            # the abandoned closure. Use normal PARI recovery, bypassing GP
+            # iferr handlers because the pending exception belongs to Python.
+            iferr_env = NULL
+            pari_err(e_MISC, "Python callback failed")
         sig_error()
     return r
 
@@ -204,7 +306,7 @@ cpdef Gen objtoclosure(f):
     >>> mul(*range(100))
     Traceback (most recent call last):
     ...
-    PariError: call_python: too many parameters in user-defined function call
+    PariError: too many parameters in user-defined function call
     >>> mul([1], [2])
     Traceback (most recent call last):
     ...
