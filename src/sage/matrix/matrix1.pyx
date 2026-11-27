@@ -278,10 +278,20 @@ cdef class Matrix(Matrix0):
             sage: A._mathematica_init_()                                                # needs sage.symbolic
             '{{1/1, 2/1, 3/1}, {4/3, 5/3, 3/2}, {7/1, 8/1, 9/1}}'
 
+        The same with Mathilda, which reads Mathematica's list syntax::
+
+            sage: g = mathilda(A); g                     # needs sage.libs.mathilda
+            {{1, 2, 3}, {4/3, 5/3, 3/2}, {7, 8, 9}}
+
         ::
 
             sage: A = matrix([[1,2],[3,4]])
             sage: g = mathematica(A); g                  # optional - mathematica
+            {{1, 2}, {3, 4}}
+
+        The same with Mathilda::
+
+            sage: g = mathilda(A); g                     # needs sage.libs.mathilda
             {{1, 2}, {3, 4}}
 
         ::
@@ -293,6 +303,9 @@ cdef class Matrix(Matrix0):
             '{{Pi, Sin[x]}, {Cos[x], Exp[-1]}}'
         """
         return '{' + ', '.join(v._mathematica_init_() for v in self.rows()) + '}'
+
+    # Mathilda accepts Mathematica's list syntax for matrices.
+    _mathilda_init_ = _mathematica_init_
 
     def _magma_init_(self, magma) -> str:
         r"""

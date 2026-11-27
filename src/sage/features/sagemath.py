@@ -699,7 +699,7 @@ class sage__libs__mathilda(JoinFeature):
         JoinFeature.__init__(self, 'sage.libs.mathilda',
                              [PythonModule('sage.libs.mathilda'),
                               PythonModule('sage.interfaces.mathilda')],
-                             spkg='sagemath_mathilda', type='standard')
+                             spkg='sagemath_mathilda', type='optional')
 
 
 class sage__libs__ntl(JoinFeature):
@@ -1431,6 +1431,7 @@ def all_features():
             sage__libs__iml(),
             sage__libs__linbox(),
             sage__libs__m4ri(),
+            sage__libs__mathilda(),
             sage__libs__maxima(),
             sage__libs__ntl(),
             sage__libs__pari(),
