@@ -39,8 +39,8 @@ Examples:
 >>> pari = cypari2.Pari()
 >>> pari('5! + 10/x')
 (120*x + 10)/x
->>> pari('intnum(x=0,13,sin(x)+sin(x^2) + x)')
-85.6215190762676
+>>> pari('intnum(x=0,1,x^2)')
+0.333333333333333
 >>> f = pari('x^3 - 1')
 >>> v = f.factor(); v
 [x - 1, 1; x^2 + x + 1, 1]
@@ -134,8 +134,10 @@ in PARI:
 
 >>> pi = pari.pi(precision=1024)
 
-The default precision is 15 digits:
+The default precision is 128 bits. For the following examples, use a
+15-digit display precision:
 
+>>> pari.set_real_precision_bits(53)
 >>> pi
 3.14159265358979
 
@@ -146,7 +148,7 @@ affect the object ``pi`` at all, it only affects how it is printed:
 >>> pi
 3.1415926535897932384626433832795028841971693993751
 
-Back to the default:
+Back to the 15-digit display precision:
 
 >>> _ = pari.set_real_precision(15)
 >>> pi
@@ -180,13 +182,15 @@ In the first case, the relevant precision is the one set by the methods
 0.841470984807897
 
 In the second case, the precision can be given as the argument
-``precision`` in the function call, with a default of 53 bits.
+``precision`` in the function call, with a default of 128 bits.
 The real precision set by
 :meth:`Pari.set_real_precision_bits` or
 :meth:`Pari.set_real_precision` does not affect the call
 (but it still affects printing).
 
-As explained before, the precision increases to a multiple of the
+With PARI 2.19, the requested bit precision is passed unchanged to the
+library; older versions require rounding to a multiple of the wordsize.
+The precision of the returned real object is still a multiple of the
 wordsize (and you should not assume that the extra bits are meaningful):
 
 >>> a = pari.sin(1, precision=180); a
@@ -200,12 +204,12 @@ wordsize (and you should not assume that the extra bits are meaningful):
 >>> c = pari.sin(1); c
 0.841470984807897
 >>> c.bitprecision()
-64
+128
 >>> pari.set_real_precision_bits(90)
 >>> print(a); print(b); print(c)
 0.841470984807896506652502322
 0.8414709848078965067
-0.8414709848078965067
+0.841470984807896506652502322
 
 In the third case, the precision is determined only by the inexact
 inputs and the ``precision`` argument is ignored:
@@ -290,6 +294,7 @@ cimport cython
 
 from cysignals.signals cimport sig_check, sig_on, sig_off, sig_error
 
+from .types cimport prec_bits_to_pari
 from .string_utils cimport to_string, to_bytes
 from .paridecl cimport *
 from .paripriv cimport *
@@ -299,6 +304,17 @@ from .stack cimport (new_gen, new_gen_noclear, clear_stack,
 from .handle_error cimport _pari_init_error_handling
 from .closure cimport _pari_init_closure
 
+# Compatibility wrappers
+cdef extern from *:
+    """
+    #include <pari/pari.h>
+    #if PARI_VERSION_CODE >= PARI_VERSION(2,18,1)
+    #define cypari2_initprimetable(M) initprimetable(M, 1UL << 20)
+    #else
+    #define cypari2_initprimetable(M) initprimetable(M)
+    #endif
+    """
+    void cypari2_initprimetable(ulong maxnum)
 
 #################################################################
 # conversions between various real precision models
@@ -375,7 +391,28 @@ cpdef long default_bitprec() noexcept:
 
     >>> from cypari2.pari_instance import default_bitprec
     >>> default_bitprec()
-    64
+    128
+
+    The default precision is sufficient for the L-function calculation
+    from issue #221:
+
+    >>> from cypari2 import Pari
+    >>> pari = Pari()
+    >>> E = pari.ellinit([0,0,0,1,2]); abs(pari.lfun(E, 100) - 1) < pari('1e-30')
+    True
+
+    Explicit precision must not be rounded up before calling PARI 2.19.
+    In issue #232, rounding 15 bits up to 64 made this computation
+    overflow the default stack:
+
+    >>> E = pari.ellinit([1, 1, 0, -63900, -1964465932632])
+    >>> stacksize = pari.stacksize()
+    >>> abs(float(pari.lfun(E, 2, precision=15)) - 0.830902950937342) < 0.001
+    True
+    >>> abs(float(E.lfun(2, precision=15)) - 0.830902950937342) < 0.001
+    True
+    >>> pari.stacksize() == stacksize
+    True
     """
     return DEFAULT_BITPREC
 
@@ -478,8 +515,8 @@ cdef class Pari(Pari_auto):
         pariOut.puts = python_puts
         pariOut.flush = python_flush
 
-        # Use 53 bits as default precision
-        self.set_real_precision_bits(53)
+        # Match the 128-bit default precision of GP.
+        self.set_real_precision_bits(DEFAULT_BITPREC)
 
         # Disable pretty-printing
         GP_DATA.fmt.prettyp = 0
@@ -1031,7 +1068,7 @@ cdef class Pari(Pari_auto):
         if M <= maxprime():
             return
         sig_on()
-        initprimetable(M)
+        cypari2_initprimetable(M)
         sig_off()
 
     def primes(self, n=None, end=None):
@@ -1257,7 +1294,7 @@ cdef class Pari(Pari_auto):
         [0, 1, 2; 3, 4, 5; 6, 7, 8]
         """
         cdef long i, j, k
-        cdef Gen x
+        cdef Gen A, x
 
         sig_on()
         A = new_gen(zeromatcopy(m, n))
@@ -1265,6 +1302,8 @@ cdef class Pari(Pari_auto):
             if len(entries) != m * n:
                 raise IndexError("len of entries (=%s) must be %s*%s=%s" % (len(entries), m, n, m*n))
             k = 0
+            # Ensure the matrix is on the heap before assigning cloned entries
+            A.fixGEN()
             for i in range(m):
                 for j in range(n):
                     sig_check()
@@ -1291,10 +1330,16 @@ cdef class Pari(Pari_auto):
         >>> import cypari2
         >>> pari = cypari2.Pari()
         >>> x = pari('x')
-        >>> pari.genus2red([-5*x**5, x**3 - 2*x**2 - 2*x + 1])
-        [1416875, [2, -1; 5, 4; 2267, 1], ..., [[2, [2, [Mod(1, 2)]], []], [5, [1, []], ["[V] page 156", [3]]], [2267, [2, [Mod(432, 2267)]], ["[I{1-0-0}] page 170", []]]]]
-        >>> pari.genus2red([-5*x**5, x**3 - 2*x**2 - 2*x + 1],2267)
-        [2267, Mat([2267, 1]), ..., [2267, [2, [Mod(432, 2267)]], ["[I{1-0-0}] page 170", []]]]
+        >>> red = pari.genus2red([-5*x**5, x**3 - 2*x**2 - 2*x + 1])
+        >>> red[:2]
+        [1416875, [2, -1; 5, 4; 2267, 1]]
+        >>> red[3][0]
+        [2, [2, [Mod(1, 2)]], []]
+        >>> local = pari.genus2red([-5*x**5, x**3 - 2*x**2 - 2*x + 1], 2267)
+        >>> local[:2]
+        [2267, Mat([2267, 1])]
+        >>> local[3][:3]
+        [2267, [2, [Mod(432, 2267)]], ["[I{1-0-0}] page 170", []]]
         """
         cdef Gen t0 = objtogen(P)
         if p is None:

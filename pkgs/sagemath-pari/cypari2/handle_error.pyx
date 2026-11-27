@@ -29,6 +29,7 @@ from cysignals.signals cimport sig_block, sig_unblock, sig_error
 from .paridecl cimport *
 from .paripriv cimport *
 from .stack cimport clone_gen_noclear, reset_avma, after_resize
+from .closure cimport note_callback_pari_error
 
 
 # We derive PariError from RuntimeError, for backward compatibility with
@@ -187,6 +188,11 @@ cdef int _pari_err_handle(GEN E) except 0:
         [2, 0; 0, 2]
         [2, 0; 0, 2]
     """
+    # PARI is unwinding a Python callback. Leave its exception and traceback
+    # in place for cysignals to propagate after PARI resets the evaluator.
+    if PyErr_Occurred():
+        return 0
+
     cdef long errnum = E[1]
     cdef char* errstr
     cdef const char* s
@@ -209,6 +215,7 @@ cdef int _pari_err_handle(GEN E) except 0:
     if s is not NULL:
         pari_error_string = s.decode('ascii') + ": " + pari_error_string
 
+    note_callback_pari_error()
     raise PariError(errnum, pari_error_string, clone_gen_noclear(E))
 
 

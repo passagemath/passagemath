@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-pari
 # distutils: libraries = gmp pari
 """
 Declarations for private functions from PARI
@@ -11,6 +12,8 @@ cdef extern from "pari/paripriv.h":
     int t_FF_FpXQ, t_FF_Flxq, t_FF_F2xq
 
     int gpd_QUIET, gpd_TEST, gpd_EMACS, gpd_TEXMACS
+
+    int mt_is_thread() noexcept nogil
 
     struct pariout_t:
         char format  # e,f,g
