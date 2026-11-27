@@ -984,10 +984,10 @@ cdef class RealDoubleElement(FieldElement):
 
         The same with Mathilda::
 
-            sage: mathilda(RDF(1e25))      # needs sage.libs.mathilda
-            1e+25
-            sage: mathilda(RDF(1e-25))     # needs sage.libs.mathilda
-            1e-25
+            sage: mathilda(RDF(1e25))                                                   # needs sage.libs.mathilda
+            1.0*^25
+            sage: mathilda(RDF(1e-25))                                                  # needs sage.libs.mathilda
+            1.0*^-25
         """
         from sage.rings.real_mpfr import RR
         return RR(self._value)._mathematica_init_()

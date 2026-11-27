@@ -989,8 +989,8 @@ cdef class ComplexDoubleElement(FieldElement):
 
         The same with Mathilda::
 
-            sage: mathilda(CDF(1e-25, 1e25))   # needs sage.libs.mathilda
-            1e-25 + 1e+25*I
+            sage: mathilda(CDF(1e-25, 1e25))                                            # needs sage.libs.mathilda
+            1.0*^-25 + 1.0*^25*I
         """
         from sage.rings.complex_mpfr import ComplexField
         return ComplexField()(self)._mathematica_init_()
