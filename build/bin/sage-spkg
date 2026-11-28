@@ -758,15 +758,35 @@ run_test_suite() { ###############################################
 } ################################################# run_test_suite
 
 write_installation_record() { ####################################
-# For each line in $FILE_LIST, enclose in double quotes:
+# For each line in $FILE_LIST, escape the characters that are special
+# in JSON strings and enclose in double quotes.  Read the list line by
+# line so that file names containing spaces are not split.  File names
+# containing newlines are not supported, because $FILE_LIST has one
+# file name per line.
+local f c i escaped
 NEW_LIST=""
-for f in $FILE_LIST; do
+while IFS= read -r f; do
+         [ -n "$f" ] || continue
+         f="${f//\\/\\\\}"
+         f="${f//\"/\\\"}"
+         if [[ $f == *[[:cntrl:]]* ]]; then
+             # Write control characters as \uXXXX
+             escaped=""
+             for (( i = 0; i < ${#f}; i++ )); do
+                 c="${f:i:1}"
+                 if [[ $c == [[:cntrl:]] ]]; then
+                     printf -v c '\\u%04x' "'$c"
+                 fi
+                 escaped+="$c"
+             done
+             f="$escaped"
+         fi
          NEW_LIST+="\"$f\"
 "
-done
-# Now remove the last line (it's blank), indent each line (skipping
-# the first) and append a comma (skipping the last).
-FILE_LIST="$(echo "$NEW_LIST" | sed '$d' | sed '2,$s/^/        /; $!s/$/,/')"
+done <<< "$FILE_LIST"
+# Now indent each line (skipping the first) and append a comma
+# (skipping the last).
+FILE_LIST="$(printf '%s' "$NEW_LIST" | sed '2,$s/^/        /; $!s/$/,/')"
 
 # Mark that the new package has been installed (and tested, if
 # applicable).
