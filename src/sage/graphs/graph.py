@@ -2832,6 +2832,11 @@ class Graph(GenericGraph):
             sage: L = graphs.LjubljanaGraph()                                           # needs networkx
             sage: L.is_semi_symmetric()                                                 # needs networkx sage.libs.gap
             True
+
+        The empty graph is vertex transitive, so it is not semi-symmetric::
+
+            sage: Graph().is_semi_symmetric()
+            False
         """
         # A semi-symmetric graph is always bipartite
         if not self.is_bipartite():
