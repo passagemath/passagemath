@@ -1,0 +1,161 @@
+From c914d0d8da601ad8a23721cb9b51f9672014c4f1 Mon Sep 17 00:00:00 2001
+From: Suyun <suyun@aosc.io>
+Date: Wed, 29 Jul 2026 13:10:16 +0800
+Subject: [PATCH] Fix build on MinGW
+
+---
+ .gitignore        |  1 +
+ fplll/defs.h      | 11 ++++++++---
+ fplll/nr/nr_Z.inl | 48 +++++++++++++++++++++++++++--------------------
+ fplll/util.cpp    |  9 ---------
+ 4 files changed, 37 insertions(+), 32 deletions(-)
+
+diff --git a/fplll/defs.h b/fplll/defs.h
+index 0e85dc0f..e788d6b2 100644
+--- a/fplll/defs.h
++++ b/fplll/defs.h
+@@ -23,14 +23,19 @@
+ #define FPLLL_WITH_LONG_DOUBLE
+ #endif
+ 
++#if !defined(__MINGW32__) && !defined(_MSC_VER)
++#define FPLLL_WITH_GETRUSAGE
++#endif
++
+ #define FPLLL_WITH_DPE
+ #define FPLLL_WITH_ZDOUBLE
+ #define FPLLL_WITH_ZLONG
+-#define FPLLL_WITH_GETRUSAGE
++
++#define _USE_MATH_DEFINES
++#include <cmath>
+ 
+ #include <algorithm>
+ #include <climits>
+-#include <cmath>
+ #include <cstddef>
+ #include <cstdio>
+ #include <cstdlib>
+@@ -42,10 +47,10 @@
+ #include <sstream>
+ #include <stdexcept>
+ #include <string>
++#include <sys/time.h>
+ 
+ #ifdef FPLLL_WITH_GETRUSAGE
+ #include <sys/resource.h>
+-#include <sys/time.h>
+ #include <unistd.h>
+ #endif
+ 
+diff --git a/fplll/nr/nr_Z.inl b/fplll/nr/nr_Z.inl
+index b77911d0..faff788d 100644
+--- a/fplll/nr/nr_Z.inl
++++ b/fplll/nr/nr_Z.inl
+@@ -237,14 +237,6 @@ public:
+  */
+ #ifdef FPLLL_WITH_LONG_DOUBLE
+ 
+-// Thread_local variables for doing numeric conversions.
+-// These are global to replace their previous usage, but member variables
+-// cannot be thread local and so they're declared at this scope.
+-// NOTE: these are extern because these can only have one definition.
+-// These are defined in util.cpp
+-extern thread_local mpfr_t temp_mpfr;
+-extern thread_local bool temp_mpfr_initialized;
+-
+ class LDConvHelper
+ {
+ public:
+@@ -252,8 +244,8 @@ public:
+   static long double mpz_get_ld(const mpz_t op)
+   {
+     init_temp();
+-    mpfr_set_z(temp_mpfr, op, GMP_RNDN);
+-    return mpfr_get_ld(temp_mpfr, GMP_RNDN);  // exact
++    mpfr_set_z(temp_mpfr(), op, GMP_RNDN);
++    return mpfr_get_ld(temp_mpfr(), GMP_RNDN);  // exact
+   }
+ 
+   static void free() { free_temp(); }
+@@ -265,34 +257,50 @@ public:
+   static long double mpz_get_ld_2exp(long *exp, const mpz_t op)
+   {
+     init_temp();
+-    mpfr_set_z(temp_mpfr, op, GMP_RNDN);
+-    return mpfr_get_ld_2exp(exp, temp_mpfr, GMP_RNDN);  // exact
++    mpfr_set_z(temp_mpfr(), op, GMP_RNDN);
++    return mpfr_get_ld_2exp(exp, temp_mpfr(), GMP_RNDN);  // exact
+   }
+ 
+   /** Sets the value of rop from op. */
+   static void mpz_set_ld(mpz_t rop, long double op)
+   {
+     init_temp();
+-    mpfr_set_ld(temp_mpfr, op, GMP_RNDN);  // exact
+-    mpfr_get_z(rop, temp_mpfr, GMP_RNDN);
++    mpfr_set_ld(temp_mpfr(), op, GMP_RNDN);  // exact
++    mpfr_get_z(rop, temp_mpfr(), GMP_RNDN);
+   }
+ 
+ private:
++  // Thread-local scratch variables for doing numeric conversions.
++  // These are function-local statics because thread-local globals cannot be
++  // exported from a Windows DLL (MinGW), and member variables cannot be
++  // thread local without an out-of-line definition.
++  static inline mpfr_ptr temp_mpfr()
++  {
++    static thread_local mpfr_t t;
++    return t;
++  }
++
++  static inline bool &temp_mpfr_initialized()
++  {
++    static thread_local bool initialized{false};
++    return initialized;
++  }
++
+   static inline void init_temp()
+   {
+-    if (!temp_mpfr_initialized)
++    if (!temp_mpfr_initialized())
+     {
+-      mpfr_init2(temp_mpfr, numeric_limits<long double>::digits);
+-      temp_mpfr_initialized = true;
++      mpfr_init2(temp_mpfr(), numeric_limits<long double>::digits);
++      temp_mpfr_initialized() = true;
+     }
+   }
+ 
+   static inline void free_temp()
+   {
+-    if (temp_mpfr_initialized)
++    if (temp_mpfr_initialized())
+     {
+-      mpfr_clear(temp_mpfr);
+-      temp_mpfr_initialized = false;
++      mpfr_clear(temp_mpfr());
++      temp_mpfr_initialized() = false;
+     }
+   }
+ };
+diff --git a/fplll/util.cpp b/fplll/util.cpp
+index 504b8b5d..8d78fe01 100644
+--- a/fplll/util.cpp
++++ b/fplll/util.cpp
+@@ -27,15 +27,6 @@ enum MinPrecAlgo
+   MINPREC_L2
+ };
+ 
+-/*
+-  Helper variables for LDConvHelper (declared in nr_Z.inl, must be defined in exactly
+-  one source file)
+-*/
+-#ifdef FPLLL_WITH_LONG_DOUBLE
+-thread_local mpfr_t temp_mpfr;
+-thread_local bool temp_mpfr_initialized{false};
+-#endif
+-
+ /* State of the random generator (declared in nr.h, must be defined in exactly
+    one source file) */
+ bool RandGen::initialized = false;

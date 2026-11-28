@@ -32,7 +32,6 @@ AUTHORS:
 #  the License, or (at your option) any later version.
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
-import bz2
 import os
 from pathlib import Path
 
@@ -59,6 +58,7 @@ def _dbz_to_string(name) -> str:
         filename = Path(path) / name
         if os.path.exists(filename):
             with open(filename, 'rb') as f:
+                import bz2
                 data = bz2.decompress(f.read())
             return data.decode()
     raise FileNotFoundError('file not found in the Kohel database')

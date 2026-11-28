@@ -10,11 +10,13 @@ cdef Gen new_gen_noclear(GEN x)
 cdef Gen clone_gen(GEN x)
 cdef Gen clone_gen_noclear(GEN x)
 
+cdef pari_sp callback_stack_limit
 cdef void clear_stack() noexcept
 cdef void reset_avma() noexcept
 
 cdef void remove_from_pari_stack(Gen self) noexcept
 cdef int move_gens_to_heap(pari_sp lim) except -1
+cdef int move_gens_above_to_heap(Gen boundary) except -1
 
 cdef int before_resize() except -1
 cdef int set_pari_stack_size(size_t size, size_t sizemax) except -1

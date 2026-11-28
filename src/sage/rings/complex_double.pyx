@@ -986,6 +986,11 @@ cdef class ComplexDoubleElement(FieldElement):
 
             sage: mathematica(CDF(1e-25, 1e25))  # optional - mathematica
             1.*^-25 + 1.*^25*I
+
+        The same with Mathilda::
+
+            sage: mathilda(CDF(1e-25, 1e25))                                            # needs sage.libs.mathilda
+            1.0*^-25 + 1.0*^25*I
         """
         from sage.rings.complex_mpfr import ComplexField
         return ComplexField()(self)._mathematica_init_()
@@ -1133,13 +1138,13 @@ cdef class ComplexDoubleElement(FieldElement):
 
             sage: # needs sage.libs.pari
             sage: CDF(1,2).__pari__()
-            1.00000000000000 + 2.00000000000000*I
+            1.00000000000... + 2.00000000000...*I
             sage: pari(CDF(1,2))
-            1.00000000000000 + 2.00000000000000*I
+            1.00000000000... + 2.00000000000...*I
             sage: pari(CDF(2.0))
-            2.00000000000000
+            2.00000000000...
             sage: pari(CDF(I))
-            1.00000000000000*I
+            1.00000000000...*I
         """
         global new_gen_from_complex_double_element
         if new_gen_from_complex_double_element is None:

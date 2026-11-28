@@ -11,7 +11,7 @@ cpdef long default_bitprec() noexcept
 
 cdef extern from *:
     """
-    #define DEFAULT_BITPREC prec2nbits(DEFAULTPREC)
+    #define DEFAULT_BITPREC prec2nbits(MEDDEFAULTPREC)
     """
     long DEFAULT_BITPREC
 

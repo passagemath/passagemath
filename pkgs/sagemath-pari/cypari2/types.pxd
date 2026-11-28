@@ -123,7 +123,17 @@ cdef extern from "pari/pari.h":
     struct forpart_t
     struct forprime_t
     struct forvec_t
-    struct gp_context
+    struct pari_evalstate:
+        pari_sp avma
+
+    struct pari_parsestate:
+        pass
+
+    struct gp_context:
+        pari_evalstate eval
+        pari_parsestate parse
+        GEN err_data
+        void *iferr_env
     struct nfbasic_t
     struct pariFILE
     struct pari_mt
@@ -144,4 +154,4 @@ cdef extern from "pari/pari.h":
 
 # It is important that this gets included *after* all PARI includes
 cdef extern from "cypari.h":
-    pass
+    long prec_bits_to_pari "cypari2_prec_bits_to_pari"(long bits) noexcept

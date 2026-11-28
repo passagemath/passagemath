@@ -1199,6 +1199,22 @@ cdef class Expression(Expression_abc):
         from sage.symbolic.expression_conversions import InterfaceInit
         return InterfaceInit(I)(self)
 
+    def _mathilda_init_(self):
+        r"""
+        Return the Mathilda string for this expression.
+
+        Mathilda reads Mathematica's input syntax, so this is the Mathematica
+        form.  Delegating avoids a round trip through
+        :class:`~sage.symbolic.expression_conversions.InterfaceInit`, which
+        would dispatch back into this very hook.
+
+        EXAMPLES::
+
+            sage: (pi + 2*sin(x))._mathilda_init_()                                     # needs sage.symbolic
+            '(Pi)+((Sin[x])*(2))'
+        """
+        return self._mathematica_init_()
+
     def _gap_init_(self) -> str:
         """
         Convert symbolic object to GAP string.
@@ -5661,6 +5677,16 @@ cdef class Expression(Expression_abc):
 
             sage: for s1,s2 in subs:                        # optional - mathematica
             ....:     mathematica(cmd.format(E,s1,s2))
+            y + y^2 + y^4
+            x + x^4 + y
+            x^4 + y
+            y
+
+        The same with Mathilda, whose kernel runs in this process::
+
+            sage: cmd = '{} /. {} -> {}'                    # needs sage.libs.mathilda
+            sage: for s1,s2 in subs:                        # needs sage.libs.mathilda
+            ....:     mathilda(cmd.format(E,s1,s2))
             y + y^2 + y^4
             x + x^4 + y
             x^4 + y
@@ -13205,7 +13231,7 @@ cdef class Expression(Expression_abc):
             integrate(log(4/5*sin(x) + 1), x, -3.14150000000000,
             3.14150000000000)
             sage: # needs sage.libs.giac
-            sage: integrate(f, x, -3.1415, 3.1415)  # tol 10e-6
+            sage: integrate(f, x, -3.1415, 3.1415)  # tol 10e-6  # not tested (crash with maxima 5.50.0)
             -1.40205228301000
         """
         from sage.symbolic.integration.integral import \

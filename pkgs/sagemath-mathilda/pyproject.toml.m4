@@ -8,6 +8,7 @@ requires = [
     SPKG_INSTALL_REQUIRES_sage_setup
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_objects
+    SPKG_INSTALL_REQUIRES_sagemath_categories
     SPKG_INSTALL_REQUIRES_cython
     SPKG_INSTALL_REQUIRES_cysignals
 ]
@@ -20,6 +21,8 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_objects
+    SPKG_INSTALL_REQUIRES_sagemath_categories             dnl sage.interfaces.interface, tab_completion
+    SPKG_INSTALL_REQUIRES_sagemath_repl                   dnl sage.misc.sage_eval (MathildaElement._sage_)
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'
@@ -30,7 +33,9 @@ content-type = "text/x-rst"
 
 [project.optional-dependencies]
 test = [
-    SPKG_INSTALL_REQUIRES_sagemath_repl
+    dnl passagemath-repl is a hard dependency now: MathildaElement._sage_
+    dnl needs sage.misc.sage_eval.  Kept as an (empty) extra because tox.ini
+    dnl installs `.[test]`.
 ]
 
 jupyterlab      = [

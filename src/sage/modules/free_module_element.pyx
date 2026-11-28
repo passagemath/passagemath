@@ -3723,8 +3723,16 @@ cdef class FreeModuleElement(Vector):   # abstract base class
             (1, x, x^2, sin(x), pi)
             sage: a._mathematica_init_()
             '{1, x, (x)^(2), Sin[x], Pi}'
+
+        The same with Mathilda, which reads Mathematica's list syntax::
+
+            sage: mathilda(vector((1,2,3), QQ))                    # needs sage.libs.mathilda
+            {1, 2, 3}
         """
         return '{' + ', '.join(x._mathematica_init_() for x in self.list()) + '}'
+
+    # Mathilda accepts Mathematica's list syntax for vectors.
+    _mathilda_init_ = _mathematica_init_
 
     def _sympy_(self):
         """
