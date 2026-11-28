@@ -15,9 +15,6 @@ on:
       - '.github/workflows/dist.yml'
   merge_group:
   push:
-    branches:
-      - '*windows*'
-      - '*delvewheel*'
     tags:
       # Match all release tags including alpha, beta, rc
       - 'passagemath-[0-9]+.[0-9]+'
@@ -469,6 +466,13 @@ jobs:
         with:
           package-dir: unpacked/passagemath_gsl
 
+      - name: sagemath-ntl
+        id:   sagemath-ntl
+        if:   (success() || failure()) && steps.unpack.outcome == 'success'
+        uses: pypa/cibuildwheel@v4.3.1
+        with:
+          package-dir: unpacked/passagemath_ntl
+
       - name: sagemath-plot
         id:   sagemath-plot
         if:   (success() || failure()) && steps.unpack.outcome == 'success'
@@ -554,6 +558,7 @@ jobs:
          'sagemath-homfly',
          'sagemath-mathilda',
          'sagemath-modules',
+         'sagemath-ntl',
          'sagemath-planarity',
          'sagemath-plot',
          'sagemath-rankwidth',

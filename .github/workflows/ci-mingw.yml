@@ -1,10 +1,8 @@
 name: CI MinGW
 
 on:
+  pull_request:
   push:
-    branches:
-      - '*windows*'
-      - '*mingw*'
     tags:
       - '*'
   workflow_dispatch:
