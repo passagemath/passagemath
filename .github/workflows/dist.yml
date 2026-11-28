@@ -349,28 +349,19 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os:      [ubuntu-latest]
-        arch: >-
+        include: >-
           ${{ github.event_name == 'pull_request'
-                && fromJson('["x86_64"]')
-                || fromJson('["x86_64"]') }}
-        build: >-
-          ${{ github.event_name == 'pull_request'
-                && fromJson('["manylinux"]')
-                || fromJson('["manylinux", "musllinux"]') }}
-        include:
-          - os: ubuntu-24.04-arm
-            arch: aarch64
-            build: manylinux
-          - os: ubuntu-24.04-arm
-            arch: aarch64
-            build: musllinux
-          - os: macos-26-intel
-            arch: x86_64
-            build: macosx
-          - os: macos-26
-            arch: arm64
-            build: macosx
+                && fromJson('[
+                     {"os": "ubuntu-latest",    "arch": "x86_64",  "build": "manylinux"}
+                   ]')
+                || fromJson('[
+                     {"os": "ubuntu-latest",    "arch": "x86_64",  "build": "manylinux"},
+                     {"os": "ubuntu-latest",    "arch": "x86_64",  "build": "musllinux"},
+                     {"os": "ubuntu-24.04-arm", "arch": "aarch64", "build": "manylinux"},
+                     {"os": "ubuntu-24.04-arm", "arch": "aarch64", "build": "musllinux"},
+                     {"os": "macos-26-intel",   "arch": "x86_64",  "build": "macosx"   },
+                     {"os": "macos-26",         "arch": "arm64",   "build": "macosx"   }
+                   ]') }}
     env:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq liblzma bzip2 info libxml2 libuuid
@@ -796,28 +787,19 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os:      [ubuntu-latest]
-        arch: >-
+        include: >-
           ${{ github.event_name == 'pull_request'
-                && fromJson('["x86_64"]')
-                || fromJson('["x86_64"]') }}
-        build: >-
-          ${{ github.event_name == 'pull_request'
-                && fromJson('["manylinux"]')
-                || fromJson('["manylinux", "musllinux"]') }}
-        include:
-          - os: ubuntu-24.04-arm
-            arch: aarch64
-            build: manylinux
-          - os: ubuntu-24.04-arm
-            arch: aarch64
-            build: musllinux
-          - os: macos-26-intel
-            arch: x86_64
-            build: macosx
-          - os: macos-26
-            arch: arm64
-            build: macosx
+                && fromJson('[
+                     {"os": "ubuntu-latest",    "arch": "x86_64",  "build": "manylinux"}
+                   ]')
+                || fromJson('[
+                     {"os": "ubuntu-latest",    "arch": "x86_64",  "build": "manylinux"},
+                     {"os": "ubuntu-latest",    "arch": "x86_64",  "build": "musllinux"},
+                     {"os": "ubuntu-24.04-arm", "arch": "aarch64", "build": "manylinux"},
+                     {"os": "ubuntu-24.04-arm", "arch": "aarch64", "build": "musllinux"},
+                     {"os": "macos-26-intel",   "arch": "x86_64",  "build": "macosx"   },
+                     {"os": "macos-26",         "arch": "arm64",   "build": "macosx"   }
+                   ]') }}
     env:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq liblzma bzip2 info libxml2 libuuid
@@ -1113,28 +1095,19 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os:      [ubuntu-latest]
-        arch: >-
+        include: >-
           ${{ github.event_name == 'pull_request'
-                && fromJson('["x86_64"]')
-                || fromJson('["x86_64"]') }}
-        build: >-
-          ${{ github.event_name == 'pull_request'
-                && fromJson('["manylinux"]')
-                || fromJson('["manylinux", "musllinux"]') }}
-        include:
-          - os: ubuntu-24.04-arm
-            arch: aarch64
-            build: manylinux
-          - os: ubuntu-24.04-arm
-            arch: aarch64
-            build: musllinux
-          - os: macos-26-intel
-            arch: x86_64
-            build: macosx
-          - os: macos-26
-            arch: arm64
-            build: macosx
+                && fromJson('[
+                     {"os": "ubuntu-latest",    "arch": "x86_64",  "build": "manylinux"}
+                   ]')
+                || fromJson('[
+                     {"os": "ubuntu-latest",    "arch": "x86_64",  "build": "manylinux"},
+                     {"os": "ubuntu-latest",    "arch": "x86_64",  "build": "musllinux"},
+                     {"os": "ubuntu-24.04-arm", "arch": "aarch64", "build": "manylinux"},
+                     {"os": "ubuntu-24.04-arm", "arch": "aarch64", "build": "musllinux"},
+                     {"os": "macos-26-intel",   "arch": "x86_64",  "build": "macosx"   },
+                     {"os": "macos-26",         "arch": "arm64",   "build": "macosx"   }
+                   ]') }}
     env:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq liblzma bzip2 info libxml2 libuuid
@@ -1453,3 +1426,11 @@ jobs:
     uses: ./.github/workflows/ci-wheels.yml
     with:
       run-id: ${{ github.run_id }}
+      oss: >-
+          ${{ github.event_name == 'pull_request'
+                && '["ubuntu-latest"]'
+                || '["ubuntu-latest",
+                     "ubuntu-24.04-arm",
+                     "macos-26-intel",
+                     "macos-26",
+                    ]' }}

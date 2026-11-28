@@ -1924,7 +1924,6 @@ cdef extern from *:     # PARI headers already included by types.pxd
                        GEN (*div)(void *E, GEN x, GEN y, GEN *r))
     GEN     gen_fromdigits(GEN x, GEN B, void *E, bb_ring *r)
     byteptr initprimes(ulong maxnum, long *lenp, ulong *lastp)
-    void    initprimetable(ulong maxnum)
     ulong   init_primepointer_geq(ulong a, byteptr *pd)
     ulong   init_primepointer_gt(ulong a, byteptr *pd)
     ulong   init_primepointer_leq(ulong a, byteptr *pd)

@@ -81,7 +81,6 @@ AUTHORS:
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
-import bz2
 import os
 import re
 
@@ -280,6 +279,7 @@ class SloaneEncyclopediaClass:
         if self.__loaded__:
             return
         try:
+            import bz2
             file_seq = bz2.BZ2File(self.__file__, 'r')
         except OSError:
             raise OSError("The Sloane Encyclopedia database must be installed."
@@ -300,6 +300,7 @@ class SloaneEncyclopediaClass:
         file_seq.close()
 
         try:
+            import bz2
             file_names = bz2.BZ2File(self.__file_names__, 'r')
             entry = re.compile(r'A(?P<num>\d{6}) (?P<body>.*)$')
             for L in file_names:
@@ -392,6 +393,7 @@ def copy_gz_file(gz_source, bz_destination):
     # Write the bzipped output
     try:
         os.makedirs(os.path.dirname(bz_destination), exist_ok=True)
+        import bz2
         bz2_output = bz2.BZ2File(bz_destination, 'w')
         bz2_output.write(db_text)
         bz2_output.close()

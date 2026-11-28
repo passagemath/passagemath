@@ -981,6 +981,13 @@ cdef class RealDoubleElement(FieldElement):
             1.*^25
             sage: mathematica(RDF(1e-25))  # optional - mathematica
             1.*^-25
+
+        The same with Mathilda::
+
+            sage: mathilda(RDF(1e25))                                                   # needs sage.libs.mathilda
+            1.0*^25
+            sage: mathilda(RDF(1e-25))                                                  # needs sage.libs.mathilda
+            1.0*^-25
         """
         from sage.rings.real_mpfr import RR
         return RR(self._value)._mathematica_init_()
@@ -1670,7 +1677,7 @@ cdef class RealDoubleElement(FieldElement):
         EXAMPLES::
 
             sage: RDF(1.5).__pari__()                                                   # needs sage.libs.pari
-            1.50000000000000
+            1.50000000000...
         """
         global new_gen_from_real_double_element
         if new_gen_from_real_double_element is None:

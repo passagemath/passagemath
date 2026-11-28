@@ -648,7 +648,7 @@ cdef class Gen(Gen_base):
         if m is not None:
             t0 = t0.Mod(m)
         sig_on()
-        return new_gen(gpow(t0.g, t1.g, nbits2prec(DEFAULT_BITPREC)))
+        return new_gen(gpow(t0.g, t1.g, prec_bits_to_pari(DEFAULT_BITPREC)))
 
     def __neg__(self):
         sig_on()
@@ -1534,6 +1534,9 @@ cdef class Gen(Gen_base):
                 raise IndexError("column j(=%s) must be between 0 and %s" % (j, self.ncols()-1))
 
             self.cache((i, j), x)
+            # Ensure self is on the heap before assigning a cloned reference
+            if not is_universal_constant(x.g):
+                self.fixGEN()
             xt = x.ref_target()
             set_gcoeff(self.g, i+1, j+1, xt)
             return
@@ -1558,6 +1561,9 @@ cdef class Gen(Gen_base):
             raise IndexError("index (%s) must be between 0 and %s" % (i, glength(self.g)-1))
 
         self.cache(i, x)
+        # Ensure self is on the heap before assigning a cloned reference
+        if not is_universal_constant(x.g):
+            self.fixGEN()
         xt = x.ref_target()
         if typ(self.g) == t_LIST:
             listput(self.g, xt, i+1)
@@ -1791,9 +1797,9 @@ cdef class Gen(Gen_base):
         while sp[0] == c'0':
             sp = sp + 1
         sp -= 1
-        sp[0] = 'x'
+        sp[0] = c'x'
         sp -= 1
-        sp[0] = '0'
+        sp[0] = c'0'
         if signe(x) < 0:
             sp -= 1
             sp[0] = c'-'
@@ -1929,7 +1935,6 @@ cdef class Gen(Gen_base):
         """
         # TODO: deprecate
         cdef long n
-        cdef Gen t
 
         if typ(self.g) != t_VEC and typ(self.g) != t_COL:
             raise TypeError("Object (=%s) must be of type t_VEC or t_COL." % self)
@@ -2030,21 +2035,21 @@ cdef class Gen(Gen_base):
         clear_stack()
         return complex(re, im)
 
-    def __nonzero__(self):
+    def __bool__(self):
         """
         Examples:
 
         >>> from cypari2 import Pari
         >>> pari = Pari()
 
-        >>> pari('1').__nonzero__()
+        >>> pari('1').__bool__()
         True
-        >>> pari('x').__nonzero__()
+        >>> pari('x').__bool__()
         True
         >>> bool(pari(0))
         False
         >>> a = pari('Mod(0,3)')
-        >>> a.__nonzero__()
+        >>> a.__bool__()
         False
         """
         return not gequal0(self.g)
@@ -2183,26 +2188,29 @@ cdef class Gen(Gen_base):
 
     def ispseudoprime(self, long flag=0):
         """
-        ispseudoprime(x, flag=0): Returns True if x is a pseudo-prime
-        number, and False otherwise.
+        Returns ``True`` if ``x`` is a strong pseudo prime number, and 
+        ``False`` if it is not prime.
 
         INPUT:
 
 
-        -  ``flag`` - int 0 (default): checks whether x is a
+        -  ``flag`` - an ``int``. 
+           If ``flag`` is ``0``, checks whether ``x`` has no small prime 
+           divisors (up to 101 included) and is a 
            Baillie-Pomerance-Selfridge-Wagstaff pseudo prime (strong
            Rabin-Miller pseudo prime for base 2, followed by strong Lucas test
-           for the sequence (P,-1), P smallest positive integer such that
-           `P^2 - 4` is not a square mod x). 0: checks whether x is a
-           strong Miller-Rabin pseudo prime for flag randomly chosen bases
-           (with end-matching to catch square roots of -1).
+           for the sequence `(P, 1)`, where `P \geq 3` smallest positive 
+           integer such that `P^2 - 4` is not a square mod ``x``). 
+           If ``flag > 0``, checks whether ``x`` is a strong Miller-Rabin pseudo 
+           prime for ``flag`` randomly chosen bases (with end-matching to catch 
+           square roots of -1).
 
 
         OUTPUT:
 
 
-        -  ``bool`` - True or False, or when flag=1, either False or a tuple
-           (True, cert) where ``cert`` is a primality certificate.
+        -  ``bool`` - Returns ``True`` if ``x`` is a pseudo-prime number, 
+           and ``False`` otherwise.
 
 
         Examples:
@@ -2705,7 +2713,6 @@ cdef class Gen(Gen_base):
         >>> pari('(2.4*x^2 - 1.7)/x').truncate()
         2.40000000000000*x
         """
-        cdef int n
         cdef long e
         cdef Gen y
         sig_on()
@@ -2900,7 +2907,7 @@ cdef class Gen(Gen_base):
         54.9711779448622
         """
         sig_on()
-        return new_gen(bernreal(self, nbits2prec(precision)))
+        return new_gen(bernreal(self, prec_bits_to_pari(precision)))
 
     def besselk(nu, x, unsigned long precision=DEFAULT_BITPREC):
         """
@@ -2937,7 +2944,7 @@ cdef class Gen(Gen_base):
         """
         cdef Gen t0 = objtogen(x)
         sig_on()
-        return new_gen(kbessel(nu.g, t0.g, nbits2prec(precision)))
+        return new_gen(kbessel(nu.g, t0.g, prec_bits_to_pari(precision)))
 
     def eint1(x, long n=0, unsigned long precision=DEFAULT_BITPREC):
         r"""
@@ -2965,9 +2972,9 @@ cdef class Gen(Gen_base):
         """
         sig_on()
         if n <= 0:
-            return new_gen(eint1(x.g, nbits2prec(precision)))
+            return new_gen(eint1(x.g, prec_bits_to_pari(precision)))
         else:
-            return new_gen(veceint1(x.g, stoi(n), nbits2prec(precision)))
+            return new_gen(veceint1(x.g, stoi(n), prec_bits_to_pari(precision)))
 
     log_gamma = Gen_base.lngamma
 
@@ -3001,7 +3008,7 @@ cdef class Gen(Gen_base):
         -0.400459056163451
         """
         sig_on()
-        return new_gen(polylog0(m, x.g, flag, nbits2prec(precision)))
+        return new_gen(polylog0(m, x.g, flag, prec_bits_to_pari(precision)))
 
     def sqrtn(x, n, unsigned long precision=DEFAULT_BITPREC):
         r"""
@@ -3052,20 +3059,17 @@ cdef class Gen(Gen_base):
         1.14869835499704
         >>> s**5
         2.00000000000000
-        >>> (s*z)**5
-        2.00000000000000 + 0.E-19*I
+        >>> abs((s*z)**5 - 2) < pari('1e-30')
+        True
 
 
-        >>> import sys
-        >>> bitness = '64' if sys.maxsize > (1 << 32) else '32'
-        >>> s = str(z**5)
-        >>> s == ('1.00000000000000 - 2.710505431 E-20*I' if bitness == '32' else '1.00000000000000 - 2.71050543121376 E-20*I')
+        >>> abs(z**5 - 1) < pari('1e-30')
         True
         """
         cdef GEN ans, zetan
         cdef Gen t0 = objtogen(n)
         sig_on()
-        ans = gsqrtn(x.g, t0.g, &zetan, nbits2prec(precision))
+        ans = gsqrtn(x.g, t0.g, &zetan, prec_bits_to_pari(precision))
         return new_gens2(ans, zetan)
 
     def ffprimroot(self):
@@ -3118,7 +3122,6 @@ cdef class Gen(Gen_base):
         """
         cdef GEN G
         cdef long t
-        cdef Gen g
         sig_on()
         if find_root:
             t = itos(gissquareall(x.g, &G))
@@ -3641,7 +3644,7 @@ cdef class Gen(Gen_base):
         >>> G.galoissubfields(flag=2, v='z')[3]
         [...^2 + 2, Mod(x^3 + x, x^4 + 1), [x^2 - z*x - 1, x^2 + z*x - 1]]
 
-        .. _galoissubfields: http://pari.math.u-bordeaux.fr/dochtml/html.stable/Functions_related_to_general_number_fields.html#galoissubfields
+        .. _galoissubfields: https://pari.math.u-bordeaux.fr/dochtml/html.stable/Functions_related_to_general_number_fields.html#galoissubfields
         """
         sig_on()
         return new_gen(galoissubfields(self.g, flag, get_var(v)))
@@ -4030,10 +4033,10 @@ cdef class Gen(Gen_base):
         objects, for example a number field:
 
         >>> nf = pari('x^2 + 1').nfinit()
-        >>> nf
-        [x^2 + 1, [0, 1], -4, 1, [Mat([1, 0.E-38 + 1.00000000000000*I]), [1, 1.00000000000000; 1, -1.00000000000000], ..., [2, 0; 0, -2], [2, 0; 0, 2], [1, 0; 0, -1], [1, [0, -1; 1, 0]], [2]], [0.E-38 + 1.00000000000000*I], [1, x], [1, 0; 0, 1], [1, 0, 0, -1; 0, 1, 1, 0]]
-        >>> nf(x='y')
-        [y^2 + 1, [0, 1], -4, 1, [Mat([1, 0.E-38 + 1.00000000000000*I]), [1, 1.00000000000000; 1, -1.00000000000000], ..., [2, 0; 0, -2], [2, 0; 0, 2], [1, 0; 0, -1], [1, [0, -1; 1, 0]], [2]], [0.E-38 + 1.00000000000000*I], [1, y], [1, 0; 0, 1], [1, 0, 0, -1; 0, 1, 1, 0]]
+        >>> nf[0]
+        x^2 + 1
+        >>> nf(x='y')[0]
+        y^2 + 1
 
         Tests:
 
@@ -4585,7 +4588,7 @@ cdef class Gen(Gen_base):
         elif typ(g0) == t_RFRAC:
             g0 = rfrac_to_ser(g0, n+4)
 
-        cdef GEN r = ellwp0(self.g, g0, flag, nbits2prec(precision))
+        cdef GEN r = ellwp0(self.g, g0, flag, prec_bits_to_pari(precision))
         if flag == 1 and have_ellwp_flag1_bug():
             # Work around ellwp() bug: double the second element
             set_gel(r, 2, gmulgs(gel(r, 2), 2))

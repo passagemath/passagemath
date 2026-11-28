@@ -1681,6 +1681,13 @@ cdef class RealNumber(sage.structure.element.RingElement):
             3.5*^-15
             sage: mathematica.Log(3.5e6).sage()  # optional - mathematica
             15.06827352645964
+
+        The same with Mathilda, whose kernel runs in this process::
+
+            sage: mathilda(3.5e-15)                                                     # needs sage.libs.mathilda
+            3.5*^-15
+            sage: mathilda.Log(3.5e6).sage()                                            # needs sage.libs.mathilda
+            15.0683000000000
         """
         return self.str(10, e='*^')
 
@@ -3348,7 +3355,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
         EXAMPLES::
 
             sage: RR(2.0).__pari__()                                                    # needs sage.libs.pari
-            2.00000000000000
+            2.00000000000...
 
         The current Pari precision affects the printing of this number, but
         Pari does maintain the same 250-bit number on both 32-bit and
@@ -3356,13 +3363,13 @@ cdef class RealNumber(sage.structure.element.RingElement):
 
             sage: # needs sage.libs.pari
             sage: RealField(250).pi().__pari__()
-            3.14159265358979
+            3.14159265358...
             sage: RR(0.0).__pari__()
             0.E-19
             sage: RR(-1.234567).__pari__()
-            -1.23456700000000
+            -1.23456700000...
             sage: RR(2.0).sqrt().__pari__()
-            1.41421356237310
+            1.41421356237...
             sage: RR(2.0).sqrt().__pari__().sage()
             1.41421356237309515
             sage: RR(2.0).sqrt().__pari__().sage().prec()
@@ -5369,7 +5376,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
         cases. Here's how to compute zeta with at least a given precision::
 
             sage: z = pari(2).zeta(precision=53); z                                     # needs sage.libs.pari
-            1.64493406684823
+            1.64493406684...
             sage: pari(2).zeta(precision=128).sage().prec()                             # needs sage.libs.pari
             128
             sage: pari(2).zeta(precision=65).sage().prec()                              # needs sage.libs.pari

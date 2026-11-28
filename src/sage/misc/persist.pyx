@@ -39,9 +39,7 @@ from textwrap import dedent
 # change to import zlib to use zlib instead; but this
 # slows down loading any data stored in the other format
 import zlib
-import bz2
 comp = zlib
-comp_other = bz2
 
 from sage.misc.sage_unittest import TestSuite
 from sage.misc.superseded import deprecation
@@ -1011,7 +1009,8 @@ def loads(s, compress=True, **kwargs):
             s = comp.decompress(s)
         except Exception as msg1:
             try:
-                s = comp_other.decompress(s)
+                import bz2
+                s = bz2.decompress(s)
             except Exception as msg2:
                 # Maybe data is uncompressed?
                 pass

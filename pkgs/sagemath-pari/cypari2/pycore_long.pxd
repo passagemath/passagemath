@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-pari
 from cpython.longintrepr cimport py_long, digit
 
 cdef extern from "pycore_long.h":

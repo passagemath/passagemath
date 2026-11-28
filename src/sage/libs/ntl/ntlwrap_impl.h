@@ -12,6 +12,9 @@
 
 #include <NTL/ZZ_limbs.h>
 
+// PARI also defines coeff(a, i, j) as a macro. Parenthesize NTL's coeff
+// below so both libraries can be included in the same Cython module.
+
 //////// ZZ //////////
 
 /* Return value is only valid if the result should fit into an int.
@@ -157,7 +160,7 @@ static CYTHON_INLINE void ZZX_setitem_from_int(struct ZZX* x, long i, int value)
    AUTHOR: David Harvey (2006-06-08) */
 static CYTHON_INLINE int ZZX_getitem_as_int(struct ZZX* x, long i)
 {
-    return ZZ_to_int(&coeff(*x, i));
+    return ZZ_to_int(&(coeff)(*x, i));
 }
 
 /* Copies ith coefficient of x to output.
@@ -165,7 +168,7 @@ static CYTHON_INLINE int ZZX_getitem_as_int(struct ZZX* x, long i)
    AUTHOR: David Harvey (2007-02) */
 static CYTHON_INLINE void ZZX_getitem_as_mpz(mpz_t output, struct ZZX* x, long i)
 {
-    const ZZ& z = coeff(*x, i);
+    const ZZ& z = (coeff)(*x, i);
     ZZ_to_mpz(output, &z);
 }
 
@@ -623,7 +626,7 @@ static CYTHON_INLINE long ZZ_pX_get_val_coeff(const struct ZZ_pX &f, const struc
 {
     // Gets the p-adic valuation of the ith coefficient of f.
     ZZ *u = new ZZ();
-    long ans = ZZ_remove(*u, rep(coeff(f, i)), p);
+    long ans = ZZ_remove(*u, rep((coeff)(f, i)), p);
     delete u;
     return ans;
 }

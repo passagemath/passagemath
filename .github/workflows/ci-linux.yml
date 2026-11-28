@@ -36,7 +36,7 @@ jobs:
       # Build from scratch
       free_disk_space: true
       docker_targets: "with-system-packages configured with-targets-pre with-targets"
-      extra_sage_packages: gdbm libxml2
+      extra_sage_packages: gdbm libxml2 libuuid
       # FIXME: duplicated from env.TARGETS
       targets_pre: all-sage-local
       targets: build sagemath_doc_html-build-deps
@@ -58,7 +58,7 @@ jobs:
       # Build from scratch
       free_disk_space: true
       docker_targets: "with-system-packages configured with-targets-pre with-targets with-targets-optional"
-      extra_sage_packages: gdbm libxml2
+      extra_sage_packages: gdbm libxml2 libuuid
       # FIXME: duplicated from env.TARGETS
       targets_pre: all-sage-local
       targets: build sagemath_doc_html-build-deps
@@ -77,7 +77,7 @@ jobs:
       # Build from scratch
       free_disk_space: true
       docker_targets: "with-system-packages configured with-targets-pre with-targets with-targets-optional"
-      extra_sage_packages: gdbm libxml2
+      extra_sage_packages: gdbm libxml2 libuuid
       # FIXME: duplicated from env.TARGETS
       targets_pre: all-sage-local
       targets: build sagemath_doc_html-build-deps

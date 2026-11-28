@@ -1040,6 +1040,17 @@ cdef class SageObject:
         I = sage.interfaces.mathics3.mathics3
         return self._interface_init_(I)
 
+    def _mathilda_(self, G=None):
+        if G is None:
+            import sage.interfaces.mathilda
+            G = sage.interfaces.mathilda.mathilda
+        return self._interface_(G)
+
+    def _mathilda_init_(self):
+        import sage.interfaces.mathilda
+        I = sage.interfaces.mathilda.mathilda
+        return self._interface_init_(I)
+
     def _octave_(self, G=None):
         if G is None:
             import sage.interfaces.octave

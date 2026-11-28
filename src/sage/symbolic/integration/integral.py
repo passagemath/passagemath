@@ -626,6 +626,14 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
                  x y  + Sqrt[--] FresnelS[Sqrt[--] x]
                              2                 Pi
 
+    The same with Mathilda, whose kernel runs in this process::
+
+        sage: g = mathilda(f)                               # needs sage.libs.mathilda
+        sage: print(g)                                      # needs sage.libs.mathilda
+        y^z + Sin[x^2]
+        sage: print(g.Integrate(x))                         # needs sage.libs.mathilda
+        x y^z + Sqrt[1/2 Pi] FresnelS[Sqrt[2/Pi] x]
+
         sage: # needs sage.libs.maxima
         sage: ans = f.integral(x); ans  # random - depends on maxima version
         x*y^z - 1/4*(-1)^(3/4)*sqrt(pi)*(I*sqrt(-I)*erf((-1)^(1/4)*x) - I*(-1)^(1/4)*erf(sqrt(-I)*x))/sqrt(-I)

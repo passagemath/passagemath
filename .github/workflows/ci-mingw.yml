@@ -21,6 +21,7 @@ jobs:
     with:
       logs_artifact_suffix: "-minimal"
       targets: >-
+        fpylll
         sagemath_bliss
         sagemath_categories
         sagemath_cddlib
@@ -113,6 +114,7 @@ jobs:
         tdlib
         zlib
       targets: >-
+        fpylll
         sagemath_bliss
         sagemath_categories
         sagemath_cddlib
@@ -230,6 +232,7 @@ jobs:
         setuptools
         trove_classifiers
       targets: >-
+        fpylll
         sagemath_bliss
         sagemath_categories
         sagemath_cddlib

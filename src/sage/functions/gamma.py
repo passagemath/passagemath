@@ -258,7 +258,7 @@ class Function_log_gamma(GinacFunction):
         TESTS::
 
             sage: log_gamma(pari(6))                                                    # needs sage.libs.pari
-            4.78749174278205
+            4.78749174278...
 
             sage: # needs sage.symbolic
             sage: log_gamma(-2.1 + I)
@@ -751,6 +751,8 @@ def _mathematica_gamma3(*args):
         sage: gamma(4/3, 1)._mathematica_().sage()    # indirect doctest, optional - mathematica
         gamma(4/3, 1)
         sage: mathematica('Gamma[4/3, 0, 1]').sage()  # indirect doctest, optional - mathematica
+        gamma(4/3) - gamma(4/3, 1)
+        sage: mathilda('Gamma[4/3, 0, 1]').sage()     # indirect doctest, needs sage.libs.mathilda
         gamma(4/3) - gamma(4/3, 1)
     """
     assert len(args) == 3

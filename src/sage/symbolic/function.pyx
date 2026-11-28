@@ -697,6 +697,8 @@ cdef class Function(SageObject):
         s = self._conversions.get('mathematica', None)
         return s if s is not None else repr(self).capitalize()
 
+    _mathilda_init_ = _mathematica_init_
+
     def _sympy_init_(self, I=None):
         """
         EXAMPLES::

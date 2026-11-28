@@ -16,7 +16,7 @@ PARI integers are stored as an array of limbs of type ``pari_ulong``
 (GMP or native), this array is stored little-endian or big-endian.
 This is encapsulated in macros like ``int_W()``:
 see section 4.5.1 of the
-`PARI library manual <http://pari.math.u-bordeaux.fr/pub/pari/manuals/2.7.0/libpari.pdf>`_.
+`PARI library manual <https://pari.math.u-bordeaux.fr/pub/pari/manuals/2.7.0/libpari.pdf>`_.
 
 Python integers of type ``int`` are just C longs. Python integers of
 type ``long`` are stored as a little-endian array of type ``digit``
