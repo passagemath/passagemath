@@ -684,7 +684,7 @@ class sage__libs__mathilda(JoinFeature):
 
     TESTS::
 
-        sage: from sage.features.sagemath import sage__libs__m4ri
+        sage: from sage.features.sagemath import sage__libs__mathilda
         sage: sage__libs__mathilda().is_present()                                           # needs sage.libs.mathilda
         FeatureTestResult('sage.libs.mathilda', True)
     """
